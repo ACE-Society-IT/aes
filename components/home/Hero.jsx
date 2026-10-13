@@ -1,3 +1,6 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import MouseStreakWrapper from './MouseStreakWrapper';
@@ -9,13 +12,39 @@ const SUMMIT_DATES = [
 ];
 
 export default function Hero() {
-  return (
-    <MouseStreakWrapper className="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      {/* Main Center Content Container (Fully transparent so canvas streaks shine through) */}
-      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+  const [scrollY, setScrollY] = useState(0);
 
-        {/* AES Monument Logo Centerpiece (Refined, sleeker scale) */}
-        <div className="relative group mb-5 flex flex-col items-center justify-center">
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <MouseStreakWrapper className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+      {/* Main Center Content Container */}
+      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+        {/* AES Monument Logo Centerpiece with Dynamic Ascent, Perspective Scaling & Fade */}
+        <div
+          className="relative group mb-5 flex flex-col items-center justify-center will-change-transform"
+          style={{
+            transform: `translate3d(0, ${-scrollY * 0.35}px, 0) scale(${Math.max(0.86, 1 - scrollY * 0.00045)})`,
+            opacity: Math.max(0, 1 - scrollY / 520),
+          }}
+        >
           {/* Ambient Backlight Halo */}
           <div className="absolute -inset-6 bg-gradient-to-r from-[#E5D9C5]/10 via-[#2E1D16]/50 to-[#E5D9C5]/10 rounded-full blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -35,20 +64,32 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Subtitle Description */}
-        <p className="mt-2 text-base sm:text-lg md:text-xl text-[#B09B8C] max-w-2xl font-normal leading-relaxed">
+        {/* Subtitle Description with Upward Parallax & Fade */}
+        <p
+          className="mt-2 text-base sm:text-lg md:text-xl text-[#B09B8C] max-w-2xl font-normal leading-relaxed will-change-transform"
+          style={{
+            transform: `translate3d(0, ${-scrollY * 0.22}px, 0)`,
+            opacity: Math.max(0, 1 - scrollY / 440),
+          }}
+        >
           Three days of visionary discourse, high-stakes venture showcases, and
           curated networking with top founders, venture partners, and pioneers.
         </p>
 
-        {/* 3 Highlighted Dates (Nov 13, Nov 14, Nov 15) */}
-        <div className="mt-7 sm:mt-9 flex flex-col items-center w-full">
+        {/* 3 Highlighted Dates with Upward Parallax & Fade */}
+        <div
+          className="mt-7 sm:mt-9 flex flex-col items-center w-full will-change-transform"
+          style={{
+            transform: `translate3d(0, ${-scrollY * 0.14}px, 0)`,
+            opacity: Math.max(0, 1 - scrollY / 380),
+          }}
+        >
           <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[#9CA3AF] mb-2.5">
             Official Summit Dates
           </div>
 
           <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4">
-            {SUMMIT_DATES.map((item, idx) => (
+            {SUMMIT_DATES.map((item) => (
               <div
                 key={item.date}
                 className="group relative w-18 sm:w-22 h-20 sm:h-24 rounded-xl bg-[#241712]/90 backdrop-blur-md border border-[#443027] hover:border-[#E5D9C5]/70 hover:bg-[#322019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/50 flex flex-col items-center justify-center cursor-default p-2"
@@ -75,8 +116,14 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Action Buttons: Register & Become an Ambassador */}
-        <div className="mt-9 sm:mt-11 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full justify-center">
+        {/* Action Buttons with Gentle Upward Parallax */}
+        <div
+          className="mt-9 sm:mt-11 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full justify-center will-change-transform"
+          style={{
+            transform: `translate3d(0, ${-scrollY * 0.08}px, 0)`,
+            opacity: Math.max(0, 1 - scrollY / 340),
+          }}
+        >
           {/* Primary Action: Register */}
           <Link
             href="#register"
@@ -93,7 +140,6 @@ export default function Hero() {
             Become an Ambassador
           </Link>
         </div>
-
       </div>
     </MouseStreakWrapper>
   );

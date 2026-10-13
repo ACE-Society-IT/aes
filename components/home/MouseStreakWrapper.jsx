@@ -1,16 +1,37 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 /**
  * High-performance 3-line continuous motion mouse streak wrapper.
- * - Completely hidden and disabled on mobile devices (< 768px or touch screens).
- * - When mouse is still, trails transition into a hypnotic, harmonious circular orbit.
- * - Follows mouse smoothly with spring-damped curves when moving.
+ * - Hardware-accelerated perspective parallax: ascends and recedes as you scroll down.
+ * - Hidden and disabled on mobile devices (< 768px or touch screens).
+ * - Synchronized circular orbit when mouse is stationary.
  */
 export default function MouseStreakWrapper({ children, className = '' }) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Parallax scroll listener
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -26,7 +47,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     };
 
     if (checkMobile()) {
-      return; // Do not start canvas loop on mobile
+      return;
     }
 
     const ctx = canvas.getContext('2d', { alpha: true });
@@ -58,9 +79,8 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // Track mouse coordinates and idle/still state
     let lastMoveTimestamp = 0;
-    let orbitBlend = 1; // 0 = following movement, 1 = circular orbit
+    let orbitBlend = 1;
 
     const mouse = {
       x: width / 2,
@@ -86,10 +106,8 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     container.addEventListener('mousemove', onMouseMove, { passive: true });
     container.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
-    // 3 Curvy Glowing Ribbons configured for balanced 120° circular orbit
     const ribbons = [
       {
-        // Ribbon 1: Warm Sand
         color: '218, 198, 172',
         spring: 0.05,
         friction: 0.82,
@@ -105,7 +123,6 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         glowWidth: 15,
       },
       {
-        // Ribbon 2: Warm Champagne (120° phase offset)
         color: '198, 172, 142',
         spring: 0.04,
         friction: 0.84,
@@ -121,7 +138,6 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         glowWidth: 13,
       },
       {
-        // Ribbon 3: Roasted Bronze (240° phase offset)
         color: '175, 145, 118',
         spring: 0.03,
         friction: 0.86,
@@ -138,7 +154,6 @@ export default function MouseStreakWrapper({ children, className = '' }) {
       },
     ];
 
-    // Initialize point positions
     ribbons.forEach((r) => {
       for (let i = 0; i < r.tailLength; i++) {
         r.points.push({ x: r.currX, y: r.currY });
@@ -156,15 +171,12 @@ export default function MouseStreakWrapper({ children, className = '' }) {
       frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // Interpolate current anchor toward mouse
       mouse.x += (mouse.targetX - mouse.x) * 0.09;
       mouse.y += (mouse.targetY - mouse.y) * 0.09;
 
-      // Determine if the mouse is stationary (idle for > 160ms or left container)
       const now = performance.now();
       const isMouseStationary = !mouse.isInside || now - lastMoveTimestamp > 160;
 
-      // Smoothly transition between movement tracking and circular orbit mode
       const targetBlend = isMouseStationary ? 1 : 0;
       orbitBlend += (targetBlend - orbitBlend) * 0.05;
 
@@ -177,22 +189,18 @@ export default function MouseStreakWrapper({ children, className = '' }) {
       for (let i = 0; i < ribbons.length; i++) {
         const r = ribbons[i];
 
-        // 1. Calculate Pure Circular Orbit around the anchor
         const orbitAngle = frame * 0.032 + r.angleOffset;
         const circleTargetX = baseAnchorX + Math.cos(orbitAngle) * r.orbitRadius;
         const circleTargetY = baseAnchorY + Math.sin(orbitAngle) * r.orbitRadius;
 
-        // 2. Linear/Spring movement target when actively dragging mouse
         const moveTargetX = baseAnchorX;
         const moveTargetY = baseAnchorY;
 
-        // 3. Blend between direct cursor follow and circular orbit
         const finalTargetX =
           moveTargetX * (1 - orbitBlend) + circleTargetX * orbitBlend;
         const finalTargetY =
           moveTargetY * (1 - orbitBlend) + circleTargetY * orbitBlend;
 
-        // Spring-damping physics (creates sweeping curves without jerky corners)
         r.vx += (finalTargetX - r.currX) * r.spring;
         r.vy += (finalTargetY - r.currY) * r.spring;
         r.vx *= r.friction;
@@ -209,7 +217,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         const pts = r.points;
         if (pts.length < 4) continue;
 
-        // Pass 1: Wide diffuse atmospheric glow
+        // Pass 1: Wide diffuse glow
         ctx.beginPath();
         ctx.moveTo(pts[0].x, pts[0].y);
         for (let j = 1; j < pts.length - 1; j++) {
@@ -223,7 +231,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         ctx.lineJoin = 'round';
         ctx.stroke();
 
-        // Pass 2: Mid-body glowing light ribbon
+        // Pass 2: Mid-body ribbon
         for (let j = 0; j < pts.length - 2; j += 2) {
           const ratio = 1 - j / pts.length;
           const alpha = Math.pow(ratio, 1.4) * 0.45;
@@ -244,7 +252,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           ctx.stroke();
         }
 
-        // Pass 3: Inner warm core filament (No pure white)
+        // Pass 3: Inner core filament
         for (let j = 0; j < Math.min(pts.length - 2, 18); j += 2) {
           const ratio = 1 - j / 18;
           const alpha = ratio * 0.58;
@@ -265,7 +273,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           ctx.stroke();
         }
 
-        // Leading tip: Soft diffuse radial aura
+        // Leading tip aura
         const tip = pts[0];
         const tipGrad = ctx.createRadialGradient(
           tip.x,
@@ -313,21 +321,36 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     >
       {/* Background Layer: Subtle Architectural Coordinate Grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.025] z-0 will-change-transform"
         style={{
           backgroundImage: `linear-gradient(#E5D9C5 1px, transparent 1px), linear-gradient(to right, #E5D9C5 1px, transparent 1px)`,
           backgroundSize: '48px 48px',
+          transform: `translate3d(0, ${-scrollY * 0.08}px, 0)`,
         }}
       />
 
       {/* Background Layer: Ambient Vignette & Center Glow */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
+      <div
+        className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0 will-change-transform"
+        style={{
+          transform: `translate3d(0, ${-scrollY * 0.06}px, 0)`,
+        }}
+      />
+      <div
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0 will-change-transform"
+        style={{
+          transform: `translate3d(-50%, calc(-50% - ${scrollY * 0.1}px), 0)`,
+        }}
+      />
 
-      {/* Mid Layer: Canvas - Hidden completely on mobile via Tailwind 'hidden md:block' */}
+      {/* Mid Layer: Canvas trails floating with upward perspective */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-10 w-full h-full hidden md:block"
+        className="absolute inset-0 pointer-events-none z-10 w-full h-full hidden md:block will-change-transform"
+        style={{
+          transform: `translate3d(0, ${-scrollY * 0.16}px, 0)`,
+          opacity: Math.max(0, 1 - scrollY / 600),
+        }}
       />
 
       {/* Top Layer: Foreground Content */}
