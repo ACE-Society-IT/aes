@@ -28,8 +28,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#281A14]/90 backdrop-blur-md border-b border-[#52433D]/60 shadow-lg shadow-black/20 py-3'
-          : 'bg-[#281A14]/40 backdrop-blur-sm border-b border-[#52433D]/25 py-4'
+          ? 'bg-[#140C08]/92 backdrop-blur-md border-b border-[#3A241B]/80 shadow-xl shadow-black/40 py-3'
+          : 'bg-[#140C08]/40 backdrop-blur-sm border-b border-[#3A241B]/30 py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +80,7 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center gap-3.5">
             {/* Event Dates Micro-Badge */}
             <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#3A2D28]/80 border border-[#52433D] text-xs font-medium text-[#E5D9C5] backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#241712]/90 border border-[#443027] text-xs font-medium text-[#E5D9C5] backdrop-blur-sm"
               title="Summit Dates: Nov 13, 14, 15"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5] animate-pulse" />
@@ -90,7 +90,7 @@ export default function Navbar() {
             {/* Primary CTA */}
             <Link
               href="#register"
-              className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-full bg-white text-[#1E1410] hover:bg-[#E5D9C5] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 shadow-md shadow-black/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E5D9C5]"
+              className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-full bg-white text-[#160D09] hover:bg-[#E5D9C5] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 shadow-md shadow-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#E5D9C5]"
             >
               Register
             </Link>
@@ -100,7 +100,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-[#F4EFEA] hover:text-[#E5D9C5] hover:bg-[#3A2D28]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-[#F4EFEA] hover:text-[#E5D9C5] hover:bg-[#241712]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
           >
@@ -132,29 +132,29 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#52433D]/60 bg-[#281A14]/95 backdrop-blur-xl px-4 pt-4 pb-6 mt-3 space-y-3 shadow-xl">
+        <div className="md:hidden border-t border-[#3A241B]/80 bg-[#140C08]/98 backdrop-blur-xl px-4 pt-4 pb-6 mt-3 space-y-3 shadow-2xl">
           <div className="flex flex-col space-y-2">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-3 py-2 rounded-lg text-base font-medium text-[#F4EFEA] hover:bg-[#3A2D28]/70 hover:text-[#E5D9C5] transition-colors"
+                className="px-3 py-2 rounded-lg text-base font-medium text-[#F4EFEA] hover:bg-[#241712] hover:text-[#E5D9C5] transition-colors"
               >
                 {link.name}
               </Link>
             ))}
           </div>
 
-          <div className="pt-3 border-t border-[#52433D]/50 flex flex-col gap-3">
-            <div className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#3A2D28]/80 border border-[#52433D] text-xs font-medium text-[#E5D9C5]">
+          <div className="pt-3 border-t border-[#3A241B]/60 flex flex-col gap-3">
+            <div className="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#241712]/90 border border-[#443027] text-xs font-medium text-[#E5D9C5]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5] animate-pulse" />
               <span>NOV 13 – 15, 2026</span>
             </div>
             <Link
               href="#register"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 px-4 text-sm font-semibold rounded-full bg-white text-[#1E1410] hover:bg-[#E5D9C5] transition-colors shadow-md"
+              className="w-full text-center py-2.5 px-4 text-sm font-semibold rounded-full bg-white text-[#160D09] hover:bg-[#E5D9C5] transition-colors shadow-md"
             >
               Register Now
             </Link>
