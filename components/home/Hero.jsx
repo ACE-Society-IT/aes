@@ -42,38 +42,33 @@ export default function Hero() {
         </p>
 
         {/* 3 Highlighted Dates (Nov 13, Nov 14, Nov 15) */}
-        <div className="mt-9 sm:mt-11 flex flex-col items-center w-full">
-          <div className="text-[10px] sm:text-[11px] font-bold tracking-[0.25em] uppercase text-[#9CA3AF] mb-3.5">
+        <div className="mt-7 sm:mt-9 flex flex-col items-center w-full">
+          <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[#9CA3AF] mb-2.5">
             Official Summit Dates
           </div>
 
-          <div className="flex flex-row items-center justify-center gap-3 sm:gap-5">
+          <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-4">
             {SUMMIT_DATES.map((item, idx) => (
               <div
                 key={item.date}
-                className="group relative w-24 sm:w-28 md:w-32 h-28 sm:h-32 md:h-36 rounded-2xl bg-[#241712]/90 backdrop-blur-md border border-[#443027] hover:border-[#E5D9C5]/70 hover:bg-[#322019] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/60 flex flex-col items-center justify-center cursor-default"
+                className="group relative w-18 sm:w-22 h-20 sm:h-24 rounded-xl bg-[#241712]/90 backdrop-blur-md border border-[#443027] hover:border-[#E5D9C5]/70 hover:bg-[#322019] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/50 flex flex-col items-center justify-center cursor-default p-2"
               >
                 {/* Subtle top indicator highlight */}
                 <div className="absolute top-0 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-transparent via-[#E5D9C5]/40 group-hover:via-[#E5D9C5] to-transparent rounded-full transition-colors" />
 
                 {/* Weekday Micro-label */}
-                <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#9CA3AF] uppercase">
+                <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#9CA3AF] uppercase">
                   {item.day}
                 </span>
 
                 {/* Date Highlight */}
-                <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#F4EFEA] group-hover:text-[#E5D9C5] transition-colors my-0.5 sm:my-1 leading-none tracking-tight">
+                <span className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#F4EFEA] group-hover:text-[#E5D9C5] transition-colors leading-tight my-0.5 tracking-tight">
                   {item.date}
                 </span>
 
                 {/* Month Label */}
-                <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#E5D9C5]">
+                <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider text-[#E5D9C5]">
                   {item.month}
-                </span>
-
-                {/* Day Tag label */}
-                <span className="text-[9px] text-[#B09B8C]/80 mt-1 hidden sm:block font-medium">
-                  Day 0{idx + 1}
                 </span>
               </div>
             ))}
@@ -99,21 +94,6 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* Summit Highlights Micro-Badge */}
-        <div className="mt-11 pt-7 border-t border-[#443027]/40 flex flex-wrap items-center justify-center gap-6 sm:gap-9 text-xs font-medium text-[#B09B8C]">
-          <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5]" />
-            50+ Visionary Speakers
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5]" />
-            Venture Pitch Arena
-          </span>
-          <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5]" />
-            Global Founder Network
-          </span>
-        </div>
       </div>
     </MouseStreakWrapper>
   );

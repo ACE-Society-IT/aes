@@ -4,8 +4,9 @@ import React, { useRef, useEffect } from 'react';
 
 /**
  * High-performance 3-line continuous motion mouse streak wrapper.
- * Renders curvy, glowing, atmospheric light ribbons without bulbous heads or harsh white colors.
- * Uses spring physics and quadratic curve smoothing for organic sweeping arcs.
+ * - Completely hidden and disabled on mobile devices (< 768px or touch screens).
+ * - When mouse is still, trails transition into a hypnotic, harmonious circular orbit.
+ * - Follows mouse smoothly with spring-damped curves when moving.
  */
 export default function MouseStreakWrapper({ children, className = '' }) {
   const containerRef = useRef(null);
@@ -16,17 +17,35 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     const container = containerRef.current;
     if (!canvas || !container) return;
 
+    // Detect mobile or touch-first devices
+    const checkMobile = () => {
+      return (
+        window.innerWidth < 768 ||
+        window.matchMedia('(pointer: coarse)').matches
+      );
+    };
+
+    if (checkMobile()) {
+      return; // Do not start canvas loop on mobile
+    }
+
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animId;
     let width = 0;
     let height = 0;
+    let isMobile = false;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
 
     const resize = () => {
       if (!container) return;
+      isMobile = checkMobile();
+      if (isMobile) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
       width = container.clientWidth;
       height = container.clientHeight;
       canvas.width = Math.floor(width * dpr);
@@ -39,7 +58,10 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // Mouse coordinates with smooth interpolation
+    // Track mouse coordinates and idle/still state
+    let lastMoveTimestamp = 0;
+    let orbitBlend = 1; // 0 = following movement, 1 = circular orbit
+
     const mouse = {
       x: width / 2,
       y: height * 0.42,
@@ -49,10 +71,12 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     };
 
     const onMouseMove = (e) => {
+      if (isMobile) return;
       const rect = container.getBoundingClientRect();
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
       mouse.isInside = true;
+      lastMoveTimestamp = performance.now();
     };
 
     const onMouseLeave = () => {
@@ -62,65 +86,59 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     container.addEventListener('mousemove', onMouseMove, { passive: true });
     container.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
-    // 3 Curvy Glowing Ribbons - Warm muted palette (No pure white, no bulbous heads)
+    // 3 Curvy Glowing Ribbons configured for balanced 120° circular orbit
     const ribbons = [
       {
-        // Ribbon 1: Warm Muted Sand
+        // Ribbon 1: Warm Sand
         color: '218, 198, 172',
-        spring: 0.045,
+        spring: 0.05,
         friction: 0.82,
-        waveFreq: 0.018,
-        waveAmp: 28,
-        phase: 0,
-        yOffset: -12,
+        angleOffset: 0,
+        orbitRadius: 36,
         tailLength: 36,
         points: [],
         currX: width / 2,
         currY: height * 0.42,
         vx: 0,
         vy: 0,
-        maxWidth: 5.5,
-        glowWidth: 16,
+        maxWidth: 5.2,
+        glowWidth: 15,
       },
       {
-        // Ribbon 2: Muted Warm Champagne
+        // Ribbon 2: Warm Champagne (120° phase offset)
         color: '198, 172, 142',
-        spring: 0.035,
+        spring: 0.04,
         friction: 0.84,
-        waveFreq: 0.015,
-        waveAmp: 36,
-        phase: 2.2,
-        yOffset: 4,
+        angleOffset: (Math.PI * 2) / 3,
+        orbitRadius: 44,
         tailLength: 42,
         points: [],
         currX: width / 2,
         currY: height * 0.42,
         vx: 0,
         vy: 0,
-        maxWidth: 4.5,
-        glowWidth: 14,
+        maxWidth: 4.4,
+        glowWidth: 13,
       },
       {
-        // Ribbon 3: Soft Roasted Taupe / Bronze
+        // Ribbon 3: Roasted Bronze (240° phase offset)
         color: '175, 145, 118',
-        spring: 0.026,
+        spring: 0.03,
         friction: 0.86,
-        waveFreq: 0.012,
-        waveAmp: 44,
-        phase: 4.4,
-        yOffset: 18,
+        angleOffset: (Math.PI * 4) / 3,
+        orbitRadius: 52,
         tailLength: 48,
         points: [],
         currX: width / 2,
         currY: height * 0.42,
         vx: 0,
         vy: 0,
-        maxWidth: 4.0,
-        glowWidth: 12,
+        maxWidth: 3.8,
+        glowWidth: 11,
       },
     ];
 
-    // Seed initial trail points
+    // Initialize point positions
     ribbons.forEach((r) => {
       for (let i = 0; i < r.tailLength; i++) {
         r.points.push({ x: r.currX, y: r.currY });
@@ -130,21 +148,28 @@ export default function MouseStreakWrapper({ children, className = '' }) {
     let frame = 0;
 
     const loop = () => {
-      frame++;
+      if (isMobile) {
+        animId = requestAnimationFrame(loop);
+        return;
+      }
 
+      frame++;
       ctx.clearRect(0, 0, width, height);
 
-      // Smooth mouse target lerping
-      mouse.x += (mouse.targetX - mouse.x) * 0.08;
-      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      // Interpolate current anchor toward mouse
+      mouse.x += (mouse.targetX - mouse.x) * 0.09;
+      mouse.y += (mouse.targetY - mouse.y) * 0.09;
 
-      // Base anchor: follows mouse when inside, or drifts in gentle infinity figure-eight when idle
-      const idleX = mouse.isInside
-        ? mouse.x
-        : width / 2 + Math.sin(frame * 0.012) * 80;
-      const idleY = mouse.isInside
-        ? mouse.y
-        : height * 0.42 + Math.cos(frame * 0.016) * 40;
+      // Determine if the mouse is stationary (idle for > 160ms or left container)
+      const now = performance.now();
+      const isMouseStationary = !mouse.isInside || now - lastMoveTimestamp > 160;
+
+      // Smoothly transition between movement tracking and circular orbit mode
+      const targetBlend = isMouseStationary ? 1 : 0;
+      orbitBlend += (targetBlend - orbitBlend) * 0.05;
+
+      const baseAnchorX = mouse.isInside ? mouse.x : width / 2;
+      const baseAnchorY = mouse.isInside ? mouse.y : height * 0.42;
 
       ctx.save();
       ctx.globalCompositeOperation = 'screen';
@@ -152,17 +177,24 @@ export default function MouseStreakWrapper({ children, className = '' }) {
       for (let i = 0; i < ribbons.length; i++) {
         const r = ribbons[i];
 
-        // Curvilinear sinusoidal motion
-        const oscX = Math.sin(frame * r.waveFreq + r.phase) * r.waveAmp;
-        const oscY =
-          Math.cos(frame * r.waveFreq * 0.85 + r.phase) * (r.waveAmp * 0.65);
+        // 1. Calculate Pure Circular Orbit around the anchor
+        const orbitAngle = frame * 0.032 + r.angleOffset;
+        const circleTargetX = baseAnchorX + Math.cos(orbitAngle) * r.orbitRadius;
+        const circleTargetY = baseAnchorY + Math.sin(orbitAngle) * r.orbitRadius;
 
-        const targetX = idleX + oscX;
-        const targetY = idleY + oscY + r.yOffset;
+        // 2. Linear/Spring movement target when actively dragging mouse
+        const moveTargetX = baseAnchorX;
+        const moveTargetY = baseAnchorY;
 
-        // Spring acceleration & velocity physics (creates sweeping curves, never sharp corners)
-        r.vx += (targetX - r.currX) * r.spring;
-        r.vy += (targetY - r.currY) * r.spring;
+        // 3. Blend between direct cursor follow and circular orbit
+        const finalTargetX =
+          moveTargetX * (1 - orbitBlend) + circleTargetX * orbitBlend;
+        const finalTargetY =
+          moveTargetY * (1 - orbitBlend) + circleTargetY * orbitBlend;
+
+        // Spring-damping physics (creates sweeping curves without jerky corners)
+        r.vx += (finalTargetX - r.currX) * r.spring;
+        r.vy += (finalTargetY - r.currY) * r.spring;
         r.vx *= r.friction;
         r.vy *= r.friction;
 
@@ -177,8 +209,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         const pts = r.points;
         if (pts.length < 4) continue;
 
-        // Render Ribbon in 3 soft glowing passes:
-        // Pass 1: Wide diffuse atmospheric aura
+        // Pass 1: Wide diffuse atmospheric glow
         ctx.beginPath();
         ctx.moveTo(pts[0].x, pts[0].y);
         for (let j = 1; j < pts.length - 1; j++) {
@@ -192,7 +223,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         ctx.lineJoin = 'round';
         ctx.stroke();
 
-        // Pass 2: Mid-body soft light ribbon (tapering naturally toward the tail)
+        // Pass 2: Mid-body glowing light ribbon
         for (let j = 0; j < pts.length - 2; j += 2) {
           const ratio = 1 - j / pts.length;
           const alpha = Math.pow(ratio, 1.4) * 0.45;
@@ -213,10 +244,10 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           ctx.stroke();
         }
 
-        // Pass 3: Inner luminous core filament (warm sand tone, NOT pure white)
+        // Pass 3: Inner warm core filament (No pure white)
         for (let j = 0; j < Math.min(pts.length - 2, 18); j += 2) {
           const ratio = 1 - j / 18;
-          const alpha = ratio * 0.6;
+          const alpha = ratio * 0.58;
 
           const p0 = pts[j];
           const p1 = pts[j + 1];
@@ -234,7 +265,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           ctx.stroke();
         }
 
-        // Leading tip: A soft diffuse ambient glow aura (no circle bead, no white dot)
+        // Leading tip: Soft diffuse radial aura
         const tip = pts[0];
         const tipGrad = ctx.createRadialGradient(
           tip.x,
@@ -293,13 +324,13 @@ export default function MouseStreakWrapper({ children, className = '' }) {
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
 
-      {/* Mid Layer: Hardware-Accelerated Curvy Light Ribbon Canvas */}
+      {/* Mid Layer: Canvas - Hidden completely on mobile via Tailwind 'hidden md:block' */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 pointer-events-none z-10 w-full h-full"
+        className="absolute inset-0 pointer-events-none z-10 w-full h-full hidden md:block"
       />
 
-      {/* Top Layer: Foreground Content (Transparent container) */}
+      {/* Top Layer: Foreground Content */}
       <div className="relative z-20 w-full flex flex-col items-center justify-center">
         {children}
       </div>
