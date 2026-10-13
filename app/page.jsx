@@ -1,9 +1,11 @@
-import React from 'react'
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/home/Hero';
 
-const page = () => {
+export default function Home() {
   return (
-    <div>page</div>
-  )
+    <main className="min-h-screen bg-[#281A14] text-[#F4EFEA]">
+      <Navbar />
+      <Hero />
+    </main>
+  );
 }
-
-export default page

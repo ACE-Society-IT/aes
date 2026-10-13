@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-espresso: #281A14;
+  --color-brand-espresso-light: #38251D;
+  --color-brand-roast: #382A24;
+  --color-brand-ink: #2B1E18;
+  --color-brand-cream: #F5F2EB;
+  --color-brand-sand: #E5D9C5;
+  --color-brand-taupe: #B09B8C;
+  --color-brand-card-dark: #3A2D28;
+  --color-brand-border-dark: #52433D;
+  --color-brand-border-light: #EBE6DC;
+  --color-brand-slate-body: #4B5563;
+}
+
+:root {
+  --bg-dark: #281A14;
+  --bg-light: #F5F2EB;
+}
+
+body {
+  background-color: #281A14;
+  color: #F4EFEA;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
