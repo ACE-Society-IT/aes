@@ -186,14 +186,6 @@ export default function Competition() {
           }}
         />
 
-        {/* Architectural Fine Coordinate Grid */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.025] z-0"
-          style={{
-            backgroundImage: `linear-gradient(#E5D9C5 1px, transparent 1px), linear-gradient(to right, #E5D9C5 1px, transparent 1px)`,
-            backgroundSize: '48px 48px',
-          }}
-        />
 
         {/* Ambient Warm Vignette Halo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />

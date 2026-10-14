@@ -319,15 +319,6 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           'radial-gradient(circle at 50% 38%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
       }}
     >
-      {/* Background Layer: Subtle Architectural Coordinate Grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025] z-0 will-change-transform"
-        style={{
-          backgroundImage: `linear-gradient(#E5D9C5 1px, transparent 1px), linear-gradient(to right, #E5D9C5 1px, transparent 1px)`,
-          backgroundSize: '48px 48px',
-          transform: `translate3d(0, ${-scrollY * 0.08}px, 0)`,
-        }}
-      />
 
       {/* Background Layer: Ambient Vignette & Center Glow */}
       <div
