@@ -15,6 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "AES - Alpha Entrepreneurship Summit 2026",
   description: "Official Alpha Entrepreneurship Summit 2026",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon0.svg", type: "image/svg+xml" },
+      { url: "/icon1.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+    ],
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({ children }) {
