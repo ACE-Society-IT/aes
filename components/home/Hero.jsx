@@ -34,7 +34,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <MouseStreakWrapper className="pt-28 sm:pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+    <MouseStreakWrapper className="pt-42 sm:pt-50 pb-24 px-4 sm:px-6 lg:px-8">
       {/* Main Center Content Container */}
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         {/* AES Monument Logo Centerpiece with Dynamic Ascent, Perspective Scaling & Fade */}

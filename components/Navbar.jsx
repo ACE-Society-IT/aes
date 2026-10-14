@@ -49,14 +49,7 @@ export default function Navbar() {
                 className="object-contain drop-shadow-[0_2px_8px_rgba(229,217,197,0.25)]"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-semibold tracking-wider text-[#F4EFEA] group-hover:text-[#E5D9C5] transition-colors leading-tight">
-                AES
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-medium tracking-widest uppercase text-[#B09B8C]">
-                Summit 2026
-              </span>
-            </div>
+           
           </Link>
 
           {/* Desktop Nav Links */}
@@ -78,15 +71,7 @@ export default function Navbar() {
 
           {/* Right Action: Dates Pill & CTA */}
           <div className="hidden sm:flex items-center gap-3.5">
-            {/* Event Dates Micro-Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#241712]/90 border border-[#443027] text-xs font-medium text-[#E5D9C5] backdrop-blur-sm"
-              title="Summit Dates: Nov 13, 14, 15"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5] animate-pulse" />
-              <span>NOV 13 – 15</span>
-            </div>
-
+          
             {/* Primary CTA */}
             <Link
               href="#register"
