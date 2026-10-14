@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import Competition from '@/components/home/Competition';
 import Hero from '@/components/home/Hero';
 import Vision from '@/components/home/Vision';
 
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Vision />
+      <Competition/>
     </main>
   );
 }
