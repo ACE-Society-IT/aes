@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Competition from '@/components/home/Competition';
 import Hero from '@/components/home/Hero';
+import Modules from '@/components/home/Modules';
 import Vision from '@/components/home/Vision';
 
 export default function Home() {
@@ -9,7 +10,8 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Vision />
-      <Competition/>
+      <Competition />
+      <Modules />
     </main>
   );
 }

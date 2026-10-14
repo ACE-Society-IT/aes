@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
   --color-brand-espresso: #281A14;
   --color-brand-espresso-light: #38251D;
   --color-brand-roast: #382A24;
@@ -15,6 +22,24 @@
 }
 
 :root {
+  --background: #0D0704;
+  --foreground: #F4EFEA;
+  --card: #1E130E;
+  --card-foreground: #F4EFEA;
+  --popover: #1E130E;
+  --popover-foreground: #F4EFEA;
+  --primary: #E5D9C5;
+  --primary-foreground: #1E1410;
+  --secondary: #3A2D28;
+  --secondary-foreground: #F4EFEA;
+  --muted: #281A14;
+  --muted-foreground: #B09B8C;
+  --accent: #38251D;
+  --accent-foreground: #E5D9C5;
+  --border: #52433D;
+  --ring: #E5D9C5;
+  --radius: 0.75rem;
+
   --bg-dark: #281A14;
   --bg-light: #F5F2EB;
 }
