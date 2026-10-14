@@ -11,8 +11,8 @@ const NAV_LINKS = [
   { name: 'About', href: '#about' },
   { name: 'Vision', href: '#vision' },
   { name: 'Modules', href: '#modules' },
+  { name: 'Competition', href: '#competition' },
   { name: 'Schedule', href: '#schedule' },
-  { name: 'Register', href: '#register' },
 ];
 
 /**
@@ -28,7 +28,7 @@ const NAV_LINKS = [
  *      * State C (Scrolling Up): Stays as floating glassmorphic pill, expanding smoothly (max-w-4xl),
  *        center links container expands back open before reaching top (max-w-[600px] opacity-100)
  * - 4. Inner Elements & Active Link Pill: whitespace-nowrap, active link pill (bg-white/10 text-white rounded-full),
- *      remaining links in muted gray, compact dark pills for GitHub + X buttons.
+ *      remaining links in muted gray, compact dark/light pills for Ambassador + Register CTA buttons.
  *
  * Adheres strictly to project DESIGN-RULES.md (AES champagne/espresso tokens, zero unapproved CSS).
  */
@@ -210,47 +210,26 @@ export function MorphingScrollNavbar() {
             })}
           </div>
 
-          {/* Right CTA Buttons (GitHub + X) */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* GitHub CTA Button */}
-            <a
-              href="https://github.com/ACE-Society-IT"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 text-[#F4EFEA] hover:text-white rounded-full px-3 py-1 text-sm font-medium transition-all duration-200 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
-              aria-label="GitHub Repository"
+          {/* Right CTA Buttons (Become a Brand Ambassador + Register) */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* Secondary Action: Become a Brand Ambassador */}
+            <Link
+              href="#ambassador"
+              className="inline-flex items-center justify-center px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border border-white/15 bg-white/5 hover:bg-white/10 hover:border-[#E5D9C5]/50 text-[#F4EFEA] hover:text-[#E5D9C5] transition-all duration-200 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
+              aria-label="Become a Brand Ambassador"
             >
-              <svg
-                className="w-3.5 h-3.5 fill-current shrink-0"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                />
-              </svg>
-              <span>GitHub</span>
-            </a>
+              <span className="hidden sm:inline">Become &nbsp;</span>
+              <span> Brand Ambassador</span>
+            </Link>
 
-            {/* X (formerly Twitter) CTA Button */}
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 text-[#F4EFEA] hover:text-white rounded-full px-3 py-1 text-sm font-medium transition-all duration-200 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
-              aria-label="X Profile"
+            {/* Primary Action: Register */}
+            <Link
+              href="#register"
+              className="inline-flex items-center justify-center px-4 py-1 sm:px-5 sm:py-1.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#1E1410] hover:bg-[#E5D9C5] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 shadow-md shadow-black/30 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
+              aria-label="Register for AES 2026"
             >
-              <svg
-                className="w-3 h-3 fill-current shrink-0"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-              </svg>
-              <span>X</span>
-            </a>
+              Register
+            </Link>
           </div>
         </nav>
       </div>

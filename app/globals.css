@@ -67,3 +67,45 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
+
+/* ==========================================================================
+   AES Custom Side Scrollbar (Strictly adheres to DESIGN-RULES.md)
+   ========================================================================== */
+
+/* Modern Standard (Firefox) */
+html {
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #3A2D28 #0D0704;
+}
+
+/* Chromium, Edge, WebKit (Chrome, Edge, Safari, Brave, Opera) */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D0704;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3A2D28;
+  border-radius: 9999px;
+  border: 1.5px solid #0D0704;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #E5D9C5;
+  box-shadow: 0 0 10px rgba(229, 217, 197, 0.45);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #E5D9C5;
+}
+
+::-webkit-scrollbar-corner {
+  background: #0D0704;
+}
+
