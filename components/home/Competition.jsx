@@ -76,9 +76,12 @@ export default function Competition() {
   });
 
   useEffect(() => {
-    if (scrollYProgress.get() > 0.02) {
-      setHasEntered(true);
-    }
+    const rafId = requestAnimationFrame(() => {
+      if (scrollYProgress.get() > 0.02) {
+        setHasEntered(true);
+      }
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [scrollYProgress]);
 
   // Heading exit fade near the very end of the 320vh scroll track

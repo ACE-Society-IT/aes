@@ -65,7 +65,7 @@ body {
   background-color: #0D0704;
   color: #F4EFEA;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ==========================================================================
@@ -74,7 +74,6 @@ body {
 
 /* Modern Standard (Firefox) */
 html {
-  overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #3A2D28 #0D0704;
 }
