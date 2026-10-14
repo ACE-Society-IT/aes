@@ -1,325 +1,364 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 
 /**
- * High-Impact Scroll-Driven Image Scatter & Typography Animation.
- * Uses Framer Motion useScroll + useSpring for extreme, buttery-smooth
- * scroll-scrubbed 3D depth choreography.
+ * AES 2026 - High-Impact Sticky Showcase Section
+ * 
+ * Flow:
+ * 1. Blank on Entrance: Initial state starts completely blank until user scrolls into the section.
+ * 2. Calm & Smooth Text Reveal: Staggered character slide-up from overflow-hidden masks
+ *    with smooth cubic-bezier easing [0.22, 1, 0.36, 1] and tight, stacked display typography.
+ * 3. Sequential Center-to-Corner Image Choreography:
+ *    - Picture 1 appears in the CENTER of the screen directly from the text, scales up,
+ *      then travels diagonally to the Top-Left corner on scroll and exits.
+ *    - Then Picture 2 appears in the CENTER of the screen directly from the text, scales up,
+ *      then travels diagonally to the Bottom-Right corner on scroll and exits.
+ * 4. No end blueprint wireframe illustration or cross-fading layout picture at the end.
  */
+
+const LINE_1 = 'YOUR VISION.';
+const LINE_2 = 'YOUR VENTURE.';
+const LINE_3 = 'YOUR SUMMIT.';
+
+// Smooth character animation variants: calm 0.65s slide-up inside overflow:hidden
+const charVariants = {
+  hidden: {
+    y: '110%',
+    opacity: 0,
+  },
+  visible: {
+    y: '0%',
+    opacity: 1,
+    transition: {
+      duration: 0.65,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const lineVariants = (delayOffset = 0) => ({
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.025,
+      delayChildren: delayOffset,
+    },
+  },
+});
+
 export default function Competition() {
   const containerRef = useRef(null);
+  const [hasEntered, setHasEntered] = useState(false);
 
-  // Bind scroll progress across the 280vh track
+  // 1. Scroll-linking mechanics
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Inertia spring physics to eliminate abrupt stops
+  // Inertia spring smoothing for silky scrubbing
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 90,
+    damping: 26,
     restDelta: 0.001,
   });
 
-  // Typography animations: dynamic reveal and subtle scale progression
-  const textScale = useTransform(smoothProgress, [0, 0.5, 1], [0.85, 1.0, 1.1]);
-  const textOpacity = useTransform(smoothProgress, [0, 0.15, 0.9, 1], [0.35, 1, 1, 0.85]);
-  const textLetterSpacing = useTransform(smoothProgress, [0, 1], ['-0.05em', '-0.02em']);
+  // Control calm text reveal: screen is blank when entering, triggers smoothly past 0.02
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (latest > 0.02 && !hasEntered) {
+      setHasEntered(true);
+    } else if (latest <= 0.005 && hasEntered) {
+      setHasEntered(false);
+    }
+  });
 
-  // Scroll scrub progress bar indicator
-  const progressWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+  useEffect(() => {
+    if (scrollYProgress.get() > 0.02) {
+      setHasEntered(true);
+    }
+  }, [scrollYProgress]);
 
-  // --- Multi-Directional Image Vectors ---
+  // Heading exit fade near the very end of the 320vh scroll track
+  const textExitOpacity = useTransform(smoothProgress, [0.88, 0.96], [1, 0]);
+  const textExitScale = useTransform(smoothProgress, [0.88, 0.96], [1, 0.95]);
 
-  // 1. Top-Left Image (z-10: Behind text)
-  const tlX = useTransform(smoothProgress, [0, 1], ['0%', '-60%']);
-  const tlY = useTransform(smoothProgress, [0, 1], ['0%', '-50%']);
-  const tlRotate = useTransform(smoothProgress, [0, 1], [0, -12]);
-  const tlScale = useTransform(smoothProgress, [0, 1], [0.85, 1.08]);
+  // =========================================================================
+  // PICTURE 1 (IF2025.jpg - KEYNOTE ARENA)
+  // 1. Appears in the CENTER of the screen from the text (0.16 -> 0.28)
+  // 2. Holds briefly, then travels diagonally to the Top-Left corner (0.28 -> 0.50)
+  // =========================================================================
+  const photo1Opacity = useTransform(
+    smoothProgress,
+    [0.15, 0.22, 0.44, 0.50],
+    [0, 1, 1, 0]
+  );
+  const photo1Scale = useTransform(
+    smoothProgress,
+    [0.15, 0.25, 0.50],
+    [0.3, 1.0, 1.1]
+  );
+  const photo1X = useTransform(
+    smoothProgress,
+    [0.15, 0.28, 0.50],
+    ['0vw', '0vw', '-85vw']
+  );
+  const photo1Y = useTransform(
+    smoothProgress,
+    [0.15, 0.28, 0.50],
+    ['0vh', '0vh', '-72vh']
+  );
+  const photo1Rotate = useTransform(
+    smoothProgress,
+    [0.15, 0.28, 0.50],
+    [-3, -3, -16]
+  );
 
-  // 2. Top-Right Image (z-30: In front of text)
-  const trX = useTransform(smoothProgress, [0, 1], ['0%', '65%']);
-  const trY = useTransform(smoothProgress, [0, 1], ['0%', '-45%']);
-  const trRotate = useTransform(smoothProgress, [0, 1], [0, 15]);
-  const trScale = useTransform(smoothProgress, [0, 1], [0.8, 1.15]);
+  // =========================================================================
+  // PICTURE 2 (if2025_2.jpg - STARTUP SHOWDOWN)
+  // 1. Appears in the CENTER of the screen from the text (0.50 -> 0.62)
+  // 2. Holds briefly, then travels diagonally to the Bottom-Right corner (0.62 -> 0.84)
+  // =========================================================================
+  const photo2Opacity = useTransform(
+    smoothProgress,
+    [0.49, 0.56, 0.78, 0.84],
+    [0, 1, 1, 0]
+  );
+  const photo2Scale = useTransform(
+    smoothProgress,
+    [0.49, 0.59, 0.84],
+    [0.3, 1.0, 1.1]
+  );
+  const photo2X = useTransform(
+    smoothProgress,
+    [0.49, 0.62, 0.84],
+    ['0vw', '0vw', '85vw']
+  );
+  const photo2Y = useTransform(
+    smoothProgress,
+    [0.49, 0.62, 0.84],
+    ['0vh', '0vh', '72vh']
+  );
+  const photo2Rotate = useTransform(
+    smoothProgress,
+    [0.49, 0.62, 0.84],
+    [3, 3, 16]
+  );
 
-  // 3. Bottom-Left Image (z-30: In front of text)
-  const blX = useTransform(smoothProgress, [0, 1], ['0%', '-55%']);
-  const blY = useTransform(smoothProgress, [0, 1], ['0%', '60%']);
-  const blRotate = useTransform(smoothProgress, [0, 1], [0, 8]);
-  const blScale = useTransform(smoothProgress, [0, 1], [0.85, 1.05]);
+  // Gold SVG accent doodles
+  const doodle1Scale = useTransform(smoothProgress, [0.20, 0.26, 0.40, 0.46], [0, 1.15, 1, 0]);
+  const doodle1Opacity = useTransform(smoothProgress, [0.20, 0.24, 0.40, 0.46], [0, 1, 1, 0]);
 
-  // 4. Bottom-Right Image (z-10: Behind text)
-  const brX = useTransform(smoothProgress, [0, 1], ['0%', '60%']);
-  const brY = useTransform(smoothProgress, [0, 1], ['0%', '55%']);
-  const brRotate = useTransform(smoothProgress, [0, 1], [0, -10]);
-  const brScale = useTransform(smoothProgress, [0, 1], [0.75, 1.12]);
+  const doodle2Scale = useTransform(smoothProgress, [0.54, 0.60, 0.74, 0.80], [0, 1.15, 1, 0]);
+  const doodle2Opacity = useTransform(smoothProgress, [0.54, 0.58, 0.74, 0.80], [0, 1, 1, 0]);
 
-  // 5. Center/Accent Image (z-30: Foreground depth-of-field rush)
-  const centerRushX = useTransform(smoothProgress, [0, 1], ['0%', '105%']);
-  const centerRushY = useTransform(smoothProgress, [0, 1], ['0%', '20%']);
-  const centerRushRotate = useTransform(smoothProgress, [0, 1], [-4, -18]);
-  const centerRushScale = useTransform(smoothProgress, [0, 1], [0.6, 1.25]);
-  const centerRushOpacity = useTransform(smoothProgress, [0, 0.2, 0.85, 1], [0.2, 0.9, 0.9, 0.6]);
+  // Bottom scrub bar
+  const progressBarWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
-  // 6. Deep Background Accent Image (z-10: Slow ambient parallax)
-  const bgAccentX = useTransform(smoothProgress, [0, 1], ['0%', '-30%']);
-  const bgAccentY = useTransform(smoothProgress, [0, 1], ['0%', '-80%']);
-  const bgAccentRotate = useTransform(smoothProgress, [0, 1], [4, 9]);
-  const bgAccentScale = useTransform(smoothProgress, [0, 1], [0.65, 0.9]);
-  const bgAccentOpacity = useTransform(smoothProgress, [0, 0.3, 0.9, 1], [0.2, 0.6, 0.6, 0.3]);
+  // Helper to split text into characters
+  const renderCharacters = (text) => {
+    return text.split('').map((char, index) => (
+      <motion.span
+        key={index}
+        variants={charVariants}
+        className="inline-block will-change-transform"
+      >
+        {char === ' ' ? '\u00A0' : char}
+      </motion.span>
+    ));
+  };
 
   return (
-    <div
+    <section
       ref={containerRef}
-      className="relative w-full h-[280vh] bg-[#0D0704] text-[#F4EFEA]"
+      className="relative w-full h-[320vh] bg-[#0D0704] text-[#F4EFEA]"
     >
-      {/* Sticky Fullscreen Viewport Stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center select-none">
-        {/* Background Atmosphere: Deep Espresso Radial Spotlight */}
+      {/* Sticky Viewport Stage (h-screen, sticky top-0, overflow:hidden) */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center select-none">
+        {/* Background Ambient Atmosphere */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
             background:
-              'radial-gradient(circle at 50% 50%, #2A1A13 0%, #160D09 55%, #0D0704 100%)',
+              'radial-gradient(circle at 50% 50%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
           }}
         />
 
         {/* Architectural Fine Coordinate Grid */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+          className="absolute inset-0 pointer-events-none opacity-[0.025] z-0"
           style={{
             backgroundImage: `linear-gradient(#E5D9C5 1px, transparent 1px), linear-gradient(to right, #E5D9C5 1px, transparent 1px)`,
             backgroundSize: '48px 48px',
           }}
         />
 
-        {/* Ambient Corner Glow Halos */}
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
-        <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[300px] bg-[#38251D]/[0.45] rounded-full blur-3xl pointer-events-none z-0" />
+        {/* Ambient Warm Vignette Halo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
 
         {/* =========================================================================
-            LAYER 1 (z-10): Images Passing BEHIND Typography
-           ========================================================================= */}
-
-        {/* 1. Top-Left Floating Image */}
-        <motion.div
-          style={{
-            x: tlX,
-            y: tlY,
-            rotate: tlRotate,
-            scale: tlScale,
-          }}
-          className="absolute top-[16%] left-[8%] sm:left-[14%] z-10 w-44 sm:w-60 md:w-72 lg:w-84 aspect-[4/3] will-change-transform"
-        >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#52433D]/60 bg-[#160D09] shadow-[0_20px_50px_rgba(0,0,0,0.85)] group">
-            <Image
-              src="/sample-pics/IF2025.jpg"
-              alt="Speaker Keynote Showcase"
-              fill
-              sizes="(max-width: 768px) 180px, 320px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2.5 py-1 rounded-md bg-[#160D09]/85 backdrop-blur-md border border-[#52433D]/60 text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase text-[#E5D9C5]">
-              KEYNOTE ARENA
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 4. Bottom-Right Floating Image */}
-        <motion.div
-          style={{
-            x: brX,
-            y: brY,
-            rotate: brRotate,
-            scale: brScale,
-          }}
-          className="absolute bottom-[16%] right-[8%] sm:right-[14%] z-10 w-44 sm:w-60 md:w-72 lg:w-80 aspect-[4/3] will-change-transform"
-        >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#52433D]/60 bg-[#160D09] shadow-[0_20px_50px_rgba(0,0,0,0.85)] group">
-            <Image
-              src="/sample-pics/Business-Summit.jpg"
-              alt="Business Summit Ecosystem"
-              fill
-              sizes="(max-width: 768px) 180px, 320px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2.5 py-1 rounded-md bg-[#160D09]/85 backdrop-blur-md border border-[#52433D]/60 text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase text-[#E5D9C5]">
-              VENTURE SUMMIT
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 6. Deep Background Top-Center Accent */}
-        <motion.div
-          style={{
-            x: bgAccentX,
-            y: bgAccentY,
-            rotate: bgAccentRotate,
-            scale: bgAccentScale,
-            opacity: bgAccentOpacity,
-          }}
-          className="absolute top-[18%] left-[40%] z-10 w-40 sm:w-52 md:w-64 aspect-[4/3] hidden sm:block will-change-transform"
-        >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#52433D]/40 bg-[#160D09] shadow-2xl">
-            <Image
-              src="/sample-pics/if2025_2.jpg"
-              alt="Audience & Judges Session"
-              fill
-              sizes="240px"
-              className="object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-[#0D0704]/40" />
-          </div>
-        </motion.div>
-
-        {/* =========================================================================
-            LAYER 2 (z-20): Central Massive Typographic Lockup
+            STAGE 1: Centered 3-Line Stacked Heading (Calm & Smooth Mask Reveal)
+            Z-Index: 10 (Centered Typography)
            ========================================================================= */}
         <motion.div
           style={{
-            scale: textScale,
-            opacity: textOpacity,
+            opacity: textExitOpacity,
+            scale: textExitScale,
           }}
-          className="relative z-20 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
+          className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
         >
-          {/* Summit Pre-badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#241712]/90 border border-[#443027] text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-[#E5D9C5] mb-4 sm:mb-6 backdrop-blur-md shadow-xl shadow-black/50">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5] animate-ping" />
-            <span>AES 2026 COMPETITION ARENA</span>
-          </div>
+          
 
-          {/* Massive Display Lockup */}
-          <motion.h2
-            style={{ letterSpacing: textLetterSpacing }}
-            className="text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-black uppercase text-[#F4EFEA] leading-[0.88] select-none text-center"
+          {/* 3-Line Stacked Uppercase Heading (Tight leading, no unnecessary space) */}
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#F4EFEA] leading-[0.88] select-none text-center">
+            {/* Line 1: YOUR VISION. */}
+            <div className="overflow-hidden">
+              <motion.div
+                variants={lineVariants(0.06)}
+                initial="hidden"
+                animate={hasEntered ? 'visible' : 'hidden'}
+                className="flex justify-center"
+              >
+                {renderCharacters(LINE_1)}
+              </motion.div>
+            </div>
+
+            {/* Line 2: YOUR VENTURE. */}
+            <div className="overflow-hidden">
+              <motion.div
+                variants={lineVariants(0.36)}
+                initial="hidden"
+                animate={hasEntered ? 'visible' : 'hidden'}
+                className="flex justify-center text-transparent bg-clip-text bg-gradient-to-r from-[#F4EFEA] via-[#E5D9C5] to-[#B09B8C]"
+              >
+                {renderCharacters(LINE_2)}
+              </motion.div>
+            </div>
+
+            {/* Line 3: YOUR SUMMIT. */}
+            <div className="overflow-hidden">
+              <motion.div
+                variants={lineVariants(0.66)}
+                initial="hidden"
+                animate={hasEntered ? 'visible' : 'hidden'}
+                className="flex justify-center text-[#F4EFEA] drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]"
+              >
+                {renderCharacters(LINE_3)}
+              </motion.div>
+            </div>
+          </h2>
+        </motion.div>
+
+        {/* =========================================================================
+            STAGE 2: Gold SVG Accent Doodles (Pop In & Out)
+           ========================================================================= */}
+        {/* Doodle 1: Sparkle Star Cluster (Top Right of Text, active during Photo 1) */}
+        <motion.div
+          style={{
+            scale: doodle1Scale,
+            opacity: doodle1Opacity,
+          }}
+          className="absolute top-[26%] right-[14%] sm:right-[20%] z-25 pointer-events-none will-change-transform"
+        >
+          <svg
+            viewBox="0 0 100 100"
+            className="w-14 h-14 sm:w-18 sm:h-18 stroke-[#E5D9C5] fill-none stroke-[3] stroke-linecap-round filter drop-shadow-[0_0_12px_rgba(229,217,197,0.7)]"
           >
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-[#F4EFEA] via-[#E5D9C5] to-[#B09B8C] drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]">
-              VENTURE
-            </span>
-            <span className="block text-[#F4EFEA] drop-shadow-[0_20px_45px_rgba(0,0,0,0.95)]">
-              ARENA
-            </span>
-          </motion.h2>
+            <path d="M50 10 Q50 45 15 50 Q50 50 50 85 Q50 50 85 50 Q50 45 50 10Z" />
+            <circle cx="82" cy="22" r="3" fill="#E5D9C5" />
+            <circle cx="18" cy="78" r="2.5" fill="#E5D9C5" />
+          </svg>
+        </motion.div>
 
-          {/* Subtext Description */}
-          <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-[#B09B8C] max-w-xl text-center leading-relaxed font-normal">
-            High-stakes venture battles where visionary founders pitch live before global investors, angel syndicates, and market leaders.
-          </p>
-
-          {/* Category Tag Pills */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#E5D9C5]/85">
-            <span className="px-3 py-1 rounded-full bg-[#241712]/80 border border-[#443027]">
-              $500K+ Prize Pool
-            </span>
-            <span className="px-3 py-1 rounded-full bg-[#241712]/80 border border-[#443027]">
-              Live Pitch
-            </span>
-            <span className="px-3 py-1 rounded-full bg-[#241712]/80 border border-[#443027]">
-              VC Demo Day
-            </span>
-          </div>
+        {/* Doodle 2: Hand-drawn Curved Arrow Swoop (Mid-Left, active during Photo 2) */}
+        <motion.div
+          style={{
+            scale: doodle2Scale,
+            opacity: doodle2Opacity,
+          }}
+          className="absolute bottom-[26%] left-[12%] sm:left-[18%] z-25 pointer-events-none will-change-transform"
+        >
+          <svg
+            viewBox="0 0 160 80"
+            className="w-24 h-12 sm:w-32 sm:h-16 stroke-[#E5D9C5] fill-none stroke-[3.5] stroke-linecap-round stroke-linejoin-round filter drop-shadow-[0_0_12px_rgba(229,217,197,0.7)]"
+          >
+            <path d="M10 55 C45 15, 115 15, 145 42" />
+            <path d="M128 26 L148 43 L126 53" />
+          </svg>
         </motion.div>
 
         {/* =========================================================================
-            LAYER 3 (z-30): Images Passing IN FRONT of Typography (3D Depth)
+            STAGE 3: Sequential Picture 1 & Picture 2
+            - Picture 1 appears in the CENTER from the text, then travels to Top-Left corner
+            - Then Picture 2 appears in the CENTER from the text, then travels to Bottom-Right corner
            ========================================================================= */}
 
-        {/* 2. Top-Right Floating Image */}
+        {/* PICTURE 1: Appears at Center -> Travels to Top-Left Corner */}
         <motion.div
           style={{
-            x: trX,
-            y: trY,
-            rotate: trRotate,
-            scale: trScale,
+            x: photo1X,
+            y: photo1Y,
+            scale: photo1Scale,
+            rotate: photo1Rotate,
+            opacity: photo1Opacity,
           }}
-          className="absolute top-[12%] right-[6%] sm:right-[12%] z-30 w-48 sm:w-64 md:w-76 lg:w-88 aspect-[4/3] will-change-transform"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#52433D]/70 bg-[#160D09] shadow-[0_25px_60px_rgba(0,0,0,0.95)] group">
-            <Image
-              src="/sample-pics/if2025_2.jpg"
-              alt="Live Stage Founder Pitch"
-              fill
-              sizes="(max-width: 768px) 200px, 340px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/85 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2.5 py-1 rounded-md bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase text-[#E5D9C5]">
-              STARTUP SHOWDOWN
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 3. Bottom-Left Floating Image */}
-        <motion.div
-          style={{
-            x: blX,
-            y: blY,
-            rotate: blRotate,
-            scale: blScale,
-          }}
-          className="absolute bottom-[14%] left-[6%] sm:left-[12%] z-30 w-48 sm:w-64 md:w-76 lg:w-84 aspect-[4/3] will-change-transform"
-        >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#52433D]/70 bg-[#160D09] shadow-[0_25px_60px_rgba(0,0,0,0.95)] group">
+          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#52433D]/70 bg-[#160D09] shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
             <Image
               src="/sample-pics/IF2025.jpg"
-              alt="Judge Panel & Presentation"
+              alt="Speaker Keynote Session"
               fill
-              sizes="(max-width: 768px) 200px, 340px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 260px, 380px"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/85 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2.5 py-1 rounded-md bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase text-[#E5D9C5]">
-              INVESTOR ARENA
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+              <span className="px-3 py-1.5 rounded-xl bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[10px] font-bold tracking-widest uppercase text-[#E5D9C5]">
+                KEYNOTE ARENA
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-wider text-[#B09B8C]">
+                AES 2026
+              </span>
             </div>
           </div>
         </motion.div>
 
-        {/* 5. Center-Right Foreground Depth Rush Image */}
+        {/* PICTURE 2: Appears at Center -> Travels to Bottom-Right Corner */}
         <motion.div
           style={{
-            x: centerRushX,
-            y: centerRushY,
-            rotate: centerRushRotate,
-            scale: centerRushScale,
-            opacity: centerRushOpacity,
+            x: photo2X,
+            y: photo2Y,
+            scale: photo2Scale,
+            rotate: photo2Rotate,
+            opacity: photo2Opacity,
           }}
-          className="absolute top-[36%] right-[16%] sm:right-[20%] z-30 w-44 sm:w-56 md:w-68 aspect-[4/3] will-change-transform"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
-          <div className="relative w-full h-full rounded-2xl overflow-hidden border border-[#E5D9C5]/40 bg-[#160D09] shadow-[0_30px_70px_rgba(0,0,0,0.98)] group">
+          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#52433D]/70 bg-[#160D09] shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
             <Image
-              src="/sample-pics/Business-Summit.jpg"
-              alt="Innovation Showcase Gala"
+              src="/sample-pics/if2025_2.jpg"
+              alt="Live Stage Startup Pitch"
               fill
-              sizes="(max-width: 768px) 180px, 280px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 768px) 260px, 380px"
+              className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/85 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-2.5 py-1 rounded-md bg-[#160D09]/90 backdrop-blur-md border border-[#E5D9C5]/50 text-[9px] sm:text-[10px] font-semibold tracking-widest uppercase text-[#E5D9C5]">
-              STAGE FINALE
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+              <span className="px-3 py-1.5 rounded-xl bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[10px] font-bold tracking-widest uppercase text-[#E5D9C5]">
+                STARTUP SHOWDOWN
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-wider text-[#B09B8C]">
+                PKR 1.5M+ POOL
+              </span>
             </div>
           </div>
         </motion.div>
 
-        {/* Bottom Scroll-Scrub Progress Bar Indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none">
-          <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#B09B8C]">
-            SCROLL TO EXPLORE ARENA
-          </span>
-          <div className="w-36 sm:w-48 h-1 rounded-full bg-[#3A2D28] overflow-hidden border border-[#52433D]/60">
-            <motion.div
-              style={{ width: progressWidth }}
-              className="h-full bg-gradient-to-r from-[#B09B8C] via-[#E5D9C5] to-[#F4EFEA] rounded-full"
-            />
-          </div>
-        </div>
+        
       </div>
-    </div>
+    </section>
   );
 }
