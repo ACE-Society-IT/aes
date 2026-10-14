@@ -114,10 +114,7 @@ export default function Modules() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3A2D28]/80 border border-[#52433D] text-[11px] font-bold uppercase tracking-[0.22em] text-[#E5D9C5] mb-4 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5D9C5] animate-ping" />
-              Summit Competition Tracks
-            </div>
+           
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F4EFEA]">
               Flagship Modules
             </h2>
