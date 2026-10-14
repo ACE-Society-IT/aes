@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Competition from '@/components/home/Competition';
 import Hero from '@/components/home/Hero';
@@ -12,6 +13,7 @@ export default function Home() {
       <Vision />
       <Competition />
       <Modules />
+      <Footer />
     </main>
   );
 }
