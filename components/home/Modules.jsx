@@ -28,6 +28,7 @@ import { cn } from '@/lib/utils';
  * Strictly adheres to DESIGN-RULES.md 7-color palette:
  * #5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e
  */
+
 const MODULES_DATA = [
   {
     id: 'investomania',
@@ -225,7 +226,11 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
   const endProgress = Math.min(1, (index + 1.2) / totalCards);
   const targetScale = 1 - (totalCards - index - 1) * 0.03;
 
-  const scale = useTransform(scrollYProgress, [startProgress, endProgress], [1, targetScale]);
+  const scale = useTransform(
+    scrollYProgress,
+    [startProgress, endProgress],
+    [1, targetScale]
+  );
 
   return (
     <div
@@ -336,7 +341,12 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
                 module.theme.statusBg
               )}
             >
-              <span className={cn('w-2 h-2 rounded-full animate-pulse', module.theme.pulseDot)} />
+              <span
+                className={cn(
+                  'w-2 h-2 rounded-full animate-pulse',
+                  module.theme.pulseDot
+                )}
+              />
               <span>{module.status}</span>
             </div>
           </div>
@@ -411,19 +421,8 @@ export default function Modules() {
       ref={containerRef}
       className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c]"
     >
-      {/* Ambient Radial Glow */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-60 bg-[radial-gradient(circle_at_50%_15%,#89192c_0%,#701020_45%,#5a0d1b_90%)]" />
-
-      {/* Decorative Vignette Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[360px] bg-[#f1ca7e]/[0.04] rounded-full blur-3xl pointer-events-none z-0" />
-
       {/* Lead-in Header */}
-      <div className="relative z-10 max-w-7xl mx-auto pt-24 sm:pt-32 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Eyebrow badge */}
-        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
-          Summit Challenges
-        </span>
-
+      <div className="relative z-10 max-w-7xl mx-auto pt-24 sm:pt-32  px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Section Heading */}
         <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#f8eee1]">
           Module <span className="text-[#f1ca7e]">Overview</span>
@@ -431,31 +430,9 @@ export default function Modules() {
 
         {/* Description */}
         <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#e8dcc6] leading-relaxed">
-          Five flagship competitive tracks designed to test portfolio strategy, corporate crisis control,
-          property bidding, venture pitching, and guerrilla brand growth.
+          Five flagship competitive tracks designed to test portfolio strategy, corporate
+          crisis control, property bidding, venture pitching, and guerrilla brand growth.
         </p>
-
-        {/* Quick Stats Pill */}
-        <div className="mt-8 flex items-center gap-4 bg-[#701020]/90 border border-[#89192c] rounded-2xl p-4 shadow-md">
-          <div className="border-r border-[#89192c] pr-4">
-            <div className="text-2xl font-black text-[#f1ca7e]">5</div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
-              Arenas
-            </div>
-          </div>
-          <div className="border-r border-[#89192c] pr-4">
-            <div className="text-2xl font-black text-[#f8eee1]">1.5M+</div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
-              Prize Pool
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl font-black text-[#f1ca7e]">40+</div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
-              VC Judges
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* 3D Stacking Cards Deck Track */}

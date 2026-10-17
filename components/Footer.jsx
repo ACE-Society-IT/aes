@@ -15,25 +15,45 @@ const FOOTER_LINKS = [
 ];
 
 // Official AES Contact Information
-const CONTACT_INFO = [
-  {
-    icon: <Mail size={18} className="text-[#f1ca7e] shrink-0" />,
-    text: 'partnerships@aesociety.org',
-    href: 'mailto:partnerships@aesociety.org',
+const CONTACT_INFO = {
+  venue: 'Alpha College Karachi',
+  presidents: [
+    { name: 'Mansoor Moiz', phone: '0335 7555253', tel: 'tel:03357555253' },
+    { name: 'Zoya Ehtasham', phone: '0332 5175032', tel: 'tel:03325175032' },
+  ],
+  generalSecretary: {
+    name: 'Bareerah Ahmed',
+    phone: '0336 0081714',
+    tel: 'tel:03360081714',
   },
-  {
-    icon: <Phone size={18} className="text-[#f1ca7e] shrink-0" />,
-    text: '+92 (51) 844-2026',
-    href: 'tel:+92518442026',
+  socials: {
+    instagram: '@aes_summit',
+    instagramHref: 'https://instagram.com/aes_summit',
   },
-  {
-    icon: <MapPin size={18} className="text-[#f1ca7e] shrink-0" />,
-    text: 'Islamabad, Pakistan',
-  },
-];
+};
 
 // Verified Social Media Icons strictly matching DESIGN-RULES.md
 const SOCIAL_LINKS = [
+  {
+    name: 'Instagram',
+    href: 'https://instagram.com/aes_summit',
+    icon: (
+      <svg
+        className="w-4 h-4 text-inherit"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    ),
+  },
   {
     name: 'LinkedIn',
     href: 'https://linkedin.com',
@@ -55,40 +75,6 @@ const SOCIAL_LINKS = [
     ),
   },
   {
-    name: 'X (Twitter)',
-    href: 'https://twitter.com',
-    icon: (
-      <svg
-        className="w-3.5 h-3.5 text-inherit"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'Instagram',
-    href: 'https://instagram.com',
-    icon: (
-      <svg
-        className="w-4 h-4 text-inherit"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-      </svg>
-    ),
-  },
-  {
     name: 'Website',
     href: '/',
     icon: <Globe className="w-4 h-4 text-inherit" aria-hidden="true" />,
@@ -104,8 +90,8 @@ export default function Footer() {
       {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-20 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12">
-          {/* Brand Column (6 cols) */}
-          <div className="lg:col-span-6 space-y-4">
+          {/* Brand Column (5 cols) */}
+          <div className="lg:col-span-5 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative h-11 w-28 transition-transform duration-300 group-hover:scale-105">
                 <Image
@@ -144,28 +130,85 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Column (3 cols) */}
-          <div className="lg:col-span-3">
+          {/* Contact Column (4 cols) */}
+          <div className="lg:col-span-4">
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#f1ca7e] mb-5">
-              Contact
+              Contact & Venue
             </h4>
-            <ul className="space-y-3.5 text-sm text-[#e8dcc6]">
-              {CONTACT_INFO.map((item, i) => (
-                <li key={i} className="flex items-center space-x-3">
-                  {item.icon}
-                  {item.href ? (
+            <div className="space-y-4 text-sm text-[#e8dcc6]">
+              {/* Venue */}
+              <div className="flex items-start space-x-3">
+                <MapPin size={18} className="text-[#f1ca7e] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-[#f1ca7e] block">
+                    Venue
+                  </span>
+                  <span className="text-sm text-[#f8eee1] font-medium">{CONTACT_INFO.venue}</span>
+                </div>
+              </div>
+
+              {/* Presidents */}
+              <div className="flex items-start space-x-3">
+                <Phone size={18} className="text-[#f1ca7e] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-[#f1ca7e] block">
+                    Presidents
+                  </span>
+                  <div className="space-y-1.5 mt-1">
+                    {CONTACT_INFO.presidents.map((p) => (
+                      <div key={p.name} className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[#e8dcc6] text-xs sm:text-sm">{p.name}:</span>
+                        <a
+                          href={p.tel}
+                          className="text-[#f8eee1] hover:text-[#f1ca7e] transition-colors font-medium text-xs sm:text-sm"
+                        >
+                          {p.phone}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* General Secretary */}
+              <div className="flex items-start space-x-3">
+                <Phone size={18} className="text-[#f1ca7e] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-[#f1ca7e] block">
+                    General Secretary
+                  </span>
+                  <div className="mt-1 flex items-center gap-2 flex-wrap">
+                    <span className="text-[#e8dcc6] text-xs sm:text-sm">
+                      {CONTACT_INFO.generalSecretary.name}:
+                    </span>
                     <a
-                      href={item.href}
-                      className="hover:text-[#f8eee1] transition-colors duration-200"
+                      href={CONTACT_INFO.generalSecretary.tel}
+                      className="text-[#f8eee1] hover:text-[#f1ca7e] transition-colors font-medium text-xs sm:text-sm"
                     >
-                      {item.text}
+                      {CONTACT_INFO.generalSecretary.phone}
                     </a>
-                  ) : (
-                    <span>{item.text}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Instagram */}
+              <div className="flex items-start space-x-3">
+                <Mail size={18} className="text-[#f1ca7e] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider font-bold text-[#f1ca7e] block">
+                    Official Inquiries
+                  </span>
+                  <a
+                    href={CONTACT_INFO.socials.instagramHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#f8eee1] hover:text-[#f1ca7e] transition-colors font-medium text-xs sm:text-sm block mt-0.5"
+                  >
+                    Instagram: <span className="text-[#f1ca7e]">{CONTACT_INFO.socials.instagram}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -12,7 +12,7 @@ const FAQ_ITEMS = [
   {
     question: 'What is the Alpha Entrepreneurship Summit (AES)?',
     answer:
-      'AES is a premier, multi-day entrepreneurship summit uniting frontier founders, institutional venture capital, angel syndicates, and global industry leaders. It features six flagship modules — pitch arenas, hackathons, case competitions, growth labs, sustainability tracks, and executive deal rooms — designed to catalyze the next generation of market-defining ventures.',
+      'AES is a premier, multi-day entrepreneurship summit uniting frontier founders, institutional venture capital, and global industry leaders. It features five flagship modules — Investomania, Defend the Empire, Venture Verse, Market Monopoly, and Viral Velocity — designed to catalyze the next generation of market-defining ventures.',
   },
   {
     question: 'Who should attend the summit?',
@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
   {
     question: 'When and where will AES 2026 take place?',
     answer:
-      'AES 2026 is scheduled across three flagship days in Islamabad, Pakistan. Specific venue details and the full event calendar will be announced following registration close. Stay connected through our official channels for the latest updates.',
+      'AES 2026 will be held across three flagship days from November 13–15, 2026 at Alpha College in Karachi, Pakistan. Stay connected through our official channels and Instagram (@aes_summit) for timely updates.',
   },
   {
     question: 'How do I register for the summit?',
@@ -32,7 +32,7 @@ const FAQ_ITEMS = [
   {
     question: 'What is the prize pool and competition format?',
     answer:
-      'Competitors across all six modules vie for a combined PKR 1.5M+ prize pool. The Venture Sprint alone offers direct term sheets and equity-free grants. Each module has its own judging criteria evaluated by 40+ VC judges, enterprise partners, and Tier-1 management consultants.',
+      'Competitors across all five modules vie for a combined PKR 1.5M+ prize pool. Each module features three rigorous rounds evaluated by VC judges, enterprise partners, and industry leaders.',
   },
   {
     question: 'Can I participate in multiple modules?',
