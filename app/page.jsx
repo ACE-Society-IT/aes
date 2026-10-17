@@ -2,6 +2,7 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import Competition from '@/components/home/Competition';
 import Faqs from '@/components/home/Faqs';
+import Handbook from '@/components/home/Handbook';
 import Hero from '@/components/home/Hero';
 import Modules from '@/components/home/Modules';
 import Schedule from '@/components/home/Schedule';
@@ -16,6 +17,7 @@ export default function Home() {
       <Competition />
       <Modules />
       <Schedule />
+      <Handbook />
       <Faqs />
       <Footer />
     </main>

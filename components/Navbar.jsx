@@ -11,8 +11,9 @@ const NAV_LINKS = [
   { name: 'Executives', href: '/executives' },
   { name: 'Ambassador’s', href: '/ambassadors' },
   { name: 'Modules', href: '#modules' },
-  { name: 'FAQ’s', href: '#competition' },
-  { name: 'schedule', href: '#schedule' },
+  { name: 'Schedule', href: '#schedule' },
+  { name: 'Handbook', href: '#handbook' },
+  { name: 'FAQ’s', href: '#faqs' },
 ];
 
 /**
