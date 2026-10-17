@@ -14,7 +14,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Vision />
-      <Handbook />
+      {/* <Handbook /> */}
       <Competition />
       <Modules />
       <Schedule />
