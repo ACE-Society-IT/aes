@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 
 /**
  * High-performance 3-line continuous motion mouse streak wrapper.
+ * - Strict 7-color palette: Imperial Gold (#f1ca7e), Alabaster Cream (#f8eee1), Warm Parchment (#e8dcc6).
  * - Hardware-accelerated perspective parallax: ascends and recedes as you scroll down.
  * - Hidden and disabled on mobile devices (< 768px or touch screens).
  * - Synchronized circular orbit when mouse is stationary.
@@ -113,9 +114,10 @@ export default function MouseStreakWrapper({
     container.addEventListener('mousemove', onMouseMove, { passive: true });
     container.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
+    // Strict 7-color RGB values for ribbon ribbons: Imperial Gold, Alabaster Cream, Warm Parchment
     const ribbons = [
       {
-        color: '218, 198, 172',
+        color: '241, 202, 126', // Imperial Gold (#f1ca7e)
         spring: 0.05,
         friction: 0.82,
         angleOffset: 0,
@@ -130,7 +132,7 @@ export default function MouseStreakWrapper({
         glowWidth: 15,
       },
       {
-        color: '198, 172, 142',
+        color: '248, 238, 225', // Alabaster Cream (#f8eee1)
         spring: 0.04,
         friction: 0.84,
         angleOffset: (Math.PI * 2) / 3,
@@ -145,7 +147,7 @@ export default function MouseStreakWrapper({
         glowWidth: 13,
       },
       {
-        color: '175, 145, 118',
+        color: '232, 220, 198', // Warm Parchment (#e8dcc6)
         spring: 0.03,
         friction: 0.86,
         angleOffset: (Math.PI * 4) / 3,
@@ -290,7 +292,7 @@ export default function MouseStreakWrapper({
         );
         tipGrad.addColorStop(0, `rgba(${r.color}, 0.5)`);
         tipGrad.addColorStop(0.5, `rgba(${r.color}, 0.15)`);
-        tipGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        tipGrad.addColorStop(1, 'rgba(90, 13, 27, 0)');
 
         ctx.fillStyle = tipGrad;
         ctx.beginPath();
@@ -319,22 +321,20 @@ export default function MouseStreakWrapper({
     <section
       id={id}
       ref={containerRef}
-      className={`relative w-full ${className.includes('min-h-') ? '' : 'min-h-screen'} overflow-hidden flex flex-col items-center justify-center select-none ${className}`}
-      style={{
-        background:
-          'radial-gradient(circle at 50% 38%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
-        ...style,
-      }}
+      className={`relative w-full ${
+        className.includes('min-h-') ? '' : 'min-h-screen'
+      } overflow-hidden flex flex-col items-center justify-center select-none bg-[radial-gradient(circle_at_50%_38%,#89192c_0%,#701020_45%,#5a0d1b_100%)] ${className}`}
+      style={style}
     >
-      {/* Background Layer: Ambient Vignette & Center Glow */}
+      {/* Background Layer: Ambient Vignette & Center Glow adhering to DESIGN-RULES.md */}
       <div
-        className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0 will-change-transform"
+        className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#650d1c]/25 to-[#5a0d1b]/95 z-0 will-change-transform"
         style={{
           transform: fadeOnScroll ? `translate3d(0, ${-scrollY * 0.06}px, 0)` : undefined,
         }}
       />
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0 will-change-transform"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#f1ca7e]/[0.05] rounded-full blur-3xl pointer-events-none z-0 will-change-transform"
         style={{
           transform: fadeOnScroll
             ? `translate3d(-50%, calc(-50% - ${scrollY * 0.1}px), 0)`

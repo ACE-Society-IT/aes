@@ -8,10 +8,10 @@ import SqueezeCarousel from '@/components/ui/carousel-squeeze';
  */
 const renderBadge = (tag, title) => (
   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2.5">
-    <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#160D09]/85 backdrop-blur-md border border-[#52433D]/90 text-[10px] font-bold uppercase tracking-widest text-[#E5D9C5] shadow-sm">
+    <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-[#701020]/90 backdrop-blur-md border border-[#89192c] text-[10px] font-bold uppercase tracking-widest text-[#f1ca7e] shadow-sm">
       {tag}
     </span>
-    <span className="text-sm sm:text-base font-semibold tracking-tight text-[#F4EFEA] drop-shadow-md">
+    <span className="text-sm sm:text-base font-semibold tracking-tight text-[#f8eee1] drop-shadow-md">
       {title}
     </span>
   </div>
@@ -96,28 +96,22 @@ export default function Modules() {
   return (
     <section
       id="modules"
-      className="relative w-full bg-[#0D0704] text-[#F4EFEA] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#52433D]/50 overflow-hidden"
+      className="relative w-full bg-[#650d1c] text-[#f8eee1] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c] overflow-hidden"
     >
       {/* Ambient Radial Spotlight strictly following DESIGN-RULES.md */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0 opacity-70"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 15%, #38251D 0%, #281A14 45%, #0D0704 85%)',
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-70 bg-[radial-gradient(circle_at_50%_15%,#89192c_0%,#701020_45%,#5a0d1b_85%)]" />
 
       {/* Decorative Warm Vignette Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[360px] bg-[#E5D9C5]/[0.03] rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[360px] bg-[#f1ca7e]/[0.04] rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F4EFEA]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#f8eee1]">
               Flagship Modules
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-[#B09B8C] leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-[#e8dcc6] leading-relaxed">
               Six high-velocity challenge arenas designed to test founders, engineers, and
               strategists. Compete for the PKR 1.5M+ pool, institutional term sheets, and
               global venture acceleration.
@@ -125,22 +119,22 @@ export default function Modules() {
           </div>
 
           {/* Quick Stats Pill */}
-          <div className="flex items-center gap-4 self-start md:self-auto bg-[#1E130E]/90 border border-[#52433D]/80 rounded-2xl p-4 backdrop-blur-sm shadow-md">
-            <div className="border-r border-[#52433D]/60 pr-4">
-              <div className="text-2xl font-black text-[#E5D9C5]">6</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">
+          <div className="flex items-center gap-4 self-start md:self-auto bg-[#701020]/90 border border-[#89192c] rounded-2xl p-4 backdrop-blur-sm shadow-md">
+            <div className="border-r border-[#89192c] pr-4">
+              <div className="text-2xl font-black text-[#f1ca7e]">6</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
                 Arenas
               </div>
             </div>
-            <div className="border-r border-[#52433D]/60 pr-4">
-              <div className="text-2xl font-black text-[#F4EFEA]">1.5M+</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">
+            <div className="border-r border-[#89192c] pr-4">
+              <div className="text-2xl font-black text-[#f8eee1]">1.5M+</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
                 Prize Pool
               </div>
             </div>
             <div>
-              <div className="text-2xl font-black text-[#E5D9C5]">40+</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#9CA3AF]">
+              <div className="text-2xl font-black text-[#f1ca7e]">40+</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#e8dcc6]">
                 VC Judges
               </div>
             </div>
@@ -148,7 +142,7 @@ export default function Modules() {
         </div>
 
         {/* Squeeze Carousel Container */}
-        <div className="w-full bg-[#160D09]/60 rounded-3xl p-4 sm:p-8 border border-[#52433D]/60 backdrop-blur-md shadow-2xl">
+        <div className="w-full bg-[#5a0d1b]/70 rounded-3xl p-4 sm:p-8 border border-[#89192c] backdrop-blur-md shadow-2xl">
           <SqueezeCarousel
             slides={MODULES_SLIDES}
             defaultIndex={0}
@@ -162,8 +156,8 @@ export default function Modules() {
             autoplay={true}
             interval={5500}
             controls={true}
-            accent="#E5D9C5"
-            accentForeground="#1E1410"
+            accent="#f1ca7e"
+            accentForeground="#5a0d1b"
             label="AES Flagship Summit Modules"
             className="w-full"
           />

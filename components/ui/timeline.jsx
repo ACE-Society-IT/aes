@@ -126,12 +126,12 @@ export default function Timeline({
   id = 'schedule',
   title = 'Summit Itinerary',
   periodLabel = 'Nov 07 — 09, 2026',
-  textColor = '#382A24',
-  mutedTextColor = '#4B5563',
-  activeColor = '#2B1E18',
-  backgroundColor = '#F5F2EB',
-  accentColor = '#B09B8C',
-  borderColor = '#EBE6DC',
+  textColor = '#5a0d1b',
+  mutedTextColor = '#650d1c',
+  activeColor = '#701020',
+  backgroundColor = '#f8eee1',
+  accentColor = '#f1ca7e',
+  borderColor = '#e8dcc6',
   imageUrl = 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
   imageAlt = 'AES Summit Grand Conference Hall',
   duration,
@@ -145,17 +145,7 @@ export default function Timeline({
   const animationDuration = duration ?? scrollDuration;
   const normalizedDuration = Math.max(0.2, animationDuration);
 
-  const sectionStyle = {
-    color: textColor,
-    backgroundColor,
-  };
-  const activeStyle = {
-    backgroundColor: activeColor,
-    boxShadow: `0 0 10px ${activeColor}33`,
-  };
-  const mutedTextStyle = {
-    color: mutedTextColor,
-  };
+
 
   // Interleave top and bottom items chronologically for animation ordering
   const allJourneyItems = (() => {
@@ -242,8 +232,6 @@ export default function Timeline({
 
       // Set initial hidden states for stems, dots and text
       items.forEach((item) => {
-        // Top items: stem grows downward from top to center line
-        // Bottom items: stem grows downward from center line to bottom
         gsap.set(`.jl-${item.id}`, {
           scaleY: 0,
           transformOrigin: item._isTop ? 'top top' : 'top top',
@@ -375,17 +363,11 @@ export default function Timeline({
     <section
       ref={sectionRef}
       id={id}
-      className="h-[200vw] max-[600px]:h-[400vh] w-full relative select-none"
-      style={sectionStyle}
+      className="h-[200vw] max-[600px]:h-[400vh] w-full relative select-none bg-[#f8eee1] text-[#5a0d1b]"
     >
       {/* Warm ambient background glow for light mode */}
       <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 30%, #FFFFFF 0%, #F5F2EB 60%, #EFEBE1 100%)',
-          opacity: 0.6,
-        }}
+        className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#f8eee1_0%,#e8dcc6_60%,#f8eee1_100%)] opacity-60"
       />
 
       <div className="h-screen w-full sticky top-[0%] pt-[10%] overflow-hidden max-[600px]:top-[5%] relative z-10">
@@ -394,7 +376,7 @@ export default function Timeline({
           className="mr-[2vw] flex h-[30vw] w-[240vw] items-center gap-[5vw] px-[5vw] max-[600px]:h-[80vh] max-[600px]:w-[800vw] max-[600px]:px-[7vw]"
         >
           {/* Main Visual Monument */}
-          <div className="h-full w-[30vw] overflow-hidden rounded-[1.25vw] max-[600px]:h-[65vw] max-[600px]:w-[85vw] max-[600px]:rounded-[4vw] border border-[#EBE6DC] shadow-xl relative group shrink-0 bg-white">
+          <div className="h-full w-[30vw] overflow-hidden rounded-[1.25vw] max-[600px]:h-[65vw] max-[600px]:w-[85vw] max-[600px]:rounded-[4vw] border border-[#e8dcc6] shadow-xl relative group shrink-0 bg-[#e8dcc6]/40">
             <Image
               src={imageUrl}
               alt={imageAlt}
@@ -404,50 +386,35 @@ export default function Timeline({
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             {/* Subtle ambient vignette on visual */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#281A14]/35 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#5a0d1b]/40 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-              <span className="px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#EBE6DC] text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#2B1E18] shadow-sm">
+              <span className="px-3 py-1.5 rounded-xl bg-[#f8eee1]/95 backdrop-blur-md border border-[#e8dcc6] text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#5a0d1b] shadow-sm">
                 AES MAIN STAGE
               </span>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#F4EFEA] drop-shadow-md">
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#f8eee1] drop-shadow-md">
                 2026 SUMMIT
               </span>
             </div>
           </div>
 
           <div className="relative h-full w-full">
-            {/* ═══ Center Track Line with Guide Rail & Glowing Endcaps ═══ */}
+            {/* ═══ Center Track Line with Guide Rail & Endcaps ═══ */}
             <div className="w-full absolute left-0 top-[50%] -translate-y-1/2 flex items-center h-fit pointer-events-none z-20">
-              {/* Subtle background guide rail in #EBE6DC */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-[#EBE6DC] rounded-full" />
+              {/* Background guide rail in #e8dcc6 */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-[#e8dcc6] rounded-full" />
 
-              <div
-                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10"
-                style={activeStyle}
-              />
-              <div
-                className="h-[2px] w-[0%] rounded-full journey-line relative z-10"
-                style={{ backgroundColor: activeColor, boxShadow: `0 0 8px ${activeColor}33` }}
-              />
-              <div
-                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10"
-                style={activeStyle}
-              />
+              <div className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]" />
+              <div className="h-[2px] w-[0%] rounded-full journey-line relative z-10 bg-[#701020] shadow-[0_0_8px_rgba(112,16,32,0.2)]" />
+              <div className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]" />
             </div>
 
-            {/* ═══ Top Half: Content above center line ═══
-                 Layout: stem hangs from content down to center line
-                 Structure per item (top to bottom):
-                   - Text content (year/month + description)
-                   - Vertical stem line (grows downward)
-                   - Dot (anchored at bottom, touching center line)
-            */}
+            {/* ═══ Top Half: Content above center line ═══ */}
             <div className="flex h-1/2 w-full items-stretch justify-start gap-[.5vw]">
               <div className="h-full w-[20%] pt-[2vw] max-[600px]:h-fit max-[600px]:pt-[5vw]">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#B09B8C] block mb-2">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] block mb-2">
                   Timeline
                 </span>
-                <h2 className="w-[85%] text-[3vw] font-bold tracking-tight leading-[0.95] max-[600px]:text-[8.5vw] text-[#382A24]">
+                <h2 className="w-[85%] text-[3vw] font-bold tracking-tight leading-[0.95] max-[600px]:text-[8.5vw] text-[#5a0d1b]">
                   {title}
                 </h2>
               </div>
@@ -458,53 +425,41 @@ export default function Timeline({
                     key={`top-${item.id}`}
                     className="relative h-full w-[30vw] px-[3vw] flex flex-col max-[600px]:w-[70vw] max-[600px]:px-[7vw]"
                   >
-                    {/* Text Content — pushed to top */}
+                    {/* Text Content */}
                     <div className="flex-1 flex flex-col justify-start pt-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#2B1E18]`}
+                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#5a0d1b]`}
                       >
-                        <span className="text-[#2B1E18]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#B09B8C]">
+                        <span className="text-[#5a0d1b]">{item.year}</span>{' '}
+                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#701020]">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#4B5563]`}
+                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#650d1c]`}
                       >
                         {item.content}
                       </p>
                     </div>
 
-                    {/* Stem + Dot — anchored at bottom, connecting to center line */}
-                    <div className="relative w-0 flex flex-col items-center pointer-events-none" style={{ height: '40%' }}>
-                      <div
-                        className={`w-px flex-1 jl-${item.id}`}
-                        style={{ backgroundColor: activeColor, transformOrigin: 'top' }}
-                      />
-                      <div
-                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id}`}
-                        style={activeStyle}
-                      />
+                    {/* Stem + Dot */}
+                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
+                      <div className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`} />
+                      <div className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`} />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* ═══ Bottom Half: Content below center line ═══
-                 Layout: stem drops from center line down to content
-                 Structure per item (top to bottom):
-                   - Dot (anchored at top, touching center line)
-                   - Vertical stem line (grows downward)
-                   - Text content (year/month + description)
-            */}
+            {/* ═══ Bottom Half: Content below center line ═══ */}
             <div className="h-1/2 flex items-stretch justify-start w-full">
               <div className="w-[34%] pt-[2vw] max-[600px]:pt-[5vw] max-[600px]:w-[30%] h-full">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#B09B8C] block mb-2">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] block mb-2">
                   Summit Dates
                 </span>
                 <p
-                  className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#382A24]"
+                  className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#5a0d1b]"
                 >
                   {periodLabel}
                 </p>
@@ -516,30 +471,24 @@ export default function Timeline({
                     key={`bottom-${item.id}`}
                     className="relative h-full w-[25vw] px-[3vw] flex flex-col max-[600px]:w-[70vw] max-[600px]:px-[7vw]"
                   >
-                    {/* Dot + Stem — anchored at top, connecting from center line */}
-                    <div className="relative w-0 flex flex-col items-center pointer-events-none" style={{ height: '40%' }}>
-                      <div
-                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id}`}
-                        style={activeStyle}
-                      />
-                      <div
-                        className={`w-px flex-1 jl-${item.id}`}
-                        style={{ backgroundColor: activeColor, transformOrigin: 'top' }}
-                      />
+                    {/* Dot + Stem */}
+                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
+                      <div className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`} />
+                      <div className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`} />
                     </div>
 
-                    {/* Text Content — pushed to bottom */}
+                    {/* Text Content */}
                     <div className="flex-1 flex flex-col justify-end pb-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#2B1E18]`}
+                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#5a0d1b]`}
                       >
-                        <span className="text-[#2B1E18]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#B09B8C]">
+                        <span className="text-[#5a0d1b]">{item.year}</span>{' '}
+                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#701020]">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#4B5563]`}
+                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#650d1c]`}
                       >
                         {item.content}
                       </p>

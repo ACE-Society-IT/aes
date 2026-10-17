@@ -10,7 +10,7 @@ import Vision from '@/components/home/Vision';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0D0704] text-[#F4EFEA]">
+    <main className="min-h-screen bg-[#5a0d1b] text-[#f8eee1]">
       <Navbar />
       <Hero />
       <Vision />

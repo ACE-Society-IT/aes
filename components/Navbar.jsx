@@ -28,10 +28,10 @@ const NAV_LINKS = [
  *        center links container collapses smoothly (max-w-0 opacity-0 overflow-hidden)
  *      * State C (Scrolling Up): Stays as floating glassmorphic pill, expanding smoothly (max-w-4xl),
  *        center links container expands back open before reaching top (max-w-[600px] opacity-100)
- * - 4. Inner Elements & Active Link Pill: whitespace-nowrap, active link pill (bg-white/10 text-white rounded-full),
- *      remaining links in muted gray, compact dark/light pills for Ambassador + Register CTA buttons.
+ * - 4. Inner Elements & Active Link Pill: whitespace-nowrap, active link pill (bg-[#f1ca7e] text-[#5a0d1b] rounded-full),
+ *      remaining links in text-[#e8dcc6], compact dark/light pills for Ambassador + Register CTA buttons.
  *
- * Adheres strictly to project DESIGN-RULES.md (AES champagne/espresso tokens, zero unapproved CSS).
+ * Adheres strictly to project DESIGN-RULES.md (7 core colors: #5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e).
  */
 export function MorphingScrollNavbar() {
   const [scrollState, setScrollState] = useState({
@@ -139,11 +139,11 @@ export function MorphingScrollNavbar() {
   } else if (isScrollingDown) {
     // State B — Scrolling Down: tight floating pill
     navLayoutClasses +=
-      'w-auto max-w-fit rounded-full bg-[#1E130E]/85 backdrop-blur-md border border-white/10 shadow-2xl px-4 py-2 gap-4';
+      'w-auto max-w-fit rounded-full bg-[#5a0d1b]/85 backdrop-blur-md border border-[#89192c] shadow-2xl px-4 py-2 gap-4';
   } else {
     // State C — Scrolling Up: expanding floating glassmorphic pill
     navLayoutClasses +=
-      'w-full max-w-4xl rounded-full bg-[#1E130E]/85 backdrop-blur-md border border-white/10 shadow-2xl px-5 py-2 gap-6';
+      'w-full max-w-4xl rounded-full bg-[#5a0d1b]/85 backdrop-blur-md border border-[#89192c] shadow-2xl px-5 py-2 gap-6';
   }
 
   // Center Nav Links collapsing mechanics:
@@ -159,7 +159,7 @@ export function MorphingScrollNavbar() {
         aria-hidden="true"
       >
         <div
-          className="h-full bg-[#E5D9C5] transition-transform duration-75 origin-left will-change-transform shadow-[0_0_8px_rgba(229,217,197,0.7)]"
+          className="h-full bg-[#f1ca7e] transition-transform duration-75 origin-left will-change-transform shadow-[0_0_8px_rgba(241,202,126,0.7)]"
           style={{ transform: `scaleX(${scrollProgress})` }}
         />
       </div>
@@ -170,7 +170,7 @@ export function MorphingScrollNavbar() {
           {/* Left Brand Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5] rounded-full shrink-0"
+            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] rounded-full shrink-0"
             aria-label="AES Home"
           >
             <div className="relative h-7 w-14 sm:h-8 sm:w-16 transition-transform duration-300 group-hover:scale-105">
@@ -181,7 +181,7 @@ export function MorphingScrollNavbar() {
                 sizes="(max-width: 640px) 56px, 64px"
                 priority
                 loading="eager"
-                className="object-contain drop-shadow-[0_2px_8px_rgba(229,217,197,0.25)]"
+                className="object-contain drop-shadow-[0_2px_8px_rgba(241,202,126,0.25)]"
               />
             </div>
           </Link>
@@ -201,10 +201,10 @@ export function MorphingScrollNavbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setActiveHref(link.href)}
-                  className={`whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5] ${
+                  className={`whitespace-nowrap rounded-full px-3 py-1 text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] ${
                     isActive
-                      ? 'bg-white/10 text-white shadow-sm'
-                      : 'text-[#B09B8C] hover:text-white'
+                      ? 'bg-[#f1ca7e] text-[#5a0d1b] font-semibold shadow-sm'
+                      : 'text-[#e8dcc6] hover:text-[#f8eee1]'
                   }`}
                 >
                   {link.name}
@@ -218,7 +218,7 @@ export function MorphingScrollNavbar() {
             {/* Secondary Action: Become a Brand Ambassador */}
             <Link
               href="#ambassador"
-              className="inline-flex items-center justify-center px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border border-white/15 bg-white/5 hover:bg-white/10 hover:border-[#E5D9C5]/50 text-[#F4EFEA] hover:text-[#E5D9C5] transition-all duration-200 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
+              className="inline-flex items-center justify-center px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border border-[#f1ca7e]/40 bg-[#89192c]/40 hover:bg-[#89192c] hover:border-[#f1ca7e]/70 text-[#f8eee1] hover:text-[#f1ca7e] transition-all duration-300 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
               aria-label="Become a Brand Ambassador"
             >
               <span className="hidden sm:inline">Become &nbsp;</span>
@@ -228,7 +228,7 @@ export function MorphingScrollNavbar() {
             {/* Primary Action: Register */}
             <Link
               href="#register"
-              className="inline-flex items-center justify-center px-4 py-1 sm:px-5 sm:py-1.5 text-xs sm:text-sm font-semibold rounded-full bg-white text-[#1E1410] hover:bg-[#E5D9C5] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 shadow-md shadow-black/30 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]"
+              className="inline-flex items-center justify-center px-4 py-1 sm:px-5 sm:py-1.5 text-xs sm:text-sm font-semibold rounded-full bg-[#f1ca7e] text-[#5a0d1b] hover:bg-[#f8eee1] hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-md shadow-[#5a0d1b]/40 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
               aria-label="Register for AES 2026"
             >
               Register

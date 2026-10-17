@@ -62,7 +62,7 @@ function useReducedMotion() {
 /**
  * SqueezeCarousel (Pure JSX for Next.js)
  * A carousel that gives one active panel the room and squeezes remaining cards into slats.
- * Features Next.js Image optimization, fluid container-query scaling, and full keyboard/hover physics.
+ * Strictly adheres to DESIGN-RULES.md 7 colors (#5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e).
  */
 export function SqueezeCarousel({
   slides = [],
@@ -78,8 +78,8 @@ export function SqueezeCarousel({
   autoplay = false,
   interval = 6000,
   controls = true,
-  accent = 'var(--sq-accent, var(--primary, #E5D9C5))',
-  accentForeground = 'var(--sq-accent-foreground, var(--primary-foreground, #1E1410))',
+  accent = 'var(--sq-accent, var(--primary, #f1ca7e))',
+  accentForeground = 'var(--sq-accent-foreground, var(--primary-foreground, #5a0d1b))',
   label = 'Featured',
   panelClassName,
   className,
@@ -259,8 +259,8 @@ export function SqueezeCarousel({
       {controls && count > 1 && (
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#E5D9C5] animate-pulse" />
-            <span className="text-xs uppercase tracking-widest font-semibold text-[#B09B8C]">
+            <span className="inline-block w-2 h-2 rounded-full bg-[#f1ca7e] animate-pulse" />
+            <span className="text-xs uppercase tracking-widest font-semibold text-[#e8dcc6]">
               {count} Modules Active
             </span>
           </div>
@@ -303,9 +303,9 @@ export function SqueezeCarousel({
                 onMouseMove={() => hoverGrow && setHover(col)}
                 onClick={() => col > 0 && step(col)}
                 className={cn(
-                  'relative isolate h-full shrink-0 cursor-pointer overflow-hidden bg-[#1E130E] p-0 border border-[#52433D]/60',
+                  'relative isolate h-full shrink-0 cursor-pointer overflow-hidden bg-[#5a0d1b] p-0 border border-[#89192c]',
                   'outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                  'focus-visible:ring-[var(--sq-fill)] focus-visible:ring-offset-[#0D0704]',
+                  'focus-visible:ring-[#f1ca7e] focus-visible:ring-offset-[#5a0d1b]',
                   panelClassName
                 )}
                 style={{
@@ -323,12 +323,10 @@ export function SqueezeCarousel({
                 {slide.overlay && (
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end p-4 pt-16 @lg:p-6 @lg:pt-20"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end p-4 pt-16 @lg:p-6 @lg:pt-20 bg-gradient-to-t from-[#5a0d1b]/95 via-[#5a0d1b]/45 to-transparent"
                     style={{
                       opacity: front ? 1 : 0,
                       transition: `opacity var(--sq-ms) var(--sq-ease)`,
-                      backgroundImage:
-                        'linear-gradient(to top, rgba(13, 7, 4, 0.9) 0%, rgba(13, 7, 4, 0.4) 60%, transparent 100%)',
                     }}
                   >
                     {slide.overlay}
@@ -366,9 +364,9 @@ export function SqueezeCarousel({
               }}
             >
               <p className="max-w-[48rem] text-[15px] leading-[1.65] text-balance @lg:text-[17px]">
-                <span className="font-semibold text-[#F4EFEA]">{slide.title}</span>{' '}
+                <span className="font-semibold text-[#f8eee1]">{slide.title}</span>{' '}
                 {slide.description && (
-                  <span className="text-[#B09B8C]">{slide.description}</span>
+                  <span className="text-[#e8dcc6]">{slide.description}</span>
                 )}
               </p>
 
@@ -430,10 +428,10 @@ function Arrow({ back = false, label, onClick }) {
       onClick={onClick}
       className={cn(
         'grid size-9 cursor-pointer place-items-center rounded-lg',
-        'bg-[#E5D9C5] text-[#1E1410] font-bold',
-        'transition-all duration-200 hover:scale-105 hover:bg-white active:scale-95 outline-none',
-        'focus-visible:ring-2 focus-visible:ring-[#E5D9C5]',
-        'focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0704] border border-[#52433D]/60 shadow-sm'
+        'bg-[#f1ca7e] text-[#5a0d1b] font-bold',
+        'transition-all duration-300 hover:scale-105 hover:bg-[#f8eee1] active:scale-95 outline-none',
+        'focus-visible:ring-2 focus-visible:ring-[#f1ca7e]',
+        'focus-visible:ring-offset-2 focus-visible:ring-offset-[#5a0d1b] border border-[#89192c] shadow-sm'
       )}
     >
       <svg
@@ -480,10 +478,10 @@ function Action({ slide, shown }) {
 
   const dress = cn(
     'group/sq-action inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full',
-    'bg-white px-5 py-2.5 text-sm font-semibold text-[#1E1410]',
-    'transition-all duration-300 hover:bg-[#E5D9C5] hover:scale-[1.03] active:scale-[0.98] outline-none',
-    'focus-visible:ring-2 focus-visible:ring-[#E5D9C5]',
-    'focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0704] shadow-md'
+    'bg-[#f1ca7e] px-5 py-2.5 text-sm font-semibold text-[#5a0d1b]',
+    'transition-all duration-300 hover:bg-[#f8eee1] hover:scale-[1.03] active:scale-[0.98] outline-none',
+    'focus-visible:ring-2 focus-visible:ring-[#f1ca7e]',
+    'focus-visible:ring-offset-2 focus-visible:ring-offset-[#5a0d1b] shadow-md shadow-[#5a0d1b]/30'
   );
 
   if (slide.href) {

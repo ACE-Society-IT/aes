@@ -7,8 +7,9 @@ import { cn } from "@/lib/utils";
 /**
  * TextHoverEffect
  * Interactive SVG text outline that animates a drawing stroke on load,
- * and reveals a luxury AES champagne/gold sand gradient mask with ambient glow
+ * and reveals a luxury Imperial Gold gradient mask with ambient glow
  * following the user's cursor on hover.
+ * Adheres strictly to DESIGN-RULES.md.
  */
 export const TextHoverEffect = ({
   text = "AES",
@@ -49,7 +50,7 @@ export const TextHoverEffect = ({
       className={cn("select-none uppercase cursor-pointer", className)}
     >
       <defs>
-        {/* AES Brand Metallic Gradient: Warm Sand, Champagne, and Gold */}
+        {/* Brand Metallic Gradient: Imperial Gold, Alabaster Cream, Warm Parchment */}
         <linearGradient
           id={gradientId}
           x1="0%"
@@ -57,11 +58,11 @@ export const TextHoverEffect = ({
           x2="100%"
           y2="0%"
         >
-          <stop offset="0%" stopColor="#E5D9C5" />
-          <stop offset="25%" stopColor="#F4EFEA" />
-          <stop offset="50%" stopColor="#D4AF37" />
-          <stop offset="75%" stopColor="#E5D9C5" />
-          <stop offset="100%" stopColor="#B09B8C" />
+          <stop offset="0%" stopColor="#f1ca7e" />
+          <stop offset="25%" stopColor="#f8eee1" />
+          <stop offset="50%" stopColor="#f1ca7e" />
+          <stop offset="75%" stopColor="#e8dcc6" />
+          <stop offset="100%" stopColor="#f1ca7e" />
         </linearGradient>
 
         <motion.radialGradient
@@ -72,8 +73,8 @@ export const TextHoverEffect = ({
           animate={maskPosition}
           transition={{ duration: duration, ease: "easeOut" }}
         >
-          <stop offset="0%" stopColor="white" />
-          <stop offset="100%" stopColor="black" />
+          <stop offset="0%" stopColor="#f8eee1" stopOpacity="1" />
+          <stop offset="100%" stopColor="#5a0d1b" stopOpacity="0" />
         </motion.radialGradient>
         <mask id={maskId}>
           <rect
@@ -96,13 +97,13 @@ export const TextHoverEffect = ({
         fontWeight="900"
         letterSpacing="0.04em"
         strokeWidth="0.5"
-        className="fill-transparent stroke-[#52433D]/50 font-sans transition-all duration-300"
+        className="fill-transparent stroke-[#89192c]/50 font-sans transition-all duration-300"
         style={{ opacity: hovered ? 0.8 : 0.25 }}
       >
         {text}
       </text>
 
-      {/* Animated draw-in stroke on mount using AES brand sand accent */}
+      {/* Animated draw-in stroke on mount using Imperial Gold accent */}
       <motion.text
         x="50%"
         y="50%"
@@ -112,7 +113,7 @@ export const TextHoverEffect = ({
         fontWeight="900"
         letterSpacing="0.04em"
         strokeWidth="0.5"
-        className="fill-transparent stroke-[#E5D9C5] font-sans"
+        className="fill-transparent stroke-[#f1ca7e] font-sans"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -141,7 +142,7 @@ export const TextHoverEffect = ({
         className="fill-transparent font-sans transition-opacity duration-300"
         style={{
           opacity: hovered ? 1 : 0,
-          filter: hovered ? 'drop-shadow(0 0 18px rgba(229, 217, 197, 0.5))' : 'none',
+          filter: hovered ? 'drop-shadow(0 0 18px rgba(241, 202, 126, 0.5))' : 'none',
         }}
       >
         {text}
@@ -152,16 +153,15 @@ export const TextHoverEffect = ({
 
 /**
  * FooterBackgroundGradient
- * Rich dark espresso & warm sand radial gradient strictly aligning with DESIGN-RULES.md
+ * Rich dark crimson & abyssal oxblood radial gradient strictly aligning with DESIGN-RULES.md
  */
 export const FooterBackgroundGradient = ({ className }) => {
   return (
     <div
-      className={cn("absolute inset-0 z-0 pointer-events-none", className)}
-      style={{
-        background:
-          "radial-gradient(ellipse at 50% 100%, rgba(56, 37, 29, 0.45) 0%, rgba(26, 16, 11, 0.6) 50%, rgba(13, 7, 4, 0.95) 100%)",
-      }}
+      className={cn(
+        "absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(ellipse_at_50%_100%,rgba(137,25,44,0.45)_0%,rgba(112,16,32,0.6)_50%,rgba(90,13,27,0.98)_100%)]",
+        className
+      )}
     />
   );
 };

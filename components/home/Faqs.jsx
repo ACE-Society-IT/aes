@@ -66,15 +66,15 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
           group rounded-2xl border transition-all duration-300
           ${
             isOpen
-              ? 'bg-[#1E130E] border-[#E5D9C5]/25 shadow-[0_0_30px_rgba(229,217,197,0.06)]'
-              : 'bg-[#160D09]/60 border-[#52433D]/50 hover:border-[#52433D] hover:bg-[#1E130E]/80'
+              ? 'bg-[#701020] border-[#f1ca7e]/50 shadow-[0_0_30px_rgba(241,202,126,0.12)]'
+              : 'bg-[#5a0d1b]/70 border-[#89192c] hover:border-[#f1ca7e]/40 hover:bg-[#701020]/60'
           }
         `}
       >
         {/* Question Button */}
         <button
           onClick={onToggle}
-          className="w-full flex items-center justify-between gap-4 px-6 py-5 sm:px-8 sm:py-6 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E5D9C5]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0D0704] rounded-2xl"
+          className="w-full flex items-center justify-between gap-4 px-6 py-5 sm:px-8 sm:py-6 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#5a0d1b] rounded-2xl"
           aria-expanded={isOpen}
         >
           <div className="flex items-center gap-4 min-w-0">
@@ -82,7 +82,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
             <span
               className={`
                 text-xs font-bold tabular-nums shrink-0 transition-colors duration-300
-                ${isOpen ? 'text-[#E5D9C5]' : 'text-[#52433D] group-hover:text-[#B09B8C]'}
+                ${isOpen ? 'text-[#f1ca7e]' : 'text-[#89192c] group-hover:text-[#e8dcc6]'}
               `}
             >
               {String(index + 1).padStart(2, '0')}
@@ -92,7 +92,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
             <span
               className={`
                 text-sm sm:text-base font-semibold tracking-tight transition-colors duration-300
-                ${isOpen ? 'text-[#F4EFEA]' : 'text-[#B09B8C] group-hover:text-[#F4EFEA]'}
+                ${isOpen ? 'text-[#f8eee1]' : 'text-[#e8dcc6] group-hover:text-[#f8eee1]'}
               `}
             >
               {item.question}
@@ -109,7 +109,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
               size={18}
               className={`
                 transition-colors duration-300
-                ${isOpen ? 'text-[#E5D9C5]' : 'text-[#52433D] group-hover:text-[#B09B8C]'}
+                ${isOpen ? 'text-[#f1ca7e]' : 'text-[#89192c] group-hover:text-[#e8dcc6]'}
               `}
             />
           </motion.div>
@@ -130,8 +130,8 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
               className="overflow-hidden"
             >
               <div className="px-6 pb-5 sm:px-8 sm:pb-6 pl-[calc(1.5rem+2rem)] sm:pl-[calc(2rem+2rem)]">
-                <div className="h-px w-full bg-gradient-to-r from-[#52433D]/60 via-[#52433D]/30 to-transparent mb-4" />
-                <p className="text-sm sm:text-base leading-relaxed text-[#B09B8C]">
+                <div className="h-px w-full bg-gradient-to-r from-[#89192c] via-[#89192c]/40 to-transparent mb-4" />
+                <p className="text-sm sm:text-base leading-relaxed text-[#e8dcc6]">
                   {item.answer}
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default function Faqs() {
     <MouseStreakWrapper
       id="faqs"
       fadeOnScroll={false}
-      className="w-full text-[#F4EFEA] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#52433D]/50"
+      className="w-full text-[#f8eee1] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]"
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Two-Column Layout: Header Left + FAQs Right */}
@@ -168,15 +168,15 @@ export default function Faqs() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#E5D9C5]">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
               Have Questions?
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#F4EFEA]">
-              Frequently <span className="text-[#E5D9C5]">Asked</span>
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f8eee1]">
+              Frequently <span className="text-[#f1ca7e]">Asked</span>
               <br />
               Questions
             </h2>
-            <p className="mt-5 text-base sm:text-lg text-[#B09B8C] leading-relaxed max-w-md">
+            <p className="mt-5 text-base sm:text-lg text-[#e8dcc6] leading-relaxed max-w-md">
               Everything you need to know about AES 2026 — from registration and modules
               to competition formats and networking opportunities.
             </p>

@@ -22,7 +22,7 @@ import {
  *      then travels diagonally to the Top-Left corner on scroll and exits.
  *    - Then Picture 2 appears in the CENTER of the screen directly from the text, scales up,
  *      then travels diagonally to the Bottom-Right corner on scroll and exits.
- * 4. No end blueprint wireframe illustration or cross-fading layout picture at the end.
+ * 4. Strict 7-color alignment (#5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e).
  */
 
 const LINE_1 = 'YOUR VISION.';
@@ -163,9 +163,6 @@ export default function Competition() {
     [0, 1, 1, 0]
   );
 
-  // Bottom scrub bar
-  const progressBarWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
-
   // Helper to split text into characters
   const renderCharacters = (text) => {
     return text.split('').map((char, index) => (
@@ -182,21 +179,15 @@ export default function Competition() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[320vh] bg-[#0D0704] text-[#F4EFEA]"
+      className="relative w-full h-[320vh] bg-[#5a0d1b] text-[#f8eee1]"
     >
       {/* Sticky Viewport Stage (h-screen, sticky top-0, overflow:hidden) */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center select-none">
         {/* Background Ambient Atmosphere */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background:
-              'radial-gradient(circle at 50% 50%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
-          }}
-        />
+        <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_50%,#89192c_0%,#701020_45%,#5a0d1b_100%)]" />
 
         {/* Ambient Warm Vignette Halo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#f1ca7e]/[0.05] rounded-full blur-3xl pointer-events-none z-0" />
 
         {/* =========================================================================
             STAGE 1: Centered 3-Line Stacked Heading (Calm & Smooth Mask Reveal)
@@ -210,7 +201,7 @@ export default function Competition() {
           className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
         >
           {/* 3-Line Stacked Uppercase Heading (Tight leading, no unnecessary space) */}
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#F4EFEA] leading-[0.88] select-none text-center">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#f8eee1] leading-[0.88] select-none text-center">
             {/* Line 1: YOUR VISION. */}
             <div className="overflow-hidden">
               <motion.div
@@ -229,7 +220,7 @@ export default function Competition() {
                 variants={lineVariants(0.36)}
                 initial="hidden"
                 animate={hasEntered ? 'visible' : 'hidden'}
-                className="flex justify-center text-transparent bg-clip-text bg-gradient-to-r from-[#F4EFEA] via-[#E5D9C5] to-[#B09B8C]"
+                className="flex justify-center text-transparent bg-clip-text bg-gradient-to-r from-[#f8eee1] via-[#f1ca7e] to-[#e8dcc6]"
               >
                 {renderCharacters(LINE_2)}
               </motion.div>
@@ -241,7 +232,7 @@ export default function Competition() {
                 variants={lineVariants(0.66)}
                 initial="hidden"
                 animate={hasEntered ? 'visible' : 'hidden'}
-                className="flex justify-center text-[#F4EFEA] drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)]"
+                className="flex justify-center text-[#f8eee1] drop-shadow-[0_15px_35px_rgba(90,13,27,0.95)]"
               >
                 {renderCharacters(LINE_3)}
               </motion.div>
@@ -262,11 +253,11 @@ export default function Competition() {
         >
           <svg
             viewBox="0 0 100 100"
-            className="w-14 h-14 sm:w-18 sm:h-18 stroke-[#E5D9C5] fill-none stroke-[3] stroke-linecap-round filter drop-shadow-[0_0_12px_rgba(229,217,197,0.7)]"
+            className="w-14 h-14 sm:w-18 sm:h-18 stroke-[#f1ca7e] fill-none stroke-[3] stroke-linecap-round filter drop-shadow-[0_0_12px_rgba(241,202,126,0.7)]"
           >
             <path d="M50 10 Q50 45 15 50 Q50 50 50 85 Q50 50 85 50 Q50 45 50 10Z" />
-            <circle cx="82" cy="22" r="3" fill="#E5D9C5" />
-            <circle cx="18" cy="78" r="2.5" fill="#E5D9C5" />
+            <circle cx="82" cy="22" r="3" fill="#f1ca7e" />
+            <circle cx="18" cy="78" r="2.5" fill="#f1ca7e" />
           </svg>
         </motion.div>
 
@@ -280,7 +271,7 @@ export default function Competition() {
         >
           <svg
             viewBox="0 0 160 80"
-            className="w-24 h-12 sm:w-32 sm:h-16 stroke-[#E5D9C5] fill-none stroke-[3.5] stroke-linecap-round stroke-linejoin-round filter drop-shadow-[0_0_12px_rgba(229,217,197,0.7)]"
+            className="w-24 h-12 sm:w-32 sm:h-16 stroke-[#f1ca7e] fill-none stroke-[3.5] stroke-linecap-round stroke-linejoin-round filter drop-shadow-[0_0_12px_rgba(241,202,126,0.7)]"
           >
             <path d="M10 55 C45 15, 115 15, 145 42" />
             <path d="M128 26 L148 43 L126 53" />
@@ -304,7 +295,7 @@ export default function Competition() {
           }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
-          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#52433D]/70 bg-[#160D09] shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
+          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#89192c] bg-[#5a0d1b] shadow-[0_30px_70px_rgba(90,13,27,0.95)]">
             <Image
               src="/sample-pics/IF2025.jpg"
               alt="Speaker Keynote Session"
@@ -312,12 +303,12 @@ export default function Competition() {
               sizes="(max-width: 768px) 260px, 380px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#5a0d1b]/85 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <span className="px-3 py-1.5 rounded-xl bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[10px] font-bold tracking-widest uppercase text-[#E5D9C5]">
+              <span className="px-3 py-1.5 rounded-xl bg-[#701020]/90 backdrop-blur-md border border-[#89192c] text-[10px] font-bold tracking-widest uppercase text-[#f1ca7e]">
                 KEYNOTE ARENA
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-[#B09B8C]">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-[#e8dcc6]">
                 AES 2026
               </span>
             </div>
@@ -335,7 +326,7 @@ export default function Competition() {
           }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
-          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#52433D]/70 bg-[#160D09] shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
+          <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#89192c] bg-[#5a0d1b] shadow-[0_30px_70px_rgba(90,13,27,0.95)]">
             <Image
               src="/sample-pics/if2025_2.jpg"
               alt="Live Stage Startup Pitch"
@@ -343,12 +334,12 @@ export default function Competition() {
               sizes="(max-width: 768px) 260px, 380px"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#5a0d1b]/85 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <span className="px-3 py-1.5 rounded-xl bg-[#160D09]/90 backdrop-blur-md border border-[#52433D]/70 text-[10px] font-bold tracking-widest uppercase text-[#E5D9C5]">
+              <span className="px-3 py-1.5 rounded-xl bg-[#701020]/90 backdrop-blur-md border border-[#89192c] text-[10px] font-bold tracking-widest uppercase text-[#f1ca7e]">
                 STARTUP SHOWDOWN
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-[#B09B8C]">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-[#e8dcc6]">
                 PKR 1.5M+ POOL
               </span>
             </div>
