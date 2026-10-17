@@ -180,6 +180,7 @@ export function MorphingScrollNavbar() {
                 fill
                 sizes="(max-width: 640px) 56px, 64px"
                 priority
+                loading="eager"
                 className="object-contain drop-shadow-[0_2px_8px_rgba(229,217,197,0.25)]"
               />
             </div>

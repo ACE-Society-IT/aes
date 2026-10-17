@@ -56,6 +56,7 @@ export default function Hero() {
               fill
               sizes="(max-width: 640px) 176px, (max-width: 768px) 208px, 240px"
               priority
+              loading="eager"
               className="object-contain drop-shadow-[0_10px_24px_rgba(0,0,0,0.85)]"
             />
           </div>

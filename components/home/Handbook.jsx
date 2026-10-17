@@ -114,10 +114,7 @@ export default function Handbook() {
                 {/* Glossy sheen reflection overlay across diagonal */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-60 pointer-events-none" />
 
-                {/* Top Corner Badge */}
-                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-[#0D0704]/80 backdrop-blur-md border border-[#E5D9C5]/30 text-[9px] font-bold tracking-widest uppercase text-[#E5D9C5]">
-                  OFFICIAL PDF
-                </div>
+               
               </div>
 
               {/* Document Metadata Details */}
@@ -126,7 +123,7 @@ export default function Handbook() {
                   AES Summit Delegate Dossier
                 </h3>
                 <p className="mt-1 text-xs text-[#B09B8C]">
-                  Version 2.4 • Published October 2026 • 36 Illustrated Pages
+                  • Published October 2026 • 36 Illustrated Pages
                 </p>
 
                 {/* Quick Spec Pills */}
@@ -137,9 +134,7 @@ export default function Handbook() {
                   <span className="px-2.5 py-1 rounded-lg bg-[#3A2D28]/70 border border-[#52433D]/60">
                     12.8 MB
                   </span>
-                  <span className="px-2.5 py-1 rounded-lg bg-[#3A2D28]/70 border border-[#52433D]/60">
-                    English (Full)
-                  </span>
+                 
                 </div>
               </div>
 
