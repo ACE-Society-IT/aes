@@ -1,189 +1,155 @@
-## Extracted Color Reference
+The updated design system strips out all old espresso, white, and slate-gray tokens from your previous specification and locks the entire application strictly to your **7 core hex colors**.
 
-### Light Theme / Content Section (`Our Vision`)
+### 1. The 7-Color Classification & Semantic Map
 
-
-
-| Element / Usage | Hex Code | RGB Value | Tailwind Equivalent / Custom Token |
-| --- | --- | --- | --- |
-| **Primary Background** (Warm Cream/Alabaster)
-
- | `#F5F2EB` | `rgb(245, 242, 235)` | `bg-[#F5F2EB]` or `bg-surface-light` |
-| **Icon Card Background** (Pure Crisp White)
-
- | `#FFFFFF` | `rgb(255, 255, 255)` | `bg-white` |
-| **Icon Card Border / Shadow** (Subtle Warm Stone)
-
- | `#EBE6DC` | `rgb(235, 230, 220)` | `border-[#EBE6DC] shadow-sm` |
-| **Primary Heading (`Our Vision`)** (Deep Espresso)
-
- | `#382A24` | `rgb(56, 42, 36)` | `text-[#382A24]` or `text-brand-dark` |
-| **Card Subheadings & Icons** (Dark Roast Brown)
-
- | `#2B1E18` | `rgb(43, 30, 24)` | `text-[#2B1E18]` |
-| **Body Copy / Descriptions** (Cool Muted Slate)
-
- | `#4B5563` | `rgb(75, 85, 99)` | `text-gray-600` / `text-[#4B5563]` |
-
-### Dark Theme / Hero Section (`AES` Hero)
-
-
-
-| Element / Usage | Hex Code | RGB Value | Tailwind Equivalent / Custom Token |
-| --- | --- | --- | --- |
-| **Hero Background Base** (Deep Espresso Brown)
-
- | `#281A14` | `rgb(40, 26, 20)` | `bg-[#281A14]` or `bg-surface-dark` |
-| **Hero Radial Glow** (Center Warm Undertone)
-
- | `#38251D` | `rgb(56, 37, 29)` | `from-[#38251D] to-[#211510]` |
-| **Primary Brand Accent (`AES` Logo)** (Warm Sand/Beige)
-
- | `#E5D9C5` | `rgb(229, 217, 197)` | `text-[#E5D9C5]` or `text-brand-beige` |
-| **Hero Title & Nav Links** (Crisp Off-White)
-
- | `#F4EFEA` | `rgb(244, 239, 234)` | `text-[#F4EFEA]` |
-| **Hero Subtitle / Muted Copy** (Warm Taupe/Tan)
-
- | `#B09B8C` | `rgb(176, 155, 140)` | `text-[#B09B8C]` |
-| **Date Badge Background** (Translucent Charcoal-Brown)
-
- | `#3A2D28` | `rgb(58, 45, 40)` | `bg-[#3A2D28]/80` or `bg-white/5` |
-| **Date Badge Border** (Subtle Muted Rim)
-
- | `#52433D` | `rgb(82, 67, 61)` | `border-[#52433D]` or `border-white/10` |
-| **Date Badge Weekday Text** (Muted Warm Gray)
-
- | `#9CA3AF` | `rgb(156, 163, 175)` | `text-gray-400` |
-| **Primary CTA (`Register` Pill)** (Pure White / Dark Text)
-
- | `#FFFFFF` / `#1E1410` | `rgb(255,255,255)` | `bg-white text-[#1E1410] rounded-full` |
+| Category | Hex Code | RGB Value | Semantic Name | Strict Role in the Web App |
+| --- | --- | --- | --- | --- |
+| **Dark 1 (Darkest)** | `#5a0d1b` | `rgb(90, 13, 27)` | **Abyssal Oxblood** | Deepest background base, footers, dark-mode recessed areas, and **primary body/heading text on light backgrounds**. |
+| **Dark 2 (Deep)** | `#650d1c` | `rgb(101, 13, 28)` | **Deep Wine** | Secondary dark section background, alternating dark rows, and **secondary text on light backgrounds**. |
+| **Dark 3 (Core)** | `#701020` | `rgb(112, 16, 32)` | **Royal Crimson** | Primary brand dark surface, hero backgrounds, and **primary dark CTA button fill on light sections**. |
+| **Dark 4 (Elevated)** | `#89192c` | `rgb(137, 25, 44)` | **Ruby Velvet** | Elevated card surfaces on dark backgrounds, dark-mode borders, radial glows, and hover states for dark elements. |
+| **Light 1 (Lightest)** | `#f8eee1` | `rgb(248, 238, 225)` | **Alabaster Cream** | Primary light section background, and **primary heading/title text on dark backgrounds**. |
+| **Light 2 (Warm Neutral)** | `#e8dcc6` | `rgb(232, 220, 198)` | **Warm Parchment** | Card surfaces & borders on light backgrounds, and **muted subtitle/body copy on dark backgrounds**. |
+| **Accent (Highlight)** | `#f1ca7e` | `rgb(241, 202, 126)` | **Imperial Gold** | Primary CTA buttons on dark backgrounds, active nav indicators, badges, icons, and luxury highlight accents. |
 
 ---
 
-## Complete `design-rule.md` File
+### 2. Complete `DESIGN-RULES.md` File
 
-Copy and save the block below directly as `design-rule.md` in your project root:
+Replace the contents of your `DESIGN-RULES.md` file with the markdown block below:
 
 ```markdown
-# AI Agent Design & Frontend Architecture Rules (`design-rule.md`)
+# AI Agent Design & Frontend Architecture Rules (`DESIGN-RULES.md`)
 
 > **CRITICAL DIRECTIVE FOR AI AGENTS:** 
-> You MUST read and strictly follow every constraint in this document before creating, modifying, or styling any component. **NEVER hallucinate, invent, or substitute hex codes, colors, or arbitrary CSS files.**
+> You MUST read and strictly follow every constraint in this document before creating, modifying, or styling any component. **NEVER hallucinate, invent, or substitute hex codes, default Tailwind colors, inline styles, or extra CSS files.**
 
 ---
 
-## 1. Strict Color System (Zero Hallucination Policy)
+## 1. Strict 7-Color Lockdown (Zero Extra Colors Policy)
 
-You are strictly forbidden from using default Tailwind colors (like `bg-blue-500`, `bg-amber-900`, `bg-neutral-900`) for brand surfaces or typography unless explicitly mapped below. Use ONLY the following exact hex tokens or their mapped Tailwind classes.
+The entire web application is strictly locked to **ONLY 7 HEX COLORS**. 
+- You are **FORBIDDEN** from using pure white (`#FFFFFF` / `bg-white`), pure black (`#000000` / `bg-black`), or any default Tailwind palette colors (`gray-*`, `red-*`, `amber-*`, `slate-*`, `neutral-*`, etc.).
+- Every background, card, border, shadow, icon, button, and text element MUST use one of the 7 hex codes below (Tailwind opacity modifiers on these 7 colors, such as `bg-[#89192c]/60` or `border-[#f1ca7e]/30`, are permitted for depth).
 
-### A. Light Mode / Content Surface Tokens (`Our Vision` Aesthetic)
-- **Primary Section Background:** `#F5F2EB` (`bg-[#F5F2EB]`) — Warm cream/alabaster surface. Never use pure white (`#FFFFFF`) as a main page background.
-- **Elevated Card / Icon Container Background:** `#FFFFFF` (`bg-white`) — Used strictly for icon containers, floating cards, and pills resting on top of `#F5F2EB`.
-- **Card Border & Subtle Divider:** `#EBE6DC` (`border-[#EBE6DC]`) — 1px solid subtle border with soft elevation (`shadow-sm`).
-- **Primary Display Heading:** `#382A24` (`text-[#382A24]`) — Deep espresso brown for `h1` and `h2` titles.
-- **Card Feature Title & Icon Stroke:** `#2B1E18` (`text-[#2B1E18]`) — Rich dark roast for `h3`/`h4` subheadings and SVG strokes.
-- **Body Copy & Descriptions:** `#4B5563` (`text-[#4B5563]` or `text-gray-600`) — Cool muted slate for clean readability against warm backgrounds.
+### A. The Dark Palette (4 Crimson / Burgundy Shades)
+1. **`#5a0d1b` (Abyssal Oxblood — Darkest)**
+   - **Dark Theme Usage:** Deepest page base (`bg-[#5a0d1b]`), navbar/footer backgrounds, and high-contrast text inside `#f1ca7e` gold buttons (`text-[#5a0d1b]`).
+   - **Light Theme Usage:** Primary display headings (`h1`, `h2`) and high-contrast body text (`text-[#5a0d1b]`).
+2. **`#650d1c` (Deep Wine — Deep Dark)**
+   - **Dark Theme Usage:** Secondary dark section backgrounds (`bg-[#650d1c]`) and gradient mid-stops.
+   - **Light Theme Usage:** Card subheadings (`h3`, `h4`) and secondary body copy (`text-[#650d1c]`).
+3. **`#701020` (Royal Crimson — Core Brand Dark)**
+   - **Dark Theme Usage:** Primary hero surface (`bg-[#701020]`) and standard dark containers.
+   - **Light Theme Usage:** Primary dark CTA button background (`bg-[#701020] text-[#f8eee1]`), icons, and active borders.
+4. **`#89192c` (Ruby Velvet — Elevated Dark & Interactive)**
+   - **Dark Theme Usage:** Elevated card surfaces (`bg-[#89192c]`), glassmorphic badges (`bg-[#89192c]/50`), dark-mode borders (`border-[#89192c]`), and radial background spotlights.
+   - **Light Theme Usage:** Hover state for dark buttons (`hover:bg-[#89192c]`), subtle muted labels (`text-[#89192c]`), and interactive focus rings.
 
-### B. Dark Mode / Hero Surface Tokens (`AES` Hero Aesthetic)
-- **Primary Dark Background Base:** `#281A14` (`bg-[#281A14]`) — Deep espresso brown base.
-- **Hero Center Spotlight / Gradient:** `radial-gradient(circle at center, #38251D 0%, #281A14 65%, #1E130E 100%)` — Gives depth behind hero logos and central typography.
-- **Brand Monogram / Primary Accent:** `#E5D9C5` (`text-[#E5D9C5]` / `bg-[#E5D9C5]`) — Warm sand/champagne beige used for primary brand marks (`AES`).
-- **Dark Surface Primary Text & Nav Links:** `#F4EFEA` (`text-[#F4EFEA]`) — Soft warm white for hero headings, dates (`07`, `08`, `09`), and navigation items.
-- **Dark Surface Muted Subtitle:** `#B09B8C` (`text-[#B09B8C]`) — Muted warm taupe/tan for hero paragraph descriptions.
-- **Glass / Elevated Badge Surface:** `#3A2D28` (`bg-[#3A2D28]/80 backdrop-blur-sm`) — Used for date cards and dark-mode secondary containers.
-- **Glass / Elevated Badge Border:** `#52433D` (`border-[#52433D]`) — 1px solid border around dark-mode cards.
-- **Dark Surface Micro-Labels:** `#9CA3AF` (`text-gray-400`) — Used for uppercase micro-text (e.g., `FRIDAY`, `SATURDAY`, `SUNDAY`).
-- **Primary CTA Button (Dark Surface):** Background `#FFFFFF` (`bg-white`), Text `#1E1410` (`text-[#1E1410]`), Pill shape (`rounded-full`), hover state `hover:bg-[#E5D9C5] transition-colors duration-300`.
+### B. The Light & Accent Palette (3 Cream, Sand & Gold Shades)
+5. **`#f8eee1` (Alabaster Cream — Lightest)**
+   - **Light Theme Usage:** Primary light section background (`bg-[#f8eee1]`) and elevated card interiors resting on `#e8dcc6`.
+   - **Dark Theme Usage:** Primary headings (`h1`, `h2`), navigation links, and high-contrast text (`text-[#f8eee1]`).
+6. **`#e8dcc6` (Warm Parchment — Secondary Light / Muted Neutral)**
+   - **Light Theme Usage:** Secondary light section background, card backgrounds on top of `#f8eee1` (`bg-[#e8dcc6]`), and subtle card borders/dividers (`border-[#e8dcc6]`).
+   - **Dark Theme Usage:** Muted subtitles, paragraph descriptions, and secondary labels (`text-[#e8dcc6]`).
+7. **`#f1ca7e` (Imperial Gold — Primary Brand Accent)**
+   - **Dark Theme Usage:** Primary CTA button fill (`bg-[#f1ca7e] text-[#5a0d1b]`), brand monograms/logos, active states, key icons (`text-[#f1ca7e]`), and glowing accent borders (`border-[#f1ca7e]`).
+   - **Light Theme Usage:** Highlight badges (`bg-[#f1ca7e] text-[#5a0d1b]`), active tabs, icon container accents, and decorative underlines.
 
 ---
 
-## 2. CSS & Tailwind Architecture Rules
+## 2. Surface & Text Pairing Matrix
 
-1. **Tailwind-First Mandate:**
-   - **100% of component styling** (layout, spacing, typography, colors, borders, states, responsiveness) MUST be written using Tailwind CSS utility classes directly in the JSX/HTML markup.
-   - Do **NOT** use inline `style={{ ... }}` attributes unless dynamically calculating real-time scroll/cursor coordinates via JavaScript.
+Never pair dark text on a dark surface or light text on a light surface. Follow this exact pairing matrix:
 
-2. **Single External CSS File Rule:**
-   - You are permitted **ONLY ONE** global CSS file in the entire project (e.g., `app/globals.css` or `src/index.css`).
-   - Do **NOT** create component-level `.css` or `.module.css` files.
-   - Use the single global CSS file exclusively for:
-     - `@tailwind base; @tailwind components; @tailwind utilities;` (or `@import "tailwindcss";` in v4).
-     - CSS Root Variables (`--bg-light: #F5F2EB`, etc.).
-     - Custom `@keyframes` definitions or complex mask/scroll utilities that cannot be expressed as standard Tailwind utilities.
+### Dark Sections (Hero, Feature Showcases, Footer)
+- **Main Section Background:** `bg-[#5a0d1b]` or `bg-[#650d1c]` or `bg-[#701020]`
+- **Hero Radial Glow:** `bg-[radial-gradient(circle_at_center,#89192c_0%,#701020_45%,#5a0d1b_100%)]`
+- **Elevated Card / Badge Surface:** `bg-[#701020]` or `bg-[#89192c]/60 backdrop-blur-md`
+- **Card Border:** `border border-[#89192c]` (Idle) -> `hover:border-[#f1ca7e]/60` (Hover)
+- **Primary Heading Text:** `text-[#f8eee1]`
+- **Body / Subtitle Text:** `text-[#e8dcc6]`
+- **Highlight / Eyebrow Text:** `text-[#f1ca7e]`
+- **Primary CTA Button:** `bg-[#f1ca7e] text-[#5a0d1b] hover:bg-[#f8eee1] font-semibold rounded-full transition-all duration-300`
+- **Secondary CTA Button:** `bg-[#89192c]/40 text-[#f8eee1] border border-[#f1ca7e]/40 hover:bg-[#89192c] rounded-full transition-all duration-300`
 
-3. **Recommended Tailwind Theme Extension (`tailwind.config.js` / `globals.css`):**
-   ```javascript
-   // Map these in tailwind.config.js so classes remain clean and deterministic:
-   colors: {
-     brand: {
-       espresso: '#281A14',
-       espressoLight: '#38251D',
-       roast: '#382A24',
-       ink: '#2B1E18',
-       cream: '#F5F2EB',
-       sand: '#E5D9C5',
-       taupe: '#B09B8C',
-       cardDark: '#3A2D28',
-       borderDark: '#52433D',
-       borderLight: '#EBE6DC',
-       slateBody: '#4B5563',
-     }
-   }
+### Light Sections (Content Grids, Vision, Details)
+- **Main Section Background:** `bg-[#f8eee1]` (or `bg-[#e8dcc6]` for alternating contrast sections)
+- **Card Surface:** `bg-[#e8dcc6]/60` (when on `#f8eee1`) or `bg-[#f8eee1]` (when on `#e8dcc6`)
+- **Card Border:** `border border-[#e8dcc6]` or `border-[#89192c]/15`
+- **Icon Box Surface:** `bg-[#701020] text-[#f1ca7e]` or `bg-[#f1ca7e] text-[#5a0d1b]`
+- **Primary Heading Text:** `text-[#5a0d1b]`
+- **Subheading Text:** `text-[#701020]`
+- **Body Copy Text:** `text-[#650d1c]` (or `text-[#5a0d1b]/80`)
+- **Primary CTA Button (Light Mode):** `bg-[#701020] text-[#f8eee1] hover:bg-[#5a0d1b] border border-[#f1ca7e]/30 rounded-full transition-all duration-300`
+
+---
+
+## 3. Tailwind CSS & Zero Inline CSS Mandate
+
+1. **Strictly Tailwind CSS Only:**
+   - **100% of styling** (layout, flexbox/grid, spacing, typography, colors, borders, shadows, hover/focus states, responsiveness, and animations) MUST be written using Tailwind CSS utility classes directly in the JSX/TSX markup.
+2. **Zero Inline CSS (`style={{...}}` is Banned):**
+   - You are **STRICTLY FORBIDDEN** from writing inline `style={{ ... }}` attributes in JSX/HTML for colors, fonts, spacing, borders, or backgrounds.
+   - Use Tailwind arbitrary values (e.g., `bg-[#701020]`, `text-[#f8eee1]`) or mapped theme tokens (e.g., `bg-crimson-core`, `text-cream-light`).
+3. **Single Global CSS File Rule:**
+   - Maintain **ONLY ONE** global stylesheet (`globals.css` or `index.css`).
+   - Do **NOT** create component-level `.css`, `.scss`, or `.module.css` files.
+   - Define your 7 color tokens in `tailwind.config.js` (or `@theme` in Tailwind v4) so the codebase stays clean:
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        theme: {
+          oxblood: '#5a0d1b',   // Dark 1 (Darkest)
+          wine: '#650d1c',      // Dark 2 (Deep)
+          crimson: '#701020',   // Dark 3 (Core Brand)
+          ruby: '#89192c',      // Dark 4 (Elevated/Border)
+          cream: '#f8eee1',     // Light 1 (Lightest Surface/Text)
+          parchment: '#e8dcc6', // Light 2 (Secondary Surface/Muted Text)
+          gold: '#f1ca7e',      // Accent (Primary Highlight/CTA)
+        }
+      }
+    }
+  }
+}
 
 ```
 
 ---
 
-## 3. Typography & Layout Standards
+## 4. Smooth Experience, Motion & UI Polish
 
-* **Font Stack:** Clean geometric sans-serif (`Inter`, `Plus Jakarta Sans`, or `Geist Sans`).
-* **Heading Hierarchy:**
-* Section Titles (`Our Vision`): `text-4xl md:text-5xl font-bold tracking-tight text-[#382A24]`
-* Hero Subtitle (`Alpha Entrepreneurship Summit`): `text-2xl md:text-4xl font-normal tracking-wide text-[#F4EFEA]`
-* Feature Titles (`Vibrant Ecosystem`): `text-base md:text-lg font-semibold text-[#2B1E18]`
-* Body Copy: `text-sm md:text-base leading-relaxed text-[#4B5563]`
+Every view and interaction must feel fluid, cohesive, and intentional:
 
-
-* **Icon Containers:** Fixed square proportions (`w-12 h-12 rounded-xl bg-white shadow-sm border border-[#EBE6DC] flex items-center justify-center shrink-0`).
-* **Date Cards:** Fixed vertical rectangle (`w-24 h-28 rounded-xl bg-[#3A2D28]/80 border border-[#52433D] flex flex-col items-center justify-center`).
-
----
-
-## 4. Advanced Animations & Interactive Effects
-
-When prompted to add animations, transitions, or modern interactive polish, implement high-craft, performant motion that elevates the executive feel of the web app:
-
-1. **Scroll-Triggered Reveal Animations:**
-* Stagger feature grid items (like the 6 vision cards) on viewport entry (`opacity-0 translate-y-6` -> `opacity-100 translate-y-0`) with `75ms–100ms` stagger delay per card.
-* Use smooth cubic-bezier easing (`cubic-bezier(0.22, 1, 0.36, 1)`) with durations between `500ms` and `700ms`.
+1. **Smooth Transitions Everywhere:**
+* All interactive elements (buttons, cards, links, inputs, tabs) must include smooth Tailwind transitions: `transition-all duration-300 ease-out`.
+* Global scrolling must use `scroll-smooth` on the root `<html>` element.
 
 
-2. **Parallax & Depth Effects:**
-* Apply subtle vertical parallax on hero elements: as the user scrolls down, the `AES` monument logo and background radial glow should shift at `0.3x–0.5x` scroll speed relative to the foreground text and date cards.
-* Maintain `will-change-transform` on parallax layers to guarantee 60fps performance.
+2. **Card & Button Hover Physics:**
+* **Interactive Cards:** Apply subtle lift and border glow on hover: `hover:-translate-y-1 hover:border-[#f1ca7e]/60 hover:shadow-lg hover:shadow-[#5a0d1b]/20 transition-all duration-300`.
+* **Buttons:** Apply micro-scale tactile feedback: `hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200`.
 
 
-3. **Micro-Interactions & Hover Physics:**
-* **Light Feature Cards:** On hover, subtly lift the icon box (`group-hover:-translate-y-1 group-hover:shadow-md transition-all duration-300`) and shift icon stroke color toward `#382A24`.
-* **Dark Date Cards:** On hover, brighten the border (`hover:border-[#E5D9C5]/50 hover:bg-[#463630] transition-all duration-300 hover:-translate-y-1`).
-* **CTA Pill Buttons:** Apply subtle scale and color transition (`hover:scale-[1.03] active:scale-[0.98] hover:bg-[#E5D9C5] transition-all duration-200`).
+3. **Visual Hierarchy & Spacing:**
+* Use generous section padding (`py-20 md:py-28 px-6 md:px-12`) and consistent container widths (`max-w-7xl mx-auto`).
+* Separate stacked dark sections with subtle 1px borders (`border-b border-[#89192c]`) or smooth gradient transitions between `#5a0d1b`, `#650d1c`, and `#701020`.
 
 
-4. **Accessibility & Performance Guardrails:**
-* Always respect `prefers-reduced-motion: reduce` by disabling parallax and heavy transforms for sensitive users.
-* Animate **only** composite properties (`transform`, `opacity`) to prevent layout thrashing and repaint lag.
-
-
-
----
+4. **Performance Guardrails:**
+* Animate only hardware-accelerated properties (`transform`, `opacity`, `colors`) and respect `motion-reduce:transition-none motion-reduce:hover:transform-none`.
 
 ## 5. Pre-Execution Checklist for the AI Agent
 
-Before writing or modifying code, verify:
+Before outputting any component code, verify:
 
-* [ ] Did I check the exact hex codes in Section 1 instead of guessing a brown/beige/gray?
-* [ ] Are all styles applied via Tailwind classes with zero extra `.css` files created?
-* [ ] Do light sections use `#F5F2EB` as the background and `#FFFFFF` solely for elevated icon/card surfaces?
-* [ ] Do dark sections use `#281A14` with `#E5D9C5` accents and `#B09B8C` muted copy?
-* [ ] Are scroll, parallax, and hover animations smooth, staggered, and hardware-accelerated?
+* [ ] **Color Audit:** Are 100% of colors strictly from the 7 allowed hex codes (`#5a0d1b`, `#650d1c`, `#701020`, `#89192c`, `#f8eee1`, `#e8dcc6`, `#f1ca7e`)?
+* [ ] **Zero Contraband Colors:** Did I eliminate all occurrences of `bg-white`, `text-black`, `text-gray-*`, `bg-neutral-*`, `#FFFFFF`, and `#000000`?
+* [ ] **Zero Inline Styles:** Are there zero `style={{ ... }}` attributes in the JSX?
+* [ ] **Contrast Check:** Are light texts (`#f8eee1`, `#e8dcc6`, `#f1ca7e`) used on dark crimson surfaces, and dark crimson texts (`#5a0d1b`, `#650d1c`, `#701020`) used on light cream/parchment surfaces?
+* [ ] **Smooth Polish:** Do all buttons, links, and cards include smooth Tailwind hover and active transitions?
