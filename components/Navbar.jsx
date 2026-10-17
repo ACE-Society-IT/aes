@@ -12,7 +12,6 @@ const NAV_LINKS = [
   { name: 'Ambassador’s', href: '/ambassadors' },
   { name: 'Modules', href: '#modules' },
   { name: 'Schedule', href: '#schedule' },
-  { name: 'Handbook', href: '#handbook' },
   { name: 'FAQ’s', href: '#faqs' },
 ];
 
@@ -217,7 +216,7 @@ export function MorphingScrollNavbar() {
           <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Secondary Action: Become a Brand Ambassador */}
             <Link
-              href="#ambassador"
+              href="/ambassadors"
               className="inline-flex items-center justify-center px-3.5 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium rounded-full border border-[#f1ca7e]/40 bg-[#89192c]/40 hover:bg-[#89192c] hover:border-[#f1ca7e]/70 text-[#f8eee1] hover:text-[#f1ca7e] transition-all duration-300 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
               aria-label="Become a Brand Ambassador"
             >
