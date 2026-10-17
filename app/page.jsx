@@ -4,6 +4,7 @@ import Competition from '@/components/home/Competition';
 import Faqs from '@/components/home/Faqs';
 import Hero from '@/components/home/Hero';
 import Modules from '@/components/home/Modules';
+import Schedule from '@/components/home/Schedule';
 import Vision from '@/components/home/Vision';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <Vision />
       <Competition />
       <Modules />
+      <Schedule />
       <Faqs />
       <Footer />
     </main>

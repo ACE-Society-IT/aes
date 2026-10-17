@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { name: 'Ambassador’s', href: '/ambassadors' },
   { name: 'Modules', href: '#modules' },
   { name: 'FAQ’s', href: '#competition' },
-  { name: 'scedule', href: '#scedule' },
+  { name: 'schedule', href: '#schedule' },
 ];
 
 /**
@@ -177,6 +177,7 @@ export function MorphingScrollNavbar() {
                 src="/aes-logo.png"
                 alt="AES Logo"
                 fill
+                sizes="(max-width: 640px) 56px, 64px"
                 priority
                 className="object-contain drop-shadow-[0_2px_8px_rgba(229,217,197,0.25)]"
               />
