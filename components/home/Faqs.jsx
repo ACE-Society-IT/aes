@@ -154,6 +154,7 @@ export default function Faqs() {
     <MouseStreakWrapper
       id="faqs"
       fadeOnScroll={false}
+      showTrail={false}
       className="w-full text-[#f8eee1] py-10 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]"
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto">

@@ -14,7 +14,6 @@ export default function Home() {
     <main className="min-h-screen bg-[#5a0d1b] text-[#f8eee1]">
       <Navbar />
       <Hero />
-
       {/* Curved Loop Ribbon (Seamless upper section transition) */}
       <section className="py-2 sm:py-3 bg-[#5a0d1b] border-y border-[#89192c]/30 overflow-hidden relative select-none">
         <CurvedLoop
