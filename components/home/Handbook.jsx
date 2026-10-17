@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Download,
   FileText,
   CheckCircle2,
   Sparkles,
@@ -12,16 +11,12 @@ import {
   Award,
   Shirt,
   Clock,
-  ArrowUpRight,
-  Eye,
   BookOpen,
   FileDown,
   Layers,
   Scale,
-  Sparkle,
   Check,
   AlertCircle,
-  HelpCircle,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────────────────────
@@ -222,20 +217,6 @@ startxref
             Section Header
             ───────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-          {/* Top Pill Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#3A2D28]/80 border border-[#52433D] backdrop-blur-md shadow-sm mb-4"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-[#E5D9C5]" />
-            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#E5D9C5]">
-              Official Tournament Guide • 2026 Edition
-            </span>
-          </motion.div>
-
           {/* Main Section Title */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -246,19 +227,6 @@ startxref
           >
             Tournament <span className="text-[#E5D9C5]">Handbook</span> & Guidelines
           </motion.h2>
-
-          {/* Lead Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="mt-4 text-base sm:text-lg text-[#B09B8C] leading-relaxed max-w-2xl"
-          >
-            Your comprehensive roadmap to the Alpha Entrepreneurship Summit. Access judging
-            matrices, deliverable timelines, competitive frameworks, and the mandatory delegate
-            dress code.
-          </motion.p>
         </div>
 
         {/* ─────────────────────────────────────────────
@@ -359,7 +327,8 @@ startxref
                 </button>
 
                 <p className="text-[11px] text-center text-[#B09B8C]/80">
-                  Free instant download for all registered and prospective summit delegates.
+                  Free instant download for all registered and prospective summit
+                  delegates.
                 </p>
               </div>
             </div>
@@ -444,20 +413,7 @@ startxref
                     })}
                   </div>
 
-                  {/* Informational Callout Banner */}
-                  <div className="mt-6 p-4 rounded-2xl bg-[#3A2D28]/40 border border-[#52433D]/70 flex items-start gap-3.5">
-                    <Sparkles className="w-5 h-5 text-[#E5D9C5] shrink-0 mt-0.5" />
-                    <div>
-                      <h5 className="text-xs font-bold text-[#E5D9C5] uppercase tracking-wider">
-                        Executive Notice for Pitching Teams
-                      </h5>
-                      <p className="mt-1 text-xs text-[#B09B8C] leading-relaxed">
-                        All final slide decks, live prototype URLs, and financial projections must be
-                        uploaded to your delegate portal at least 4 hours before your module’s
-                        commencement time. Late submissions incur automated scoring penalties.
-                      </p>
-                    </div>
-                  </div>
+                  
                 </motion.div>
               ) : (
                 /* Tab 2: Dress Code Protocol */
@@ -479,7 +435,9 @@ startxref
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#B09B8C]">
                             {tier.tier}
                           </span>
-                          <h4 className="text-base font-bold text-[#E5D9C5]">{tier.code}</h4>
+                          <h4 className="text-base font-bold text-[#E5D9C5]">
+                            {tier.code}
+                          </h4>
                         </div>
                         <span className="text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-[#3A2D28] text-[#F4EFEA] border border-[#52433D]">
                           {tier.badge}
@@ -488,7 +446,10 @@ startxref
 
                       <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {tier.recommendations.map((rec) => (
-                          <div key={rec} className="flex items-start gap-2 text-xs text-[#F4EFEA]">
+                          <div
+                            key={rec}
+                            className="flex items-start gap-2 text-xs text-[#F4EFEA]"
+                          >
                             <Check className="w-3.5 h-3.5 text-[#E5D9C5] shrink-0 mt-0.5" />
                             <span>{rec}</span>
                           </div>
@@ -498,7 +459,8 @@ startxref
                       <div className="mt-3.5 pt-3 border-t border-[#52433D]/30 flex items-center gap-2 text-[11px] text-[#B09B8C]">
                         <AlertCircle className="w-3.5 h-3.5 text-amber-500/80 shrink-0" />
                         <span>
-                          <strong className="text-[#F4EFEA]">Prohibited:</strong> {tier.prohibited}
+                          <strong className="text-[#F4EFEA]">Prohibited:</strong>{' '}
+                          {tier.prohibited}
                         </span>
                       </div>
                     </div>
@@ -508,9 +470,11 @@ startxref
                   <div className="p-4 rounded-2xl bg-[#3A2D28]/40 border border-[#52433D]/70 flex items-center gap-3">
                     <ShieldCheck className="w-5 h-5 text-[#E5D9C5] shrink-0" />
                     <p className="text-xs text-[#B09B8C]">
-                      <strong className="text-[#F4EFEA]">Badge Visibility Protocol:</strong> Your
-                      official delegate badge with visible lanyard must be worn continuously inside
-                      all summit halls, pitch rooms, and VIP lounges.
+                      <strong className="text-[#F4EFEA]">
+                        Badge Visibility Protocol:
+                      </strong>{' '}
+                      Your official delegate badge with visible lanyard must be worn
+                      continuously inside all summit halls, pitch rooms, and VIP lounges.
                     </p>
                   </div>
                 </motion.div>

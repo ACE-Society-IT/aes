@@ -14,11 +14,11 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Vision />
+      <Handbook />
       <Competition />
       <Modules />
       <Schedule />
-      <Handbook />
-      <Faqs />
+<Faqs />
       <Footer />
     </main>
   );
