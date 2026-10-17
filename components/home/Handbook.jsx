@@ -1,204 +1,55 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   FileText,
-  CheckCircle2,
-  Sparkles,
-  ShieldCheck,
-  Award,
-  Shirt,
-  Clock,
-  BookOpen,
-  FileDown,
-  Layers,
   Scale,
-  Check,
-  AlertCircle,
+  Shirt,
+  ShieldCheck,
+  FileDown,
 } from 'lucide-react';
 
 /* ─────────────────────────────────────────────────────────────
-   SUMMIT BRIEFING POINTERS
+   4 SUMMIT POINTERS (Edit text and titles below)
    ───────────────────────────────────────────────────────────── */
-const SUMMIT_POINTERS = [
+const HANDBOOK_POINTERS = [
   {
-    icon: Layers,
-    title: '6 Signature Competitive Tracks',
+    number: '01',
+    icon: FileText,
+    title: 'Tournament Tracks & Rules',
+    tag: 'REGULATIONS',
     description:
-      'Structured 48-hour competitive streams spanning Venture Pitching, Autonomous AI Sprint, Corporate Innovation Challenge, and Growth Labs.',
-    tag: 'FORMAT',
+      'Detailed overview of the competitive modules, eligibility requirements, stage presentation timings, team sizes, and final submission deliverables.',
   },
   {
+    number: '02',
     icon: Scale,
-    title: 'Transparent Evaluation Rubrics',
+    title: 'Evaluation & Scoring Matrix',
+    tag: 'CRITERIA',
     description:
-      'Rigorous adjudication benchmark: Market Validation (25%), Financial Defensibility (25%), Proprietary Moat (20%), and Executive Defense (30%).',
-    tag: 'SCORING',
+      'Comprehensive scoring criteria utilized by VC and industry judges: Market Validation (25%), Financials (25%), Tech Moat (20%), and Live Q&A Defense (30%).',
   },
   {
-    icon: Award,
-    title: 'PKR 1.5M+ Pool & Term Sheets',
+    number: '03',
+    icon: Shirt,
+    title: 'Official Summit Dress Code',
+    tag: 'DRESS CODE',
     description:
-      'Non-dilutive innovation grants, institutional syndication intros, and fast-track incubator admissions for podium-ranking delegates.',
-    tag: 'REWARDS',
+      'Western Business Formal for keynote arenas and pitch rounds, Smart Executive Casual for workshops & hackathons, and Black Tie Optional for the Gala Night.',
   },
   {
+    number: '04',
     icon: ShieldCheck,
-    title: 'Proprietary IP & Chatham House Rule',
+    title: 'Check-In, Badges & Protocol',
+    tag: 'LOGISTICS',
     description:
-      '100% IP ownership retained by participating teams. Select venture roundtables operate under strict non-disclosure conventions.',
-    tag: 'INTEGRITY',
-  },
-  {
-    icon: Clock,
-    title: 'Strict Deliverable Checkpoints',
-    description:
-      'Hard submission deadlines for pitch decks, financial models, and code repositories enforced via the official AES portal.',
-    tag: 'DEADLINES',
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Accredited Access & RFID Badging',
-    description:
-      'Digital accreditation badge and government-issued ID mandatory for all access gates, private investor lounges, and keynotes.',
-    tag: 'CHECK-IN',
-  },
-];
-
-/* ─────────────────────────────────────────────────────────────
-   OFFICIAL DRESS CODE TIERS
-   ───────────────────────────────────────────────────────────── */
-const DRESS_CODE_TIERS = [
-  {
-    tier: 'Daytime Sessions & Pitch Arenas',
-    code: 'Western Business Formal',
-    badge: 'MANDATORY',
-    recommendations: [
-      'Tailored two-piece or three-piece suits in navy, charcoal, or dark tones',
-      'Pressed collared dress shirts with conservative necktie or bow tie',
-      'Executive tailored blazers, trousers, or modest business formal attire',
-      'Polished formal leather dress shoes or executive formal footwear',
-    ],
-    prohibited: 'No athletic trainers, graphic tees, or distressed jeans',
-  },
-  {
-    tier: 'Workshops & Hackathon Labs',
-    code: 'Smart Executive Casual',
-    badge: 'COLLABORATIVE',
-    recommendations: [
-      'Collared button-down shirts, polo shirts, or structured knitwear',
-      'Tailored chinos or dark pressed trousers paired with smart blazers',
-      'Clean, minimalist monotone dress sneakers or leather loafers',
-      'Company or university branded polo apparel permitted for teams',
-    ],
-    prohibited: 'No gym wear, casual tracksuits, shorts, or flip-flops',
-  },
-  {
-    tier: 'Evening Gala & Award Ceremony',
-    code: 'Black Tie Optional / Formal Evening Elegance',
-    badge: 'GRAND GALA',
-    recommendations: [
-      'Classic black or midnight navy tuxedos, or formal evening dark suits',
-      'Floor-length evening gowns or elegant contemporary formal dresses',
-      'Ceremonial formal cultural attire (e.g., formal dark Sherwanis)',
-      'Formal evening dress footwear with matching leather accessories',
-    ],
-    prohibited: 'Strictly zero casual or daytime sportswear permitted',
+      'Accredited venue access, mandatory delegate badge policy, IP ownership protections, and Chatham House rules across closed-door investor roundtables.',
   },
 ];
 
 export default function Handbook() {
-  const [activeTab, setActiveTab] = useState('pointers'); // 'pointers' | 'dresscode'
-  const [downloadStatus, setDownloadStatus] = useState('idle'); // 'idle' | 'preparing' | 'success'
-
-  /**
-   * Triggers an official PDF handbook download
-   */
-  const handleDownload = () => {
-    setDownloadStatus('preparing');
-
-    // Simulate instant secure file generation/prep
-    setTimeout(() => {
-      // Create a downloadable blob with handbook executive summary
-      const handbookContent = `%PDF-1.4
-%âãÏÓ
-1 0 obj
-<< /Title (Alpha Entrepreneurship Summit 2026 - Official Tournament Handbook)
-   /Author (ACE Society / AES Organizing Committee)
-   /Subject (Tournament Regulations, Dress Code, and Evaluation Rubrics)
-   /Keywords (AES, Summit, Entrepreneurship, Competition, Regulations)
->>
-endobj
-2 0 obj
-<< /Type /Catalog /Pages 3 0 R >>
-endobj
-3 0 obj
-<< /Type /Pages /Kids [4 0 R] /Count 1 >>
-endobj
-4 0 obj
-<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 5 0 R >>
-endobj
-5 0 obj
-<< /Length 440 >>
-stream
-BT
-/F1 24 Tf
-72 710 Td
-(ALPHA ENTREPRENEURSHIP SUMMIT 2026) Tj
-/F1 14 Tf
-0 -36 Td
-(OFFICIAL TOURNAMENT HANDBOOK & DELEGATE DOSSIER) Tj
-/F1 10 Tf
-0 -30 Td
-(Tournament Dates: Nov 07 - Nov 09, 2026 | Islamabad, Pakistan) Tj
-0 -20 Td
-(1. Mandatory Business Formal Dress Code for all keynote arenas and pitch stages.) Tj
-0 -16 Td
-(2. Smart Executive Casual for innovation workshops and hackathon labs.) Tj
-0 -16 Td
-(3. Black Tie Optional / Formal Evening Wear for the Grand Awards Gala.) Tj
-0 -20 Td
-(4. 100% intellectual property rights retained by participating teams.) Tj
-0 -16 Td
-(5. Evaluation: Market Validation 25%, Financials 25%, Moat 20%, Defense 30%.) Tj
-0 -30 Td
-(Downloaded from the Official AES Summit Portal: https://aes-summit.com) Tj
-ET
-endstream
-endobj
-xref
-0 6
-0000000000 65535 f
-0000000015 00000 n
-0000000215 00000 n
-0000000262 00000 n
-0000000320 00000 n
-0000000405 00000 n
-trailer
-<< /Size 6 /Root 2 0 R /Info 1 0 R >>
-startxref
-900
-%%EOF`;
-
-      const blob = new Blob([handbookContent], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'AES-2026-Official-Tournament-Handbook.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      setDownloadStatus('success');
-
-      setTimeout(() => {
-        setDownloadStatus('idle');
-      }, 3500);
-    }, 600);
-  };
+  
 
   return (
     <section
@@ -217,7 +68,6 @@ startxref
             Section Header
             ───────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-          {/* Main Section Title */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -230,9 +80,9 @@ startxref
         </div>
 
         {/* ─────────────────────────────────────────────
-            Main Content Grid (Book Showcase + Interactive Intel)
+            Main Content Grid (Book Showcase + 4 Pointers)
             ───────────────────────────────────────────── */}
-        <div className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* ──────────────────────────────────────────
               LEFT: 3D Book Cover & Download Card (5 Cols)
               ────────────────────────────────────────── */}
@@ -297,189 +147,75 @@ startxref
                   DOWNLOAD PDF BUTTON (High-Impact CTA)
                   ────────────────────────────────────────── */}
               <div className="mt-7 flex flex-col gap-3">
-                <button
-                  type="button"
-                  onClick={handleDownload}
-                  disabled={downloadStatus === 'preparing'}
-                  className={`w-full relative group/btn flex items-center justify-center gap-3 py-3.5 px-6 rounded-full font-bold text-sm tracking-wide transition-all duration-300 shadow-lg ${
-                    downloadStatus === 'success'
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-white text-[#1E1410] hover:bg-[#E5D9C5] hover:scale-[1.02] active:scale-[0.98]'
-                  }`}
+                <a
+                  href="/AES-Handbook-2026.pdf"
+                  download="AES-Handbook-2026.pdf"
+                  className="w-full relative group/btn flex items-center justify-center gap-3 py-3.5 px-6 rounded-full font-bold text-sm tracking-wide bg-white text-[#1E1410] hover:bg-[#E5D9C5] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-lg cursor-pointer"
                   aria-label="Download Official AES Tournament Handbook"
                 >
-                  {downloadStatus === 'preparing' ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-[#1E1410] border-t-transparent rounded-full animate-spin" />
-                      <span>Preparing Your Dossier...</span>
-                    </>
-                  ) : downloadStatus === 'success' ? (
-                    <>
-                      <Check className="w-4 h-4 text-white" />
-                      <span>Handbook Downloaded ✓</span>
-                    </>
-                  ) : (
-                    <>
-                      <FileDown className="w-4 h-4 text-[#1E1410] transition-transform duration-300 group-hover/btn:translate-y-0.5" />
-                      <span>Download Handbook (PDF)</span>
-                    </>
-                  )}
-                </button>
+                  <FileDown className="w-4 h-4 text-[#1E1410] transition-transform duration-300 group-hover/btn:translate-y-0.5" />
+                  <span>Download Handbook (PDF)</span>
+                </a>
 
                 <p className="text-[11px] text-center text-[#B09B8C]/80">
-                  Free instant download for all registered and prospective summit
-                  delegates.
+                  Free instant download for all registered and prospective summit delegates.
                 </p>
               </div>
             </div>
           </motion.div>
 
           {/* ──────────────────────────────────────────
-              RIGHT: Information Showcase (7 Cols)
+              RIGHT: 4 Clean Pointers (7 Cols)
               ────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="lg:col-span-7 flex flex-col"
+            className="lg:col-span-7 flex flex-col gap-4"
           >
-            {/* View Switcher Tabs (Pointers vs Dress Code) */}
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#160D09] border border-[#52433D]/70 self-start mb-8">
-              <button
-                type="button"
-                onClick={() => setActiveTab('pointers')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 ${
-                  activeTab === 'pointers'
-                    ? 'bg-[#E5D9C5] text-[#1E1410] shadow-md'
-                    : 'text-[#B09B8C] hover:text-[#F4EFEA]'
-                }`}
-              >
-                <FileText className="w-4 h-4" />
-                <span>Summit Pointers & Rules</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('dresscode')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 ${
-                  activeTab === 'dresscode'
-                    ? 'bg-[#E5D9C5] text-[#1E1410] shadow-md'
-                    : 'text-[#B09B8C] hover:text-[#F4EFEA]'
-                }`}
-              >
-                <Shirt className="w-4 h-4" />
-                <span>Official Dress Code</span>
-              </button>
-            </div>
-
-            {/* Tab 1: Summit Pointers & Information */}
-            <AnimatePresence mode="wait">
-              {activeTab === 'pointers' ? (
-                <motion.div
-                  key="tab-pointers"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-4"
-                >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {SUMMIT_POINTERS.map((pointer, idx) => {
-                      const IconComponent = pointer.icon;
-                      return (
-                        <div
-                          key={pointer.title}
-                          className="group p-5 rounded-2xl bg-[#160D09]/80 border border-[#52433D]/60 hover:border-[#E5D9C5]/50 hover:bg-[#1E130E] transition-all duration-300 flex flex-col justify-between"
-                        >
-                          <div>
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="w-9 h-9 rounded-xl bg-[#3A2D28]/80 border border-[#52433D] flex items-center justify-center text-[#E5D9C5] transition-transform duration-300 group-hover:scale-110">
-                                <IconComponent className="w-4 h-4" />
-                              </div>
-                              <span className="text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-[#0D0704] text-[#B09B8C] border border-[#52433D]/40">
-                                {pointer.tag}
-                              </span>
-                            </div>
-                            <h4 className="text-sm font-bold text-[#F4EFEA] group-hover:text-[#E5D9C5] transition-colors duration-200">
-                              {pointer.title}
-                            </h4>
-                            <p className="mt-2 text-xs text-[#B09B8C] leading-relaxed">
-                              {pointer.description}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  
-                </motion.div>
-              ) : (
-                /* Tab 2: Dress Code Protocol */
-                <motion.div
-                  key="tab-dresscode"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-4"
-                >
-                  {DRESS_CODE_TIERS.map((tier) => (
-                    <div
-                      key={tier.tier}
-                      className="p-5 sm:p-6 rounded-2xl bg-[#160D09]/80 border border-[#52433D]/70 hover:border-[#E5D9C5]/50 transition-all duration-300"
-                    >
-                      <div className="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-[#52433D]/40">
-                        <div>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#B09B8C]">
-                            {tier.tier}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {HANDBOOK_POINTERS.map((pointer, idx) => {
+                const IconComponent = pointer.icon;
+                return (
+                  <motion.div
+                    key={pointer.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 * idx }}
+                    className="group p-5 sm:p-6 rounded-2xl bg-[#160D09]/90 border border-[#52433D]/70 hover:border-[#E5D9C5]/60 hover:bg-[#1E130E] transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Row: Number + Tag */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-xs font-mono font-bold text-[#E5D9C5]">
+                            {pointer.number}
                           </span>
-                          <h4 className="text-base font-bold text-[#E5D9C5]">
-                            {tier.code}
-                          </h4>
-                        </div>
-                        <span className="text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-[#3A2D28] text-[#F4EFEA] border border-[#52433D]">
-                          {tier.badge}
-                        </span>
-                      </div>
-
-                      <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {tier.recommendations.map((rec) => (
-                          <div
-                            key={rec}
-                            className="flex items-start gap-2 text-xs text-[#F4EFEA]"
-                          >
-                            <Check className="w-3.5 h-3.5 text-[#E5D9C5] shrink-0 mt-0.5" />
-                            <span>{rec}</span>
+                          <div className="w-8 h-8 rounded-lg bg-[#3A2D28]/80 border border-[#52433D] flex items-center justify-center text-[#E5D9C5] transition-transform duration-300 group-hover:scale-110">
+                            <IconComponent className="w-4 h-4" />
                           </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-3.5 pt-3 border-t border-[#52433D]/30 flex items-center gap-2 text-[11px] text-[#B09B8C]">
-                        <AlertCircle className="w-3.5 h-3.5 text-amber-500/80 shrink-0" />
-                        <span>
-                          <strong className="text-[#F4EFEA]">Prohibited:</strong>{' '}
-                          {tier.prohibited}
+                        </div>
+                        <span className="text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full bg-[#0D0704] text-[#B09B8C] border border-[#52433D]/50">
+                          {pointer.tag}
                         </span>
                       </div>
-                    </div>
-                  ))}
 
-                  {/* Mandatory Badge Reminder */}
-                  <div className="p-4 rounded-2xl bg-[#3A2D28]/40 border border-[#52433D]/70 flex items-center gap-3">
-                    <ShieldCheck className="w-5 h-5 text-[#E5D9C5] shrink-0" />
-                    <p className="text-xs text-[#B09B8C]">
-                      <strong className="text-[#F4EFEA]">
-                        Badge Visibility Protocol:
-                      </strong>{' '}
-                      Your official delegate badge with visible lanyard must be worn
-                      continuously inside all summit halls, pitch rooms, and VIP lounges.
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      {/* Title */}
+                      <h4 className="text-base font-bold text-[#F4EFEA] group-hover:text-[#E5D9C5] transition-colors duration-200">
+                        {pointer.title}
+                      </h4>
+
+                      {/* Description */}
+                      <p className="mt-2.5 text-xs sm:text-sm text-[#B09B8C] leading-relaxed">
+                        {pointer.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </motion.div>
         </div>
       </div>
