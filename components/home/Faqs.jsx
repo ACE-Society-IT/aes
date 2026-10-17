@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import MouseStreakWrapper from './MouseStreakWrapper';
 
 /* ──────────────────────────────────────────────
    FAQ Data — AES Summit 2026
@@ -151,23 +152,12 @@ export default function Faqs() {
   const toggle = (i) => setOpenIndex(openIndex === i ? -1 : i);
 
   return (
-    <section
+    <MouseStreakWrapper
       id="faqs"
-      className="relative w-full bg-[#0D0704] text-[#F4EFEA] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#52433D]/50 overflow-hidden"
+      fadeOnScroll={false}
+      className="w-full text-[#F4EFEA] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#52433D]/50"
     >
-      {/* Ambient Radial Spotlight */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0 opacity-60"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 50% at 30% 20%, #38251D 0%, #281A14 40%, #0D0704 80%)',
-        }}
-      />
-
-      {/* Decorative Warm Orb */}
-      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[#E5D9C5]/[0.02] rounded-full blur-[100px] pointer-events-none z-0" />
-
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Two-Column Layout: Header Left + FAQs Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column — Section Header */}
@@ -190,8 +180,6 @@ export default function Faqs() {
               Everything you need to know about AES 2026 — from registration and modules
               to competition formats and networking opportunities.
             </p>
-
-           
           </motion.div>
 
           {/* Right Column — Accordion */}
@@ -208,6 +196,6 @@ export default function Faqs() {
           </div>
         </div>
       </div>
-    </section>
+    </MouseStreakWrapper>
   );
 }

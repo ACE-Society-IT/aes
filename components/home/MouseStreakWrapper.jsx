@@ -8,13 +8,21 @@ import React, { useRef, useEffect, useState } from 'react';
  * - Hidden and disabled on mobile devices (< 768px or touch screens).
  * - Synchronized circular orbit when mouse is stationary.
  */
-export default function MouseStreakWrapper({ children, className = '' }) {
+export default function MouseStreakWrapper({
+  children,
+  className = '',
+  fadeOnScroll = true,
+  id,
+  style = {},
+}) {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
 
-  // Parallax scroll listener
+  // Parallax scroll listener (only active if fadeOnScroll is enabled)
   useEffect(() => {
+    if (!fadeOnScroll) return;
+
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
@@ -33,7 +41,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [fadeOnScroll]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -309,24 +317,28 @@ export default function MouseStreakWrapper({ children, className = '' }) {
 
   return (
     <section
+      id={id}
       ref={containerRef}
-      className={`relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-center select-none ${className}`}
+      className={`relative w-full ${className.includes('min-h-') ? '' : 'min-h-screen'} overflow-hidden flex flex-col items-center justify-center select-none ${className}`}
       style={{
         background:
           'radial-gradient(circle at 50% 38%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
+        ...style,
       }}
     >
       {/* Background Layer: Ambient Vignette & Center Glow */}
       <div
         className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0 will-change-transform"
         style={{
-          transform: `translate3d(0, ${-scrollY * 0.06}px, 0)`,
+          transform: fadeOnScroll ? `translate3d(0, ${-scrollY * 0.06}px, 0)` : undefined,
         }}
       />
       <div
         className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[300px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0 will-change-transform"
         style={{
-          transform: `translate3d(-50%, calc(-50% - ${scrollY * 0.1}px), 0)`,
+          transform: fadeOnScroll
+            ? `translate3d(-50%, calc(-50% - ${scrollY * 0.1}px), 0)`
+            : 'translate3d(-50%, -50%, 0)',
         }}
       />
 
@@ -335,8 +347,8 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none z-10 w-full h-full hidden md:block will-change-transform"
         style={{
-          transform: `translate3d(0, ${-scrollY * 0.16}px, 0)`,
-          opacity: Math.max(0, 1 - scrollY / 600),
+          transform: fadeOnScroll ? `translate3d(0, ${-scrollY * 0.16}px, 0)` : undefined,
+          opacity: fadeOnScroll ? Math.max(0, 1 - scrollY / 600) : 1,
         }}
       />
 
