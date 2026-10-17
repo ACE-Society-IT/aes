@@ -15,7 +15,9 @@ export default function MouseStreakWrapper({ children, className = '' }) {
 
   // Parallax scroll listener
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
     if (prefersReducedMotion) return;
 
     let ticking = false;
@@ -40,10 +42,7 @@ export default function MouseStreakWrapper({ children, className = '' }) {
 
     // Detect mobile or touch-first devices
     const checkMobile = () => {
-      return (
-        window.innerWidth < 768 ||
-        window.matchMedia('(pointer: coarse)').matches
-      );
+      return window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches;
     };
 
     if (checkMobile()) {
@@ -196,10 +195,8 @@ export default function MouseStreakWrapper({ children, className = '' }) {
         const moveTargetX = baseAnchorX;
         const moveTargetY = baseAnchorY;
 
-        const finalTargetX =
-          moveTargetX * (1 - orbitBlend) + circleTargetX * orbitBlend;
-        const finalTargetY =
-          moveTargetY * (1 - orbitBlend) + circleTargetY * orbitBlend;
+        const finalTargetX = moveTargetX * (1 - orbitBlend) + circleTargetX * orbitBlend;
+        const finalTargetY = moveTargetY * (1 - orbitBlend) + circleTargetY * orbitBlend;
 
         r.vx += (finalTargetX - r.currX) * r.spring;
         r.vy += (finalTargetY - r.currY) * r.spring;
@@ -319,7 +316,6 @@ export default function MouseStreakWrapper({ children, className = '' }) {
           'radial-gradient(circle at 50% 38%, #2A1A13 0%, #160D09 58%, #0D0704 100%)',
       }}
     >
-
       {/* Background Layer: Ambient Vignette & Center Glow */}
       <div
         className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-[#120B07]/20 to-[#0A0503]/90 z-0 will-change-transform"

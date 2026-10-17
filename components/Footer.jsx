@@ -118,8 +118,9 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm sm:text-base text-[#B09B8C] leading-relaxed max-w-md">
-              The premier entrepreneurship summit uniting frontier founders, institutional venture
-              capital, and global industry leaders to accelerate market-defining ventures.
+              The premier entrepreneurship summit uniting frontier founders, institutional
+              venture capital, and global industry leaders to accelerate market-defining
+              ventures.
             </p>
           </div>
 

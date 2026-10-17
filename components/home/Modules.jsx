@@ -114,13 +114,13 @@ export default function Modules() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-           
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#F4EFEA]">
               Flagship Modules
             </h2>
             <p className="mt-4 text-base sm:text-lg text-[#B09B8C] leading-relaxed">
-              Six high-velocity challenge arenas designed to test founders, engineers, and strategists.
-              Compete for the PKR 1.5M+ pool, institutional term sheets, and global venture acceleration.
+              Six high-velocity challenge arenas designed to test founders, engineers, and
+              strategists. Compete for the PKR 1.5M+ pool, institutional term sheets, and
+              global venture acceleration.
             </p>
           </div>
 

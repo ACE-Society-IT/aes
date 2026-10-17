@@ -8,11 +8,11 @@ import Link from 'next/link';
  * Navigation links matching AES Summit information architecture
  */
 const NAV_LINKS = [
-  { name: 'About', href: '#about' },
-  { name: 'Vision', href: '#vision' },
+  { name: 'Executives', href: '/executives' },
+  { name: 'Ambassador’s', href: '/ambassadors' },
   { name: 'Modules', href: '#modules' },
-  { name: 'Competition', href: '#competition' },
-  { name: 'Schedule', href: '#schedule' },
+  { name: 'FAQ’s', href: '#competition' },
+  { name: 'scedule', href: '#scedule' },
 ];
 
 /**
@@ -50,7 +50,8 @@ export function MorphingScrollNavbar() {
     const updateScrollMetrics = () => {
       const currentScrollY = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, currentScrollY / scrollHeight)) : 0;
+      const progress =
+        scrollHeight > 0 ? Math.min(1, Math.max(0, currentScrollY / scrollHeight)) : 0;
       const isTop = currentScrollY < 40;
 
       const diff = currentScrollY - lastScrollYRef.current;
@@ -114,7 +115,9 @@ export function MorphingScrollNavbar() {
       }
     };
 
-    window.addEventListener('scroll', handleSectionDetection, { passive: true });
+    window.addEventListener('scroll', handleSectionDetection, {
+      passive: true,
+    });
     return () => window.removeEventListener('scroll', handleSectionDetection);
   }, []);
 
@@ -162,10 +165,7 @@ export function MorphingScrollNavbar() {
 
       {/* 3. Navbar 3-State Morphing Architecture */}
       <div className="fixed top-4 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
-        <nav
-          className={navLayoutClasses}
-          aria-label="Main Navigation"
-        >
+        <nav className={navLayoutClasses} aria-label="Main Navigation">
           {/* Left Brand Logo */}
           <Link
             href="/"

@@ -2,11 +2,17 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValueEvent,
+} from 'framer-motion';
 
 /**
  * AES 2026 - High-Impact Sticky Showcase Section
- * 
+ *
  * Flow:
  * 1. Blank on Entrance: Initial state starts completely blank until user scrolls into the section.
  * 2. Calm & Smooth Text Reveal: Staggered character slide-up from overflow-hidden masks
@@ -95,29 +101,21 @@ export default function Competition() {
   // =========================================================================
   const photo1Opacity = useTransform(
     smoothProgress,
-    [0.15, 0.22, 0.44, 0.50],
+    [0.15, 0.22, 0.44, 0.5],
     [0, 1, 1, 0]
   );
-  const photo1Scale = useTransform(
-    smoothProgress,
-    [0.15, 0.25, 0.50],
-    [0.3, 1.0, 1.1]
-  );
+  const photo1Scale = useTransform(smoothProgress, [0.15, 0.25, 0.5], [0.3, 1.0, 1.1]);
   const photo1X = useTransform(
     smoothProgress,
-    [0.15, 0.28, 0.50],
+    [0.15, 0.28, 0.5],
     ['0vw', '0vw', '-85vw']
   );
   const photo1Y = useTransform(
     smoothProgress,
-    [0.15, 0.28, 0.50],
+    [0.15, 0.28, 0.5],
     ['0vh', '0vh', '-72vh']
   );
-  const photo1Rotate = useTransform(
-    smoothProgress,
-    [0.15, 0.28, 0.50],
-    [-3, -3, -16]
-  );
+  const photo1Rotate = useTransform(smoothProgress, [0.15, 0.28, 0.5], [-3, -3, -16]);
 
   // =========================================================================
   // PICTURE 2 (if2025_2.jpg - STARTUP SHOWDOWN)
@@ -129,11 +127,7 @@ export default function Competition() {
     [0.49, 0.56, 0.78, 0.84],
     [0, 1, 1, 0]
   );
-  const photo2Scale = useTransform(
-    smoothProgress,
-    [0.49, 0.59, 0.84],
-    [0.3, 1.0, 1.1]
-  );
+  const photo2Scale = useTransform(smoothProgress, [0.49, 0.59, 0.84], [0.3, 1.0, 1.1]);
   const photo2X = useTransform(
     smoothProgress,
     [0.49, 0.62, 0.84],
@@ -144,18 +138,30 @@ export default function Competition() {
     [0.49, 0.62, 0.84],
     ['0vh', '0vh', '72vh']
   );
-  const photo2Rotate = useTransform(
-    smoothProgress,
-    [0.49, 0.62, 0.84],
-    [3, 3, 16]
-  );
+  const photo2Rotate = useTransform(smoothProgress, [0.49, 0.62, 0.84], [3, 3, 16]);
 
   // Gold SVG accent doodles
-  const doodle1Scale = useTransform(smoothProgress, [0.20, 0.26, 0.40, 0.46], [0, 1.15, 1, 0]);
-  const doodle1Opacity = useTransform(smoothProgress, [0.20, 0.24, 0.40, 0.46], [0, 1, 1, 0]);
+  const doodle1Scale = useTransform(
+    smoothProgress,
+    [0.2, 0.26, 0.4, 0.46],
+    [0, 1.15, 1, 0]
+  );
+  const doodle1Opacity = useTransform(
+    smoothProgress,
+    [0.2, 0.24, 0.4, 0.46],
+    [0, 1, 1, 0]
+  );
 
-  const doodle2Scale = useTransform(smoothProgress, [0.54, 0.60, 0.74, 0.80], [0, 1.15, 1, 0]);
-  const doodle2Opacity = useTransform(smoothProgress, [0.54, 0.58, 0.74, 0.80], [0, 1, 1, 0]);
+  const doodle2Scale = useTransform(
+    smoothProgress,
+    [0.54, 0.6, 0.74, 0.8],
+    [0, 1.15, 1, 0]
+  );
+  const doodle2Opacity = useTransform(
+    smoothProgress,
+    [0.54, 0.58, 0.74, 0.8],
+    [0, 1, 1, 0]
+  );
 
   // Bottom scrub bar
   const progressBarWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
@@ -189,7 +195,6 @@ export default function Competition() {
           }}
         />
 
-
         {/* Ambient Warm Vignette Halo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#E5D9C5]/[0.035] rounded-full blur-3xl pointer-events-none z-0" />
 
@@ -204,8 +209,6 @@ export default function Competition() {
           }}
           className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
         >
-          
-
           {/* 3-Line Stacked Uppercase Heading (Tight leading, no unnecessary space) */}
           <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#F4EFEA] leading-[0.88] select-none text-center">
             {/* Line 1: YOUR VISION. */}
@@ -351,8 +354,6 @@ export default function Competition() {
             </div>
           </div>
         </motion.div>
-
-        
       </div>
     </section>
   );
