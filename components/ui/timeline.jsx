@@ -1,11 +1,6 @@
 'use client';
 
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useSyncExternalStore,
-} from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -27,9 +22,7 @@ function useGSAP(callback, options) {
 
   useIsomorphicLayoutEffect(() => {
     const el =
-      scope && typeof scope === 'object' && 'current' in scope
-        ? scope.current
-        : scope;
+      scope && typeof scope === 'object' && 'current' in scope ? scope.current : scope;
     ctxRef.current = gsap.context(() => {}, el ?? undefined);
     return () => {
       cleanupRef.current?.();
@@ -78,26 +71,27 @@ export const defaultTopJourneyData = [
   {
     id: 'day1-morning',
     year: 'Day 01',
-    month: '09:00 AM',
-    content: 'Summit Inauguration & Global Keynotes: Setting the Frontier Agenda',
+    month: '02:00 PM - 03:15 PM',
+    content: 'Summit Inauguration & Student Registration',
   },
   {
     id: 'day1-afternoon',
     year: 'Day 01',
-    month: '02:30 PM',
-    content: 'The Venture Sprint: Seed & Pre-Series Pitch Arena with Institutional VCs',
+    month: '03:30 PM - 07:30 PM',
+    content: 'Venture Verse , Defend The Empire & Investomania',
   },
   {
     id: 'day2-afternoon',
     year: 'Day 02',
-    month: '01:30 PM',
-    content: 'AI Frontier Hackathon Sprint & Tactical Engineering Masterclasses',
+    month: '01:00 PM - 08:30 PM',
+    content: 'Viral Velocity , Defend The Empire , Investomania & Market Monopoly ',
   },
   {
     id: 'day3-afternoon',
     year: 'Day 03',
-    month: '03:00 PM',
-    content: 'The Executive Deal Room: Private LP Receptions & Co-Investment Circles',
+    month: '09:00 AM - 08:30 PM',
+    content:
+      'The Finale Rounds of Venture Verse , Viral Velocity , Defend The Empire , Investomania & Market Monopoly ',
   },
 ];
 
@@ -105,20 +99,20 @@ export const defaultBottomJourneyData = [
   {
     id: 'day1-evening',
     year: 'Day 01',
-    month: '06:30 PM',
-    content: 'Angel Syndicate Fireside & Closed-Door Founder Mixer',
+    month: '07:30 PM',
+    content: 'Day 1 Conclusion',
   },
   {
     id: 'day2-evening',
     year: 'Day 02',
-    month: '05:00 PM',
-    content: 'Corporate Case Crack Turnaround Defense before Managing Partners',
+    month: '08:30 PM',
+    content: 'Day 2 Conclusion',
   },
   {
     id: 'day3-evening',
     year: 'Day 03',
-    month: '07:30 PM',
-    content: 'PKR 1.5M+ Prize Distribution, Grand Gala & Global Networking',
+    month: '06:30 PM - 09:30 PM',
+    content: 'Closing Ceremony and Dinner',
   },
 ];
 
@@ -144,8 +138,6 @@ export default function Timeline({
   const reducedMotion = usePrefersReducedMotion();
   const animationDuration = duration ?? scrollDuration;
   const normalizedDuration = Math.max(0.2, animationDuration);
-
-
 
   // Interleave top and bottom items chronologically for animation ordering
   const allJourneyItems = (() => {
@@ -185,11 +177,7 @@ export default function Timeline({
         },
       });
 
-      tl.fromTo(
-        wholeSliderRef.current,
-        { xPercent: 0 },
-        { xPercent: slidePercent }
-      );
+      tl.fromTo(wholeSliderRef.current, { xPercent: 0 }, { xPercent: slidePercent });
 
       if (reducedMotion) {
         gsap.set('.journey-line', { width: lineWidth });
@@ -324,23 +312,26 @@ export default function Timeline({
       const positions =
         window.innerWidth < 600
           ? [
-              [18, 28], [22, 32],
-              [30, 40], [34, 44],
-              [44, 54], [48, 58],
+              [18, 28],
+              [22, 32],
+              [30, 40],
+              [34, 44],
+              [44, 54],
+              [48, 58],
               [58, 68],
             ]
           : [
-              [6, 22], [10, 26],
-              [20, 36], [24, 40],
-              [38, 54], [42, 58],
+              [6, 22],
+              [10, 26],
+              [20, 36],
+              [24, 40],
+              [38, 54],
+              [42, 58],
               [56, 72],
             ];
 
       items.forEach((item, index) => {
-        const [startPos, endPos] = positions[index] || [
-          6 + index * 8,
-          22 + index * 8,
-        ];
+        const [startPos, endPos] = positions[index] || [6 + index * 8, 22 + index * 8];
         createItemTimeline(item, startPos, endPos);
       });
 
@@ -366,9 +357,7 @@ export default function Timeline({
       className="h-[200vw] max-[600px]:h-[400vh] w-full relative select-none bg-[#f8eee1] text-[#5a0d1b]"
     >
       {/* Warm ambient background glow for light mode */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#f8eee1_0%,#e8dcc6_60%,#f8eee1_100%)] opacity-60"
-      />
+      <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#f8eee1_0%,#e8dcc6_60%,#f8eee1_100%)] opacity-60" />
 
       <div className="h-screen w-full sticky top-[0%] pt-[10%] overflow-hidden max-[600px]:top-[5%] relative z-10">
         <div
@@ -444,8 +433,12 @@ export default function Timeline({
 
                     {/* Stem + Dot */}
                     <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
-                      <div className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`} />
-                      <div className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`} />
+                      <div
+                        className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`}
+                      />
+                      <div
+                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`}
+                      />
                     </div>
                   </div>
                 ))}
@@ -458,9 +451,7 @@ export default function Timeline({
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] block mb-2">
                   Summit Dates
                 </span>
-                <p
-                  className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#5a0d1b]"
-                >
+                <p className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#5a0d1b]">
                   {periodLabel}
                 </p>
               </div>
@@ -473,8 +464,12 @@ export default function Timeline({
                   >
                     {/* Dot + Stem */}
                     <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
-                      <div className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`} />
-                      <div className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`} />
+                      <div
+                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`}
+                      />
+                      <div
+                        className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`}
+                      />
                     </div>
 
                     {/* Text Content */}
