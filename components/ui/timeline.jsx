@@ -6,6 +6,7 @@ import React, {
   useRef,
   useSyncExternalStore,
 } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -36,7 +37,6 @@ function useGSAP(callback, options) {
       ctxRef.current?.revert();
       ctxRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useIsomorphicLayoutEffect(() => {
@@ -44,7 +44,6 @@ function useGSAP(callback, options) {
     cleanupRef.current?.();
     const ret = ctxRef.current.add(callback);
     cleanupRef.current = typeof ret === 'function' ? ret : undefined;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 }
 
@@ -127,10 +126,12 @@ export default function Timeline({
   id = 'schedule',
   title = 'Summit Itinerary',
   periodLabel = 'Nov 07 — 09, 2026',
-  textColor = '#F4EFEA',
-  mutedTextColor = '#B09B8C',
-  activeColor = '#E5D9C5',
-  backgroundColor = '#160D09',
+  textColor = '#382A24',
+  mutedTextColor = '#4B5563',
+  activeColor = '#2B1E18',
+  backgroundColor = '#F5F2EB',
+  accentColor = '#B09B8C',
+  borderColor = '#EBE6DC',
   imageUrl = 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80',
   imageAlt = 'AES Summit Grand Conference Hall',
   duration,
@@ -150,7 +151,7 @@ export default function Timeline({
   };
   const activeStyle = {
     backgroundColor: activeColor,
-    boxShadow: `0 0 12px ${activeColor}44`,
+    boxShadow: `0 0 10px ${activeColor}33`,
   };
   const mutedTextStyle = {
     color: mutedTextColor,
@@ -377,10 +378,14 @@ export default function Timeline({
       className="h-[200vw] max-[600px]:h-[400vh] w-full relative select-none"
       style={sectionStyle}
     >
-      {/* Warm ambient background glow so it doesn't look flat dark */}
+      {/* Warm ambient background glow for light mode */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
-       
+        style={{
+          background:
+            'radial-gradient(circle at 50% 30%, #FFFFFF 0%, #F5F2EB 60%, #EFEBE1 100%)',
+          opacity: 0.6,
+        }}
       />
 
       <div className="h-screen w-full sticky top-[0%] pt-[10%] overflow-hidden max-[600px]:top-[5%] relative z-10">
@@ -389,30 +394,43 @@ export default function Timeline({
           className="mr-[2vw] flex h-[30vw] w-[240vw] items-center gap-[5vw] px-[5vw] max-[600px]:h-[80vh] max-[600px]:w-[800vw] max-[600px]:px-[7vw]"
         >
           {/* Main Visual Monument */}
-          <div className="h-full w-[30vw] overflow-hidden rounded-[1vw] max-[600px]:h-[65vw] max-[600px]:w-[85vw] max-[600px]:rounded-[5vw] border border-[#52433D]/70 shadow-2xl relative group shrink-0">
-            <img
+          <div className="h-full w-[30vw] overflow-hidden rounded-[1.25vw] max-[600px]:h-[65vw] max-[600px]:w-[85vw] max-[600px]:rounded-[4vw] border border-[#EBE6DC] shadow-xl relative group shrink-0 bg-white">
+            <Image
               src={imageUrl}
               alt={imageAlt}
+              fill
+              sizes="(max-width: 600px) 85vw, 30vw"
               draggable={false}
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            {/* Ambient Dark Gradient on visual */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D0704]/80 via-transparent to-transparent pointer-events-none" />
+            {/* Subtle ambient vignette on visual */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#281A14]/35 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+              <span className="px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#EBE6DC] text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#2B1E18] shadow-sm">
+                AES MAIN STAGE
+              </span>
+              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#F4EFEA] drop-shadow-md">
+                2026 SUMMIT
+              </span>
+            </div>
           </div>
 
           <div className="relative h-full w-full">
-            {/* ═══ Center Track Line with Glowing Endcaps ═══ */}
+            {/* ═══ Center Track Line with Guide Rail & Glowing Endcaps ═══ */}
             <div className="w-full absolute left-0 top-[50%] -translate-y-1/2 flex items-center h-fit pointer-events-none z-20">
+              {/* Subtle background guide rail in #EBE6DC */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-[#EBE6DC] rounded-full" />
+
               <div
-                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0"
+                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10"
                 style={activeStyle}
               />
               <div
-                className="h-[2px] w-[0%] rounded-full journey-line"
+                className="h-[2px] w-[0%] rounded-full journey-line relative z-10"
                 style={{ backgroundColor: activeColor, boxShadow: `0 0 8px ${activeColor}33` }}
               />
               <div
-                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0"
+                className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10"
                 style={activeStyle}
               />
             </div>
@@ -426,7 +444,10 @@ export default function Timeline({
             */}
             <div className="flex h-1/2 w-full items-stretch justify-start gap-[.5vw]">
               <div className="h-full w-[20%] pt-[2vw] max-[600px]:h-fit max-[600px]:pt-[5vw]">
-                <h2 className="w-[85%] text-[3vw] font-bold tracking-tight leading-[0.95] max-[600px]:text-[8.5vw] text-[#F4EFEA]">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#B09B8C] block mb-2">
+                  Timeline
+                </span>
+                <h2 className="w-[85%] text-[3vw] font-bold tracking-tight leading-[0.95] max-[600px]:text-[8.5vw] text-[#382A24]">
                   {title}
                 </h2>
               </div>
@@ -440,16 +461,15 @@ export default function Timeline({
                     {/* Text Content — pushed to top */}
                     <div className="flex-1 flex flex-col justify-start pt-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#F4EFEA]`}
+                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#2B1E18]`}
                       >
-                        <span className="text-[#E5D9C5]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-medium text-[#B09B8C]">
+                        <span className="text-[#2B1E18]">{item.year}</span>{' '}
+                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#B09B8C]">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw]`}
-                        style={mutedTextStyle}
+                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#4B5563]`}
                       >
                         {item.content}
                       </p>
@@ -480,12 +500,11 @@ export default function Timeline({
             */}
             <div className="h-1/2 flex items-stretch justify-start w-full">
               <div className="w-[34%] pt-[2vw] max-[600px]:pt-[5vw] max-[600px]:w-[30%] h-full">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#E5D9C5] block mb-2">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#B09B8C] block mb-2">
                   Summit Dates
                 </span>
                 <p
-                  className="text-[1.65vw] font-semibold leading-none max-[600px]:text-[4.2vw]"
-                  style={mutedTextStyle}
+                  className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#382A24]"
                 >
                   {periodLabel}
                 </p>
@@ -512,16 +531,15 @@ export default function Timeline({
                     {/* Text Content — pushed to bottom */}
                     <div className="flex-1 flex flex-col justify-end pb-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#F4EFEA]`}
+                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#2B1E18]`}
                       >
-                        <span className="text-[#E5D9C5]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-medium text-[#B09B8C]">
+                        <span className="text-[#2B1E18]">{item.year}</span>{' '}
+                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#B09B8C]">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw]`}
-                        style={mutedTextStyle}
+                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#4B5563]`}
                       >
                         {item.content}
                       </p>

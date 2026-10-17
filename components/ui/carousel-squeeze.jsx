@@ -105,16 +105,12 @@ export function SqueezeCarousel({
 
   /* --- the strip -------------------------------------------------------- */
 
-  const window0 = useCallback(
-    () =>
-      Array.from({ length: visible }, (_, p) => ({
-        key: seed.current++,
-        slide: wrap(defaultIndex + p),
-      })),
-    [defaultIndex, visible, wrap]
+  const [cards, setCards] = useState(() =>
+    Array.from({ length: visible }, (_, p) => ({
+      key: `init-${p}`,
+      slide: wrap(defaultIndex + p),
+    }))
   );
-
-  const [cards, setCards] = useState(window0);
   const [column, setColumn] = useState(0);
   const columnRef = useRef(0);
   const forward = useRef(true);
