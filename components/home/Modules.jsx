@@ -44,7 +44,7 @@ const MODULES_DATA = [
       { label: 'Market Arena', value: 'PSX to Web3' },
       { label: 'Portfolio Role', value: 'Hedge Fund' },
     ],
-    badgeText: 'Wealth Preservation & Tax Navigations',
+    badgeText: 'Portfolio Strategy & Wealth Preservation',
     status: 'Stock & Digital Asset Arena',
     theme: {
       // Light 1: Alabaster Cream Card
@@ -80,7 +80,7 @@ const MODULES_DATA = [
       { label: 'Simulation Type', value: 'Corporate Crisis' },
       { label: 'Defense Round', value: 'Mock Press Conf' },
     ],
-    badgeText: 'Internal Response & Cash Flow Recovery',
+    badgeText: 'Crisis Management & Strategic Recovery',
     status: 'Crisis Control Track',
     theme: {
       // Light 2: Warm Parchment Card
@@ -182,7 +182,7 @@ const MODULES_DATA = [
     roundsLabel: '3 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
     description:
-      'Teams are assigned a brand to bring to life across three rounds. They must first establish the brand’s Instagram presence through creative content, then develop a comprehensive marketing campaign with a specified budget, and finally create a physical stall featuring a product prototype to engage with consumers in a real-world setting.',
+      "Teams are assigned a brand to bring to life across three rounds. They must first establish the brand's Instagram presence through creative content, then develop a comprehensive marketing campaign with a specified budget, and finally create a physical stall featuring a product prototype to engage with consumers in a real-world setting.",
     heroIcon: Zap,
     stats: [
       { label: 'Digital Channel', value: 'Instagram Growth' },
@@ -234,10 +234,8 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
 
   return (
     <div
-      className="sticky h-screen w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none"
+      className="sticky top-0 h-screen w-full flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 pointer-events-none"
       style={{
-        // Balanced center-weighted sticky offset so cards never get clipped at the bottom
-        top: `calc(13vh + ${index * 22}px)`,
         zIndex: index + 1,
       }}
     >
@@ -245,21 +243,22 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
         style={{
           scale,
           transformOrigin: 'top center',
+          y: index * 14,
         }}
         className={cn(
-          'pointer-events-auto will-change-transform w-full max-w-4xl lg:max-w-5xl rounded-3xl p-6 sm:p-8 md:p-9 flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-8 shadow-2xl',
+          'pointer-events-auto will-change-transform w-full max-w-5xl lg:max-w-6xl rounded-[32px] sm:rounded-[38px] p-6 sm:p-9 md:p-10 lg:p-11 flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-9 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.55)]',
           module.theme.cardBg,
           module.theme.cardBorder
         )}
       >
-        {/* Left Column (~54%): Module Overview, Slanted Round Badges & Description */}
-        <div className="flex flex-col justify-between w-full md:w-[54%] pr-0 md:pr-4">
+        {/* Left Column (~55%): Module Overview, Slanted Round Badges & Description */}
+        <div className="flex flex-col justify-between w-full md:w-[55%] pr-0 md:pr-4">
           <div>
             {/* Top Row: Module Tag & Total Rounds */}
             <div className="flex items-center gap-3 mb-2.5">
               <span
                 className={cn(
-                  'inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider',
+                  'inline-flex items-center px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider',
                   module.theme.tagBg
                 )}
               >
@@ -276,18 +275,18 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
             </div>
 
             {/* Slanted Parallelogram Round Badges (Exact match to Screenshot 2) */}
-            <div className="flex items-center gap-2 sm:gap-2.5 my-3">
+            <div className="flex items-center gap-2 sm:gap-3 my-3.5">
               {module.roundsList.map((roundName, rIdx) => {
                 const isActive = rIdx === 0;
                 return (
                   <div
                     key={rIdx}
                     className={cn(
-                      'transform -skew-x-12 px-3 sm:px-4 py-1 sm:py-1.5 transition-all duration-300',
+                      'transform -skew-x-12 px-3.5 sm:px-4.5 py-1 sm:py-1.5 transition-all duration-300',
                       isActive ? module.theme.roundActive : module.theme.roundInactive
                     )}
                   >
-                    <span className="block transform skew-x-12 text-[10px] sm:text-xs font-black tracking-wider uppercase select-none">
+                    <span className="block transform skew-x-12 text-[11px] sm:text-xs font-black tracking-wider uppercase select-none">
                       {roundName}
                     </span>
                   </div>
@@ -298,7 +297,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
             {/* Title */}
             <h3
               className={cn(
-                'text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight mb-3',
+                'text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-tight mb-3.5',
                 module.theme.titleColor
               )}
             >
@@ -308,7 +307,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
             {/* Exact Official Description */}
             <p
               className={cn(
-                'text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal',
+                'text-sm sm:text-[15px] md:text-base leading-relaxed font-normal',
                 module.theme.descColor
               )}
             >
@@ -317,10 +316,10 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           </div>
         </div>
 
-        {/* Right Column (~46%): Pure Icon Dashboard & Round Intelligence (No Photos, No Buttons) */}
+        {/* Right Column (~45%): Pure Icon Dashboard & Round Intelligence (No Photos, No Buttons) */}
         <div
           className={cn(
-            'w-full md:w-[46%] rounded-2xl p-5 sm:p-6 flex flex-col justify-between border mt-2 md:mt-0',
+            'w-full md:w-[45%] rounded-3xl p-6 sm:p-7 flex flex-col justify-between border mt-3 md:mt-0',
             module.theme.rightFrameBg
           )}
         >
@@ -328,16 +327,16 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           <div className="flex items-center justify-between gap-4 mb-4">
             <div
               className={cn(
-                'w-13 h-13 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center shadow-md',
+                'w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-md',
                 module.theme.iconBoxBg
               )}
             >
-              <HeroIcon className="w-7 h-7 stroke-[2.2]" />
+              <HeroIcon className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.2]" />
             </div>
 
             <div
               className={cn(
-                'inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider border shadow-sm',
+                'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border shadow-sm',
                 module.theme.statusBg
               )}
             >
@@ -352,18 +351,18 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           </div>
 
           {/* Center: 2 Key Stat Cards */}
-          <div className="grid grid-cols-2 gap-3 my-auto">
+          <div className="grid grid-cols-2 gap-3.5 my-auto">
             {module.stats.map((st, sIdx) => (
               <div
                 key={sIdx}
                 className={cn(
-                  'rounded-xl p-3 sm:p-3.5 border flex flex-col justify-center shadow-sm',
+                  'rounded-2xl p-3.5 sm:p-4 border flex flex-col justify-center shadow-sm',
                   module.theme.statCardBg
                 )}
               >
                 <div
                   className={cn(
-                    'text-base sm:text-lg md:text-xl font-black tracking-tight leading-tight',
+                    'text-lg sm:text-xl md:text-2xl font-black tracking-tight leading-tight',
                     module.theme.statValColor
                   )}
                 >
@@ -371,7 +370,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
                 </div>
                 <div
                   className={cn(
-                    'text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-0.5 opacity-80',
+                    'text-[11px] sm:text-xs font-bold uppercase tracking-wider mt-1 opacity-80',
                     module.theme.statLabelColor
                   )}
                 >
@@ -384,7 +383,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           {/* Bottom Card: Round Intelligence Spec Pill */}
           <div
             className={cn(
-              'mt-4 px-3.5 py-2.5 rounded-xl border flex items-center justify-between gap-3 text-[11px] sm:text-xs font-semibold shadow-sm',
+              'mt-5 px-4 py-3 rounded-2xl border flex items-center justify-between gap-3 text-xs sm:text-sm font-semibold shadow-sm',
               module.theme.footerPillBg
             )}
           >
@@ -392,7 +391,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
               <CheckCircle2 className="w-4 h-4 shrink-0" />
               <span className="truncate">{module.badgeText}</span>
             </div>
-            <Clock className="w-3.5 h-3.5 shrink-0 opacity-70" />
+            <Clock className="w-4 h-4 shrink-0 opacity-70" />
           </div>
         </div>
       </motion.div>
@@ -419,12 +418,23 @@ export default function Modules() {
     <section
       id="modules"
       ref={containerRef}
-      className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c]"
+      className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] scroll-mt-28 sm:scroll-mt-32"
     >
-      {/* Lead-in Header */}
-      <div className="relative z-10 max-w-7xl mx-auto pt-24 sm:pt-32  px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Section Heading */}
-        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#f8eee1]">
+      {/* Lead-in Header with scroll lazy-loading */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 max-w-7xl mx-auto pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center"
+      >
+        {/* Eyebrow Label matching Vision, FAQs and other sections */}
+        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
+          Competitive Tracks
+        </span>
+
+        {/* Section Heading matching other sections */}
+        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f8eee1]">
           Module <span className="text-[#f1ca7e]">Overview</span>
         </h2>
 
@@ -433,7 +443,7 @@ export default function Modules() {
           Five flagship competitive tracks designed to test portfolio strategy, corporate
           crisis control, property bidding, venture pitching, and guerrilla brand growth.
         </p>
-      </div>
+      </motion.div>
 
       {/* 3D Stacking Cards Deck Track */}
       <div className="relative w-full pb-32">

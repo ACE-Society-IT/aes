@@ -16,6 +16,8 @@
   --color-primary: #f1ca7e;
   --color-primary-foreground: #5a0d1b;
   --color-border: #89192c;
+
+  --font-sans: var(--font-outfit), system-ui, -apple-system, sans-serif;
 }
 
 :root {
@@ -61,8 +63,27 @@ html.lenis body {
 body {
   background-color: #5a0d1b;
   color: #f8eee1;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
   overflow-x: clip;
+}
+
+/* ==========================================================================
+   Global Image Drag & Selection Prevention
+   ========================================================================== */
+img,
+image,
+svg,
+picture {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
 }
 
 /* ==========================================================================

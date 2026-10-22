@@ -29,8 +29,14 @@ export default function Handbook() {
           <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-[#f8eee1]/60 rounded-full blur-2xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-            {/* Left: 3D Book Cover Frame */}
-            <div className="lg:col-span-5 flex justify-center">
+            {/* Left: 3D Book Cover Frame with scroll lazy loading */}
+            <motion.div
+              initial={{ opacity: 0, x: -30, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 flex justify-center"
+            >
               <div className="relative w-60 sm:w-72 md:w-80 aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_45px_rgba(90,13,27,0.18)] border border-[#89192c]/20 group">
                 <Image
                   src="/aes-handbook-cover.jpg"
@@ -45,10 +51,16 @@ export default function Handbook() {
                 {/* Diagonal glossy sheen */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#f8eee1]/10 to-transparent opacity-60 pointer-events-none" />
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right: Content & Action */}
-            <div className="lg:col-span-7 flex flex-col justify-center">
+            {/* Right: Content & Action with scroll lazy loading */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7 flex flex-col justify-center"
+            >
               {/* Eyebrow Tag */}
               <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] mb-3">
                 AES 2026 · DELEGATE GUIDE
@@ -95,23 +107,34 @@ export default function Handbook() {
                 </div>
               </div>
 
-              {/* Action Row: CTA Button + File Specs */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+              {/* Action Row: CTA Buttons + File Specs */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                 <a
-                  href="/AES-Handbook-2026.pdf"
-                  download="AES-Handbook-2026.pdf"
-                  className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-bold text-sm sm:text-base bg-[#701020] text-[#f8eee1] hover:bg-[#5a0d1b] border border-[#f1ca7e]/30 shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer"
-                  aria-label="Download the delegate guide"
+                  href="/aes-delegate-guide.pdf"
+                  download="AES-Delegate-Guide-2026.pdf"
+                  className="group relative inline-flex items-center justify-between pl-7 pr-2.5 py-2.5 sm:pl-8 sm:pr-3 sm:py-3 rounded-full bg-[#5a0d1b] hover:bg-[#701020] text-[#f8eee1] font-bold text-sm sm:text-base tracking-tight shadow-xl shadow-[#5a0d1b]/40 hover:shadow-[0_0_28px_rgba(90,13,27,0.5)] hover:scale-[1.04] active:scale-[0.96] transition-all duration-300 ease-out cursor-pointer"
+                  aria-label="Download the official delegate guide PDF"
                 >
-                  <Download className="w-4 h-4 stroke-[2.5]" />
-                  <span>Download the delegate guide</span>
+                  <span>Download Delegate Guide</span>
+                  <span className="w-8 h-8 rounded-full bg-[#f1ca7e] text-[#5a0d1b] flex items-center justify-center ml-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                    <Download className="w-4 h-4 stroke-[2.5]" />
+                  </span>
+                </a>
+
+                <a
+                  href="/aes-delegate-guide.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center px-6 py-2.5 rounded-full border-2 border-[#89192c]/40 hover:border-[#701020] bg-[#f8eee1] hover:bg-[#e8dcc6] text-[#5a0d1b] font-bold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+                >
+                  <span>Read Online (PDF)</span>
                 </a>
 
                 <span className="text-xs sm:text-[13px] font-semibold text-[#650d1c] tracking-wider uppercase">
-                  PDF · 36 PAGES · 12.8 MB
+                  PDF · 21 PAGES · 6.2 MB
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

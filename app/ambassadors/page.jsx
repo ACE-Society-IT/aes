@@ -18,6 +18,7 @@ import {
   BadgeCheck,
   Gem,
   ArrowRight,
+  ArrowUpRight,
   Mail,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -121,20 +122,20 @@ const REWARD_TIERS = [
 const HOW_IT_WORKS = [
   {
     step: '01',
-    title: 'Apply',
-    description: 'Fill out the ambassador application form and get approved.',
+    title: 'Submit Application',
+    description: 'Complete the short ambassador sign-up form and receive your official referral code.',
     icon: BadgeCheck,
   },
   {
     step: '02',
-    title: 'Promote',
-    description: 'Share your unique code and promote AES across your network.',
+    title: 'Rally Your Campus',
+    description: 'Spread the word across your institution and invite student teams to register with your code.',
     icon: Megaphone,
   },
   {
     step: '03',
-    title: 'Earn Rewards',
-    description: 'Unlock tiered discounts and recognition as teams register.',
+    title: 'Unlock Rewards',
+    description: 'Earn generous registration discounts, personal passes, and honors at the closing ceremony.',
     icon: Gift,
   },
 ];
@@ -513,19 +514,25 @@ export default function AmbassadorsPage() {
             transition={{ duration: 0.7, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
             className="mt-10 flex flex-col sm:flex-row items-center gap-4"
           >
-            <Link
-              href="#apply"
-              className="inline-flex items-center gap-2 px-8 py-3.5 text-base font-semibold rounded-full bg-[#f1ca7e] text-[#5a0d1b] hover:bg-[#f8eee1] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-[#5a0d1b]/40"
+            <a
+              href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-between pl-7 pr-2.5 py-2 sm:pl-8 sm:pr-3 sm:py-2.5 rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] font-bold text-base sm:text-lg tracking-tight shadow-xl shadow-[#5a0d1b]/40 hover:shadow-[0_0_30px_rgba(248,238,225,0.45)] hover:scale-[1.04] active:scale-[0.97] transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
             >
-              Apply for Ambassador Program
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <span>Apply for Ambassador Program</span>
+              <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#5a0d1b] text-[#f8eee1] flex items-center justify-center ml-4 shrink-0 transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-[#701020]">
+                <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </a>
             <Link
               href="#tiers"
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-base font-medium rounded-full bg-[#89192c]/40 text-[#f8eee1] border border-[#f1ca7e]/40 hover:border-[#f1ca7e]/70 hover:bg-[#89192c] hover:text-[#f1ca7e] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 backdrop-blur-sm"
+              className="group relative inline-flex items-center justify-between pl-6 pr-2.5 py-2 sm:pl-7 sm:pr-3 sm:py-2.5 rounded-full bg-[#89192c]/50 text-[#f8eee1] border-2 border-[#f1ca7e]/50 hover:border-[#f1ca7e] hover:bg-[#89192c] hover:text-[#f1ca7e] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 ease-out backdrop-blur-md shadow-md hover:shadow-lg hover:shadow-[#5a0d1b]/40 text-base sm:text-lg font-semibold"
             >
-              View Rewards
-              <ChevronRight className="w-4 h-4" />
+              <span>View Rewards</span>
+              <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1ca7e] text-[#5a0d1b] flex items-center justify-center ml-3.5 shrink-0 transition-all duration-300 ease-out group-hover:scale-110">
+                <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
             </Link>
           </motion.div>
         </motion.div>
@@ -676,21 +683,17 @@ export default function AmbassadorsPage() {
 
           {/* CTA Button */}
           <AnimatedSection delay={0.2} className="mt-10">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="group inline-flex items-center gap-3 px-10 py-4 text-lg font-bold rounded-full bg-[#f1ca7e] text-[#5a0d1b] hover:bg-[#f8eee1] transition-all duration-300 shadow-2xl shadow-[#5a0d1b]/50 cursor-pointer"
+            <a
+              href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-between pl-8 pr-3 py-3 sm:pl-9 sm:pr-3.5 sm:py-3.5 text-base sm:text-lg font-bold rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] hover:shadow-[0_0_35px_rgba(248,238,225,0.55)] hover:scale-[1.04] active:scale-[0.96] transition-all duration-300 ease-out shadow-2xl shadow-[#5a0d1b]/60 cursor-pointer"
             >
-              <Shield className="w-5 h-5" />
-              Apply for Ambassador Program
-              <motion.span
-                className="inline-block"
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <ArrowRight className="w-5 h-5" />
-              </motion.span>
-            </motion.button>
+              <span>Apply for Ambassador Program</span>
+              <span className="w-10 h-10 rounded-full bg-[#5a0d1b] text-[#f8eee1] flex items-center justify-center ml-4 shrink-0 transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-[#701020]">
+                <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </a>
           </AnimatedSection>
 
           {/* Contact Information */}

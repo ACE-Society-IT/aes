@@ -1,0 +1,8 @@
+# AES Security Disclosure Policy (RFC 9116)
+Contact: mailto:info@alphaace.com.pk
+Contact: tel:+92-335-7555253
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://alphaace.com.pk/.well-known/security.txt
+Policy: https://alphaace.com.pk/faq
+Acknowledgments: https://alphaace.com.pk/executives

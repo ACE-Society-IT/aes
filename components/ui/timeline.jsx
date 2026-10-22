@@ -66,60 +66,59 @@ function usePrefersReducedMotion() {
   );
 }
 
-// Default AES Summit Schedule Datasets
+// Default AES Summit Schedule Datasets (Authentic 3-Day Schedule from Delegate Guide)
 export const defaultTopJourneyData = [
   {
-    id: 'day1-morning',
+    id: 'day1-opening',
     year: 'Day 01',
     month: '02:00 PM - 03:15 PM',
-    content: 'Summit Inauguration & Student Registration',
+    content: 'Summit Inauguration, Delegate Registration & Grand Opening Ceremony',
   },
   {
-    id: 'day1-afternoon',
-    year: 'Day 01',
-    month: '03:30 PM - 07:30 PM',
-    content: 'Venture Verse , Defend The Empire & Investomania',
-  },
-  {
-    id: 'day2-afternoon',
+    id: 'day2-morning',
     year: 'Day 02',
-    month: '01:00 PM - 08:30 PM',
-    content: 'Viral Velocity , Defend The Empire , Investomania & Market Monopoly ',
+    month: '12:30 PM - 03:00 PM',
+    content: 'Assembly, Gate Check-in, Viral Velocity (Round 1) & Midday Break',
   },
   {
-    id: 'day3-afternoon',
+    id: 'day3-morning',
     year: 'Day 03',
-    month: '09:00 AM - 08:30 PM',
-    content:
-      'The Finale Rounds of Venture Verse , Viral Velocity , Defend The Empire , Investomania & Market Monopoly ',
+    month: '08:30 AM - 01:30 PM',
+    content: 'Viral Velocity & Venture Verse Finales, Followed by Lunch Break',
+  },
+  {
+    id: 'day3-closing',
+    year: 'Day 03',
+    month: '06:30 PM - 09:30 PM',
+    content: 'Grand Closing Ceremony, Awards Distribution & Formal Gala Dinner',
   },
 ];
 
 export const defaultBottomJourneyData = [
   {
-    id: 'day1-evening',
+    id: 'day1-rounds',
     year: 'Day 01',
-    month: '07:30 PM',
-    content: 'Day 1 Conclusion',
+    month: '03:30 PM - 07:30 PM',
+    content: 'Venture Verse (R1), Defend The Empire (R1) & Investomania (R1)',
   },
   {
-    id: 'day2-evening',
+    id: 'day2-rounds',
     year: 'Day 02',
-    month: '08:30 PM',
-    content: 'Day 2 Conclusion',
+    month: '03:00 PM - 08:30 PM',
+    content: 'Defend The Empire (R2), Investomania (R2) & Market Monopoly (R1)',
   },
   {
-    id: 'day3-evening',
+    id: 'day3-finals',
     year: 'Day 03',
-    month: '06:30 PM - 09:30 PM',
-    content: 'Closing Ceremony and Dinner',
+    month: '01:30 PM - 06:30 PM',
+    content: 'Championship Finales: Defend The Empire, Market Monopoly & Investomania',
   },
 ];
 
 export default function Timeline({
   id = 'schedule',
-  title = 'Summit Itinerary',
-  periodLabel = 'Nov 07 — 09, 2026',
+  title = 'Summit Track',
+  periodLabel = 'Nov 13 — Nov 15, 2026',
   textColor = '#5a0d1b',
   mutedTextColor = '#650d1c',
   activeColor = '#701020',
@@ -165,19 +164,31 @@ export default function Timeline({
       const slideEnd = isMobile ? '82% 50%' : '92% bottom';
       const lineEnd = isMobile ? '80% 50%' : '92% bottom';
 
+      // Pinned scrub timeline with intentional pauses on Day 01, Day 02, and Day 03
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: slideEnd,
-          scrub: true,
+          scrub: 1,
+          snap: {
+            snapTo: [0, 0.48, 1],
+            duration: { min: 0.25, max: 0.6 },
+            delay: 0.1,
+            ease: 'power1.inOut',
+          },
         },
         defaults: {
-          ease: 'none',
+          ease: 'power1.inOut',
         },
       });
 
-      tl.fromTo(wholeSliderRef.current, { xPercent: 0 }, { xPercent: slidePercent });
+      // Step-wise travel: Dwell on Day 01 -> Travel -> Dwell on Day 02 -> Travel -> Dwell on Day 03
+      tl.to(wholeSliderRef.current, { xPercent: 0, duration: 1 })
+        .to(wholeSliderRef.current, { xPercent: slidePercent * 0.48, duration: 2.2 })
+        .to(wholeSliderRef.current, { xPercent: slidePercent * 0.48, duration: 1.6 })
+        .to(wholeSliderRef.current, { xPercent: slidePercent, duration: 2.2 })
+        .to(wholeSliderRef.current, { xPercent: slidePercent, duration: 1.2 });
 
       if (reducedMotion) {
         gsap.set('.journey-line', { width: lineWidth });
@@ -191,7 +202,7 @@ export default function Timeline({
           trigger: section,
           start: lineStart,
           end: lineEnd,
-          scrub: true,
+          scrub: 1,
         },
       });
     },
@@ -308,26 +319,26 @@ export default function Timeline({
         return timeline;
       };
 
-      // Interleaved positions so top/bottom items animate together
+      // Interleaved positions so top/bottom items animate perfectly with the day pauses
       const positions =
         window.innerWidth < 600
           ? [
-              [18, 28],
-              [22, 32],
-              [30, 40],
-              [34, 44],
-              [44, 54],
-              [48, 58],
-              [58, 68],
+              [16, 26],
+              [20, 30],
+              [36, 46],
+              [40, 50],
+              [60, 70],
+              [64, 74],
+              [72, 82],
             ]
           : [
-              [6, 22],
-              [10, 26],
-              [20, 36],
-              [24, 40],
-              [38, 54],
-              [42, 58],
-              [56, 72],
+              [6, 18],
+              [9, 21],
+              [30, 42],
+              [34, 46],
+              [58, 70],
+              [62, 74],
+              [70, 84],
             ];
 
       items.forEach((item, index) => {
@@ -354,7 +365,7 @@ export default function Timeline({
     <section
       ref={sectionRef}
       id={id}
-      className="h-[200vw] max-[600px]:h-[400vh] w-full relative select-none bg-[#f8eee1] text-[#5a0d1b]"
+      className="h-[240vw] max-[600px]:h-[420vh] w-full relative select-none bg-[#f8eee1] text-[#5a0d1b]"
     >
       {/* Warm ambient background glow for light mode */}
       <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#f8eee1_0%,#e8dcc6_60%,#f8eee1_100%)] opacity-60" />
