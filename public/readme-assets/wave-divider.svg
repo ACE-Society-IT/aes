@@ -1,0 +1,16 @@
+<svg viewBox="0 0 1200 40" width="100%" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5a0d1b" stop-opacity="0" />
+      <stop offset="25%" stop-color="#89192c" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#f1ca7e" stop-opacity="1" />
+      <stop offset="75%" stop-color="#89192c" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#5a0d1b" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <path d="M0 20 Q 300 35, 600 20 T 1200 20" stroke="url(#waveGrad)" stroke-width="2.5" fill="none" />
+  <circle cx="600" cy="20" r="5" fill="#f1ca7e">
+    <animate attributeName="r" values="4;7;4" dur="2.5s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite" />
+  </circle>
+</svg>
