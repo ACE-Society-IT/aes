@@ -193,8 +193,14 @@ export default function Schedule() {
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#701020]/30 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        {/* Clean, Non-Congested Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        {/* Clean, Non-Congested Header with scroll lazy loading on scroll up & down */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
+        >
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
             The Summit <span className="text-[#f1ca7e]">Track</span>
           </h2>
@@ -202,7 +208,7 @@ export default function Schedule() {
           <p className="mt-3 text-sm sm:text-base md:text-lg text-[#e8dcc6] font-normal leading-relaxed">
             Three days of keynotes, high-stakes heats, and the grand closing gala at Alpha College.
           </p>
-        </div>
+        </motion.div>
 
         {/* Minimal 3-Day Tabs */}
         <div className="grid grid-cols-3 gap-2 sm:gap-3 p-1.5 rounded-2xl bg-[#701020]/40 border border-[#89192c]/40 mb-10 max-w-xl mx-auto">

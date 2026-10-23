@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -211,8 +212,14 @@ export default function Modules() {
       id="modules"
       className="relative z-20 w-full bg-[#f8eee1] text-[#5a0d1b] select-none"
     >
-      {/* Intro Header (Visible before cards stack) */}
-      <div className="pt-20 sm:pt-28 md:pt-36 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+      {/* Intro Header (Visible before cards stack, animating on scroll up & down) */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="pt-20 sm:pt-28 md:pt-36 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto"
+      >
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#5a0d1b] leading-[1.05]">
           Summit <span className="text-[#701020]">Modules</span>
         </h2>
@@ -220,7 +227,7 @@ export default function Modules() {
         <p className="mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] font-normal leading-relaxed max-w-xl mx-auto">
           Scroll through our premier arenas. Designed to test real business instinct under real constraints.
         </p>
-      </div>
+      </motion.div>
 
       {/* 5 Stacking Cards Deck in Smooth Sticky Flow */}
       <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-28 sm:pb-44">

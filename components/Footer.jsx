@@ -93,11 +93,11 @@ export default function Footer() {
       {/* Main Content Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 z-20 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 pb-6 sm:pb-12">
-          {/* Brand Column (5 cols) with scroll lazy loading */}
+          {/* Brand Column (5 cols) with scroll lazy loading on scroll up & down */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5 space-y-4"
           >
@@ -119,11 +119,11 @@ export default function Footer() {
             </p>
           </motion.div>
 
-          {/* Quick Links Column (3 cols) with scroll lazy loading */}
+          {/* Quick Links Column (3 cols) with scroll lazy loading on scroll up & down */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-3"
           >
@@ -155,11 +155,11 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Contact Column (4 cols) with scroll lazy loading */}
+          {/* Contact Column (4 cols) with scroll lazy loading on scroll up & down */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-4"
           >

@@ -20,7 +20,7 @@ export default function Handbook() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-[24px] sm:rounded-[36px] bg-[#e8dcc6]/60 border border-[#e8dcc6] p-4 sm:p-8 md:p-12 shadow-[0_20px_60px_rgba(90,13,27,0.08)] overflow-hidden"
         >
@@ -33,7 +33,7 @@ export default function Handbook() {
             <motion.div
               initial={{ opacity: 0, x: -30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-5 flex justify-center"
             >
@@ -89,7 +89,7 @@ export default function Handbook() {
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-7 flex flex-col justify-center"
             >

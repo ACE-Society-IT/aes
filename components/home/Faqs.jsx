@@ -54,10 +54,10 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: false, amount: 0.15 }}
       transition={{
         duration: 0.6,
-        delay: index * 0.08,
+        delay: (index % 4) * 0.06,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
@@ -163,7 +163,7 @@ export default function Faqs() {
             className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">

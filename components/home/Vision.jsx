@@ -342,11 +342,11 @@ export default function Vision() {
       className="relative z-30 w-full bg-[#f8eee1] py-12 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/15 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(90,13,27,0.35)] -mt-8 sm:-mt-10"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header with scroll lazy loading */}
+        {/* Header with scroll lazy loading on scroll up & down */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-2xl text-left sm:text-center mx-auto mb-8 sm:mb-14 md:mb-20"
         >
@@ -362,14 +362,14 @@ export default function Vision() {
           </p>
         </motion.div>
 
-        {/* 6 Feature Grid with interactive cards */}
+        {/* 6 Feature Grid with interactive cards animating on scroll up & down */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {VISION_CARDS.map((card, index) => (
             <motion.div
               key={card.id}
               initial={{ opacity: 0, y: 35 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{
                 duration: 0.55,
                 delay: (index % 3) * 0.1,
