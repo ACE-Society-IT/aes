@@ -44,6 +44,9 @@ yarn-error.log*
 .agents/
 *.exe
 scratch*.js
+*.zip
+male-female-users-silhouette-style/
+temp_avatars/
 
 # typescript
 *.tsbuildinfo

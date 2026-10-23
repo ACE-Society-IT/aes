@@ -28,10 +28,12 @@ export function MorphingScrollNavbar() {
   });
   const lastScrollYRef = useRef(0);
 
-  // Close mobile drawer whenever the route changes
-  useEffect(() => {
+  // Track pathname changes to close mobile drawer
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
