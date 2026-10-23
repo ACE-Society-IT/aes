@@ -47,6 +47,7 @@ scratch*.js
 *.zip
 male-female-users-silhouette-style/
 temp_avatars/
+*.code-workspace
 
 # typescript
 *.tsbuildinfo
