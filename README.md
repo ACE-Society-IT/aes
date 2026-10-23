@@ -20,6 +20,9 @@
     <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19-61dafb?style=for-the-badge&logo=react&logoColor=black&labelColor=5a0d1b" alt="React 19" /></a>
     <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=650d1c" alt="Tailwind CSS" /></a>
     <a href="https://www.framer.com/motion/"><img src="https://img.shields.io/badge/Motion-Smooth-f1ca7e?style=for-the-badge&logo=framer&logoColor=white&labelColor=89192c" alt="Framer Motion" /></a>
+    <a href="https://alphaace.com.pk/robots.txt"><img src="https://img.shields.io/badge/robots.txt-Optimized-f1ca7e?style=for-the-badge&logo=robot&logoColor=5a0d1b&labelColor=5a0d1b" alt="robots.txt" /></a>
+    <a href="https://alphaace.com.pk/sitemap.xml"><img src="https://img.shields.io/badge/sitemap.xml-Dynamic-f8eee1?style=for-the-badge&logo=google&logoColor=5a0d1b&labelColor=701020" alt="sitemap.xml" /></a>
+    <a href="https://alphaace.com.pk/llms.txt"><img src="https://img.shields.io/badge/llms.txt-AI_Indexed-f1ca7e?style=for-the-badge&logo=openai&logoColor=5a0d1b&labelColor=89192c" alt="llms.txt" /></a>
     <img src="https://img.shields.io/badge/Security-Hardened_A%2B-2ea44f?style=for-the-badge&logo=shield&logoColor=white&labelColor=5a0d1b" alt="Security" />
   </p>
 
@@ -29,6 +32,13 @@
     <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"><b>🌟 Brand Ambassador</b></a> •
     <a href="https://alphaace.com.pk/aes-delegate-guide.pdf"><b>📑 Delegate Guide (PDF)</b></a> •
     <a href="https://instagram.com/aes_summit"><b>📸 Instagram</b></a>
+  </p>
+
+  <p align="center">
+    <a href="https://alphaace.com.pk/robots.txt"><b>🤖 robots.txt</b></a> •
+    <a href="https://alphaace.com.pk/sitemap.xml"><b>🗺️ sitemap.xml</b></a> •
+    <a href="https://alphaace.com.pk/llms.txt"><b>🧠 llms.txt</b></a> •
+    <a href="https://alphaace.com.pk/.well-known/security.txt"><b>🔒 security.txt</b></a>
   </p>
 
 </div>
@@ -115,8 +125,8 @@ The AES platform is engineered for enterprise-grade speed, strict compliance, an
 - **Active Scanner Mitigation**: Next.js proxy instantly returns **HTTP 403 Forbidden** for directory traversal attempts and vulnerability scanners probing for `.env`, `.git`, `wp-admin`, or PHP scripts.
 - **Vulnerability Disclosure (RFC 9116)**: Standardized [`/.well-known/security.txt`](https://alphaace.com.pk/.well-known/security.txt) endpoint for responsible reporting.
 - **Search Engine & LLM Crawlers**:
-  - Dynamic `sitemap.xml` with automatic last-modified timestamps.
-  - Dynamic `robots.txt` + standalone `robots.xml`.
+  - Dynamic [`sitemap.xml`](https://alphaace.com.pk/sitemap.xml) with automatic last-modified timestamps.
+  - Dynamic [`robots.txt`](https://alphaace.com.pk/robots.txt) + standalone [`robots.xml`](https://alphaace.com.pk/robots.xml).
   - Machine-readable [`/llms.txt`](https://alphaace.com.pk/llms.txt) and [`/llms-full.txt`](https://alphaace.com.pk/llms-full.txt) tailored for AI discovery agents.
   - Dynamic branded 1200×630 OpenGraph card at `/opengraph-image`.
   - Schema.org `BusinessEvent` JSON-LD rich snippet markup.
