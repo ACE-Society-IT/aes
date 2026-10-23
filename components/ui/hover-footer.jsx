@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useId } from "react";
+import React, { useRef, useState, useEffect, useId } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
