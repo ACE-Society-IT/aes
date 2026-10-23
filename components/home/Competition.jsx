@@ -174,7 +174,7 @@ export default function Competition() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[180vh] md:h-[220vh] bg-[#5a0d1b] text-[#f8eee1] overflow-hidden select-none"
+      className="relative z-20 w-full h-[220vh] md:h-[300vh] bg-[#5a0d1b] text-[#f8eee1] select-none"
     >
       {/* Sticky Viewport Stage: Locks during the photo choreography */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center select-none">
