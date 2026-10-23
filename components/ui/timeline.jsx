@@ -115,6 +115,65 @@ export const defaultBottomJourneyData = [
   },
 ];
 
+export const ALL_TIMELINE_EVENTS = [
+  {
+    id: 'd1-opening',
+    day: 'Day 01',
+    time: '02:00 PM — 03:15 PM',
+    title: 'Summit Inauguration & Grand Opening',
+    description: 'Delegate check-in, opening keynote address, and briefing on the five competitive modules.',
+    badge: 'Opening Session',
+  },
+  {
+    id: 'd1-rounds',
+    day: 'Day 01',
+    time: '03:30 PM — 07:30 PM',
+    title: 'Round 1: Preliminary Module Battles',
+    description: 'First competitive rounds across Venture Verse, Defend The Empire, and Investomania.',
+    badge: 'Module Rounds',
+  },
+  {
+    id: 'd2-morning',
+    day: 'Day 02',
+    time: '12:30 PM — 03:00 PM',
+    title: 'Assembly & Creative Challenges',
+    description: 'Gate entry, morning check-ins, Viral Velocity Round 1, and strategic deliberation break.',
+    badge: 'Creative Round',
+  },
+  {
+    id: 'd2-rounds',
+    day: 'Day 02',
+    time: '03:00 PM — 08:30 PM',
+    title: 'Round 2: Semi-Finals & Market Monopoly',
+    description: 'High-stakes semi-finals in Defend The Empire & Investomania, plus Market Monopoly Round 1.',
+    badge: 'Semi-Finals',
+  },
+  {
+    id: 'd3-morning',
+    day: 'Day 03',
+    time: '08:30 AM — 01:30 PM',
+    title: 'Morning Finals & Pitch Decks',
+    description: 'Viral Velocity and Venture Verse championship pitches, followed by networking lunch.',
+    badge: 'Championship Pitch',
+  },
+  {
+    id: 'd3-finals',
+    day: 'Day 03',
+    time: '01:30 PM — 06:30 PM',
+    title: 'Grand Championship Showdowns',
+    description: 'Final showdowns in Defend The Empire, Market Monopoly, and Investomania.',
+    badge: 'Final Showdown',
+  },
+  {
+    id: 'd3-closing',
+    day: 'Day 03',
+    time: '06:30 PM — 09:30 PM',
+    title: 'Awards Ceremony & Formal Gala Dinner',
+    description: 'Presentation of official summit trophies, executive addresses, and celebration gala dinner.',
+    badge: 'Grand Gala',
+  },
+];
+
 export default function Timeline({
   id = 'schedule',
   title = 'Summit Track',
@@ -154,22 +213,20 @@ export default function Timeline({
 
   useGSAP(
     () => {
+      // Guard: On mobile screens (< 768px), we use native vertical timeline.
+      if (typeof window === 'undefined' || window.innerWidth < 768) return;
+
       const section = sectionRef.current;
       if (!section) return;
 
-      const isMobile = window.innerWidth < 600;
-      const slidePercent = isMobile ? -57 : -65;
-      const lineWidth = isMobile ? '65%' : '98%';
-      const lineStart = isMobile ? 'top 30%' : 'top 25%';
-      const slideEnd = isMobile ? '82% 50%' : '92% bottom';
-      const lineEnd = isMobile ? '80% 50%' : '92% bottom';
+      const slidePercent = -58;
+      const lineWidth = '96%';
 
-      // Pinned scrub timeline with intentional pauses on Day 01, Day 02, and Day 03
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: slideEnd,
+          end: '92% bottom',
           scrub: 1,
           snap: {
             snapTo: [0, 0.48, 1],
@@ -183,7 +240,6 @@ export default function Timeline({
         },
       });
 
-      // Step-wise travel: Dwell on Day 01 -> Travel -> Dwell on Day 02 -> Travel -> Dwell on Day 03
       tl.to(wholeSliderRef.current, { xPercent: 0, duration: 1 })
         .to(wholeSliderRef.current, { xPercent: slidePercent * 0.48, duration: 2.2 })
         .to(wholeSliderRef.current, { xPercent: slidePercent * 0.48, duration: 1.6 })
@@ -200,8 +256,8 @@ export default function Timeline({
         ease: 'none',
         scrollTrigger: {
           trigger: section,
-          start: lineStart,
-          end: lineEnd,
+          start: 'top 25%',
+          end: '92% bottom',
           scrub: 1,
         },
       });
@@ -211,6 +267,8 @@ export default function Timeline({
 
   useGSAP(
     () => {
+      if (typeof window === 'undefined' || window.innerWidth < 768) return;
+
       const section = sectionRef.current;
       if (!section) return;
 
@@ -229,11 +287,10 @@ export default function Timeline({
         return;
       }
 
-      // Set initial hidden states for stems, dots and text
       items.forEach((item) => {
         gsap.set(`.jl-${item.id}`, {
           scaleY: 0,
-          transformOrigin: item._isTop ? 'top top' : 'top top',
+          transformOrigin: 'top top',
         });
         gsap.set(`.jd-${item.id}`, { scale: 0 });
         gsap.set(`.title-${item.id}`, { opacity: 1 });
@@ -246,22 +303,19 @@ export default function Timeline({
       items.forEach((item) => {
         try {
           titleSplits[item.id] = new SplitText(`.title-${item.id}`, {
-            type: 'chars, words, lines',
+            type: 'lines',
             mask: 'lines',
           });
-
           descriptionSplits[item.id] = new SplitText(`.description-${item.id}`, {
-            type: 'chars, words, lines',
+            type: 'lines',
             mask: 'lines',
           });
         } catch {
-          // Fallback if DOM element is not yet ready
+          // Fallback if SplitText is unavailable
         }
       });
 
       const createItemTimeline = (item, startPos, endPos) => {
-        const lineSelector = `.jl-${item.id}`;
-        const dotSelector = `.jd-${item.id}`;
         const titleLines =
           titleSplits[item.id]?.lines?.length > 0
             ? titleSplits[item.id].lines
@@ -281,12 +335,12 @@ export default function Timeline({
         });
 
         timeline
-          .to(lineSelector, {
+          .to(`.jl-${item.id}`, {
             scaleY: 1,
             duration: normalizedDuration * 0.4,
           })
           .to(
-            dotSelector,
+            `.jd-${item.id}`,
             {
               scale: 1,
               duration: normalizedDuration * 0.4,
@@ -319,27 +373,15 @@ export default function Timeline({
         return timeline;
       };
 
-      // Interleaved positions so top/bottom items animate perfectly with the day pauses
-      const positions =
-        window.innerWidth < 600
-          ? [
-              [16, 26],
-              [20, 30],
-              [36, 46],
-              [40, 50],
-              [60, 70],
-              [64, 74],
-              [72, 82],
-            ]
-          : [
-              [6, 18],
-              [9, 21],
-              [30, 42],
-              [34, 46],
-              [58, 70],
-              [62, 74],
-              [70, 84],
-            ];
+      const positions = [
+        [6, 18],
+        [9, 21],
+        [30, 42],
+        [34, 46],
+        [58, 70],
+        [62, 74],
+        [70, 84],
+      ];
 
       items.forEach((item, index) => {
         const [startPos, endPos] = positions[index] || [6 + index * 8, 22 + index * 8];
@@ -365,136 +407,182 @@ export default function Timeline({
     <section
       ref={sectionRef}
       id={id}
-      className="h-[240vw] max-[600px]:h-[420vh] w-full relative select-none bg-[#f8eee1] text-[#5a0d1b]"
+      className="w-full relative select-none bg-[#5a0d1b] text-[#f8eee1]"
     >
-      {/* Warm ambient background glow for light mode */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#f8eee1_0%,#e8dcc6_60%,#f8eee1_100%)] opacity-60" />
+      {/* Warm ambient background glow */}
+      <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_30%,#701020_0%,#5a0d1b_75%)] opacity-80" />
 
-      <div className="h-screen w-full sticky top-[0%] pt-[10%] overflow-hidden max-[600px]:top-[5%] relative z-10">
-        <div
-          ref={wholeSliderRef}
-          className="mr-[2vw] flex h-[30vw] w-[240vw] items-center gap-[5vw] px-[5vw] max-[600px]:h-[80vh] max-[600px]:w-[800vw] max-[600px]:px-[7vw]"
-        >
-          {/* Main Visual Monument */}
-          <div className="h-full w-[30vw] overflow-hidden rounded-[1.25vw] max-[600px]:h-[65vw] max-[600px]:w-[85vw] max-[600px]:rounded-[4vw] border border-[#e8dcc6] shadow-xl relative group shrink-0 bg-[#e8dcc6]/40">
-            <Image
-              src={imageUrl}
-              alt={imageAlt}
-              fill
-              sizes="(max-width: 600px) 85vw, 30vw"
-              draggable={false}
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            {/* Subtle ambient vignette on visual */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#5a0d1b]/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-              <span className="px-3 py-1.5 rounded-xl bg-[#f8eee1]/95 backdrop-blur-md border border-[#e8dcc6] text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#5a0d1b] shadow-sm">
-                AES MAIN STAGE
-              </span>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#f8eee1] drop-shadow-md">
-                2026 SUMMIT
-              </span>
+      {/* ═════════════════════════════════════════════════
+          1. MOBILE VIEW (< 768px): Clean Vertical Timeline (Less Bulk)
+          ═════════════════════════════════════════════════ */}
+      <div className="block md:hidden relative z-10 px-4 py-8 sm:py-12">
+        <div className="mb-6 text-center">
+          <span className="inline-block px-3 py-0.5 rounded-full bg-[#701020] border border-[#89192c] text-[10px] font-bold tracking-[0.25em] text-[#f1ca7e] uppercase mb-1.5 shadow-sm">
+            Summit Schedule
+          </span>
+          <h2 className="text-2xl font-black text-[#f8eee1] tracking-tight">
+            {title}
+          </h2>
+          <p className="mt-1 text-[11px] font-semibold text-[#f1ca7e]">
+            {periodLabel} · Alpha College Karachi
+          </p>
+        </div>
+
+        {/* Vertical Journey Track */}
+        <div className="relative pl-5 border-l-2 border-[#89192c] flex flex-col gap-4 ml-2">
+          {ALL_TIMELINE_EVENTS.map((event) => (
+            <div key={event.id} className="relative group">
+              {/* Dot */}
+              <div className="absolute -left-[27px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#f1ca7e] border-2 border-[#5a0d1b] shadow-[0_0_8px_rgba(241,202,126,0.6)]" />
+
+              {/* Event Card */}
+              <div className="rounded-xl border border-[#89192c] bg-[#701020]/80 backdrop-blur-md p-3.5 shadow-md shadow-[#5a0d1b]/50 hover:border-[#f1ca7e]/60 transition-colors">
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="px-2 py-0.5 rounded-full bg-[#5a0d1b] text-[#f1ca7e] text-[9px] font-bold uppercase tracking-wider border border-[#89192c]">
+                    {event.day}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#f1ca7e]">
+                    {event.time}
+                  </span>
+                </div>
+
+                <h3 className="text-sm sm:text-base font-black text-[#f8eee1] tracking-tight">
+                  {event.title}
+                </h3>
+
+                <p className="mt-1 text-[11px] text-[#e8dcc6] leading-relaxed">
+                  {event.description}
+                </p>
+
+                <div className="mt-2 pt-1.5 border-t border-[#89192c]/60 flex items-center justify-between">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#f1ca7e]">
+                    {event.badge}
+                  </span>
+                  <span className="text-[9px] font-medium text-[#e8dcc6]/70">
+                    Official AES Itinerary
+                  </span>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          <div className="relative h-full w-full">
-            {/* ═══ Center Track Line with Guide Rail & Endcaps ═══ */}
-            <div className="w-full absolute left-0 top-[50%] -translate-y-1/2 flex items-center h-fit pointer-events-none z-20">
-              {/* Background guide rail in #e8dcc6 */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-[#e8dcc6] rounded-full" />
+      {/* ═════════════════════════════════════════════════
+          2. DESKTOP VIEW (>= 768px): Silky Horizontal Scrub
+          ═════════════════════════════════════════════════ */}
+      <div className="hidden md:block h-[220vw] w-full relative">
+        <div className="h-screen w-full sticky top-0 pt-[8%] overflow-hidden relative z-10">
+          <div
+            ref={wholeSliderRef}
+            className="mr-[2vw] flex h-[30vw] w-[210vw] items-center gap-[4vw] px-[5vw]"
+          >
+            {/* Header Station (Replacing Stock Photo Monument) */}
+            <div className="h-full w-[26vw] flex flex-col justify-between p-8 rounded-3xl border-2 border-[#89192c] bg-[#701020]/90 shadow-2xl shrink-0 relative overflow-hidden">
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#f1ca7e]/5 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]" />
-              <div className="h-[2px] w-[0%] rounded-full journey-line relative z-10 bg-[#701020] shadow-[0_0_8px_rgba(112,16,32,0.2)]" />
-              <div className="h-[.8vw] max-[600px]:h-[2vw] max-[600px]:w-[2vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]" />
-            </div>
-
-            {/* ═══ Top Half: Content above center line ═══ */}
-            <div className="flex h-1/2 w-full items-stretch justify-start gap-[.5vw]">
-              <div className="h-full w-[20%] pt-[2vw] max-[600px]:h-fit max-[600px]:pt-[5vw]">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] block mb-2">
-                  Timeline
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e] block mb-3">
+                  Summit Itinerary
                 </span>
-                <h2 className="w-[85%] text-[3vw] font-bold tracking-tight leading-[0.95] max-[600px]:text-[8.5vw] text-[#5a0d1b]">
+                <h2 className="text-4xl lg:text-5xl font-black text-[#f8eee1] leading-[0.95] tracking-tight">
                   {title}
                 </h2>
+                <p className="mt-4 text-sm text-[#e8dcc6] leading-relaxed font-medium">
+                  Experience three intensive days of entrepreneurship, competitive masterclasses, and executive mentorship.
+                </p>
               </div>
 
-              <div className="w-full flex h-full gap-x-[15vw] max-[600px]:gap-x-[40vw]">
+              <div className="pt-6 border-t border-[#89192c]">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#f1ca7e]">
+                    Dates
+                  </span>
+                  <span className="text-xs font-black text-[#f8eee1]">
+                    {periodLabel}
+                  </span>
+                </div>
+                <div className="mt-1 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#f1ca7e]">
+                    Venue
+                  </span>
+                  <span className="text-xs font-black text-[#f8eee1]">
+                    Alpha College Karachi
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Horizontal Timeline Track */}
+            <div className="relative h-full w-full">
+              {/* Center Track Line */}
+              <div className="w-full absolute left-0 top-[50%] -translate-y-1/2 flex items-center h-fit pointer-events-none z-20">
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-[#89192c] rounded-full" />
+                <div className="h-[.8vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#f1ca7e] shadow-[0_0_10px_rgba(241,202,126,0.6)]" />
+                <div className="h-[2px] w-[0%] rounded-full journey-line relative z-10 bg-[#f1ca7e] shadow-[0_0_8px_rgba(241,202,126,0.5)]" />
+                <div className="h-[.8vw] w-[.8vw] rounded-full shrink-0 relative z-10 bg-[#f1ca7e] shadow-[0_0_10px_rgba(241,202,126,0.6)]" />
+              </div>
+
+              {/* Top Half */}
+              <div className="flex h-1/2 w-full items-stretch justify-start gap-[12vw]">
                 {topData.map((item) => (
                   <div
                     key={`top-${item.id}`}
-                    className="relative h-full w-[30vw] px-[3vw] flex flex-col max-[600px]:w-[70vw] max-[600px]:px-[7vw]"
+                    className="relative h-full w-[26vw] px-[2vw] flex flex-col"
                   >
-                    {/* Text Content */}
                     <div className="flex-1 flex flex-col justify-start pt-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#5a0d1b]`}
+                        className={`title-${item.id} text-[2.2vw] font-black tracking-tight leading-none text-[#f8eee1]`}
                       >
-                        <span className="text-[#5a0d1b]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#701020]">
+                        <span>{item.year}</span>{' '}
+                        <span className="text-sm font-bold text-[#f1ca7e] block mt-1">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#650d1c]`}
+                        className={`description-${item.id} mt-[0.6vw] w-[95%] text-[1.1vw] leading-[1.35] text-[#e8dcc6] font-medium`}
                       >
                         {item.content}
                       </p>
                     </div>
 
                     {/* Stem + Dot */}
-                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
+                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[35%]">
+                      <div className={`w-px flex-1 jl-${item.id} bg-[#f1ca7e] origin-top`} />
                       <div
-                        className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`}
-                      />
-                      <div
-                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`}
+                        className={`size-[0.9vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#f1ca7e] shadow-[0_0_10px_rgba(241,202,126,0.5)]`}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* ═══ Bottom Half: Content below center line ═══ */}
-            <div className="h-1/2 flex items-stretch justify-start w-full">
-              <div className="w-[34%] pt-[2vw] max-[600px]:pt-[5vw] max-[600px]:w-[30%] h-full">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] block mb-2">
-                  Summit Dates
-                </span>
-                <p className="text-[1.65vw] font-bold leading-none max-[600px]:text-[4.2vw] text-[#5a0d1b]">
-                  {periodLabel}
-                </p>
-              </div>
-
-              <div className="w-full flex h-full gap-x-[20vw] ml-[7vw] max-[600px]:gap-x-[40vw] max-[600px]:ml-[7vw]">
+              {/* Bottom Half */}
+              <div className="h-1/2 flex items-stretch justify-start w-full gap-[12vw] ml-[8vw]">
                 {bottomData.map((item) => (
                   <div
                     key={`bottom-${item.id}`}
-                    className="relative h-full w-[25vw] px-[3vw] flex flex-col max-[600px]:w-[70vw] max-[600px]:px-[7vw]"
+                    className="relative h-full w-[26vw] px-[2vw] flex flex-col"
                   >
                     {/* Dot + Stem */}
-                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[40%]">
+                    <div className="relative w-0 flex flex-col items-center pointer-events-none h-[35%]">
                       <div
-                        className={`size-[1vw] max-[600px]:size-[2.5vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#701020] shadow-[0_0_10px_rgba(112,16,32,0.2)]`}
+                        className={`size-[0.9vw] aspect-square rounded-full shrink-0 jd-${item.id} bg-[#f1ca7e] shadow-[0_0_10px_rgba(241,202,126,0.5)]`}
                       />
-                      <div
-                        className={`w-px flex-1 jl-${item.id} bg-[#701020] origin-top`}
-                      />
+                      <div className={`w-px flex-1 jl-${item.id} bg-[#f1ca7e] origin-top`} />
                     </div>
 
-                    {/* Text Content */}
                     <div className="flex-1 flex flex-col justify-end pb-[1vw]">
                       <h4
-                        className={`title-${item.id} text-[2.5vw] font-bold tracking-tight leading-none max-[600px]:text-[6.4vw] text-[#5a0d1b]`}
+                        className={`title-${item.id} text-[2.2vw] font-black tracking-tight leading-none text-[#f8eee1]`}
                       >
-                        <span className="text-[#5a0d1b]">{item.year}</span>{' '}
-                        <span className="text-[1.2vw] sm:text-base font-semibold text-[#701020]">
+                        <span>{item.year}</span>{' '}
+                        <span className="text-sm font-bold text-[#f1ca7e] block mt-1">
                           {item.month}
                         </span>
                       </h4>
                       <p
-                        className={`description-${item.id} mt-[0.6vw] w-[90%] text-[1.4vw] leading-[1.3] max-[600px]:w-[90%] max-[600px]:text-[4.8vw] text-[#650d1c]`}
+                        className={`description-${item.id} mt-[0.6vw] w-[95%] text-[1.1vw] leading-[1.35] text-[#e8dcc6] font-medium`}
                       >
                         {item.content}
                       </p>

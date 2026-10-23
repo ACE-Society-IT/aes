@@ -24,7 +24,7 @@ export default function Home() {
           direction="left"
           interactive={true}
           color="#f1ca7e"
-          separator="✦ 5 SIMULATION TRACKS ✦ NOV 13–15, 2026 ✦ PKR 1,000,000+ PRIZE POOL ✦ ALPHA COLLEGE KARACHI ✦"
+          separator="✦ 5 SIMULATION TRACKS ✦ NOV 13–15, 2026 ✦ ALPHA COLLEGE KARACHI ✦"
           separatorColor="#f8eee1"
           fontSize={52}
           fontWeight={900}

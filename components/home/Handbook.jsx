@@ -9,7 +9,7 @@ export default function Handbook() {
   return (
     <section
       id="handbook"
-      className="relative z-30 w-full bg-[#f8eee1] text-[#5a0d1b] py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/15 rounded-t-[36px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(90,13,27,0.35)] -mt-10 overflow-hidden select-none"
+      className="relative z-30 w-full bg-[#f8eee1] text-[#5a0d1b] py-10 sm:py-16 md:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/15 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(90,13,27,0.35)] -mt-8 sm:-mt-10 overflow-hidden select-none"
     >
       {/* Ambient Warm Backlight Glows */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-[#e8dcc6]/40 rounded-full blur-[140px] pointer-events-none" />
@@ -22,14 +22,14 @@ export default function Handbook() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-[28px] sm:rounded-[36px] bg-[#e8dcc6]/60 border border-[#e8dcc6] p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(90,13,27,0.08)] overflow-hidden"
+          className="relative rounded-[24px] sm:rounded-[36px] bg-[#e8dcc6]/60 border border-[#e8dcc6] p-4 sm:p-8 md:p-12 shadow-[0_20px_60px_rgba(90,13,27,0.08)] overflow-hidden"
         >
           {/* Subtle warm ambient glows inside card */}
           <div className="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-[#f8eee1] to-transparent rounded-full blur-2xl pointer-events-none" />
           <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-[#f8eee1]/60 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-            {/* Left: 3D Book Cover Frame with scroll lazy loading */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center relative z-10">
+            {/* Left: Official Document Card (Non-AI Vector Design) */}
             <motion.div
               initial={{ opacity: 0, x: -30, scale: 0.95 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -37,23 +37,55 @@ export default function Handbook() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-5 flex justify-center"
             >
-              <div className="relative w-60 sm:w-72 md:w-80 aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_45px_rgba(90,13,27,0.18)] border border-[#89192c]/20 group">
-                <Image
-                  src="/aes-handbook-cover.jpg"
-                  alt="AES 2026 Delegate Guide Cover"
-                  fill
-                  sizes="(max-width: 640px) 240px, (max-width: 768px) 288px, 320px"
-                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                  priority
-                />
-                {/* Book spine shadow */}
-                <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-[#5a0d1b]/60 via-[#5a0d1b]/20 to-transparent pointer-events-none" />
-                {/* Diagonal glossy sheen */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-[#f8eee1]/10 to-transparent opacity-60 pointer-events-none" />
+              <div className="relative w-56 sm:w-72 md:w-80 aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_25px_50px_rgba(90,13,27,0.3)] border-2 border-[#f1ca7e]/50 bg-gradient-to-br from-[#701020] via-[#5a0d1b] to-[#420a13] p-5 sm:p-7 flex flex-col justify-between text-center select-none group hover:scale-[1.02] transition-transform duration-300">
+                {/* Decorative border frame */}
+                <div className="absolute inset-2 border border-[#f1ca7e]/20 rounded-xl pointer-events-none" />
+
+                {/* Top: Monogram & Heading */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#5a0d1b] border-2 border-[#f1ca7e] p-2 sm:p-2.5 flex items-center justify-center shadow-lg mb-2 sm:mb-3">
+                    <Image
+                      src="/aes-logo.png"
+                      alt="AES Emblem"
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                    />
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
+                    Official Publication
+                  </span>
+                  <div className="h-0.5 w-12 bg-[#f1ca7e]/40 my-1.5 sm:my-2" />
+                </div>
+
+                {/* Center: Title & Subtitle */}
+                <div className="relative z-10 my-auto py-1 sm:py-2">
+                  <h3 className="text-lg sm:text-2xl font-black text-[#f8eee1] tracking-tight leading-tight">
+                    AES 2026
+                  </h3>
+                  <p className="text-[11px] sm:text-sm font-semibold text-[#f1ca7e] uppercase tracking-widest mt-0.5 sm:mt-1">
+                    Delegate Handbook
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] text-[#e8dcc6] mt-1.5 sm:mt-2 leading-relaxed">
+                    Alpha College Karachi<br />
+                    November 13–15, 2026
+                  </p>
+                </div>
+
+                {/* Bottom: Format Chip */}
+                <div className="relative z-10 pt-2 border-t border-[#f1ca7e]/20 flex items-center justify-between text-[10px] sm:text-[11px] font-semibold text-[#f8eee1]/90">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#f1ca7e]" />
+                    <span>21 Pages</span>
+                  </span>
+                  <span className="text-[#f1ca7e] uppercase tracking-wider font-bold">
+                    PDF · 6.2 MB
+                  </span>
+                </div>
               </div>
             </motion.div>
 
-            {/* Right: Content & Action with scroll lazy loading */}
+            {/* Right: Content & Action */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -62,45 +94,45 @@ export default function Handbook() {
               className="lg:col-span-7 flex flex-col justify-center"
             >
               {/* Eyebrow Tag */}
-              <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020] mb-3">
+              <div className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-[#701020] mb-2 sm:mb-3">
                 AES 2026 · DELEGATE GUIDE
               </div>
 
               {/* Main Headline */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#5a0d1b] leading-[1.08]">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#5a0d1b] leading-[1.1]">
                 Read the delegate guide <br className="hidden sm:inline" />
                 before the summit.
               </h2>
 
               {/* 2-Column Bullet List with Top/Bottom Borders */}
-              <div className="mt-7 mb-8 py-6 border-y border-[#89192c]/15 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              <div className="mt-4 sm:mt-7 mb-5 sm:mb-8 py-3.5 sm:py-6 border-y border-[#89192c]/15 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 sm:gap-y-4">
                 {/* Left Column Bullets */}
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
+                <div className="space-y-2.5 sm:space-y-4">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     <span className="w-1.5 h-1.5 rounded-[1px] bg-[#701020] shrink-0 mt-2" />
-                    <span className="text-sm sm:text-[15px] font-medium text-[#650d1c] leading-snug">
+                    <span className="text-xs sm:text-[15px] font-medium text-[#650d1c] leading-snug">
                       The three-day schedule
                     </span>
                   </div>
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     <span className="w-1.5 h-1.5 rounded-[1px] bg-[#701020] shrink-0 mt-2" />
-                    <span className="text-sm sm:text-[15px] font-medium text-[#650d1c] leading-snug">
+                    <span className="text-xs sm:text-[15px] font-medium text-[#650d1c] leading-snug">
                       Submission deadlines before the summit
                     </span>
                   </div>
                 </div>
 
                 {/* Right Column Bullets */}
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
+                <div className="space-y-2.5 sm:space-y-4">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     <span className="w-1.5 h-1.5 rounded-[1px] bg-[#701020] shrink-0 mt-2" />
-                    <span className="text-sm sm:text-[15px] font-medium text-[#650d1c] leading-snug">
+                    <span className="text-xs sm:text-[15px] font-medium text-[#650d1c] leading-snug">
                       Every module and round, and how it is judged
                     </span>
                   </div>
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2.5 sm:gap-3">
                     <span className="w-1.5 h-1.5 rounded-[1px] bg-[#701020] shrink-0 mt-2" />
-                    <span className="text-sm sm:text-[15px] font-medium text-[#650d1c] leading-snug">
+                    <span className="text-xs sm:text-[15px] font-medium text-[#650d1c] leading-snug">
                       Dress code, what to bring and the code of conduct
                     </span>
                   </div>

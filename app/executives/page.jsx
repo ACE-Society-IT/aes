@@ -138,7 +138,7 @@ const EXECUTIVES = [
     gender: 'male',
     role: 'Chief Executive Officer (CEO)',
     badge: 'Executive Leadership',
-    image: '/executives/mansoor-moiz.png',
+    image: null,
     linkedin: 'https://www.linkedin.com/in/mansoor-moiz/',
     bio: 'As CEO, I focus on driving ACE’s vision, aligning teams toward shared goals, and building meaningful partnerships. I aim to foster a spirit of entrepreneurship, encourage innovative thinking, and create opportunities that connect students with the business world. Through strategic direction, collaboration, and effective execution, my goal is to deliver a summit that promotes practical learning, inspires new ideas, and creates a lasting impact on every participant.',
   },
@@ -158,7 +158,7 @@ const EXECUTIVES = [
     gender: 'female',
     role: 'Chief Communication Officer (CCO)',
     badge: 'Communications & Outreach',
-    image: '/executives/bareerah-ahmed.png',
+    image: null,
     linkedin: 'https://www.linkedin.com/in/bareerah-ahmed-ba1493423?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     bio: 'As Chief Communication Officer, I aim to expand AES’s reach through strategic outreach, meaningful networking, and impactful partnerships. I’ll build strong connections with stakeholders and ensure seamless communication that strengthens the summit’s presence and impact.',
   },
@@ -168,7 +168,7 @@ const EXECUTIVES = [
     gender: 'male',
     role: 'Marketing Director',
     badge: 'Brand & Growth Strategy',
-    image: '/executives/ayaan-japanwalla.jpg',
+    image: null,
     linkedin: 'https://www.linkedin.com/in/ayaanjapanwalla',
     bio: 'As Marketing Director, I aim to bring AES to life through creative campaigns, engaging content, and strategic promotion. My focus is on building a strong brand presence, generating excitement, and connecting with our audience to make AES a memorable and impactful experience.',
   },
@@ -271,21 +271,7 @@ export default function ExecutivesPage() {
                 <div>
                   {/* Photo / Avatar Frame */}
                   <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border-2 border-[#89192c] group-hover:border-[#f1ca7e]/60 shadow-lg bg-[#5a0d1b] mb-6 flex items-center justify-center">
-                    {exec.image ? (
-                      <>
-                        <Image
-                          src={exec.image}
-                          alt={exec.name}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                          priority={index < 3}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#5a0d1b]/80 via-transparent to-transparent pointer-events-none" />
-                      </>
-                    ) : (
-                      <ExecutiveAvatar gender={exec.gender} name={exec.name} />
-                    )}
+                    <ExecutiveAvatar gender={exec.gender} name={exec.name} />
 
                     {/* Badge */}
                     <div className="absolute top-3 left-3 bg-[#5a0d1b]/90 backdrop-blur-md border border-[#f1ca7e]/50 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#f1ca7e] shadow-md z-10">

@@ -37,51 +37,47 @@
 
 ## 🌟 About AES 2026
 
-The **Alpha Entrepreneurship Summit (AES 2026)** is Pakistan's premier youth entrepreneurship platform hosted annually at **Alpha College Karachi**. Over three high-intensity days (**November 13 – November 15, 2026**), AES convenes aspiring student founders, financial strategists, and corporate innovators to battle across 5 competitive simulation tracks, defend against real-world hostile market shocks, and pitch original startup ventures directly to seasoned angel investors.
+The **Alpha Entrepreneurship Summit (AES 2026)** is a 3-day business and startup event for students, hosted at **Alpha College Karachi** from **November 13 to November 15, 2026**.
+
+Delegates take part in practical business simulations, attend keynotes by industry leaders, and pitch their startup ideas to experienced judges.
 
 ---
 
-## ⚡ The 5 Flagship Simulation Tracks
+## ⚡ The 5 Competition Tracks
 
 <table width="100%">
   <thead>
     <tr>
-      <th align="left">Track / Module</th>
+      <th align="left">Track</th>
       <th align="center">Rounds</th>
-      <th align="left">Domain & Core Competency</th>
-      <th align="center">Prize Pool</th>
+      <th align="left">What You Will Do</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><b>📈 Investomania</b></td>
       <td align="center">3 Rounds</td>
-      <td>High-frequency stock exchange simulation, macroeconomic shock handling, portfolio hedging, and options trading.</td>
-      <td align="center">🏆 PKR 200,000+</td>
+      <td>Stock market trading, handling sudden market changes, and building smart investment portfolios.</td>
     </tr>
     <tr>
       <td><b>🛡️ Defend The Empire</b></td>
       <td align="center">3 Rounds</td>
-      <td>Hostile corporate takeover defense, PR mitigation, emergency board hearings, and regulatory anti-monopoly strategy.</td>
-      <td align="center">🏆 PKR 200,000+</td>
+      <td>Business crisis management, protecting companies against takeover bids, and public relations response.</td>
     </tr>
     <tr>
       <td><b>🏙️ Market Monopoly</b></td>
       <td align="center">2 Rounds</td>
-      <td>Karachi-inspired real estate bidding, liquidity balance, cross-team acquisition pacts, and structured debt financing.</td>
-      <td align="center">🏆 PKR 200,000+</td>
+      <td>Property bidding in Karachi, managing cash flow, team deals, and strategic bank financing.</td>
     </tr>
     <tr>
       <td><b>💡 Venture Verse</b></td>
       <td align="center">2 Rounds</td>
-      <td>Original seed startup pitch to angel judges, financial unit-economic defense, and surprise regulatory scenario pivots.</td>
-      <td align="center">🏆 PKR 250,000+</td>
+      <td>Pitching original startup ideas to judges, defending business plans, and solving sudden case challenges.</td>
     </tr>
     <tr>
       <td><b>🚀 Viral Velocity</b></td>
       <td align="center">3 Rounds</td>
-      <td>Guerrilla marketing campaigns, live Instagram reach battles, paid media ROAS optimization, and physical product stalls.</td>
-      <td align="center">🏆 PKR 200,000+</td>
+      <td>Creative marketing campaigns, social media growth challenges, and running a real-world product stall.</td>
     </tr>
   </tbody>
 </table>

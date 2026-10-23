@@ -179,7 +179,7 @@ export default function Competition() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[320vh] bg-[#5a0d1b] text-[#f8eee1]"
+      className="relative w-full h-[200vh] md:h-[320vh] bg-[#5a0d1b] text-[#f8eee1] overflow-hidden select-none"
     >
       {/* Sticky Viewport Stage (h-screen, sticky top-0, overflow:hidden) */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center select-none">
@@ -201,7 +201,7 @@ export default function Competition() {
           className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
         >
           {/* 3-Line Stacked Uppercase Heading (Tight leading, no unnecessary space) */}
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#f8eee1] leading-[0.88] select-none text-center">
+          <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#f8eee1] leading-[0.92] sm:leading-[0.88] select-none text-center">
             {/* Line 1: YOUR VISION. */}
             <div className="overflow-hidden">
               <motion.div
@@ -340,7 +340,7 @@ export default function Competition() {
                 STARTUP SHOWDOWN
               </span>
               <span className="text-[9px] font-bold uppercase tracking-wider text-[#e8dcc6]">
-                PKR 1.5M+ POOL
+                AES 2026
               </span>
             </div>
           </div>

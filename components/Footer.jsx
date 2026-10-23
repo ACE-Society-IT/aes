@@ -86,13 +86,13 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] pt-16 sm:pt-20 pb-4 overflow-hidden select-none">
+    <footer className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] pt-10 sm:pt-16 md:pt-20 pb-4 overflow-hidden select-none">
       {/* Ambient Top Glow Line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#f1ca7e]/40 to-transparent pointer-events-none z-10" />
 
       {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-20 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 z-20 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 pb-6 sm:pb-12">
           {/* Brand Column (5 cols) with scroll lazy loading */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -272,7 +272,7 @@ export default function Footer() {
       </div>
 
       {/* Monumental Interactive Text Hover Effect Displaying AES */}
-      <div className="relative flex justify-center items-center w-full h-44 sm:h-64 md:h-76 lg:h-96 -mt-10 sm:-mt-16 md:-mt-20 lg:-mt-24 overflow-hidden z-20 pointer-events-auto">
+      <div className="relative flex justify-center items-center w-full h-28 sm:h-56 md:h-76 lg:h-96 -mt-4 sm:-mt-12 md:-mt-20 lg:-mt-24 overflow-hidden z-20 pointer-events-auto">
         <TextHoverEffect text="AES" className="w-full h-full" />
       </div>
 

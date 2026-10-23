@@ -1,45 +1,156 @@
 'use client';
 
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import {
-  TrendingUp,
-  DollarSign,
-  Globe2,
-  ShieldAlert,
-  Users,
-  Flame,
-  Building2,
-  Landmark,
-  Layers,
-  Rocket,
-  Lightbulb,
-  Zap,
-  Megaphone,
-  CheckCircle2,
-  Clock,
-} from 'lucide-react';
+import { CheckCircle2, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-/**
- * 5 Official Modules for AES Summit 2026
- * Pure icon-driven dashboards with zero photos & zero buttons.
- * Features slanted parallelogram round indicators (matching screenshot).
- * Strictly adheres to DESIGN-RULES.md 7-color palette:
- * #5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e
- */
+/* ─────────────────────────────────────────────────────────────
+   Custom-Made Simple Emojis (Vector Scalable & Themed)
+   ───────────────────────────────────────────────────────────── */
 
+// 1. Investomania: 📈 Bull Market Stock Chart & Profit Arrow
+function CustomEmojiInvestomania({ className = 'w-9 h-9' }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none">
+      {/* Background soft circle */}
+      <circle cx="24" cy="24" r="22" fill="#f1ca7e" fillOpacity="0.2" />
+      {/* Grid lines */}
+      <path d="M10 38H38" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.4" />
+      <path d="M10 10V38" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.4" />
+      {/* Chart bars */}
+      <rect x="14" y="26" width="4" height="12" rx="1.5" fill="currentColor" opacity="0.5" />
+      <rect x="22" y="20" width="4" height="18" rx="1.5" fill="currentColor" opacity="0.7" />
+      <rect x="30" y="14" width="4" height="24" rx="1.5" fill="currentColor" />
+      {/* Trendline Arrow */}
+      <path
+        d="M14 26L22 18L28 22L36 10"
+        stroke="#f1ca7e"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M29 10H36V17" stroke="#f1ca7e" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// 2. Defend the Empire: 🛡️ Gilded Imperial Crisis Shield
+function CustomEmojiDefendEmpire({ className = 'w-9 h-9' }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none">
+      <circle cx="24" cy="24" r="22" fill="#f1ca7e" fillOpacity="0.2" />
+      {/* Outer Shield */}
+      <path
+        d="M24 8L36 13V22C36 31 29 37 24 40C19 37 12 31 12 22V13L24 8Z"
+        fill="currentColor"
+        opacity="0.25"
+      />
+      <path
+        d="M24 8L36 13V22C36 31 29 37 24 40C19 37 12 31 12 22V13L24 8Z"
+        stroke="currentColor"
+        strokeWidth="2.8"
+        strokeLinejoin="round"
+      />
+      {/* Inner Emblem Star/Cross */}
+      <path
+        d="M24 16V32M16 24H32"
+        stroke="#f1ca7e"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <circle cx="24" cy="24" r="3.5" fill="#f1ca7e" />
+    </svg>
+  );
+}
+
+// 3. Market Monopoly: 🏛️ Imperial Property & Banking Columns
+function CustomEmojiMarketMonopoly({ className = 'w-9 h-9' }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none">
+      <circle cx="24" cy="24" r="22" fill="#5a0d1b" fillOpacity="0.15" />
+      {/* Roof pediment */}
+      <path d="M10 18L24 10L38 18H10Z" fill="currentColor" />
+      {/* Architrave */}
+      <rect x="8" y="19" width="32" height="3" rx="1" fill="currentColor" opacity="0.8" />
+      {/* 4 Classical Columns */}
+      <rect x="12" y="24" width="4" height="12" rx="1.5" fill="currentColor" opacity="0.9" />
+      <rect x="19" y="24" width="4" height="12" rx="1.5" fill="currentColor" opacity="0.9" />
+      <rect x="25" y="24" width="4" height="12" rx="1.5" fill="currentColor" opacity="0.9" />
+      <rect x="32" y="24" width="4" height="12" rx="1.5" fill="currentColor" opacity="0.9" />
+      {/* Base Foundation */}
+      <rect x="8" y="37" width="32" height="4" rx="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+// 4. Venture Verse: 🚀 Orbital Startup Rocket
+function CustomEmojiVentureVerse({ className = 'w-9 h-9' }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none">
+      <circle cx="24" cy="24" r="22" fill="#f1ca7e" fillOpacity="0.2" />
+      {/* Thruster Flame */}
+      <path
+        d="M17 31L13 38L20 34"
+        fill="#f1ca7e"
+        opacity="0.8"
+      />
+      {/* Rocket Body */}
+      <path
+        d="M33 11C28 11 20 18 18 24C16 26 15 28 15 28L20 33C20 33 22 32 24 30C30 28 37 20 37 15L33 11Z"
+        fill="currentColor"
+        opacity="0.9"
+      />
+      {/* Left Fin */}
+      <path d="M18 24L11 25L14 30L17 29" fill="#f1ca7e" />
+      {/* Right Fin */}
+      <path d="M24 30L25 37L30 34L29 31" fill="#f1ca7e" />
+      {/* Porthole Window */}
+      <circle cx="28" cy="20" r="3" fill="#f8eee1" />
+      {/* Orbit Sparkle */}
+      <path d="M38 8L39 12L43 13L39 14L38 18L37 14L33 13L37 12L38 8Z" fill="#f1ca7e" />
+    </svg>
+  );
+}
+
+// 5. Viral Velocity: ⚡ Viral Speed Lightning Bolt
+function CustomEmojiViralVelocity({ className = 'w-9 h-9' }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} fill="none">
+      <circle cx="24" cy="24" r="22" fill="#f1ca7e" fillOpacity="0.2" />
+      {/* Dynamic Lightning Bolt */}
+      <path
+        d="M27 8L14 26H24L21 40L34 22H24L27 8Z"
+        fill="#f1ca7e"
+      />
+      <path
+        d="M27 8L14 26H24L21 40L34 22H24L27 8Z"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      {/* Energy Sparkle */}
+      <circle cx="34" cy="14" r="2" fill="#f1ca7e" />
+      <circle cx="12" cy="34" r="1.5" fill="#f1ca7e" />
+    </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5 Official Modules Data with Custom Simple Emojis
+   ───────────────────────────────────────────────────────────── */
 const MODULES_DATA = [
   {
     id: 'investomania',
     number: '01',
     tag: 'Module 01',
+    emojiSymbol: '📈',
     title: 'Investomania',
     roundsLabel: '3 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
     description:
       "Teams trade shares in Pakistan's stock market to build and manage a portfolio, then transition into a future digital economy as hedge funds managing digital assets and international markets. The final round shifts focus to wealth preservation, restructuring portfolios and navigating changing tax policies.",
-    heroIcon: TrendingUp,
+    EmojiComponent: CustomEmojiInvestomania,
     stats: [
       { label: 'Market Arena', value: 'PSX to Web3' },
       { label: 'Portfolio Role', value: 'Hedge Fund' },
@@ -47,7 +158,6 @@ const MODULES_DATA = [
     badgeText: 'Portfolio Strategy & Wealth Preservation',
     status: 'Stock & Digital Asset Arena',
     theme: {
-      // Light 1: Alabaster Cream Card
       cardBg: 'bg-[#f8eee1]',
       cardBorder: 'border border-[#e8dcc6]',
       titleColor: 'text-[#5a0d1b]',
@@ -70,12 +180,13 @@ const MODULES_DATA = [
     id: 'defend-the-empire',
     number: '02',
     tag: 'Module 02',
+    emojiSymbol: '🛡️',
     title: 'Defend the Empire',
     roundsLabel: '3 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
     description:
       'Teams navigate a corporate crisis through a three-part simulation. They must develop an internal response plan to protect employee well-being, defend their strategies in a mock shareholder meeting, manage public backlash via a mock press conference, and make strategic financial decisions to combat declining cash flow.',
-    heroIcon: ShieldAlert,
+    EmojiComponent: CustomEmojiDefendEmpire,
     stats: [
       { label: 'Simulation Type', value: 'Corporate Crisis' },
       { label: 'Defense Round', value: 'Mock Press Conf' },
@@ -83,7 +194,6 @@ const MODULES_DATA = [
     badgeText: 'Crisis Management & Strategic Recovery',
     status: 'Crisis Control Track',
     theme: {
-      // Light 2: Warm Parchment Card
       cardBg: 'bg-[#e8dcc6]',
       cardBorder: 'border border-[#89192c]/25',
       titleColor: 'text-[#5a0d1b]',
@@ -106,12 +216,13 @@ const MODULES_DATA = [
     id: 'market-monopoly',
     number: '03',
     tag: 'Module 03',
+    emojiSymbol: '🏛️',
     title: 'Market Monopoly',
     roundsLabel: '2 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2'],
     description:
       'Teams compete to build business empires by bidding on Karachi-inspired properties and utilities within a limited budget. They must manage cash flow, negotiate mergers with other teams, upgrade properties, and settle rental obligations while balancing the risks of bank financing.',
-    heroIcon: Landmark,
+    EmojiComponent: CustomEmojiMarketMonopoly,
     stats: [
       { label: 'Property Hub', value: 'Karachi Auctions' },
       { label: 'Strategic Play', value: 'Mergers & Risk' },
@@ -119,7 +230,6 @@ const MODULES_DATA = [
     badgeText: 'Property Upgrades & Rental Management',
     status: 'Real Estate & Mergers',
     theme: {
-      // Accent: Imperial Gold Card
       cardBg: 'bg-[#f1ca7e]',
       cardBorder: 'border border-[#701020]/30 shadow-2xl',
       titleColor: 'text-[#5a0d1b]',
@@ -142,12 +252,13 @@ const MODULES_DATA = [
     id: 'venture-verse',
     number: '04',
     tag: 'Module 04',
+    emojiSymbol: '🚀',
     title: 'Venture Verse',
     roundsLabel: '2 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2'],
     description:
       "Teams develop an original business concept addressing a real-world problem and pitch it to a panel of judges acting as investors. Participants must demonstrate their venture's viability, competitive advantage, and growth strategy while defending their decisions during a Q&A and an unexpected business crisis.",
-    heroIcon: Rocket,
+    EmojiComponent: CustomEmojiVentureVerse,
     stats: [
       { label: 'Pitch Format', value: 'Investor Panel' },
       { label: 'Evaluation', value: 'Crisis Q&A' },
@@ -155,7 +266,6 @@ const MODULES_DATA = [
     badgeText: 'Viability, Advantage & Growth Defense',
     status: 'Shark Pitch Arena',
     theme: {
-      // Dark 4: Ruby Velvet Card
       cardBg: 'bg-[#89192c]',
       cardBorder: 'border border-[#f1ca7e]/35 shadow-2xl',
       titleColor: 'text-[#f8eee1]',
@@ -178,12 +288,13 @@ const MODULES_DATA = [
     id: 'viral-velocity',
     number: '05',
     tag: 'Module 05',
+    emojiSymbol: '⚡',
     title: 'Viral Velocity',
     roundsLabel: '3 Rounds',
     roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
     description:
       "Teams are assigned a brand to bring to life across three rounds. They must first establish the brand's Instagram presence through creative content, then develop a comprehensive marketing campaign with a specified budget, and finally create a physical stall featuring a product prototype to engage with consumers in a real-world setting.",
-    heroIcon: Zap,
+    EmojiComponent: CustomEmojiViralVelocity,
     stats: [
       { label: 'Digital Channel', value: 'Instagram Growth' },
       { label: 'Physical Stall', value: 'Live Prototype' },
@@ -191,7 +302,6 @@ const MODULES_DATA = [
     badgeText: 'Marketing Budget & Consumer Engagement',
     status: 'Brand Growth & Activation',
     theme: {
-      // Dark 1: Abyssal Oxblood Crown Card (Matches Screenshot 2 perfectly!)
       cardBg: 'bg-[#5a0d1b]',
       cardBorder: 'border-2 border-[#f1ca7e]/60 shadow-[0_25px_60px_rgba(90,13,27,0.85)]',
       titleColor: 'text-[#f8eee1]',
@@ -212,16 +322,10 @@ const MODULES_DATA = [
   },
 ];
 
-/**
- * Individual Stacking Card Component
- * - Centered in viewport: Positioned comfortably so the whole card is visible on screen
- * - Incremental top offset creates clean cascading top edges
- * - Linear scale transform provides 3D depth without scroll lag
- */
+/* ─────────────────────────────────────────────────────────────
+   Individual Stacking Card (Retains 3D Scroll Stacking Animation)
+   ───────────────────────────────────────────────────────────── */
 function StackCard({ module, index, totalCards, scrollYProgress }) {
-  const HeroIcon = module.heroIcon;
-
-  // Lightweight hardware-accelerated scale transform
   const startProgress = index / totalCards;
   const endProgress = Math.min(1, (index + 1.2) / totalCards);
   const targetScale = 1 - (totalCards - index - 1) * 0.03;
@@ -232,9 +336,11 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
     [1, targetScale]
   );
 
+  const EmojiComponent = module.EmojiComponent;
+
   return (
     <div
-      className="sticky top-0 h-screen w-full flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 pointer-events-none"
+      className="sticky top-0 h-screen w-full flex items-center justify-center pt-14 sm:pt-20 px-3.5 sm:px-6 lg:px-8 pointer-events-none"
       style={{
         zIndex: index + 1,
       }}
@@ -243,26 +349,27 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
         style={{
           scale,
           transformOrigin: 'top center',
-          y: index * 14,
+          y: index * 12,
         }}
         className={cn(
-          'pointer-events-auto will-change-transform w-full max-w-5xl lg:max-w-6xl rounded-[32px] sm:rounded-[38px] p-6 sm:p-9 md:p-10 lg:p-11 flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-9 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.55)]',
+          'pointer-events-auto will-change-transform w-full max-w-5xl lg:max-w-6xl rounded-[28px] sm:rounded-[38px] p-4 sm:p-7 md:p-9 lg:p-10 flex flex-col md:flex-row items-stretch justify-between gap-4 sm:gap-6 md:gap-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] max-h-[84vh] md:max-h-none overflow-y-auto md:overflow-visible',
           module.theme.cardBg,
           module.theme.cardBorder
         )}
       >
-        {/* Left Column (~55%): Module Overview, Slanted Round Badges & Description */}
-        <div className="flex flex-col justify-between w-full md:w-[55%] pr-0 md:pr-4">
+        {/* Left Column (~55%): Header, Slanted Badges, Title & Description */}
+        <div className="flex flex-col justify-between w-full md:w-[55%] pr-0 md:pr-3">
           <div>
-            {/* Top Row: Module Tag & Total Rounds */}
-            <div className="flex items-center gap-3 mb-2.5">
+            {/* Top Row: Tag with Emoji + Rounds Subtitle */}
+            <div className="flex items-center gap-2.5 mb-2">
               <span
                 className={cn(
-                  'inline-flex items-center px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider',
+                  'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider',
                   module.theme.tagBg
                 )}
               >
-                {module.tag}
+                <span className="text-sm">{module.emojiSymbol}</span>
+                <span>{module.tag}</span>
               </span>
               <span
                 className={cn(
@@ -274,19 +381,19 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
               </span>
             </div>
 
-            {/* Slanted Parallelogram Round Badges (Exact match to Screenshot 2) */}
-            <div className="flex items-center gap-2 sm:gap-3 my-3.5">
+            {/* Slanted Parallelogram Round Badges */}
+            <div className="flex items-center gap-2 sm:gap-3 my-2 sm:my-3">
               {module.roundsList.map((roundName, rIdx) => {
                 const isActive = rIdx === 0;
                 return (
                   <div
                     key={rIdx}
                     className={cn(
-                      'transform -skew-x-12 px-3.5 sm:px-4.5 py-1 sm:py-1.5 transition-all duration-300',
+                      'transform -skew-x-12 px-3 sm:px-4 py-1 sm:py-1.5 transition-all duration-300',
                       isActive ? module.theme.roundActive : module.theme.roundInactive
                     )}
                   >
-                    <span className="block transform skew-x-12 text-[11px] sm:text-xs font-black tracking-wider uppercase select-none">
+                    <span className="block transform skew-x-12 text-[10px] sm:text-xs font-black tracking-wider uppercase select-none">
                       {roundName}
                     </span>
                   </div>
@@ -294,20 +401,20 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
               })}
             </div>
 
-            {/* Title */}
+            {/* Title with Emoji */}
             <h3
               className={cn(
-                'text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold tracking-tight leading-tight mb-3.5',
+                'text-xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight mb-2 sm:mb-3 flex items-center gap-2.5',
                 module.theme.titleColor
               )}
             >
-              {module.title}
+              <span>{module.title}</span>
             </h3>
 
-            {/* Exact Official Description */}
+            {/* Description */}
             <p
               className={cn(
-                'text-sm sm:text-[15px] md:text-base leading-relaxed font-normal',
+                'text-xs sm:text-[14px] md:text-base leading-relaxed font-normal',
                 module.theme.descColor
               )}
             >
@@ -316,27 +423,27 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           </div>
         </div>
 
-        {/* Right Column (~45%): Pure Icon Dashboard & Round Intelligence (No Photos, No Buttons) */}
+        {/* Right Column (~45%): Custom Emoji Showcase Dashboard */}
         <div
           className={cn(
-            'w-full md:w-[45%] rounded-3xl p-6 sm:p-7 flex flex-col justify-between border mt-3 md:mt-0',
+            'w-full md:w-[45%] rounded-2xl sm:rounded-3xl p-4 sm:p-6 flex flex-col justify-between border mt-2 md:mt-0',
             module.theme.rightFrameBg
           )}
         >
-          {/* Top Row: Emblem Hero Icon & Track Status */}
-          <div className="flex items-center justify-between gap-4 mb-4">
+          {/* Top Row: Custom Simple Emoji Box & Status Pill */}
+          <div className="flex items-center justify-between gap-3 mb-3">
             <div
               className={cn(
-                'w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-md',
+                'w-13 h-13 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center shadow-md p-1.5',
                 module.theme.iconBoxBg
               )}
             >
-              <HeroIcon className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.2]" />
+              <EmojiComponent className="w-10 h-10 sm:w-11 sm:h-11" />
             </div>
 
             <div
               className={cn(
-                'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border shadow-sm',
+                'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider border shadow-sm',
                 module.theme.statusBg
               )}
             >
@@ -351,18 +458,18 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           </div>
 
           {/* Center: 2 Key Stat Cards */}
-          <div className="grid grid-cols-2 gap-3.5 my-auto">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 my-auto">
             {module.stats.map((st, sIdx) => (
               <div
                 key={sIdx}
                 className={cn(
-                  'rounded-2xl p-3.5 sm:p-4 border flex flex-col justify-center shadow-sm',
+                  'rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 border flex flex-col justify-center shadow-sm',
                   module.theme.statCardBg
                 )}
               >
                 <div
                   className={cn(
-                    'text-lg sm:text-xl md:text-2xl font-black tracking-tight leading-tight',
+                    'text-base sm:text-xl font-black tracking-tight leading-tight',
                     module.theme.statValColor
                   )}
                 >
@@ -370,7 +477,7 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
                 </div>
                 <div
                   className={cn(
-                    'text-[11px] sm:text-xs font-bold uppercase tracking-wider mt-1 opacity-80',
+                    'text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-0.5 opacity-80',
                     module.theme.statLabelColor
                   )}
                 >
@@ -383,15 +490,15 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
           {/* Bottom Card: Round Intelligence Spec Pill */}
           <div
             className={cn(
-              'mt-5 px-4 py-3 rounded-2xl border flex items-center justify-between gap-3 text-xs sm:text-sm font-semibold shadow-sm',
+              'mt-3 px-3.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl border flex items-center justify-between gap-2 text-[11px] sm:text-xs font-semibold shadow-sm',
               module.theme.footerPillBg
             )}
           >
-            <div className="flex items-center gap-2 min-w-0">
-              <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <div className="flex items-center gap-1.5 min-w-0">
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">{module.badgeText}</span>
             </div>
-            <Clock className="w-4 h-4 shrink-0 opacity-70" />
+            <Clock className="w-3.5 h-3.5 shrink-0 opacity-70" />
           </div>
         </div>
       </motion.div>
@@ -399,13 +506,9 @@ function StackCard({ module, index, totalCards, scrollYProgress }) {
   );
 }
 
-/**
- * Modules Section
- * - Zero Scroll Lag: No backdrop filters, lightweight transform execution, optimized will-change.
- * - Perfectly Centered Sticky Cards: Cards lock fully into the center of the viewport without clipping.
- * - Official 5 Modules Content & Slanted Round Badges (Screenshot 2).
- * - Strictly follows DESIGN-RULES.md (7 core colors).
- */
+/* ─────────────────────────────────────────────────────────────
+   Modules Overview Section (Retains 3D Scroll Stacking Animation)
+   ───────────────────────────────────────────────────────────── */
 export default function Modules() {
   const containerRef = useRef(null);
 
@@ -418,35 +521,31 @@ export default function Modules() {
     <section
       id="modules"
       ref={containerRef}
-      className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] scroll-mt-28 sm:scroll-mt-32"
+      className="relative z-30 w-full bg-[#f8eee1] text-[#5a0d1b] border-t border-[#89192c]/15 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(90,13,27,0.35)] -mt-8 sm:-mt-10 scroll-mt-24 sm:scroll-mt-28"
     >
-      {/* Lead-in Header with scroll lazy-loading */}
+      {/* Lead-in Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 max-w-7xl mx-auto pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center"
+        className="relative z-10 max-w-7xl mx-auto pt-10 sm:pt-16 md:pt-28 pb-6 sm:pb-10 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center"
       >
-        {/* Eyebrow Label matching Vision, FAQs and other sections */}
-        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
+        <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020]">
           Competitive Tracks
         </span>
 
-        {/* Section Heading matching other sections */}
-        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f8eee1]">
-          Module <span className="text-[#f1ca7e]">Overview</span>
+        <h2 className="mt-2 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#5a0d1b]">
+          Module <span className="text-[#89192c]">Overview</span>
         </h2>
 
-        {/* Description */}
-        <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#e8dcc6] leading-relaxed">
-          Five flagship competitive tracks designed to test portfolio strategy, corporate
-          crisis control, property bidding, venture pitching, and guerrilla brand growth.
+        <p className="mt-2 max-w-2xl text-xs sm:text-base md:text-lg text-[#650d1c] leading-relaxed">
+          Five flagship competitive tracks designed to test portfolio strategy, corporate crisis control, property bidding, venture pitching, and guerrilla brand growth.
         </p>
       </motion.div>
 
-      {/* 3D Stacking Cards Deck Track */}
-      <div className="relative w-full pb-32">
+      {/* 3D Stacking Cards Deck Track (Preserves Stacking Scroll Animation) */}
+      <div className="relative w-full pb-16 sm:pb-24 md:pb-32">
         {MODULES_DATA.map((module, index) => (
           <StackCard
             key={module.id}
