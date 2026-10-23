@@ -1,6 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
+import PigmentTrail from "@/components/ui/PigmentTrail";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -139,6 +140,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col bg-[#5a0d1b] text-[#f8eee1]">
         <SmoothScroll>
+          <PigmentTrail />
           {children}
         </SmoothScroll>
       </body>
