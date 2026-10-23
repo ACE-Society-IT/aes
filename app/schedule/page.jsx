@@ -5,7 +5,7 @@ import Handbook from '@/components/home/Handbook';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Summit Track & Schedule | AES 2026',
+  title: 'Summit Track & Schedule',
   description:
     'Explore the full three-day itinerary for the Alpha Entrepreneurship Summit 2026. From opening rounds to the Grand Gala Dinner.',
 };

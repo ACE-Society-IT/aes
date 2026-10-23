@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import {
@@ -507,12 +508,32 @@ export default function AmbassadorsPage() {
             .
           </motion.p>
 
+          {/* Official Ambassador Creative Showcase Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 relative group"
+          >
+            <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#f1ca7e]/40 via-[#89192c] to-[#f1ca7e]/40 blur-lg opacity-60 group-hover:opacity-100 transition duration-500" />
+            <div className="relative rounded-2xl overflow-hidden border-2 border-[#f1ca7e]/40 shadow-2xl bg-[#5a0d1b] max-w-[280px] sm:max-w-[320px] mx-auto">
+              <Image
+                src="/ambassadors-og.jpg"
+                alt="Want To Represent Innovation? Become A Brand Ambassador"
+                width={320}
+                height={320}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                priority
+              />
+            </div>
+          </motion.div>
+
           {/* Dual CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+            transition={{ duration: 0.7, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 flex flex-col sm:flex-row items-center gap-4"
           >
             <a
               href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"

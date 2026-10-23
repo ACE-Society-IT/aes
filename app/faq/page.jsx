@@ -5,7 +5,7 @@ import Handbook from '@/components/home/Handbook';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Frequently Asked Questions | AES 2026',
+  title: 'Frequently Asked Questions',
   description:
     'Got questions about the Alpha Entrepreneurship Summit 2026? Find all answers on eligibility, team registrations, modules, and schedule.',
 };

@@ -5,7 +5,7 @@ import Handbook from '@/components/home/Handbook';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Summit Modules | AES 2026',
+  title: 'Summit Modules',
   description:
     'Discover the 5 flagship competitive modules of AES 2026: Investomania, Market Monopoly, Venture Verse, Defend The Empire, and Viral Velocity.',
 };
