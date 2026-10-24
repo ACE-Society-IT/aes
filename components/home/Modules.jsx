@@ -223,7 +223,7 @@ export default function Modules() {
       >
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
           <span className="text-[#701020]">Summit</span>{' '}
-          <span className="text-[#b37e1b]">Modules</span>
+          <span className="text-[#F1CA7E] drop-shadow-[0_1px_2px_rgba(90,13,27,0.3)]">Modules</span>
         </h2>
 
         <p className="mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] font-normal leading-relaxed max-w-xl mx-auto">

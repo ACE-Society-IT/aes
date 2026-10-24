@@ -407,7 +407,7 @@ export default function Vision() {
           </span>
           <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
             <span className="text-[#701020]">Our</span>{' '}
-            <span className="text-[#b37e1b]">Vision</span>
+            <span className="text-[#F1CA7E] drop-shadow-[0_1px_2px_rgba(90,13,27,0.3)]">Vision</span>
           </h2>
           <p className="mt-2 sm:mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] leading-relaxed">
             Empowering the next generation of youth entrepreneurs through practical experience,
