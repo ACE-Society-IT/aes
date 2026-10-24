@@ -16,24 +16,24 @@ function WavyBackground({ id }) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute inset-0 w-full h-full opacity-35 group-hover:opacity-55 transition-opacity duration-700 ease-out"
+        className="absolute inset-0 w-full h-full opacity-55 group-hover:opacity-75 transition-opacity duration-700 ease-out"
         aria-hidden="true"
       >
         <defs>
           <linearGradient id={`wave-g1-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.45" />
-            <stop offset="50%" stopColor="#e8dcc6" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#701020" stopOpacity="0.12" />
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.65" />
+            <stop offset="50%" stopColor="#e8dcc6" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0.25" />
           </linearGradient>
           <linearGradient id={`wave-g2-${id}`} x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#89192c" stopOpacity="0.22" />
-            <stop offset="50%" stopColor="#f1ca7e" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#701020" stopOpacity="0.06" />
+            <stop offset="0%" stopColor="#89192c" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#f1ca7e" stopOpacity="0.32" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0.15" />
           </linearGradient>
           <linearGradient id={`wave-g3-${id}`} x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#701020" stopOpacity="0.18" />
-            <stop offset="60%" stopColor="#89192c" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#f1ca7e" stopOpacity="0.05" />
+            <stop offset="0%" stopColor="#701020" stopOpacity="0.3" />
+            <stop offset="60%" stopColor="#89192c" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#f1ca7e" stopOpacity="0.1" />
           </linearGradient>
         </defs>
         {/* Layer 1: Ambient soft high wave */}

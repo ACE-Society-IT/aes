@@ -10,15 +10,15 @@ import React from 'react';
 
 export function InvestomaniaArt() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-xl pointer-events-none" />
+    <div className="relative w-full h-full flex items-center justify-center select-none pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-2xl pointer-events-none" />
       <svg
         role="img"
         aria-labelledby="art-investomania-title art-investomania-desc"
         viewBox="0 0 512 512"
         fill="currentColor"
         focusable="false"
-        className="w-12 h-12 sm:w-16 sm:h-16 md:w-28 lg:w-36 md:h-28 lg:h-36 text-[#f1ca7e] drop-shadow-[0_8px_20px_rgba(241,202,126,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-contain text-[#f1ca7e] drop-shadow-[0_12px_35px_rgba(241,202,126,0.35)] transition-transform duration-700 group-hover:scale-105"
       >
         <title id="art-investomania-title">Investomania Currency & Stock Exchange</title>
         <desc id="art-investomania-desc">
@@ -285,15 +285,15 @@ export function InvestomaniaArt() {
 
 export function DefendEmpireArt() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-xl pointer-events-none" />
+    <div className="relative w-full h-full flex items-center justify-center select-none pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-2xl pointer-events-none" />
       <svg
         role="img"
         aria-labelledby="art-defend-title art-defend-desc"
         viewBox="0 0 266.523 288.748"
         fill="currentColor"
         focusable="false"
-        className="w-12 h-12 sm:w-16 sm:h-16 md:w-28 lg:w-36 md:h-28 lg:h-36 text-[#f1ca7e] drop-shadow-[0_8px_20px_rgba(241,202,126,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-contain text-[#f1ca7e] drop-shadow-[0_12px_35px_rgba(241,202,126,0.35)] transition-transform duration-700 group-hover:scale-105"
       >
         <title id="art-defend-title">Defend The Empire Crisis Defense</title>
         <desc id="art-defend-desc">
@@ -307,15 +307,15 @@ export function DefendEmpireArt() {
 
 export function MarketMonopolyArt() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-xl pointer-events-none" />
+    <div className="relative w-full h-full flex items-center justify-center select-none pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(112,16,32,0.15),transparent_70%)] blur-2xl pointer-events-none" />
       <svg
         role="img"
         aria-labelledby="art-monopoly-title art-monopoly-desc"
         viewBox="0 0 512.028 512.028"
         fill="currentColor"
         focusable="false"
-        className="w-12 h-12 sm:w-16 sm:h-16 md:w-28 lg:w-36 md:h-28 lg:h-36 text-[#f1ca7e] drop-shadow-[0_8px_20px_rgba(241,202,126,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-contain text-[#701020] drop-shadow-[0_12px_35px_rgba(112,16,32,0.25)] transition-transform duration-700 group-hover:scale-105"
       >
         <title id="art-monopoly-title">Market Monopoly Financial Treasury</title>
         <desc id="art-monopoly-desc">
@@ -347,15 +347,15 @@ export function MarketMonopolyArt() {
 
 export function VentureVerseArt() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-xl pointer-events-none" />
+    <div className="relative w-full h-full flex items-center justify-center select-none pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-2xl pointer-events-none" />
       <svg
         role="img"
         aria-labelledby="art-venture-title art-venture-desc"
         viewBox="0 0 100 100"
         fill="currentColor"
         focusable="false"
-        className="w-12 h-12 sm:w-16 sm:h-16 md:w-28 lg:w-36 md:h-28 lg:h-36 text-[#f1ca7e] drop-shadow-[0_8px_20px_rgba(241,202,126,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-contain text-[#f1ca7e] drop-shadow-[0_12px_35px_rgba(241,202,126,0.35)] transition-transform duration-700 group-hover:scale-105"
       >
         <title id="art-venture-title">Venture Verse Partnership & Funding</title>
         <desc id="art-venture-desc">
@@ -376,15 +376,15 @@ export function VentureVerseArt() {
 
 export function ViralVelocityArt() {
   return (
-    <div className="relative w-full h-full flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-xl pointer-events-none" />
+    <div className="relative w-full h-full flex items-center justify-center select-none pointer-events-none">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241,202,126,0.18),transparent_70%)] blur-2xl pointer-events-none" />
       <svg
         role="img"
         aria-labelledby="art-viral-title art-viral-desc"
         viewBox="0 0 512 512"
         fill="currentColor"
         focusable="false"
-        className="w-12 h-12 sm:w-16 sm:h-16 md:w-28 lg:w-36 md:h-28 lg:h-36 text-[#f1ca7e] drop-shadow-[0_8px_20px_rgba(241,202,126,0.35)] transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-contain text-[#f1ca7e] drop-shadow-[0_12px_35px_rgba(241,202,126,0.35)] transition-transform duration-700 group-hover:scale-105"
       >
         <title id="art-viral-title">Viral Velocity Precision Stopwatch</title>
         <desc id="art-viral-desc">

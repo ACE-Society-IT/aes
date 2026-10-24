@@ -123,7 +123,7 @@ function StackingCard({ item, index }) {
     >
       <div
         className={cn(
-          'pointer-events-auto w-full max-w-4xl lg:max-w-5xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-12 border shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-xl',
+          'group pointer-events-auto w-full max-w-4xl lg:max-w-5xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-12 border shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-xl',
           item.cardBg,
           item.borderStyle,
           item.textColor
@@ -137,68 +137,66 @@ function StackingCard({ item, index }) {
           {item.num}
         </div>
 
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center">
-          {/* Left Side: Editorial Content (~65%) */}
-          <div className="md:col-span-7 flex flex-col justify-center">
-            {/* Index & Category Row */}
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="text-xs sm:text-sm font-mono font-extrabold tracking-widest uppercase opacity-75">
-                {item.num} / 05
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider opacity-90">
-                {item.category}
-              </span>
-            </div>
+        {/* Frameless Module SVG Artwork in Card Background */}
+        <div className="absolute right-0 bottom-0 top-0 w-3/4 sm:w-2/3 md:w-1/2 flex items-center justify-end pointer-events-none select-none overflow-hidden opacity-20 sm:opacity-25 md:opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 ease-out">
+          <div className="w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-96 -mr-4 sm:-mr-8 md:-mr-10 -mb-4 sm:-mb-6 md:mb-0 flex items-center justify-center">
+            <Art />
+          </div>
+        </div>
 
-            {/* Display Title */}
-            <h3 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
-              {item.title}
-            </h3>
-
-            {/* Crisp 1-Line Hook */}
-            <p className={cn('mt-1.5 text-xs sm:text-sm md:text-base font-bold', item.taglineColor)}>
-              {item.tagline}
-            </p>
-
-            {/* 2-Line Punchy Description */}
-            <p className={cn('mt-3 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl', item.descColor)}>
-              {item.description}
-            </p>
-
-            {/* 3 Minimal Badges */}
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              {item.tags.map((tag, tIdx) => (
-                <span
-                  key={tIdx}
-                  className={cn(
-                    'px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wide transition-colors',
-                    item.pillBg
-                  )}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Single Clean Action Link */}
-            <div className="mt-6 pt-5 border-t border-current/15">
-              <a
-                href="/aes-delegate-guide.pdf"
-                download="AES-Delegate-Guide-2026.pdf"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold hover:underline underline-offset-4 tracking-wide group"
-              >
-                <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" focusable="false" />
-                <span>Download Delegate Guide (PDF)</span>
-              </a>
-            </div>
+        {/* Editorial Content (Foreground, 100% Legible) */}
+        <div className="relative z-10 flex flex-col justify-center max-w-xl lg:max-w-2xl">
+          {/* Index & Category Row */}
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="text-xs sm:text-sm font-mono font-extrabold tracking-widest uppercase opacity-75">
+              {item.num} / 05
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider opacity-90">
+              {item.category}
+            </span>
           </div>
 
-          {/* Right Side: Visual Emblem - Small & Left-aligned on Mobile, Full Square on Desktop */}
-          <div className="md:col-span-5 flex items-center justify-start md:justify-center mt-2 md:mt-0">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-full md:max-w-none md:aspect-square rounded-2xl sm:rounded-3xl bg-current/5 border border-current/15 backdrop-blur-md flex items-center justify-center relative overflow-hidden shadow-inner group">
-              <Art />
-            </div>
+          {/* Display Title */}
+          <h3 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+            {item.title}
+          </h3>
+
+          {/* Crisp 1-Line Hook */}
+          <p className={cn('mt-1.5 text-xs sm:text-sm md:text-base font-bold', item.taglineColor)}>
+            {item.tagline}
+          </p>
+
+          {/* 2-Line Punchy Description */}
+          <p className={cn('mt-3 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl', item.descColor)}>
+            {item.description}
+          </p>
+
+          {/* 3 Minimal Badges */}
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {item.tags.map((tag, tIdx) => (
+              <span
+                key={tIdx}
+                className={cn(
+                  'px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wide transition-colors',
+                  item.pillBg
+                )}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Single Clean Action Link */}
+          <div className="mt-6 pt-5 border-t border-current/15">
+            <a
+              href="/aes-delegate-guide.pdf"
+              download="AES-Delegate-Guide-2026.pdf"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold hover:underline underline-offset-4 tracking-wide group"
+            >
+              <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" focusable="false" />
+              <span>Download Delegate Guide (PDF)</span>
+            </a>
           </div>
         </div>
       </div>
