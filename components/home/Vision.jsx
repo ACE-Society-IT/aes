@@ -8,7 +8,11 @@ import Link from 'next/link';
    Simple Elegant Wavy SVG Background
    Soft layered organic wave vector art inspired by warm sand dunes
    ───────────────────────────────────────────────────────────── */
-function WavyBackground({ id }) {
+function WavyBackground({ id, waveColors }) {
+  const g1 = waveColors?.g1 || ['#f1ca7e', '#e8dcc6', '#701020'];
+  const g2 = waveColors?.g2 || ['#89192c', '#f1ca7e', '#701020'];
+  const g3 = waveColors?.g3 || ['#701020', '#89192c', '#f1ca7e'];
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none select-none rounded-[inherit]">
       <svg
@@ -21,19 +25,19 @@ function WavyBackground({ id }) {
       >
         <defs>
           <linearGradient id={`wave-g1-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.65" />
-            <stop offset="50%" stopColor="#e8dcc6" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#701020" stopOpacity="0.25" />
+            <stop offset="0%" stopColor={g1[0]} stopOpacity="0.65" />
+            <stop offset="50%" stopColor={g1[1]} stopOpacity="0.45" />
+            <stop offset="100%" stopColor={g1[2]} stopOpacity="0.25" />
           </linearGradient>
           <linearGradient id={`wave-g2-${id}`} x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#89192c" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#f1ca7e" stopOpacity="0.32" />
-            <stop offset="100%" stopColor="#701020" stopOpacity="0.15" />
+            <stop offset="0%" stopColor={g2[0]} stopOpacity="0.4" />
+            <stop offset="50%" stopColor={g2[1]} stopOpacity="0.32" />
+            <stop offset="100%" stopColor={g2[2]} stopOpacity="0.15" />
           </linearGradient>
           <linearGradient id={`wave-g3-${id}`} x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#701020" stopOpacity="0.3" />
-            <stop offset="60%" stopColor="#89192c" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#f1ca7e" stopOpacity="0.1" />
+            <stop offset="0%" stopColor={g3[0]} stopOpacity="0.3" />
+            <stop offset="60%" stopColor={g3[1]} stopOpacity="0.2" />
+            <stop offset="100%" stopColor={g3[2]} stopOpacity="0.1" />
           </linearGradient>
         </defs>
         {/* Layer 1: Ambient soft high wave */}
@@ -55,6 +59,93 @@ function WavyBackground({ id }) {
     </div>
   );
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Interactive Brand Color Themes for Vision Cards
+   Cycles dynamically when clicking the SVG frame
+   ───────────────────────────────────────────────────────────── */
+export const COLOR_THEMES = [
+  {
+    id: 'classic-aes',
+    name: 'Classic AES (Crimson & Gold)',
+    frameBg: 'bg-[#701020]',
+    frameBorder: 'border-[#89192c]',
+    frameText: 'text-[#f1ca7e]',
+    frameInnerPulse: 'from-[#f1ca7e]/25 via-transparent to-[#89192c]/20',
+    cardBg: 'bg-gradient-to-br from-[#fbf5eb]/95 via-[#e8dcc6]/90 to-[#dfcfb5]/85',
+    cardBorder: 'border-[#89192c]/20 hover:border-[#701020]',
+    titleColor: 'text-[#5a0d1b]',
+    descColor: 'text-[#650d1c]',
+    footerBorder: 'border-[#89192c]/15',
+    footerText: 'text-[#701020] group-hover:text-[#5a0d1b]',
+    arrowBg: 'bg-[#701020] text-[#f1ca7e]',
+    waveColors: {
+      g1: ['#f1ca7e', '#e8dcc6', '#701020'],
+      g2: ['#89192c', '#f1ca7e', '#701020'],
+      g3: ['#701020', '#89192c', '#f1ca7e'],
+    },
+  },
+  {
+    id: 'imperial-gold',
+    name: 'Imperial Gold',
+    frameBg: 'bg-[#f1ca7e]',
+    frameBorder: 'border-[#d4a853]',
+    frameText: 'text-[#5a0d1b]',
+    frameInnerPulse: 'from-[#5a0d1b]/20 via-transparent to-[#f1ca7e]/30',
+    cardBg: 'bg-gradient-to-br from-[#fffdfa]/95 via-[#f8f1e5]/90 to-[#ede0cc]/85',
+    cardBorder: 'border-[#d4a853]/40 hover:border-[#b88c3a]',
+    titleColor: 'text-[#701020]',
+    descColor: 'text-[#7a1727]',
+    footerBorder: 'border-[#d4a853]/25',
+    footerText: 'text-[#8c5e12] group-hover:text-[#701020]',
+    arrowBg: 'bg-[#f1ca7e] text-[#5a0d1b]',
+    waveColors: {
+      g1: ['#d4a853', '#f1ca7e', '#701020'],
+      g2: ['#701020', '#d4a853', '#f1ca7e'],
+      g3: ['#89192c', '#f1ca7e', '#d4a853'],
+    },
+  },
+  {
+    id: 'royal-midnight',
+    name: 'Royal Midnight Obsidian',
+    frameBg: 'bg-[#24060c]',
+    frameBorder: 'border-[#f1ca7e]/60',
+    frameText: 'text-[#f1ca7e]',
+    frameInnerPulse: 'from-[#f1ca7e]/30 via-transparent to-[#701020]/40',
+    cardBg: 'bg-gradient-to-br from-[#380912]/95 via-[#29060d]/92 to-[#1b0308]/90',
+    cardBorder: 'border-[#f1ca7e]/30 hover:border-[#f1ca7e]',
+    titleColor: 'text-[#f8eee1]',
+    descColor: 'text-[#e8dcc6]/85',
+    footerBorder: 'border-white/10',
+    footerText: 'text-[#f1ca7e] group-hover:text-white',
+    arrowBg: 'bg-[#f1ca7e] text-[#24060c]',
+    waveColors: {
+      g1: ['#f1ca7e', '#89192c', '#24060c'],
+      g2: ['#701020', '#f1ca7e', '#24060c'],
+      g3: ['#f1ca7e', '#701020', '#1b0308'],
+    },
+  },
+  {
+    id: 'crimson-ruby',
+    name: 'Crimson Ruby Velvet',
+    frameBg: 'bg-[#89192c]',
+    frameBorder: 'border-[#f8eee1]/40',
+    frameText: 'text-[#ffffff]',
+    frameInnerPulse: 'from-white/25 via-transparent to-[#f1ca7e]/25',
+    cardBg: 'bg-gradient-to-br from-[#fcf5f1]/95 via-[#f5e3d9]/90 to-[#e8cec0]/85',
+    cardBorder: 'border-[#89192c]/30 hover:border-[#89192c]',
+    titleColor: 'text-[#5a0d1b]',
+    descColor: 'text-[#6e1324]',
+    footerBorder: 'border-[#89192c]/20',
+    footerText: 'text-[#89192c] group-hover:text-[#5a0d1b]',
+    arrowBg: 'bg-[#89192c] text-[#ffffff]',
+    waveColors: {
+      g1: ['#89192c', '#f1ca7e', '#5a0d1b'],
+      g2: ['#f1ca7e', '#89192c', '#dfcfb5'],
+      g3: ['#5a0d1b', '#89192c', '#f1ca7e'],
+    },
+  },
+];
 
 const VISION_CARDS = [
   {
@@ -345,6 +436,17 @@ const VISION_CARDS = [
 
 export default function Vision() {
   const [selectedPillar, setSelectedPillar] = useState(null);
+  const [cardThemes, setCardThemes] = useState({});
+
+  const toggleCardTheme = (cardId, e) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setCardThemes((prev) => ({
+      ...prev,
+      [cardId]: ((prev[cardId] || 0) + 1) % COLOR_THEMES.length,
+    }));
+  };
 
   // Close modal with Escape key
   const handleKeyDown = useCallback((e) => {
@@ -417,56 +519,109 @@ export default function Vision() {
 
         {/* 6 Feature Grid with interactive cards animating on scroll up & down */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          {VISION_CARDS.map((card, index) => (
-            <motion.div
-              key={card.id}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.15 }}
-              transition={{
-                duration: 0.55,
-                delay: (index % 3) * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              onClick={() => setSelectedPillar(card)}
-              className="group relative overflow-hidden bg-gradient-to-br from-[#fbf5eb]/95 via-[#e8dcc6]/90 to-[#dfcfb5]/85 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 border-2 border-[#89192c]/20 hover:border-[#701020] shadow-[0_8px_30px_rgba(90,13,27,0.06)] hover:shadow-[0_20px_45px_rgba(90,13,27,0.2)] transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#701020]"
-              tabIndex={0}
-              role="button"
-              aria-haspopup="dialog"
-              aria-label={`Explore ${card.title} pillar details`}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setSelectedPillar(card);
-                }
-              }}
-            >
-              {/* Glassmorphic Top Edge Highlight */}
-              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+          {VISION_CARDS.map((card, index) => {
+            const themeIndex = cardThemes[card.id] || 0;
+            const currentTheme = COLOR_THEMES[themeIndex];
 
-              {/* Simple Wavy SVG in Card Background */}
-              <WavyBackground id={card.id} />
+            return (
+              <motion.div
+                key={card.id}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{
+                  duration: 0.55,
+                  delay: (index % 3) * 0.1,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                onClick={() => setSelectedPillar(card)}
+                className={`group relative overflow-hidden ${currentTheme.cardBg} backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 border-2 ${currentTheme.cardBorder} shadow-[0_8px_30px_rgba(90,13,27,0.06)] hover:shadow-[0_20px_45px_rgba(90,13,27,0.2)] transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#701020]`}
+                tabIndex={0}
+                role="button"
+                aria-haspopup="dialog"
+                aria-label={`Explore ${card.title} pillar details`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedPillar(card);
+                  }
+                }}
+              >
+                {/* Glassmorphic Top Edge Highlight */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
 
-              <div className="relative z-10">
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#701020] text-[#f1ca7e] shadow-md border-2 border-[#89192c] flex items-center justify-center shrink-0 mb-4 sm:mb-6 group-hover:scale-110 group-hover:bg-[#5a0d1b] group-hover:rotate-2 transition-all duration-300">
-                  {card.icon}
+                {/* Simple Wavy SVG in Card Background */}
+                <WavyBackground id={card.id} waveColors={currentTheme.waveColors} />
+
+                <div className="relative z-10">
+                  {/* SVG Frame with Theme Change On Click & Inside-the-Frame Animation (No Tilt) */}
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    title="Click icon to switch color theme"
+                    aria-label={`Switch color theme for ${card.title}`}
+                    onClick={(e) => toggleCardTheme(card.id, e)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCardTheme(card.id, e);
+                      }
+                    }}
+                    className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${currentTheme.frameBg} ${currentTheme.frameText} shadow-md border-2 ${currentTheme.frameBorder} flex items-center justify-center shrink-0 mb-4 sm:mb-6 group-hover:scale-105 cursor-pointer select-none relative overflow-hidden transition-all duration-500`}
+                  >
+                    {/* Animated color wave / glow shimmer inside the frame */}
+                    <AnimatePresence initial={false} mode="wait">
+                      <motion.div
+                        key={`frame-theme-glow-${themeIndex}`}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.25 }}
+                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                        className={`absolute inset-0 rounded-[inherit] bg-gradient-to-tr ${currentTheme.frameInnerPulse} pointer-events-none`}
+                      />
+                    </AnimatePresence>
+
+                    {/* Ambient luminous sweep inside the frame on hover (no tilt) */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                    {/* Theme pulse ripple inside frame when clicked */}
+                    <motion.span
+                      key={`frame-ripple-${themeIndex}`}
+                      initial={{ scale: 0.2, opacity: 0.85 }}
+                      animate={{ scale: 2.4, opacity: 0 }}
+                      transition={{ duration: 0.55, ease: 'easeOut' }}
+                      className="absolute w-8 h-8 rounded-full bg-current opacity-25 pointer-events-none"
+                    />
+
+                    {/* SVG Icon with smooth theme entrance transition inside frame */}
+                    <motion.div
+                      key={`icon-${themeIndex}`}
+                      initial={{ scale: 0.88, opacity: 0.8 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.28 }}
+                      className="relative z-10 flex items-center justify-center shrink-0"
+                    >
+                      {card.icon}
+                    </motion.div>
+                  </div>
+
+                  <h3 className={`text-lg sm:text-xl md:text-2xl font-bold ${currentTheme.titleColor} tracking-tight transition-colors duration-500`}>
+                    {card.title}
+                  </h3>
+                  <p className={`mt-2 sm:mt-3 text-xs sm:text-sm md:text-base leading-relaxed ${currentTheme.descColor} transition-colors duration-500`}>
+                    {card.description}
+                  </p>
                 </div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#5a0d1b] tracking-tight">
-                  {card.title}
-                </h3>
-                <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base leading-relaxed text-[#650d1c]">
-                  {card.description}
-                </p>
-              </div>
 
-              <div className="relative z-10 mt-5 sm:mt-7 pt-4 sm:pt-5 border-t-2 border-[#89192c]/15 flex items-center justify-between text-xs sm:text-sm font-bold text-[#701020] group-hover:text-[#5a0d1b] transition-colors">
-                <span className="group-hover:underline underline-offset-4">Explore Pillar</span>
-                <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#701020] text-[#f1ca7e] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-1 group-hover:bg-[#5a0d1b]">
-                  →
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                <div className={`relative z-10 mt-5 sm:mt-7 pt-4 sm:pt-5 border-t-2 ${currentTheme.footerBorder} flex items-center justify-between text-xs sm:text-sm font-bold ${currentTheme.footerText} transition-colors duration-500`}>
+                  <span className="group-hover:underline underline-offset-4">Explore Pillar</span>
+                  <span className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full ${currentTheme.arrowBg} flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-1`}>
+                    →
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
@@ -499,7 +654,10 @@ export default function Vision() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Simple Wavy SVG in Modal Background */}
-              <WavyBackground id={`modal-${selectedPillar.id}`} />
+              <WavyBackground
+                id={`modal-${selectedPillar.id}`}
+                waveColors={COLOR_THEMES[cardThemes[selectedPillar.id] || 0]?.waveColors}
+              />
 
               {/* Top Bar with Badge, Pillar Counter & Close Button */}
               <div className="relative z-10 flex items-center justify-between gap-3 border-b-2 border-[#89192c]/15 pb-4 mb-5 sm:mb-6">
