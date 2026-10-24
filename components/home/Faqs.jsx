@@ -63,14 +63,15 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
     >
       <div
         className={`
-          group rounded-3xl border-2 transition-all duration-300 ease-out hover:scale-[1.01]
+          group relative overflow-hidden rounded-3xl border-2 transition-all duration-300 ease-out hover:scale-[1.01] backdrop-blur-xl
           ${
             isOpen
-              ? 'bg-[#701020] border-[#f1ca7e] shadow-[0_12px_40px_rgba(241,202,126,0.2)]'
-              : 'bg-[#5a0d1b]/80 border-[#89192c] hover:border-[#f1ca7e]/60 hover:bg-[#701020]/70 shadow-xl shadow-[#5a0d1b]/50'
+              ? 'bg-[#701020]/90 border-[#f1ca7e] shadow-[0_12px_40px_rgba(241,202,126,0.2)]'
+              : 'bg-[#5a0d1b]/70 border-[#89192c]/80 hover:border-[#f1ca7e]/60 hover:bg-[#701020]/60 shadow-xl shadow-[#5a0d1b]/50'
           }
         `}
       >
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
         {/* Question Button */}
         <button
           onClick={onToggle}

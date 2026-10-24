@@ -22,8 +22,11 @@ export default function Handbook() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-[24px] sm:rounded-[36px] bg-[#e8dcc6]/60 border border-[#e8dcc6] p-4 sm:p-8 md:p-12 shadow-[0_20px_60px_rgba(90,13,27,0.08)] overflow-hidden"
+          className="relative rounded-[24px] sm:rounded-[36px] bg-[#e8dcc6]/75 backdrop-blur-xl border border-[#89192c]/20 p-4 sm:p-8 md:p-12 shadow-[0_20px_60px_rgba(90,13,27,0.12)] overflow-hidden"
         >
+          {/* Glass Sheen Top Edge */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
+
           {/* Subtle warm ambient glows inside card */}
           <div className="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-[#f8eee1] to-transparent rounded-full blur-2xl pointer-events-none" />
           <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-[#f8eee1]/60 rounded-full blur-2xl pointer-events-none" />

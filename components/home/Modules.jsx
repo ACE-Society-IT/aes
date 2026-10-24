@@ -28,12 +28,12 @@ const MODULES = [
       'Trade real-time equities on the Pakistan Stock Exchange, construct multi-asset hedge portfolios, and navigate global digital asset shocks.',
     tags: ['3 Rounds', 'PSX Equities', 'Hedge Fund Simulation'],
     Art: InvestomaniaArt,
-    cardBg: 'bg-[#5a0d1b]',
+    cardBg: 'bg-[#5a0d1b]/92 backdrop-blur-xl',
     textColor: 'text-[#f8eee1]',
     taglineColor: 'text-[#f1ca7e]',
     descColor: 'text-[#e8dcc6]',
-    borderStyle: 'border-[#89192c]',
-    pillBg: 'bg-[#701020] text-[#f1ca7e] border border-[#f1ca7e]/20',
+    borderStyle: 'border-[#89192c]/80 shadow-[0_20px_60px_rgba(90,13,27,0.7)]',
+    pillBg: 'bg-[#701020]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
     accentColor: '#f1ca7e',
   },
   {
@@ -46,12 +46,12 @@ const MODULES = [
       'Confront an unscripted corporate emergency. Triage internal operations, defend your firm before aggressive mock journalists, and reverse critical cash bleeds.',
     tags: ['3 Rounds', 'Mock Press Conference', 'Financial Triage'],
     Art: DefendEmpireArt,
-    cardBg: 'bg-[#650d1c]',
+    cardBg: 'bg-[#650d1c]/92 backdrop-blur-xl',
     textColor: 'text-[#f8eee1]',
     taglineColor: 'text-[#f1ca7e]',
     descColor: 'text-[#e8dcc6]',
-    borderStyle: 'border-[#89192c]',
-    pillBg: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#f1ca7e]/20',
+    borderStyle: 'border-[#89192c]/80 shadow-[0_20px_60px_rgba(90,13,27,0.7)]',
+    pillBg: 'bg-[#5a0d1b]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
     accentColor: '#f1ca7e',
   },
   {
@@ -64,12 +64,12 @@ const MODULES = [
       'Build a commercial dynasty across Karachi’s prime districts. Bid on commercial utilities, negotiate aggressive mergers, and balance high-risk debt leverage.',
     tags: ['2 Rounds', 'Commercial Auctions', 'M&A Strategy'],
     Art: MarketMonopolyArt,
-    cardBg: 'bg-[#e8dcc6]',
+    cardBg: 'bg-[#e8dcc6]/92 backdrop-blur-xl',
     textColor: 'text-[#5a0d1b]',
     taglineColor: 'text-[#701020]',
     descColor: 'text-[#650d1c]',
-    borderStyle: 'border-[#701020]/30',
-    pillBg: 'bg-[#f8eee1] text-[#701020] border border-[#701020]/20',
+    borderStyle: 'border-[#701020]/30 shadow-[0_20px_60px_rgba(90,13,27,0.35)]',
+    pillBg: 'bg-[#f8eee1]/80 backdrop-blur-md text-[#701020] border border-[#701020]/25',
     accentColor: '#701020',
   },
   {
@@ -82,12 +82,12 @@ const MODULES = [
       'Pitch an original startup to seasoned venture capital partners. Justify your unit economics, defend market defensibility, and navigate unexpected operational curveballs.',
     tags: ['2 Rounds', 'Shark Pitch Arena', 'VC Cross-Exam'],
     Art: VentureVerseArt,
-    cardBg: 'bg-[#701020]',
+    cardBg: 'bg-[#701020]/92 backdrop-blur-xl',
     textColor: 'text-[#f8eee1]',
     taglineColor: 'text-[#f1ca7e]',
     descColor: 'text-[#e8dcc6]',
-    borderStyle: 'border-[#f1ca7e]/30',
-    pillBg: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#f1ca7e]/20',
+    borderStyle: 'border-[#f1ca7e]/35 shadow-[0_20px_60px_rgba(90,13,27,0.75)]',
+    pillBg: 'bg-[#5a0d1b]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
     accentColor: '#f1ca7e',
   },
   {
@@ -100,12 +100,12 @@ const MODULES = [
       'Ignite a brand from nothing. Build a viral digital media presence, model a paid growth budget, and build a physical pop-up booth on campus to convert real crowds.',
     tags: ['3 Rounds', 'Guerrilla Activation', 'Live Campus Stalls'],
     Art: ViralVelocityArt,
-    cardBg: 'bg-[#5a0d1b]',
+    cardBg: 'bg-[#5a0d1b]/92 backdrop-blur-xl',
     textColor: 'text-[#f8eee1]',
     taglineColor: 'text-[#f1ca7e]',
     descColor: 'text-[#e8dcc6]',
-    borderStyle: 'border-[#f1ca7e]/40',
-    pillBg: 'bg-[#701020] text-[#f1ca7e] border border-[#f1ca7e]/30',
+    borderStyle: 'border-[#f1ca7e]/40 shadow-[0_20px_60px_rgba(90,13,27,0.75)]',
+    pillBg: 'bg-[#701020]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/30',
     accentColor: '#f1ca7e',
   },
 ];
@@ -123,12 +123,15 @@ function StackingCard({ item, index }) {
     >
       <div
         className={cn(
-          'pointer-events-auto w-full max-w-4xl lg:max-w-5xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-12 border shadow-2xl transition-all duration-300 relative overflow-hidden',
+          'pointer-events-auto w-full max-w-4xl lg:max-w-5xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-12 border shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-xl',
           item.cardBg,
           item.borderStyle,
           item.textColor
         )}
       >
+        {/* Subtle Glass Sheen Top Edge */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+
         {/* Subtle Watermark Number in background */}
         <div className="absolute right-6 -bottom-6 text-8xl sm:text-9xl md:text-[14rem] font-black opacity-[0.04] pointer-events-none select-none font-mono">
           {item.num}
@@ -191,9 +194,9 @@ function StackingCard({ item, index }) {
             </div>
           </div>
 
-          {/* Right Side: Clean Visual Emblem (~35%) */}
-          <div className="md:col-span-5 flex items-center justify-center">
-            <div className="w-full max-w-[220px] sm:max-w-[260px] md:max-w-none aspect-square rounded-2xl sm:rounded-3xl bg-current/5 border border-current/10 flex items-center justify-center relative overflow-hidden">
+          {/* Right Side: Visual Emblem - Small & Left-aligned on Mobile, Full Square on Desktop */}
+          <div className="md:col-span-5 flex items-center justify-start md:justify-center mt-2 md:mt-0">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-full md:max-w-none md:aspect-square rounded-2xl sm:rounded-3xl bg-current/5 border border-current/15 backdrop-blur-md flex items-center justify-center relative overflow-hidden shadow-inner group">
               <Art />
             </div>
           </div>
