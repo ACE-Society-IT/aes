@@ -35,9 +35,9 @@ const FAQ_ITEMS = [
       'Each module has multiple practical rounds judged by experienced entrepreneurs, corporate executives, and industry mentors. Top performing delegates and teams receive official awards at the closing ceremony.',
   },
   {
-    question: 'Can I register for more than one module?',
+    question: 'Can teams participate in more than one module?',
     answer:
-      'No. You can only choose one competition module so you can take part in all its rounds without schedule conflicts. However, all registered delegates can attend the guest speaker sessions, workshops, and the social gala.',
+      'Yes! Teams and delegates can participate in multiple competition modules, allowing them to compete across different simulation tracks. In addition, all registered delegates have full access to keynote speaker sessions, workshops, and the grand closing gala.',
   },
   {
     question: 'Is there a dress code or code of conduct?',
