@@ -83,7 +83,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-eco-title">Vibrant Ecosystem Network</title>
@@ -131,7 +131,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-inv-title">Investor Access Capital</title>
@@ -174,7 +174,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-key-title">Executive Keynotes Stage</title>
@@ -218,7 +218,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-conf-title">Executive Conferences</title>
@@ -266,7 +266,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-pit-title">Pitch Showcase Arena Trophy</title>
@@ -314,7 +314,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-7 h-7 sm:w-8 sm:h-8"
+        className="w-8.5 h-8.5 sm:w-10 sm:h-10"
         focusable="false"
       >
         <title id="vis-gal-title">Networking & Gala Dinner</title>

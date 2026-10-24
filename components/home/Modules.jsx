@@ -221,8 +221,9 @@ export default function Modules() {
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         className="pt-20 sm:pt-28 md:pt-36 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto"
       >
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-[#5a0d1b] leading-[1.05]">
-          Summit <span className="text-[#701020]">Modules</span>
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
+          <span className="text-[#701020]">Summit</span>{' '}
+          <span className="text-[#b37e1b]">Modules</span>
         </h2>
 
         <p className="mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] font-normal leading-relaxed max-w-xl mx-auto">
