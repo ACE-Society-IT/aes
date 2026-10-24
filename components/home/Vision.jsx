@@ -405,8 +405,9 @@ export default function Vision() {
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#701020]">
             Summit Pillars
           </span>
-          <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#5a0d1b]">
-            Our Vision
+          <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <span className="text-[#701020]">Our</span>{' '}
+            <span className="text-[#b37e1b]">Vision</span>
           </h2>
           <p className="mt-2 sm:mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] leading-relaxed">
             Empowering the next generation of youth entrepreneurs through practical experience,

@@ -17,8 +17,10 @@ export default function SchedulePage() {
 
       {/* Header intro */}
       <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-[#f8eee1] leading-[1.05]">
-          The Summit Track
+        <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.05]">
+          <span className="text-[#f8eee1]">The </span>
+          <span className="text-[#e0485c]">Summit</span>{' '}
+          <span className="text-[#f1ca7e]">Track</span>
         </h1>
         <p className="mt-4 text-base sm:text-lg text-[#e8dcc6] max-w-2xl mx-auto leading-relaxed">
           November 13 — November 15, 2026 · Hosted at Alpha College Karachi. Scroll through each day to discover keynote rounds, simulations, and ceremonies.

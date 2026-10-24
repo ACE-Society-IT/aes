@@ -420,8 +420,15 @@ export default function Timeline({
           <span className="inline-block px-3 py-0.5 rounded-full bg-[#701020] border border-[#89192c] text-[10px] font-bold tracking-[0.25em] text-[#f1ca7e] uppercase mb-1.5 shadow-sm">
             Summit Schedule
           </span>
-          <h2 className="text-2xl font-black text-[#f8eee1] tracking-tight">
-            {title}
+          <h2 className="text-2xl font-black tracking-tight">
+            {title === 'Summit Track' ? (
+              <>
+                <span className="text-[#e0485c]">Summit</span>{' '}
+                <span className="text-[#f1ca7e]">Track</span>
+              </>
+            ) : (
+              <span className="text-[#f8eee1]">{title}</span>
+            )}
           </h2>
           <p className="mt-1 text-[11px] font-semibold text-[#f1ca7e]">
             {periodLabel} · Alpha College Karachi
@@ -485,8 +492,15 @@ export default function Timeline({
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e] block mb-3">
                   Summit Itinerary
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-black text-[#f8eee1] leading-[0.95] tracking-tight">
-                  {title}
+                <h2 className="text-4xl lg:text-5xl font-black leading-[0.95] tracking-tight">
+                  {title === 'Summit Track' ? (
+                    <>
+                      <span className="text-[#e0485c]">Summit</span>{' '}
+                      <span className="text-[#f1ca7e]">Track</span>
+                    </>
+                  ) : (
+                    <span className="text-[#f8eee1]">{title}</span>
+                  )}
                 </h2>
                 <p className="mt-4 text-sm text-[#e8dcc6] leading-relaxed font-medium">
                   Experience three intensive days of entrepreneurship, competitive masterclasses, and executive mentorship.
