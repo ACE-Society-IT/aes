@@ -31,7 +31,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-eco-title">Vibrant Ecosystem Network</title>
@@ -50,6 +50,34 @@ const VISION_CARDS = [
         <circle cx="23" cy="36" r="2" />
         <circle cx="41" cy="36" r="2" />
         <circle cx="32" cy="52" r="2" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-eco-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.85" />
+            <stop offset="45%" stopColor="#89192c" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-eco-line" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.75" />
+            <stop offset="50%" stopColor="#89192c" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#grad-eco-rad)" />
+        <circle cx="150" cy="150" r="100" stroke="url(#grad-eco-line)" strokeWidth="1.5" strokeDasharray="4 6" />
+        <circle cx="150" cy="150" r="65" stroke="url(#grad-eco-line)" strokeWidth="2" />
+        <path d="M50 150 Q 150 50 250 150 T 150 250" stroke="url(#grad-eco-line)" strokeWidth="1.5" fill="none" opacity="0.6" />
+        <circle cx="210" cy="90" r="10" fill="#f1ca7e" opacity="0.3" />
+        <circle cx="90" cy="210" r="14" fill="#89192c" opacity="0.2" />
       </svg>
     ),
   },
@@ -79,7 +107,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-inv-title">Investor Access Capital</title>
@@ -93,6 +121,33 @@ const VISION_CARDS = [
         <circle cx="47" cy="28" r="1.5" />
         <path d="M6 46 C6 43 9 41 14 41 L25 41 C27 41 29 42 30 43.5 L36 50 C37 51 38.5 51.5 40 51.5 L56 51.5 C58 51.5 59.5 53 59.5 55 C59.5 57 58 58.5 56 58.5 L38 58.5 C36 58.5 34 57.5 33 56 L29 51 L19 51 L15 58.5 L6 58.5 Z" />
         <path d="M35 44 C37 42 41 41 45 41 L53 41 C54.5 41 55.5 42 55.5 43.5 C55.5 45 54.5 46 53 46 L43 46 C40.5 46 38 45 35 44 Z" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-inv-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.9" />
+            <stop offset="45%" stopColor="#701020" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#5a0d1b" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-inv-line" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#701020" stopOpacity="0.2" />
+            <stop offset="50%" stopColor="#f1ca7e" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#89192c" stopOpacity="0.4" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="125" fill="url(#grad-inv-rad)" />
+        <path d="M40 240 Q 120 180 180 120 T 260 40" stroke="url(#grad-inv-line)" strokeWidth="3" fill="none" />
+        <path d="M60 260 Q 140 200 200 140 T 280 60" stroke="url(#grad-inv-line)" strokeWidth="1.5" strokeDasharray="6 6" fill="none" opacity="0.7" />
+        <circle cx="260" cy="40" r="16" fill="#f1ca7e" opacity="0.35" />
+        <polygon points="260,20 265,35 280,35 268,45 272,60 260,50 248,60 252,45 240,35 255,35" fill="url(#grad-inv-line)" opacity="0.45" />
       </svg>
     ),
   },
@@ -122,7 +177,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-key-title">Executive Keynotes Stage</title>
@@ -137,6 +192,32 @@ const VISION_CARDS = [
         <polygon points="21,36 43,36 40,55 24,55" />
         <polygon points="32,41 33.5,44.5 37,45 34.5,47.5 35,51 32,49 29,51 29.5,47.5 27,45 30.5,44.5" fill="#701020" />
         <rect x="16" y="55" width="32" height="4" rx="1.5" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-key-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.85" />
+            <stop offset="50%" stopColor="#89192c" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-key-beam" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#grad-key-rad)" />
+        <path d="M150 40 A 110 110 0 0 1 260 150" stroke="url(#grad-key-beam)" strokeWidth="2" fill="none" />
+        <path d="M150 70 A 80 80 0 0 1 230 150" stroke="url(#grad-key-beam)" strokeWidth="2.5" strokeDasharray="5 5" fill="none" />
+        <path d="M150 100 A 50 50 0 0 1 200 150" stroke="url(#grad-key-beam)" strokeWidth="2" fill="none" />
+        <polygon points="150,150 280,70 240,240" fill="url(#grad-key-beam)" opacity="0.15" />
       </svg>
     ),
   },
@@ -166,7 +247,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-conf-title">Executive Conferences</title>
@@ -185,6 +266,33 @@ const VISION_CARDS = [
         <path d="M38 40 C38 36.5 40.5 35 44 35 C47.5 35 50 36.5 50 40 Z" />
         <rect x="24" y="48" width="16" height="9" rx="1" />
         <rect x="16" y="57" width="32" height="3" rx="1.5" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-conf-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.85" />
+            <stop offset="45%" stopColor="#701020" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#5a0d1b" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-conf-grid" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#89192c" stopOpacity="0.15" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#grad-conf-rad)" />
+        <rect x="70" y="70" width="160" height="160" rx="20" stroke="url(#grad-conf-grid)" strokeWidth="1.5" />
+        <rect x="95" y="95" width="110" height="110" rx="14" stroke="url(#grad-conf-grid)" strokeWidth="2" strokeDasharray="4 6" />
+        <line x1="70" y1="150" x2="230" y2="150" stroke="url(#grad-conf-grid)" strokeWidth="1" />
+        <line x1="150" y1="70" x2="150" y2="230" stroke="url(#grad-conf-grid)" strokeWidth="1" />
+        <circle cx="150" cy="150" r="8" fill="#f1ca7e" opacity="0.4" />
       </svg>
     ),
   },
@@ -214,7 +322,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-pit-title">Pitch Showcase Arena Trophy</title>
@@ -233,6 +341,31 @@ const VISION_CARDS = [
         <polygon points="26,45 38,45 40,51 24,51" />
         <rect x="18" y="51" width="28" height="4" rx="1" />
         <rect x="12" y="55" width="40" height="4.5" rx="1.5" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-pit-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#89192c" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#701020" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-pit-star" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.75" />
+            <stop offset="100%" stopColor="#5a0d1b" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#grad-pit-rad)" />
+        <polygon points="150,30 180,110 265,115 200,170 220,250 150,205 80,250 100,170 35,115 120,110" stroke="url(#grad-pit-star)" strokeWidth="2" fill="url(#grad-pit-star)" fillOpacity="0.08" />
+        <circle cx="150" cy="150" r="45" stroke="url(#grad-pit-star)" strokeWidth="1.5" strokeDasharray="3 4" />
+        <circle cx="150" cy="150" r="20" fill="#f1ca7e" opacity="0.25" />
       </svg>
     ),
   },
@@ -262,7 +395,7 @@ const VISION_CARDS = [
         viewBox="0 0 64 64"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 h-6 sm:w-7 sm:h-7"
+        className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
         focusable="false"
       >
         <title id="vis-gal-title">Networking & Gala Dinner</title>
@@ -286,6 +419,34 @@ const VISION_CARDS = [
           <ellipse cx="38" cy="52" rx="8" ry="2.5" />
         </g>
         <path d="M8 58 Q 32 63 56 58" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" opacity="0.5" />
+      </svg>
+    ),
+    bgGradientSvg: (
+      <svg
+        viewBox="0 0 300 300"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute -top-14 -right-14 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 pointer-events-none opacity-30 group-hover:opacity-55 group-hover:scale-110 transition-all duration-700 ease-out"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="grad-gal-rad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#f1ca7e" stopOpacity="0.85" />
+            <stop offset="45%" stopColor="#701020" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#5a0d1b" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="grad-gal-ring" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#89192c" stopOpacity="0.2" />
+            <stop offset="50%" stopColor="#f1ca7e" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#f1ca7e" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <circle cx="150" cy="150" r="130" fill="url(#grad-gal-rad)" />
+        <ellipse cx="150" cy="150" rx="120" ry="60" transform="rotate(-30 150 150)" stroke="url(#grad-gal-ring)" strokeWidth="2" />
+        <ellipse cx="150" cy="150" rx="120" ry="60" transform="rotate(30 150 150)" stroke="url(#grad-gal-ring)" strokeWidth="1.5" strokeDasharray="6 4" />
+        <circle cx="100" cy="90" r="12" fill="#f1ca7e" opacity="0.3" />
+        <circle cx="210" cy="180" r="18" fill="#89192c" opacity="0.25" />
+        <circle cx="180" cy="80" r="7" fill="#f1ca7e" opacity="0.4" />
       </svg>
     ),
   },
@@ -376,7 +537,7 @@ export default function Vision() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               onClick={() => setSelectedPillar(card)}
-              className="group bg-[#e8dcc6]/75 rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-9 border-2 border-[#89192c]/20 hover:border-[#701020] hover:bg-[#e8dcc6] shadow-sm sm:shadow-md hover:shadow-2xl hover:shadow-[#5a0d1b]/20 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#701020]"
+              className="group relative overflow-hidden bg-gradient-to-br from-[#fbf5eb] via-[#e8dcc6]/95 to-[#dfcfb5]/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-9 border-2 border-[#89192c]/20 hover:border-[#701020] shadow-sm sm:shadow-md hover:shadow-2xl hover:shadow-[#5a0d1b]/25 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#701020]"
               tabIndex={0}
               role="button"
               aria-haspopup="dialog"
@@ -388,21 +549,27 @@ export default function Vision() {
                 }
               }}
             >
-              <div>
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#701020] text-[#f1ca7e] shadow-md border-2 border-[#89192c] flex items-center justify-center shrink-0 mb-4 sm:mb-6 group-hover:scale-110 group-hover:bg-[#5a0d1b] group-hover:rotate-2 transition-all duration-300">
+              {/* Themed Gradient SVG in Card Background */}
+              {card.bgGradientSvg}
+
+              {/* Ambient Warm Glow in Card Corner */}
+              <div className="absolute -bottom-10 -left-10 w-36 h-36 rounded-full bg-gradient-to-tr from-[#701020]/15 via-[#f1ca7e]/15 to-transparent blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
+
+              <div className="relative z-10">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 rounded-2xl sm:rounded-3xl bg-[#701020] text-[#f1ca7e] shadow-lg border-2 border-[#89192c] flex items-center justify-center shrink-0 mb-5 sm:mb-7 group-hover:scale-110 group-hover:bg-[#5a0d1b] group-hover:rotate-2 group-hover:shadow-[0_0_30px_rgba(241,202,126,0.4)] transition-all duration-300">
                   {card.icon}
                 </div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#5a0d1b] tracking-tight">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#5a0d1b] tracking-tight">
                   {card.title}
                 </h3>
-                <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base leading-relaxed text-[#650d1c]">
+                <p className="mt-2.5 sm:mt-3.5 text-xs sm:text-sm md:text-base leading-relaxed text-[#650d1c]">
                   {card.description}
                 </p>
               </div>
 
-              <div className="mt-5 sm:mt-7 pt-4 sm:pt-5 border-t-2 border-[#89192c]/15 flex items-center justify-between text-xs sm:text-sm font-bold text-[#701020] group-hover:text-[#5a0d1b] transition-colors">
+              <div className="relative z-10 mt-6 sm:mt-8 pt-4 sm:pt-5 border-t-2 border-[#89192c]/15 flex items-center justify-between text-xs sm:text-sm font-bold text-[#701020] group-hover:text-[#5a0d1b] transition-colors">
                 <span className="group-hover:underline underline-offset-4">Explore Pillar</span>
-                <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#701020] text-[#f1ca7e] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-1 group-hover:bg-[#5a0d1b]">
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#701020] text-[#f1ca7e] flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-1 group-hover:bg-[#5a0d1b]">
                   →
                 </span>
               </div>
@@ -436,11 +603,14 @@ export default function Vision() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-3xl bg-[#e8dcc6] text-[#5a0d1b] rounded-2xl sm:rounded-3xl border-2 sm:border-4 border-[#701020] shadow-[0_25px_70px_rgba(90,13,27,0.55)] p-5 sm:p-8 md:p-10 z-10 my-auto max-h-[92vh] overflow-y-auto custom-scrollbar"
+              className="relative overflow-hidden w-full max-w-3xl bg-[#e8dcc6] text-[#5a0d1b] rounded-2xl sm:rounded-3xl border-2 sm:border-4 border-[#701020] shadow-[0_25px_70px_rgba(90,13,27,0.55)] p-5 sm:p-8 md:p-10 z-10 my-auto max-h-[92vh] overflow-y-auto custom-scrollbar"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Ambient Themed Gradient SVG in Modal Background */}
+              {selectedPillar.bgGradientSvg}
+
               {/* Top Bar with Badge, Pillar Counter & Close Button */}
-              <div className="flex items-center justify-between gap-3 border-b-2 border-[#89192c]/15 pb-4 mb-5 sm:mb-6">
+              <div className="relative z-10 flex items-center justify-between gap-3 border-b-2 border-[#89192c]/15 pb-4 mb-5 sm:mb-6">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <span className="px-2.5 py-1 rounded-full bg-[#701020] text-[#f1ca7e] text-[10px] sm:text-xs font-bold uppercase tracking-wider">
                     Pillar {currentIndex + 1} of {VISION_CARDS.length}
@@ -461,8 +631,8 @@ export default function Vision() {
               </div>
 
               {/* Header: Large Icon + Title + Tagline */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-6">
-                <div className="w-14 h-14 sm:w-18 sm:h-18 rounded-2xl bg-[#701020] text-[#f1ca7e] border-2 border-[#89192c] flex items-center justify-center shrink-0 shadow-lg">
+              <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 rounded-2xl sm:rounded-3xl bg-[#701020] text-[#f1ca7e] border-2 border-[#89192c] flex items-center justify-center shrink-0 shadow-lg">
                   {selectedPillar.icon}
                 </div>
                 <div>
