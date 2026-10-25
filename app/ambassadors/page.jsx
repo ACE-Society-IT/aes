@@ -20,7 +20,6 @@ import {
   Gem,
   ArrowRight,
   ArrowUpRight,
-  Mail,
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -723,16 +722,7 @@ export default function AmbassadorsPage() {
               <h3 className="text-lg font-bold text-[#f8eee1] mb-4">
                 Contact Information
               </h3>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a
-                  href="mailto:ambassadors@aes2026.com"
-                  className="group flex items-center gap-3 text-[#e8dcc6] hover:text-[#f1ca7e] transition-colors duration-300"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#89192c]/60 border border-[#89192c] flex items-center justify-center group-hover:bg-[#89192c] transition-colors duration-300">
-                    <Mail className="w-4 h-4 text-[#f1ca7e]" />
-                  </div>
-                  <span className="text-sm font-medium">ambassadors@aes2026.com</span>
-                </a>
+              <div className="flex items-center justify-center">
                 <a
                   href="https://instagram.com/aes_summit"
                   target="_blank"

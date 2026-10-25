@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X, Calendar, Layers, Users, Award, HelpCircle, Home } from 'lucide-react';
+import { ArrowUpRight, Menu, X, Calendar, Layers, Users, HelpCircle, Home } from 'lucide-react';
 
 /**
  * Clean navigation links matching AES Summit information architecture
@@ -14,7 +14,6 @@ const NAV_LINKS = [
   { name: 'Schedule', href: '/schedule', icon: Calendar, subtitle: 'Nov 13 — 15, 2026' },
   { name: 'Modules', href: '/modules', icon: Layers, subtitle: '5 Flagship Tracks' },
   { name: 'Executives', href: '/executives', icon: Users, subtitle: 'Leadership Council' },
-  { name: 'Ambassadors', href: '/ambassadors', icon: Award, subtitle: 'Campus Network' },
   { name: 'FAQs', href: '/faq', icon: HelpCircle, subtitle: 'Summit Queries' },
 ];
 
@@ -191,15 +190,13 @@ export function MorphingScrollNavbar() {
 
           {/* Right CTA Buttons */}
           <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
-            <a
-              href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/ambassadors"
               className="group relative inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-full border-2 border-[#f1ca7e]/40 bg-[#89192c]/50 hover:bg-[#89192c] hover:border-[#f1ca7e] text-[#f8eee1] hover:text-[#f1ca7e] hover:shadow-lg hover:shadow-[#5a0d1b]/50 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 ease-out whitespace-nowrap overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
-              aria-label="Become an Ambassador"
+              aria-label="Ambassador Program"
             >
               <span>Ambassador</span>
-            </a>
+            </Link>
 
             <a
               href="https://forms.gle/cGVgw5TpvpU9AXZx5"
@@ -242,6 +239,14 @@ export function MorphingScrollNavbar() {
 
           {/* Quick Actions & Menu Toggle Button */}
           <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href="/ambassadors"
+              className="inline-flex items-center justify-center px-2.5 sm:px-3 py-1.5 rounded-full border border-[#f1ca7e]/40 bg-[#89192c]/50 hover:bg-[#89192c] text-[#f8eee1] hover:text-[#f1ca7e] font-semibold text-xs tracking-tight transition-colors"
+              aria-label="Ambassador Program"
+            >
+              <span>Ambassador</span>
+            </Link>
+
             <a
               href="https://forms.gle/cGVgw5TpvpU9AXZx5"
               target="_blank"
@@ -378,15 +383,13 @@ export function MorphingScrollNavbar() {
               </span>
             </a>
 
-            <a
-              href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/ambassadors"
               onClick={() => setMobileMenuOpen(false)}
               className="inline-flex items-center justify-center w-full px-5 py-3 rounded-full bg-[#701020] border-2 border-[#89192c] hover:border-[#f1ca7e] text-[#f8eee1] hover:text-[#f1ca7e] font-semibold text-sm transition-all"
             >
-              <span>Become an Ambassador</span>
-            </a>
+              <span>Ambassador Program</span>
+            </Link>
 
             <p className="text-center text-[11px] text-[#e8dcc6] mt-2">
               Alpha Entrepreneurship Summit 2026 · Alpha College Karachi
