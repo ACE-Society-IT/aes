@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Award, Shield, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Shield, Sparkles } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -36,59 +35,73 @@ const MALE_SILHOUETTE_PATH =
 const FEMALE_SILHOUETTE_PATH =
   'M 1660.8 1104.0 L 1759.1 969.8 C 1760.3 968.1 1761.0 966.2 1761.0 964.1 L 1761.0 900.7 C 1771.5 904.3 1788.3 911.0 1806.6 922.6 C 1841.5 944.5 1885.1 985.4 1901.9 1058.1 L 1812.5 1023.0 C 1809.8 1022.0 1806.8 1022.2 1804.3 1023.6 L 1660.8 1104.0 Z M 1493.3 900.7 L 1493.3 961.7 C 1493.3 963.7 1493.9 965.6 1495.1 967.3 L 1594.1 1104.3 L 1449.9 1023.6 C 1448.5 1022.8 1446.9 1022.4 1445.3 1022.4 C 1444.1 1022.4 1442.9 1022.6 1441.8 1023.0 L 1352.3 1058.1 C 1369.2 985.4 1412.8 944.5 1447.6 922.6 C 1466 911.0 1482.7 904.3 1493.3 900.7 Z M 1844.1 664.8 C 1844.1 693.8 1837.4 722.4 1824.2 749.9 C 1811.9 775.7 1794.5 799.3 1772.5 820.0 C 1729.7 860.4 1674.3 884.6 1624.3 884.6 C 1575.4 884.6 1520.4 860.4 1477.2 820.0 C 1455.3 799.4 1437.1 775.2 1424.8 749.9 C 1411.3 722.3 1404.5 693.7 1404.5 664.7 C 1404.5 664.5 1404.4 640.7 1404.7 611.1 C 1462.2 602.1 1517.8 581.0 1565.9 549.8 C 1614.8 518.1 1653.7 477.5 1678.9 432.1 C 1732.7 432.6 1768.4 439.9 1794.2 455.8 C 1827.0 475.9 1842.9 511.1 1842.9 563.4 C 1842.9 563.4 1842.9 563.5 1842.9 563.5 L 1844.1 640.4 L 1844.1 664.8 Z M 1627.2 1117.5 L 1512.4 958.6 L 1512.4 870.1 C 1548.5 891.6 1587.8 903.6 1624.3 903.6 C 1663.0 903.6 1704.5 890.6 1741.9 867.5 L 1741.9 961.0 L 1627.2 1117.5 Z M 2026.0 1009.0 L 1946.3 973.9 L 1946.3 973.9 C 1927.1 924.5 1910.1 835.2 1910.1 679.3 C 1910.1 587.4 1928.4 547.5 1916.4 468.7 C 1906.1 401.1 1867.8 337.7 1815.0 293.7 C 1763.6 251.0 1691.2 230.3 1627.1 249.4 L 1627.1 249.4 C 1563.1 230.3 1490.7 251.0 1439.3 293.7 C 1386.5 337.7 1348.2 401.1 1337.9 468.7 C 1325.8 547.5 1344.1 587.4 1344.1 679.3 C 1344.1 835.2 1327.1 924.5 1308.0 973.9 L 1308 973.9 L 1228.3 1009.0 C 1197.6 1022.6 1177.8 1053.0 1177.8 1086.6 L 1177.8 1267.8 C 1177.8 1287.1 1193.4 1302.7 1212.7 1302.7 L 2041.5 1302.7 C 2060.8 1302.7 2076.5 1287.1 2076.5 1267.8 L 2076.5 1086.6 C 2076.5 1053.0 2056.7 1022.6 2026.0 1009.0 Z';
 
-function ExecutiveAvatar({ gender, name }) {
-  const initials = name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .slice(0, 2);
-
+/**
+ * Editorial Lithograph Portrait Plate
+ * Renders executive vector silhouette in fine luxury duotone with atmospheric depth
+ */
+function ExecutivePortraitPlate({ gender, name, index, department, id }) {
   const safeSlug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
   const titleId = `exec-avatar-${safeSlug}-title`;
   const descId = `exec-avatar-${safeSlug}-desc`;
+  const gradId = `exec-grad-${id}`;
   const isFemale = gender === 'female';
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 bg-[#5a0d1b] select-none">
-      {/* Refined subtle ambient radial backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(241,202,126,0.08),transparent_70%)] pointer-events-none" />
+    <div className="relative w-full aspect-[4/4.7] sm:aspect-[4/5] bg-gradient-to-b from-[#38060f] via-[#260309] to-[#170206] rounded-xl sm:rounded-2xl overflow-hidden border border-[#89192c]/50 group-hover:border-[#f1ca7e]/60 transition-colors duration-500 flex flex-col justify-between p-4 sm:p-5 select-none shadow-inner">
+      {/* Subtle architectural radial lighting */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(241,202,126,0.12),transparent_65%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_40%,rgba(23,2,6,0.85)_100%)] pointer-events-none" />
 
-      {/* Professional Silhouette Medallion Frame */}
-      <div className="relative z-10 w-36 h-36 sm:w-44 sm:h-44 rounded-full p-[2.5px] bg-gradient-to-b from-[#f1ca7e]/90 via-[#89192c] to-[#701020] shadow-xl shadow-[#5a0d1b]/80 flex items-center justify-center">
-        {/* Inner warm disc with subtle depth */}
-        <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-b from-[#ffffff] via-[#f8eee1] to-[#e8dcc6] flex items-center justify-center relative shadow-inner">
+      {/* Top Editorial Index & Department Stamp */}
+      <div className="relative z-10 flex items-center justify-between w-full">
+        <span className="font-mono text-xs sm:text-[13px] font-bold tracking-widest text-[#f1ca7e]">
+          {index}
+        </span>
+        <span className="text-[9px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[#e8dcc6]/80 px-2.5 py-0.5 rounded border border-[#89192c]/60 bg-[#5a0d1b]/60 backdrop-blur-sm">
+          {department}
+        </span>
+      </div>
+
+      {/* Center Lithographic Silhouette Vector */}
+      <div className="relative z-10 flex-1 flex items-center justify-center py-2">
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Subtle warm halo */}
+          <div className="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-[radial-gradient(circle,rgba(241,202,126,0.15)_0%,rgba(137,25,44,0.25)_50%,transparent_75%)] pointer-events-none blur-xl" />
+
           <svg
             viewBox={isFemale ? '1137 150 980 1225' : '102 120 980 1225'}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             role="img"
             aria-labelledby={`${titleId} ${descId}`}
-            focusable="false"
-            className="w-full h-full scale-[0.92] translate-y-2.5 drop-shadow-sm transition-transform duration-500 group-hover:scale-[0.96]"
+            className="w-full h-full max-h-[210px] sm:max-h-[250px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.55)] transition-all duration-700 ease-out group-hover:scale-[1.03] opacity-95 group-hover:opacity-100"
           >
-            <title id={titleId}>{`${name} Silhouette Avatar`}</title>
+            <title id={titleId}>{`${name} Portrait Silhouette`}</title>
             <desc id={descId}>
-              {`Official executive council vector portrait silhouette for ${name}, AES 2026 leadership.`}
+              {`Official vector portrait silhouette for ${name}, AES 2026 executive council.`}
             </desc>
 
             <path
               d={isFemale ? FEMALE_SILHOUETTE_PATH : MALE_SILHOUETTE_PATH}
-              fill="#5a0d1b"
+              fill={`url(#${gradId})`}
               fillRule="evenodd"
               clipRule="evenodd"
             />
+            <defs>
+              <linearGradient id={gradId} x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#f8eee1" />
+                <stop offset="60%" stopColor="#f1ca7e" />
+                <stop offset="100%" stopColor="#c79951" />
+              </linearGradient>
+            </defs>
           </svg>
         </div>
       </div>
 
-      {/* Minimalist Professional Monogram Badge */}
-      <div className="mt-4 px-3.5 py-1 rounded-full bg-[#701020]/95 border border-[#89192c] flex items-center gap-1.5 shadow-md">
-        <span className="text-[11px] font-bold tracking-widest text-[#f1ca7e] uppercase">
-          {initials}
-        </span>
-        <span className="text-[10px] font-semibold tracking-wider text-[#e8dcc6] uppercase">
-          • Executive
-        </span>
+      {/* Bottom Architectural Seal */}
+      <div className="relative z-10 flex items-center justify-between pt-2 border-t border-[#89192c]/40 text-[9px] tracking-[0.25em] uppercase text-[#e8dcc6]/60 font-mono">
+        <span>ALPHA AES</span>
+        <span>COUNCIL · 2026</span>
       </div>
     </div>
   );
@@ -97,61 +110,67 @@ function ExecutiveAvatar({ gender, name }) {
 const EXECUTIVES = [
   {
     id: 'mansoor-moiz',
+    index: '01',
     name: 'Mansoor Moiz',
     gender: 'male',
     role: 'Chief Executive Officer (CEO)',
+    department: 'Executive Stewardship',
     badge: 'Executive Leadership',
-    image: null,
     linkedin: 'https://www.linkedin.com/in/mansoor-moiz/',
     bio: 'As CEO, I focus on driving ACE’s vision, aligning teams toward shared goals, and building meaningful partnerships. I aim to foster a spirit of entrepreneurship, encourage innovative thinking, and create opportunities that connect students with the business world. Through strategic direction, collaboration, and effective execution, my goal is to deliver a summit that promotes practical learning, inspires new ideas, and creates a lasting impact on every participant.',
   },
   {
     id: 'zoya-ehtasham',
+    index: '02',
     name: 'Zoya Ehtasham',
     gender: 'female',
     role: 'Chief Financial Officer (CFO)',
+    department: 'Fiscal Stewardship',
     badge: 'Financial Governance',
-    image: null,
     linkedin: null,
     bio: 'As CFO, I oversee financial strategy, resource allocation, and budget governance for AES. My priority is ensuring fiscal discipline, securing key sponsorships, and maximizing value across all summit modules to provide delegates and partners with a seamless, world-class experience.',
   },
   {
     id: 'bareerah-ahmed',
+    index: '03',
     name: 'Bareerah Ahmed',
     gender: 'female',
     role: 'Chief Communication Officer (CCO)',
+    department: 'External Relations',
     badge: 'Communications & Outreach',
-    image: null,
     linkedin: 'https://www.linkedin.com/in/bareerah-ahmed-ba1493423?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     bio: 'As Chief Communication Officer, I aim to expand AES’s reach through strategic outreach, meaningful networking, and impactful partnerships. I’ll build strong connections with stakeholders and ensure seamless communication that strengthens the summit’s presence and impact.',
   },
   {
     id: 'ayaan-japanwalla',
+    index: '04',
     name: 'Ayaan Japanwalla',
     gender: 'male',
     role: 'Marketing Director',
+    department: 'Brand Architecture',
     badge: 'Brand & Growth Strategy',
-    image: null,
     linkedin: 'https://www.linkedin.com/in/ayaanjapanwalla',
     bio: 'As Marketing Director, I aim to bring AES to life through creative campaigns, engaging content, and strategic promotion. My focus is on building a strong brand presence, generating excitement, and connecting with our audience to make AES a memorable and impactful experience.',
   },
   {
     id: 'ayan-khurrum',
+    index: '05',
     name: 'Ayan Khurrum',
     gender: 'male',
     role: 'Module Director',
+    department: 'Academic & Simulation',
     badge: 'Competition Design',
-    image: null,
     linkedin: 'https://www.linkedin.com/in/ayan-khurram-3bb4b4424?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     bio: 'As Module Director, I aim to turn entrepreneurial ideas into meaningful experiences through strategic planning, creative thinking, and effective team leadership. I’ll focus on fostering innovation, encouraging collaboration, and ensuring seamless execution to deliver an engaging and impactful summit experience for every participant involved.',
   },
   {
     id: 'ahmed-shahid',
+    index: '06',
     name: 'Ahmed Shahid',
     gender: 'male',
     role: 'Operating Director',
+    department: 'Logistics & Deployment',
     badge: 'Operations & Logistics',
-    image: null,
     linkedin: 'https://www.linkedin.com/in/ahmed-shahid-2326582aa?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
     bio: 'As Operating Director, my goal is to make sure everything runs smoothly and efficiently while keeping the team motivated and focused. I believe in good planning, clear communication, and working together to get things done. I’m ready to take responsibility, solve problems, and make sure we deliver the best possible AES experience for everyone involved.',
   },
@@ -159,168 +178,273 @@ const EXECUTIVES = [
 
 export default function ExecutivesPage() {
   return (
-    <main className="min-h-screen bg-[#5a0d1b] text-[#f8eee1] flex flex-col justify-between selection:bg-[#f1ca7e] selection:text-[#5a0d1b]">
+    <main className="min-h-screen bg-[#2c040b] text-[#f8eee1] flex flex-col font-sans selection:bg-[#f1ca7e] selection:text-[#5a0d1b] relative overflow-x-hidden">
       <Navbar />
 
-      {/* Header Section */}
-      <section className="relative pt-40 sm:pt-48 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Ambient Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[radial-gradient(ellipse_at_center,#89192c_0%,#701020_45%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#f1ca7e]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* ── Fixed Editorial Background Texture & Lighting ── */}
+      <div
+        className="fixed inset-0 bg-[linear-gradient(to_right,rgba(241,202,126,0.025)_1px,transparent_1px),linear-gradient(to_bottom,rgba(241,202,126,0.025)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="fixed inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(137,25,44,0.32)_0%,rgba(44,4,11,0.92)_70%)] pointer-events-none"
+        aria-hidden="true"
+      />
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center"
-        >
-          {/* Eyebrow Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#f1ca7e]/40 bg-[#701020]/80 text-[#f1ca7e] text-xs font-bold uppercase tracking-[0.25em] shadow-lg shadow-[#5a0d1b]/60 mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            Leadership Board
+      {/* ─────────────────────────────────────────────────────────────
+          1. EDITORIAL MASTHEAD & HERO
+          ───────────────────────────────────────────────────────────── */}
+      <section className="relative z-10 pt-32 sm:pt-40 md:pt-44 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Top Issue Bar */}
+          <div className="flex items-center justify-between border-y border-[#89192c]/50 py-2.5 px-1 sm:px-2 text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#e8dcc6]/70 mb-8 sm:mb-12">
+            <span>EST. 2026 · ALPHA COLLEGE</span>
+            <span className="hidden sm:inline text-[#f1ca7e]">EXECUTIVE COUNCIL ROSTER</span>
+            <span>VOL. 01 / GOVERNANCE</span>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-[#f8eee1] leading-[0.95]">
-            Executive <span className="text-[#f1ca7e]">Council</span>
-          </h1>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            {/* Minimal Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#f1ca7e]/40 bg-[#5a0d1b]/60 text-[#f1ca7e] text-[11px] font-bold uppercase tracking-[0.28em] shadow-sm mb-5">
+              <Sparkles className="w-3 h-3 text-[#f1ca7e]" />
+              Leadership Council
+            </div>
 
-          {/* Subtitle */}
-          <p className="mt-6 text-base sm:text-xl text-[#e8dcc6] max-w-2xl font-normal leading-relaxed">
-            The visionary directors, builders, and strategists leading the Alpha Entrepreneurship
-            Summit 2026.
-          </p>
+            {/* Editorial Title */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight text-[#f8eee1] leading-[0.92]">
+              The Executive{' '}
+              <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f1ca7e] via-[#f8eee1] to-[#f1ca7e]">
+                Council
+              </span>
+            </h1>
 
-          {/* Quick Metrics Bar */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 w-full max-w-2xl">
-            <div className="rounded-2xl border-2 border-[#89192c] bg-[#701020]/60 backdrop-blur-md p-4 text-center">
-              <span className="block text-2xl sm:text-3xl font-extrabold text-[#f1ca7e]">6</span>
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#e8dcc6]">
+            {/* Lead Curatorial Foreword */}
+            <p className="mt-5 sm:mt-7 text-sm sm:text-lg md:text-xl text-[#e8dcc6] max-w-2xl mx-auto font-normal leading-relaxed">
+              Six directors. Five competitive arenas. One shared institutional mission. The executive leadership stewarding Pakistan’s premier youth entrepreneurship summit.
+            </p>
+          </motion.div>
+
+          {/* Minimalist Editorial Datum Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12 sm:mt-16 border-y border-[#89192c]/50 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 md:divide-x divide-[#89192c]/40"
+          >
+            <div className="text-center sm:text-left px-3 sm:px-5">
+              <span className="block text-2xl sm:text-4xl font-black text-[#f1ca7e] font-mono">06</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#e8dcc6]/90 block mt-1">
                 Core Directors
               </span>
+              <span className="text-[10px] text-[#e8dcc6]/50 block mt-0.5">Autonomous Portfolios</span>
             </div>
-            <div className="rounded-2xl border-2 border-[#89192c] bg-[#701020]/60 backdrop-blur-md p-4 text-center">
-              <span className="block text-2xl sm:text-3xl font-extrabold text-[#f8eee1]">5</span>
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#e8dcc6]">
-                Flagship Modules
+
+            <div className="text-center sm:text-left px-3 sm:px-5 pt-4 sm:pt-0">
+              <span className="block text-2xl sm:text-4xl font-black text-[#f8eee1] font-mono">05</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#e8dcc6]/90 block mt-1">
+                Summit Tracks
               </span>
+              <span className="text-[10px] text-[#e8dcc6]/50 block mt-0.5">Simulation Arenas</span>
             </div>
-            <div className="col-span-2 sm:col-span-1 rounded-2xl border-2 border-[#89192c] bg-[#701020]/60 backdrop-blur-md p-4 text-center">
-              <span className="block text-2xl sm:text-3xl font-extrabold text-[#f1ca7e]">1</span>
-              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#e8dcc6]">
-                Shared Mission
+
+            <div className="text-center sm:text-left px-3 sm:px-5 pt-4 sm:pt-0">
+              <span className="block text-2xl sm:text-4xl font-black text-[#f1ca7e] font-mono">100%</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#e8dcc6]/90 block mt-1">
+                Student-Led
               </span>
+              <span className="text-[10px] text-[#e8dcc6]/50 block mt-0.5">Alpha College Karachi</span>
             </div>
-          </div>
-        </motion.div>
+
+            <div className="text-center sm:text-left px-3 sm:px-5 pt-4 sm:pt-0">
+              <span className="block text-2xl sm:text-4xl font-black text-[#f8eee1] font-mono">NOV 13–15</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#e8dcc6]/90 block mt-1">
+                Three-Day Summit
+              </span>
+              <span className="text-[10px] text-[#e8dcc6]/50 block mt-0.5">Alpha College Campus</span>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Executives Roster Grid */}
-      <section className="relative z-20 w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-12 bg-[#650d1c] border-t-2 border-[#89192c] rounded-t-[40px] sm:rounded-t-[56px] shadow-[0_-30px_70px_rgba(90,13,27,0.6)]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+      {/* ─────────────────────────────────────────────────────────────
+          2. EXECUTIVE DOSSIER GRID (EDITORIAL PROFILES)
+          ───────────────────────────────────────────────────────────── */}
+      <section className="relative z-10 w-full py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Subhead */}
+          <div className="flex items-center justify-between pb-6 border-b border-[#89192c]/50 mb-10">
+            <div>
+              <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#f1ca7e]">
+                01 — DIRECTORS DOSSIER
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-[#f8eee1] tracking-tight mt-1">
+                Executive Roster
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-[#e8dcc6]/60 hidden sm:inline">
+              ALPHA ENTREPRENEURSHIP SUMMIT
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {EXECUTIVES.map((exec, index) => (
-              <motion.div
+              <motion.article
                 key={exec.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative rounded-3xl bg-[#701020]/80 border-2 border-[#89192c] hover:border-[#f1ca7e]/80 p-6 sm:p-7 flex flex-col justify-between shadow-2xl shadow-[#5a0d1b]/70 hover:shadow-[0_20px_55px_rgba(90,13,27,0.95)] hover:-translate-y-2 transition-all duration-500 backdrop-blur-xl overflow-hidden"
+                transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative flex flex-col justify-between bg-[#38060f]/60 hover:bg-[#420a14]/90 border border-[#89192c]/50 hover:border-[#f1ca7e]/60 transition-all duration-500 rounded-2xl p-5 sm:p-6 backdrop-blur-md shadow-xl shadow-[#1f0207]/80 hover:shadow-[0_16px_40px_rgba(90,13,27,0.7)]"
               >
-                {/* Ambient Top Glow */}
-                <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#f1ca7e]/10 rounded-full blur-2xl group-hover:bg-[#f1ca7e]/25 transition-all duration-700 pointer-events-none" />
-
                 <div>
-                  {/* Photo / Avatar Frame */}
-                  <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden border-2 border-[#89192c] group-hover:border-[#f1ca7e]/60 shadow-lg bg-[#5a0d1b] mb-6 flex items-center justify-center">
-                    <ExecutiveAvatar gender={exec.gender} name={exec.name} />
+                  {/* Portrait Plate */}
+                  <ExecutivePortraitPlate
+                    gender={exec.gender}
+                    name={exec.name}
+                    index={exec.index}
+                    department={exec.department}
+                    id={exec.id}
+                  />
 
-                    {/* Badge */}
-                    <div className="absolute top-3 left-3 bg-[#5a0d1b]/90 backdrop-blur-md border border-[#f1ca7e]/50 px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#f1ca7e] shadow-md z-10">
-                      {exec.badge}
-                    </div>
-                  </div>
-
-                  {/* Header info */}
-                  <div className="mb-4">
-                    <h2 className="text-2xl sm:text-3xl font-black text-[#f8eee1] tracking-tight group-hover:text-[#f1ca7e] transition-colors duration-300">
+                  {/* Identification */}
+                  <div className="mt-5">
+                    <h3 className="text-xl sm:text-2xl font-black text-[#f8eee1] tracking-tight group-hover:text-[#f1ca7e] transition-colors duration-300">
                       {exec.name}
-                    </h2>
-                    <p className="text-xs sm:text-sm font-bold text-[#f1ca7e] tracking-wide uppercase mt-1">
+                    </h3>
+
+                    <p className="mt-1 text-xs sm:text-[13px] font-bold text-[#f1ca7e] uppercase tracking-[0.14em]">
                       {exec.role}
+                    </p>
+
+                    <p className="mt-0.5 text-[10px] sm:text-[11px] font-medium text-[#e8dcc6]/60 tracking-wider uppercase">
+                      {exec.badge}
                     </p>
                   </div>
 
-                  {/* Bio statement */}
-                  <div className="relative bg-[#5a0d1b]/80 border-2 border-[#89192c]/80 rounded-2xl p-4 sm:p-5 text-xs sm:text-[13px] text-[#e8dcc6] leading-relaxed mb-6 group-hover:border-[#89192c] transition-colors">
-                    <span className="text-2xl text-[#f1ca7e] font-serif leading-none block mb-1">“</span>
-                    <p className="italic">{exec.bio}</p>
-                  </div>
+                  {/* Editorial Perspective / Bio Statement */}
+                  <blockquote className="mt-4 pt-4 border-t border-[#89192c]/40 relative">
+                    <p className="text-xs sm:text-[13px] text-[#e8dcc6]/90 leading-relaxed font-normal italic">
+                      “{exec.bio}”
+                    </p>
+                  </blockquote>
                 </div>
 
-                {/* Footer Action */}
-                <div className="pt-4 border-t-2 border-[#89192c]/60 flex items-center justify-between gap-3">
+                {/* Minimalist Action Link */}
+                <div className="mt-6 pt-4 border-t border-[#89192c]/40">
                   {exec.linkedin ? (
                     <a
                       href={exec.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/btn relative inline-flex items-center justify-between pl-5 pr-1.5 py-1.5 sm:pl-6 sm:pr-2 sm:py-2 rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] font-bold text-xs sm:text-sm tracking-tight shadow-lg shadow-[#5a0d1b]/50 hover:shadow-[0_0_20px_rgba(248,238,225,0.45)] hover:scale-[1.04] active:scale-[0.96] transition-all duration-300 ease-out w-full"
+                      className="group/link inline-flex items-center justify-between w-full px-4 py-2.5 rounded-xl border border-[#89192c]/60 bg-[#4a0a14]/60 hover:bg-[#5a0d1b] hover:border-[#f1ca7e]/70 text-[#f8eee1] hover:text-[#f1ca7e] transition-all duration-300 text-xs font-bold tracking-wider uppercase"
+                      aria-label={`Connect with ${exec.name} on LinkedIn`}
                     >
-                      <span className="flex items-center gap-1.5">
-                        <LinkedInIcon className="w-3.5 h-3.5 text-[#5a0d1b]" />
-                        <span>Connect on LinkedIn</span>
+                      <span className="flex items-center gap-2">
+                        <LinkedInIcon className="w-3.5 h-3.5 text-[#f1ca7e]" />
+                        <span>LinkedIn Dossier</span>
                       </span>
-                      <span className="w-7 h-7 rounded-full bg-[#5a0d1b] text-[#f8eee1] flex items-center justify-center ml-2.5 shrink-0 transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:bg-[#701020]">
-                        <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-                      </span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-[#f1ca7e] transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                     </a>
                   ) : (
-                    <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#89192c]/50 text-[#f8eee1] font-semibold text-xs border border-[#89192c] w-full">
-                      <Shield className="w-3.5 h-3.5 text-[#f1ca7e]" />
+                    <div className="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-xl border border-[#89192c]/40 bg-[#260309]/50 text-[#e8dcc6]/60 text-xs font-semibold tracking-wider uppercase gap-2">
+                      <Shield className="w-3.5 h-3.5 text-[#f1ca7e]/60" />
                       <span>Executive Council Board</span>
                     </div>
                   )}
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Bottom Navigation CTA */}
-          <div className="mt-20 pt-12 border-t-2 border-[#89192c] flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="text-center sm:text-left">
-              <h3 className="text-xl sm:text-2xl font-black text-[#f8eee1]">
-                Ready to Join the Summit?
-              </h3>
-              <p className="text-sm text-[#e8dcc6] mt-1">
-                Register as an individual or team delegate for AES 2026.
+      {/* ─────────────────────────────────────────────────────────────
+          3. PRINCIPLES OF STEWARDSHIP (EDITORIAL PILLARS)
+          ───────────────────────────────────────────────────────────── */}
+      <section className="relative z-10 w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/50 bg-[#220207]/70 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#89192c]/50 gap-4">
+            <div>
+              <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#f1ca7e]">
+                02 — INSTITUTIONAL GOVERNANCE
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#f8eee1] tracking-tight mt-1">
+                Pillars of Stewardship
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-[#e8dcc6]/70 max-w-md font-normal leading-relaxed">
+              AES operates under uncompromising standards of simulation fidelity, fiscal accountability, and delegate care.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
+            <div className="border-l-2 border-[#f1ca7e]/60 pl-5">
+              <span className="font-mono text-xs text-[#f1ca7e] font-bold">01 / ARCHITECTURE</span>
+              <h3 className="text-lg font-black text-[#f8eee1] mt-2 tracking-tight">Rigorous Simulation</h3>
+              <p className="mt-2 text-xs sm:text-sm text-[#e8dcc6]/80 leading-relaxed font-normal">
+                Every heat, crisis room, and bidding floor is engineered to replicate live market pressures, testing true business instinct under realistic constraints.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <a
-                href="https://forms.gle/cGVgw5TpvpU9AXZx5"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-between pl-7 pr-2.5 py-2.5 sm:pl-8 sm:pr-3 sm:py-3 rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] font-bold text-sm sm:text-base tracking-tight shadow-xl shadow-[#5a0d1b]/60 hover:shadow-[0_0_28px_rgba(248,238,225,0.5)] hover:scale-[1.04] active:scale-[0.96] transition-all duration-300 ease-out whitespace-nowrap"
-              >
-                <span>Register Now</span>
-                <span className="w-8 h-8 rounded-full bg-[#5a0d1b] text-[#f8eee1] flex items-center justify-center ml-3.5 shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#701020]">
-                  <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-                </span>
-              </a>
-
-              <Link
-                href="/"
-                className="group relative inline-flex items-center justify-between pl-6 pr-2 py-2 rounded-full bg-[#89192c]/50 border-2 border-[#f1ca7e]/40 hover:border-[#f1ca7e] hover:bg-[#89192c] text-[#f8eee1] font-semibold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-              >
-                <span>Return Home</span>
-                <span className="w-7 h-7 rounded-full bg-[#f1ca7e] text-[#5a0d1b] flex items-center justify-center ml-3 shrink-0 transition-transform duration-300 group-hover:scale-110">
-                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                </span>
-              </Link>
+            <div className="border-l-2 border-[#89192c] pl-5">
+              <span className="font-mono text-xs text-[#f1ca7e] font-bold">02 / GOVERNANCE</span>
+              <h3 className="text-lg font-black text-[#f8eee1] mt-2 tracking-tight">Fiscal & Operating Precision</h3>
+              <p className="mt-2 text-xs sm:text-sm text-[#e8dcc6]/80 leading-relaxed font-normal">
+                Uncompromising logistics, transparent sponsorship allocation, and dedicated team stewards ensuring every delegate experiences summit excellence.
+              </p>
             </div>
+
+            <div className="border-l-2 border-[#f1ca7e]/60 pl-5">
+              <span className="font-mono text-xs text-[#f1ca7e] font-bold">03 / EMPOWERMENT</span>
+              <h3 className="text-lg font-black text-[#f8eee1] mt-2 tracking-tight">Youth Leadership Network</h3>
+              <p className="mt-2 text-xs sm:text-sm text-[#e8dcc6]/80 leading-relaxed font-normal">
+                Creating a persistent ecosystem connecting Pakistan&apos;s most ambitious student entrepreneurs with industry mentors, angels, and corporate leaders.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          4. CLOSING EDITORIAL CTA
+          ───────────────────────────────────────────────────────────── */}
+      <section className="relative z-10 w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/50 bg-[#1c0205]">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-[#f1ca7e]">
+            03 — SUMMIT INVITATION
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black text-[#f8eee1] tracking-tight mt-2">
+            Step Onto the Summit Arena
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-[#e8dcc6] max-w-xl mx-auto leading-relaxed font-normal">
+            Whether commanding trading floors in Market Monopoly or defending corporate empires, the executive council invites you to test your limits.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://forms.gle/cGVgw5TpvpU9AXZx5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center justify-between pl-7 pr-2.5 py-3 rounded-xl bg-[#f1ca7e] hover:bg-[#f8eee1] text-[#5a0d1b] font-bold text-sm tracking-tight shadow-xl shadow-[#1f0207]/80 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+            >
+              <span>Register as Delegate</span>
+              <span className="w-7 h-7 rounded-lg bg-[#5a0d1b] text-[#f1ca7e] flex items-center justify-center ml-4 shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              </span>
+            </a>
+
+            <Link
+              href="/modules"
+              className="group inline-flex items-center justify-center px-6 py-3 rounded-xl border border-[#89192c] hover:border-[#f1ca7e]/60 bg-[#420a14]/60 hover:bg-[#5a0d1b] text-[#f8eee1] hover:text-[#f1ca7e] text-sm font-semibold transition-all duration-300 w-full sm:w-auto"
+            >
+              <span>Explore 5 Modules</span>
+            </Link>
           </div>
         </div>
       </section>
