@@ -24,7 +24,7 @@ export const metadata = {
       'Want to represent innovation? Become an official Brand Ambassador for AES 2026. Earn tiered team discounts and special awards.',
     images: [
       {
-        url: `${SITE_URL}/ambassadors-og.png`,
+        url: `${SITE_URL}/ambassadors-poster.png`,
         width: 1200,
         height: 630,
         alt: 'Want To Represent Innovation? Become An AES Brand Ambassador',
@@ -44,7 +44,7 @@ export const metadata = {
     title: 'Brand Ambassador Program | Alpha Entrepreneurship Summit',
     description:
       'Want to represent innovation? Become an official Brand Ambassador for AES 2026.',
-    images: [`${SITE_URL}/ambassadors-og.png`],
+    images: [`${SITE_URL}/ambassadors-poster.png`],
     creator: '@aes_summit',
   },
 };

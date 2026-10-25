@@ -298,7 +298,7 @@ export default function AmbassadorsPage() {
             >
               <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[380px] rounded-2xl overflow-hidden border-2 border-[#89192c] shadow-2xl bg-[#5a0d1b]">
                 <Image
-                  src="/ambassadors-og.jpg"
+                  src="/ambassadors-poster.jpg"
                   alt="Official AES Brand Ambassador Announcement"
                   width={400}
                   height={400}
