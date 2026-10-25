@@ -3,15 +3,18 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Globe } from 'lucide-react';
 import { TextHoverEffect, FooterBackgroundGradient } from '@/components/ui/hover-footer';
 
 // Clean, streamlined navigation links
 const FOOTER_LINKS = [
-  { label: 'About AES', href: '#about' },
-  { label: 'Our Vision', href: '#vision' },
-  { label: 'Summit Modules', href: '#modules' },
-  { label: 'Registration', href: '#register' },
+  { label: 'Summit Modules', href: '/modules' },
+  { label: 'Summit Track', href: '/schedule' },
+  { label: 'Executive Council', href: '/executives' },
+  { label: 'Ambassadors', href: '/ambassadors' },
+  { label: 'FAQs', href: '/faq' },
+  { label: 'Register Now', href: 'https://forms.gle/cGVgw5TpvpU9AXZx5' },
 ];
 
 // Official AES Contact Information
@@ -83,15 +86,21 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] pt-16 sm:pt-20 pb-4 overflow-hidden select-none">
+    <footer className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c] pt-10 sm:pt-16 md:pt-20 pb-4 overflow-hidden select-none">
       {/* Ambient Top Glow Line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#f1ca7e]/40 to-transparent pointer-events-none z-10" />
 
       {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 z-20 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12">
-          {/* Brand Column (5 cols) */}
-          <div className="lg:col-span-5 space-y-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 z-20 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 pb-6 sm:pb-12">
+          {/* Brand Column (5 cols) with scroll lazy loading on scroll up & down */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 space-y-4"
+          >
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative h-11 w-28 transition-transform duration-300 group-hover:scale-105">
                 <Image
@@ -105,33 +114,55 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm sm:text-base text-[#e8dcc6] leading-relaxed max-w-md">
-              The premier entrepreneurship summit uniting frontier founders, institutional
-              venture capital, and global industry leaders to accelerate market-defining
-              ventures.
+              Pakistan’s premier youth entrepreneurship summit, empowering student founders
+              and innovators through intense business simulations, mentorship, and investor access.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Quick Links Column (3 cols) */}
-          <div className="lg:col-span-3">
+          {/* Quick Links Column (3 cols) with scroll lazy loading on scroll up & down */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-3"
+          >
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#f1ca7e] mb-5">
               Summit
             </h4>
             <ul className="space-y-3">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-[#e8dcc6] hover:text-[#f8eee1] hover:translate-x-0.5 transition-all duration-200 inline-block"
-                  >
-                    {link.label}
-                  </Link>
+                  {link.href.startsWith('http') ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#e8dcc6] hover:text-[#f1ca7e] hover:translate-x-0.5 transition-all duration-200 inline-block"
+                    >
+                      {link.label} ↗
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className="text-sm text-[#e8dcc6] hover:text-[#f8eee1] hover:translate-x-0.5 transition-all duration-200 inline-block"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Contact Column (4 cols) */}
-          <div className="lg:col-span-4">
+          {/* Contact Column (4 cols) with scroll lazy loading on scroll up & down */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4"
+          >
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#f1ca7e] mb-5">
               Contact & Venue
             </h4>
@@ -201,7 +232,7 @@ export default function Footer() {
                   <a
                     href={CONTACT_INFO.socials.instagramHref}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="text-[#f8eee1] hover:text-[#f1ca7e] transition-colors font-medium text-xs sm:text-sm block mt-0.5"
                   >
                     Instagram: <span className="text-[#f1ca7e]">{CONTACT_INFO.socials.instagram}</span>
@@ -209,7 +240,7 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Divider */}
@@ -224,7 +255,7 @@ export default function Footer() {
                 key={social.name}
                 href={social.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label={social.name}
                 className="w-10 h-10 rounded-full bg-[#701020] border border-[#89192c] flex items-center justify-center text-[#f1ca7e] hover:text-[#5a0d1b] hover:border-[#f1ca7e] hover:bg-[#f1ca7e] hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm hover:shadow-[0_0_14px_rgba(241,202,126,0.4)]"
               >
@@ -241,7 +272,7 @@ export default function Footer() {
       </div>
 
       {/* Monumental Interactive Text Hover Effect Displaying AES */}
-      <div className="relative flex justify-center items-center w-full h-44 sm:h-64 md:h-76 lg:h-96 -mt-10 sm:-mt-16 md:-mt-20 lg:-mt-24 overflow-hidden z-20 pointer-events-auto">
+      <div className="relative flex justify-center items-center w-full h-28 sm:h-56 md:h-76 lg:h-96 -mt-4 sm:-mt-12 md:-mt-20 lg:-mt-24 overflow-hidden z-20 pointer-events-auto">
         <TextHoverEffect text="AES" className="w-full h-full" />
       </div>
 

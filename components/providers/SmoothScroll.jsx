@@ -32,9 +32,21 @@ export default function SmoothScroll({ children }) {
 
     frameId = requestAnimationFrame(raf);
 
+    // Global prevention of dragging images or media
+    const handleDragStart = (e) => {
+      const tag = e.target?.tagName?.toLowerCase();
+      if (tag === 'img' || tag === 'svg' || tag === 'picture' || e.target?.closest?.('img, svg')) {
+        e.preventDefault();
+        return false;
+      }
+    };
+
+    window.addEventListener('dragstart', handleDragStart);
+
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
+      window.removeEventListener('dragstart', handleDragStart);
     };
   }, []);
 

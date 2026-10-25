@@ -1,0 +1,169 @@
+<svg fill="none" viewBox="0 0 1200 420" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes pulseGlow {
+          0%, 100% {
+            box-shadow: 0 0 25px rgba(241, 202, 126, 0.25), inset 0 0 35px rgba(241, 202, 126, 0.1);
+            border-color: rgba(241, 202, 126, 0.4);
+          }
+          50% {
+            box-shadow: 0 0 50px rgba(241, 202, 126, 0.55), inset 0 0 50px rgba(241, 202, 126, 0.25);
+            border-color: rgba(241, 202, 126, 0.85);
+          }
+        }
+        @keyframes floatBadge {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+        }
+        @keyframes shimmerText {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        @keyframes rotateOrb {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .container {
+          position: relative;
+          width: 100%;
+          height: 420px;
+          background: linear-gradient(135deg, #380811 0%, #5a0d1b 30%, #701020 60%, #89192c 85%, #5a0d1b 100%);
+          background-size: 300% 300%;
+          animation: gradientMove 14s ease infinite;
+          border-radius: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+          color: #f8eee1;
+          overflow: hidden;
+          box-sizing: border-box;
+          border: 2px solid rgba(241, 202, 126, 0.35);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(rgba(241, 202, 126, 0.07) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(241, 202, 126, 0.07) 1px, transparent 1px);
+          background-size: 36px 36px;
+          opacity: 0.8;
+          pointer-events: none;
+        }
+        .ring {
+          position: absolute;
+          border-radius: 50%;
+          border: 1px dashed rgba(241, 202, 126, 0.2);
+          pointer-events: none;
+        }
+        .ring-1 {
+          width: 480px;
+          height: 480px;
+          animation: rotateOrb 40s linear infinite;
+        }
+        .ring-2 {
+          width: 320px;
+          height: 320px;
+          border: 1px solid rgba(241, 202, 126, 0.15);
+          animation: rotateOrb 25s linear infinite reverse;
+        }
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 20px;
+          background: rgba(112, 16, 32, 0.7);
+          border: 1px solid rgba(241, 202, 126, 0.4);
+          border-radius: 9999px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: #f1ca7e;
+          animation: floatBadge 4s ease-in-out infinite, pulseGlow 3s ease-in-out infinite;
+          backdrop-filter: blur(10px);
+          margin-bottom: 18px;
+          z-index: 2;
+        }
+        .dot {
+          width: 8px;
+          height: 8px;
+          background: #f1ca7e;
+          border-radius: 50%;
+          box-shadow: 0 0 10px #f1ca7e;
+        }
+        .title {
+          font-size: 54px;
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          margin: 0;
+          text-align: center;
+          background: linear-gradient(90deg, #f8eee1 0%, #f1ca7e 50%, #f8eee1 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmerText 6s linear infinite;
+          z-index: 2;
+          text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .subtitle {
+          font-size: 20px;
+          font-weight: 500;
+          color: #e8dcc6;
+          margin: 12px 0 24px 0;
+          text-align: center;
+          max-width: 850px;
+          letter-spacing: 0.01em;
+          z-index: 2;
+        }
+        .meta-chips {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          z-index: 2;
+        }
+        .chip {
+          padding: 7px 18px;
+          background: rgba(90, 13, 27, 0.75);
+          border: 1px solid rgba(248, 238, 225, 0.2);
+          border-radius: 9999px;
+          font-size: 13px;
+          font-weight: 600;
+          color: #f8eee1;
+          letter-spacing: 0.05em;
+        }
+        .chip-accent {
+          background: #f8eee1;
+          color: #5a0d1b;
+          border-color: #f1ca7e;
+          font-weight: 800;
+        }
+      </style>
+      <div class="container">
+        <div class="bg-grid"></div>
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="badge">
+          <span class="dot"></span>
+          ALPHA COLLEGE KARACHI · NOV 13–15, 2026
+        </div>
+        <h1 class="title">ALPHA ENTREPRENEURSHIP SUMMIT</h1>
+        <p class="subtitle">Pakistan's premier youth entrepreneurship summit featuring 5 competitive simulation battlegrounds, tactical keynotes, and executive networking.</p>
+        <div class="meta-chips">
+          <span class="chip">🚀 5 Flagship Modules</span>
+          <span class="chip">⚡ 3 Intensive Days</span>
+          <span class="chip">🏛️ Alpha College Karachi</span>
+          <span class="chip chip-accent">alphaace.com.pk</span>
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>

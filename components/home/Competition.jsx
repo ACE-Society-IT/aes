@@ -11,25 +11,21 @@ import {
 } from 'framer-motion';
 
 /**
- * AES 2026 - High-Impact Sticky Showcase Section
+ * AES 2026 - High-Impact Scroll-Driven Showcase Section
+ * "YOUR VISION. YOUR VENTURE. YOUR SUMMIT."
  *
  * Flow:
- * 1. Blank on Entrance: Initial state starts completely blank until user scrolls into the section.
- * 2. Calm & Smooth Text Reveal: Staggered character slide-up from overflow-hidden masks
- *    with smooth cubic-bezier easing [0.22, 1, 0.36, 1] and tight, stacked display typography.
- * 3. Sequential Center-to-Corner Image Choreography:
- *    - Picture 1 appears in the CENTER of the screen directly from the text, scales up,
- *      then travels diagonally to the Top-Left corner on scroll and exits.
- *    - Then Picture 2 appears in the CENTER of the screen directly from the text, scales up,
- *      then travels diagonally to the Bottom-Right corner on scroll and exits.
- * 4. Strict 7-color alignment (#5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e).
+ * 1. Screen enters with calm mask-revealed display typography.
+ * 2. Picture 1 appears in the CENTER from the text, scales up, then travels diagonally to Top-Left.
+ * 3. Picture 2 appears in the CENTER from the text, scales up, then travels diagonally to Bottom-Right.
+ * 4. Calibrated scroll height (no trailing empty void before Modules slides in).
  */
 
 const LINE_1 = 'YOUR VISION.';
 const LINE_2 = 'YOUR VENTURE.';
 const LINE_3 = 'YOUR SUMMIT.';
 
-// Smooth character animation variants: calm 0.65s slide-up inside overflow:hidden
+// Smooth character animation variants
 const charVariants = {
   hidden: {
     y: '110%',
@@ -59,107 +55,106 @@ export default function Competition() {
   const containerRef = useRef(null);
   const [hasEntered, setHasEntered] = useState(false);
 
-  // 1. Scroll-linking mechanics
+  // Scroll tracking within this section
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Inertia spring smoothing for silky scrubbing
+  // Inertia spring smoothing for scrub
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 90,
     damping: 26,
     restDelta: 0.001,
   });
 
-  // Control calm text reveal: screen is blank when entering, triggers smoothly past 0.02
+  // Calm text reveal as user enters
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (latest > 0.02 && !hasEntered) {
+    if (latest > 0.01 && !hasEntered) {
       setHasEntered(true);
-    } else if (latest <= 0.005 && hasEntered) {
+    } else if (latest <= 0.002 && hasEntered) {
       setHasEntered(false);
     }
   });
 
   useEffect(() => {
     const rafId = requestAnimationFrame(() => {
-      if (scrollYProgress.get() > 0.02) {
+      if (scrollYProgress.get() > 0.01) {
         setHasEntered(true);
       }
     });
     return () => cancelAnimationFrame(rafId);
   }, [scrollYProgress]);
 
-  // Heading exit fade near the very end of the 320vh scroll track
-  const textExitOpacity = useTransform(smoothProgress, [0.88, 0.96], [1, 0]);
-  const textExitScale = useTransform(smoothProgress, [0.88, 0.96], [1, 0.95]);
+  // Heading stays visible during photos, then gently scales into the incoming section
+  const textScale = useTransform(smoothProgress, [0.85, 1.0], [1, 0.96]);
 
   // =========================================================================
   // PICTURE 1 (IF2025.jpg - KEYNOTE ARENA)
-  // 1. Appears in the CENTER of the screen from the text (0.16 -> 0.28)
-  // 2. Holds briefly, then travels diagonally to the Top-Left corner (0.28 -> 0.50)
+  // Appears at center (0.10 -> 0.24) and travels to Top-Left (0.24 -> 0.52)
   // =========================================================================
   const photo1Opacity = useTransform(
     smoothProgress,
-    [0.15, 0.22, 0.44, 0.5],
+    [0.08, 0.18, 0.48, 0.56],
     [0, 1, 1, 0]
   );
-  const photo1Scale = useTransform(smoothProgress, [0.15, 0.25, 0.5], [0.3, 1.0, 1.1]);
+  const photo1Scale = useTransform(smoothProgress, [0.08, 0.22, 0.52], [0.3, 1.0, 1.1]);
   const photo1X = useTransform(
     smoothProgress,
-    [0.15, 0.28, 0.5],
-    ['0vw', '0vw', '-85vw']
+    [0.08, 0.24, 0.52],
+    ['0vw', '0vw', '-75vw']
   );
   const photo1Y = useTransform(
     smoothProgress,
-    [0.15, 0.28, 0.5],
-    ['0vh', '0vh', '-72vh']
+    [0.08, 0.24, 0.52],
+    ['0vh', '0vh', '-65vh']
   );
-  const photo1Rotate = useTransform(smoothProgress, [0.15, 0.28, 0.5], [-3, -3, -16]);
+  const photo1Rotate = useTransform(smoothProgress, [0.08, 0.24, 0.52], [-3, -3, -15]);
 
   // =========================================================================
   // PICTURE 2 (if2025_2.jpg - STARTUP SHOWDOWN)
-  // 1. Appears in the CENTER of the screen from the text (0.50 -> 0.62)
-  // 2. Holds briefly, then travels diagonally to the Bottom-Right corner (0.62 -> 0.84)
+  // Appears at center (0.50 -> 0.64) and travels to Bottom-Right (0.64 -> 0.95)
+  // Right as it completes at ~0.95-1.0, Modules immediately glides in!
+  // Zero empty scroll void!
   // =========================================================================
   const photo2Opacity = useTransform(
     smoothProgress,
-    [0.49, 0.56, 0.78, 0.84],
+    [0.48, 0.58, 0.88, 0.98],
     [0, 1, 1, 0]
   );
-  const photo2Scale = useTransform(smoothProgress, [0.49, 0.59, 0.84], [0.3, 1.0, 1.1]);
+  const photo2Scale = useTransform(smoothProgress, [0.48, 0.62, 0.95], [0.3, 1.0, 1.1]);
   const photo2X = useTransform(
     smoothProgress,
-    [0.49, 0.62, 0.84],
-    ['0vw', '0vw', '85vw']
+    [0.48, 0.64, 0.95],
+    ['0vw', '0vw', '75vw']
   );
   const photo2Y = useTransform(
     smoothProgress,
-    [0.49, 0.62, 0.84],
-    ['0vh', '0vh', '72vh']
+    [0.48, 0.64, 0.95],
+    ['0vh', '0vh', '65vh']
   );
-  const photo2Rotate = useTransform(smoothProgress, [0.49, 0.62, 0.84], [3, 3, 16]);
+  const photo2Rotate = useTransform(smoothProgress, [0.48, 0.64, 0.95], [3, 3, 15]);
 
   // Gold SVG accent doodles
   const doodle1Scale = useTransform(
     smoothProgress,
-    [0.2, 0.26, 0.4, 0.46],
+    [0.15, 0.22, 0.42, 0.5],
     [0, 1.15, 1, 0]
   );
   const doodle1Opacity = useTransform(
     smoothProgress,
-    [0.2, 0.24, 0.4, 0.46],
+    [0.15, 0.2, 0.42, 0.5],
     [0, 1, 1, 0]
   );
 
   const doodle2Scale = useTransform(
     smoothProgress,
-    [0.54, 0.6, 0.74, 0.8],
+    [0.55, 0.62, 0.82, 0.9],
     [0, 1.15, 1, 0]
   );
   const doodle2Opacity = useTransform(
     smoothProgress,
-    [0.54, 0.58, 0.74, 0.8],
+    [0.55, 0.6, 0.82, 0.9],
     [0, 1, 1, 0]
   );
 
@@ -179,9 +174,9 @@ export default function Competition() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[320vh] bg-[#5a0d1b] text-[#f8eee1]"
+      className="relative z-20 w-full h-[220vh] md:h-[300vh] bg-[#5a0d1b] text-[#f8eee1] select-none"
     >
-      {/* Sticky Viewport Stage (h-screen, sticky top-0, overflow:hidden) */}
+      {/* Sticky Viewport Stage: Locks during the photo choreography */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center select-none">
         {/* Background Ambient Atmosphere */}
         <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_50%,#89192c_0%,#701020_45%,#5a0d1b_100%)]" />
@@ -189,19 +184,14 @@ export default function Competition() {
         {/* Ambient Warm Vignette Halo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[480px] bg-[#f1ca7e]/[0.05] rounded-full blur-3xl pointer-events-none z-0" />
 
-        {/* =========================================================================
-            STAGE 1: Centered 3-Line Stacked Heading (Calm & Smooth Mask Reveal)
-            Z-Index: 10 (Centered Typography)
-           ========================================================================= */}
+        {/* Centered 3-Line Stacked Heading (Calm & Smooth Mask Reveal) */}
         <motion.div
           style={{
-            opacity: textExitOpacity,
-            scale: textExitScale,
+            scale: textScale,
           }}
           className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center will-change-transform pointer-events-none"
         >
-          {/* 3-Line Stacked Uppercase Heading (Tight leading, no unnecessary space) */}
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#f8eee1] leading-[0.88] select-none text-center">
+          <h2 className="text-4xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black uppercase tracking-tighter text-[#f8eee1] leading-[0.92] sm:leading-[0.88] select-none text-center">
             {/* Line 1: YOUR VISION. */}
             <div className="overflow-hidden">
               <motion.div
@@ -240,9 +230,7 @@ export default function Competition() {
           </h2>
         </motion.div>
 
-        {/* =========================================================================
-            STAGE 2: Gold SVG Accent Doodles (Pop In & Out)
-           ========================================================================= */}
+        {/* Gold SVG Accent Doodles */}
         {/* Doodle 1: Sparkle Star Cluster (Top Right of Text, active during Photo 1) */}
         <motion.div
           style={{
@@ -280,11 +268,11 @@ export default function Competition() {
 
         {/* =========================================================================
             STAGE 3: Sequential Picture 1 & Picture 2
-            - Picture 1 appears in the CENTER from the text, then travels to Top-Left corner
-            - Then Picture 2 appears in the CENTER from the text, then travels to Bottom-Right corner
+            - Picture 1 appears in the CENTER from text -> travels to Top-Left
+            - Then Picture 2 appears in the CENTER from text -> travels to Bottom-Right
            ========================================================================= */}
 
-        {/* PICTURE 1: Appears at Center -> Travels to Top-Left Corner */}
+        {/* PICTURE 1: Keynote Arena */}
         <motion.div
           style={{
             x: photo1X,
@@ -293,7 +281,7 @@ export default function Competition() {
             rotate: photo1Rotate,
             opacity: photo1Opacity,
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-56 sm:w-76 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
           <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#89192c] bg-[#5a0d1b] shadow-[0_30px_70px_rgba(90,13,27,0.95)]">
             <Image
@@ -315,7 +303,7 @@ export default function Competition() {
           </div>
         </motion.div>
 
-        {/* PICTURE 2: Appears at Center -> Travels to Bottom-Right Corner */}
+        {/* PICTURE 2: Startup Showdown */}
         <motion.div
           style={{
             x: photo2X,
@@ -324,7 +312,7 @@ export default function Competition() {
             rotate: photo2Rotate,
             opacity: photo2Opacity,
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-64 sm:w-80 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-56 sm:w-76 md:w-96 aspect-[3/4] will-change-transform pointer-events-none"
         >
           <div className="relative w-full h-full rounded-[24px] overflow-hidden border-2 border-[#89192c] bg-[#5a0d1b] shadow-[0_30px_70px_rgba(90,13,27,0.95)]">
             <Image
@@ -340,7 +328,7 @@ export default function Competition() {
                 STARTUP SHOWDOWN
               </span>
               <span className="text-[9px] font-bold uppercase tracking-wider text-[#e8dcc6]">
-                PKR 1.5M+ POOL
+                AES 2026
               </span>
             </div>
           </div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robotsDirectives>
+  <directive>
+    <userAgent>*</userAgent>
+    <allow>/</allow>
+  </directive>
+  <sitemap>https://alphaace.com.pk/sitemap.xml</sitemap>
+  <host>https://alphaace.com.pk</host>
+</robotsDirectives>

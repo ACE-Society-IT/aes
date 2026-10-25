@@ -12,37 +12,37 @@ const FAQ_ITEMS = [
   {
     question: 'What is the Alpha Entrepreneurship Summit (AES)?',
     answer:
-      'AES is a premier, multi-day entrepreneurship summit uniting frontier founders, institutional venture capital, and global industry leaders. It features five flagship modules — Investomania, Defend the Empire, Venture Verse, Market Monopoly, and Viral Velocity — designed to catalyze the next generation of market-defining ventures.',
+      'AES is Pakistan’s premier youth entrepreneurship summit. It brings together ambitious students, industry leaders, and investors for three days of high-intensity business simulations, practical masterclasses, and networking across five flagship modules.',
   },
   {
     question: 'Who should attend the summit?',
     answer:
-      "AES is curated for ambitious founders, early-stage startup teams, aspiring entrepreneurs, university innovators, engineers, product builders, and investment professionals. Whether you're raising your seed round or looking for co-investment opportunities, the summit offers unmatched access to capital, mentorship, and strategic networks.",
+      'AES is designed for high school, college, and university students, aspiring founders, and creative problem-solvers. Whether you already have a startup concept or simply want to sharpen your business and trading instincts, AES offers hands-on experience and direct mentorship.',
   },
   {
     question: 'When and where will AES 2026 take place?',
     answer:
-      'AES 2026 will be held across three flagship days from November 13–15, 2026 at Alpha College in Karachi, Pakistan. Stay connected through our official channels and Instagram (@aes_summit) for timely updates.',
+      'AES 2026 will take place over three days from November 13–15, 2026, hosted at Alpha College in Karachi, Pakistan. Stay updated with announcements by following our official Instagram (@aes_summit).',
   },
   {
     question: 'How do I register for the summit?',
     answer:
-      'Registration is available through our official website. Click the "Register" button in the navigation bar or hero section to access the registration portal. Early-bird pricing and limited delegate passes are available on a first-come, first-served basis.',
+      'You can register online by clicking the "Register Now" button in the navigation bar or hero section. You may sign up individually or with your team. Delegate passes are limited, so early registration is encouraged.',
   },
   {
-    question: 'What is the prize pool and competition format?',
+    question: 'How does the competition work and how are winners chosen?',
     answer:
-      'Competitors across all five modules vie for a combined PKR 1.5M+ prize pool. Each module features three rigorous rounds evaluated by VC judges, enterprise partners, and industry leaders.',
+      'Each module has multiple practical rounds judged by experienced entrepreneurs, corporate executives, and industry mentors. Top performing delegates and teams receive official awards at the closing ceremony.',
   },
   {
-    question: 'Can I participate in multiple modules?',
+    question: 'Can teams participate in more than one module?',
     answer:
-      'Absolutely. Delegates are encouraged to engage across modules based on their skill set and strategic interests. Some modules run concurrently, so check the published schedule to plan your summit journey. Team formation across tracks is also supported.',
+      'Yes! Teams and delegates can participate in multiple competition modules, allowing them to compete across different simulation tracks. In addition, all registered delegates have full access to keynote speaker sessions, workshops, and the grand closing gala.',
   },
   {
-    question: 'Is there a code of conduct or dress code?',
+    question: 'Is there a dress code or code of conduct?',
     answer:
-      'AES maintains a professional, inclusive environment under Chatham House rules for select executive sessions. Business-casual attire is recommended for daytime sessions, with smart formal attire for the evening networking gala. A full code of conduct is shared with every registered delegate.',
+      'Yes. Business-casual attire is recommended for daytime modules and presentations, while formal attire is requested for the evening awards ceremony and gala dinner. A complete guide will be provided to all registered delegates prior to the event.',
   },
 ];
 
@@ -54,35 +54,36 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: false, amount: 0.15 }}
       transition={{
         duration: 0.6,
-        delay: index * 0.08,
+        delay: (index % 4) * 0.06,
         ease: [0.22, 1, 0.36, 1],
       }}
     >
       <div
         className={`
-          group rounded-2xl border transition-all duration-300
+          group relative overflow-hidden rounded-3xl border-2 transition-all duration-300 ease-out hover:scale-[1.01] backdrop-blur-xl
           ${
             isOpen
-              ? 'bg-[#701020] border-[#f1ca7e]/50 shadow-[0_0_30px_rgba(241,202,126,0.12)]'
-              : 'bg-[#5a0d1b]/70 border-[#89192c] hover:border-[#f1ca7e]/40 hover:bg-[#701020]/60'
+              ? 'bg-[#701020]/90 border-[#f1ca7e] shadow-[0_12px_40px_rgba(241,202,126,0.2)]'
+              : 'bg-[#5a0d1b]/70 border-[#89192c]/80 hover:border-[#f1ca7e]/60 hover:bg-[#701020]/60 shadow-xl shadow-[#5a0d1b]/50'
           }
         `}
       >
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
         {/* Question Button */}
         <button
           onClick={onToggle}
-          className="w-full flex items-center justify-between gap-4 px-6 py-5 sm:px-8 sm:py-6 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#5a0d1b] rounded-2xl"
+          className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 py-3.5 sm:px-8 sm:py-6 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#5a0d1b] rounded-3xl active:scale-[0.99] transition-transform duration-200"
           aria-expanded={isOpen}
         >
-          <div className="flex items-center gap-4 min-w-0">
+          <div className="flex items-center gap-3 sm:gap-5 min-w-0">
             {/* Index Number */}
             <span
               className={`
-                text-xs font-bold tabular-nums shrink-0 transition-colors duration-300
-                ${isOpen ? 'text-[#f1ca7e]' : 'text-[#89192c] group-hover:text-[#e8dcc6]'}
+                w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-black tabular-nums shrink-0 transition-colors duration-300
+                ${isOpen ? 'bg-[#f1ca7e] text-[#5a0d1b]' : 'bg-[#701020] text-[#f1ca7e] group-hover:bg-[#89192c]'}
               `}
             >
               {String(index + 1).padStart(2, '0')}
@@ -91,7 +92,7 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
             {/* Question Text */}
             <span
               className={`
-                text-sm sm:text-base font-semibold tracking-tight transition-colors duration-300
+                text-sm sm:text-lg font-bold tracking-tight transition-colors duration-300 leading-snug
                 ${isOpen ? 'text-[#f8eee1]' : 'text-[#e8dcc6] group-hover:text-[#f8eee1]'}
               `}
             >
@@ -99,19 +100,17 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
             </span>
           </div>
 
-          {/* Chevron */}
+          {/* Chevron in circular disc */}
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="shrink-0"
+            className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
+              isOpen
+                ? 'bg-[#5a0d1b] border-[#f1ca7e]/60 text-[#f1ca7e]'
+                : 'bg-[#701020] border-[#89192c] text-[#e8dcc6] group-hover:border-[#f1ca7e]/60 group-hover:text-[#f1ca7e]'
+            }`}
           >
-            <ChevronDown
-              size={18}
-              className={`
-                transition-colors duration-300
-                ${isOpen ? 'text-[#f1ca7e]' : 'text-[#89192c] group-hover:text-[#e8dcc6]'}
-              `}
-            />
+            <ChevronDown className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 transition-colors duration-300" />
           </motion.div>
         </button>
 
@@ -129,9 +128,9 @@ function AccordionItem({ item, index, isOpen, onToggle }) {
               }}
               className="overflow-hidden"
             >
-              <div className="px-6 pb-5 sm:px-8 sm:pb-6 pl-[calc(1.5rem+2rem)] sm:pl-[calc(2rem+2rem)]">
-                <div className="h-px w-full bg-gradient-to-r from-[#89192c] via-[#89192c]/40 to-transparent mb-4" />
-                <p className="text-sm sm:text-base leading-relaxed text-[#e8dcc6]">
+              <div className="px-4 pb-4 sm:px-8 sm:pb-6 pl-4 sm:pl-[calc(2rem+2rem)]">
+                <div className="h-px w-full bg-gradient-to-r from-[#89192c] via-[#89192c]/40 to-transparent mb-3 sm:mb-4" />
+                <p className="text-xs sm:text-base leading-relaxed text-[#e8dcc6]">
                   {item.answer}
                 </p>
               </div>
@@ -155,28 +154,28 @@ export default function Faqs() {
     <MouseStreakWrapper
       id="faqs"
       fadeOnScroll={false}
-      className="w-full text-[#f8eee1] py-24 sm:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]"
+      className="w-full text-[#f8eee1] py-10 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]"
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Two-Column Layout: Header Left + FAQs Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16">
           {/* Left Column — Section Header */}
           <motion.div
             className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#f1ca7e]">
               Have Questions?
             </span>
-            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f8eee1]">
+            <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f8eee1]">
               Frequently <span className="text-[#f1ca7e]">Asked</span>
               <br />
               Questions
             </h2>
-            <p className="mt-5 text-base sm:text-lg text-[#e8dcc6] leading-relaxed max-w-md">
+            <p className="mt-2 sm:mt-5 text-xs sm:text-base md:text-lg text-[#e8dcc6] leading-relaxed max-w-md">
               Everything you need to know about AES 2026 — from registration and modules
               to competition formats and networking opportunities.
             </p>

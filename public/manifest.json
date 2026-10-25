@@ -1,6 +1,11 @@
 {
   "name": "AES - Alpha Entrepreneurship Summit 2026",
-  "short_name": "AES",
+  "short_name": "AES 2026",
+  "description": "Official Alpha Entrepreneurship Summit 2026 hosted at Alpha College Karachi",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#5a0d1b",
+  "theme_color": "#5a0d1b",
   "icons": [
     {
       "src": "/icon1.png",
@@ -20,8 +25,5 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
-  ],
-  "theme_color": "#372320",
-  "background_color": "#372320",
-  "display": "standalone"
+  ]
 }

@@ -1,449 +1,247 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import {
-  TrendingUp,
-  DollarSign,
-  Globe2,
-  ShieldAlert,
-  Users,
-  Flame,
-  Building2,
-  Landmark,
-  Layers,
-  Rocket,
-  Lightbulb,
-  Zap,
-  Megaphone,
-  CheckCircle2,
-  Clock,
-} from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-/**
- * 5 Official Modules for AES Summit 2026
- * Pure icon-driven dashboards with zero photos & zero buttons.
- * Features slanted parallelogram round indicators (matching screenshot).
- * Strictly adheres to DESIGN-RULES.md 7-color palette:
- * #5a0d1b, #650d1c, #701020, #89192c, #f8eee1, #e8dcc6, #f1ca7e
- */
+import {
+  InvestomaniaArt,
+  DefendEmpireArt,
+  MarketMonopolyArt,
+  VentureVerseArt,
+  ViralVelocityArt,
+} from './ModuleArtworks';
 
-const MODULES_DATA = [
+/* ─────────────────────────────────────────────────────────────
+   5 Curated Modules (Clean, Minimal, Non-Congested)
+   ───────────────────────────────────────────────────────────── */
+
+const MODULES = [
   {
     id: 'investomania',
-    number: '01',
-    tag: 'Module 01',
+    num: '01',
+    category: 'Finance & Markets',
     title: 'Investomania',
-    roundsLabel: '3 Rounds',
-    roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
+    tagline: 'Master the high-pressure trading floor.',
     description:
-      "Teams trade shares in Pakistan's stock market to build and manage a portfolio, then transition into a future digital economy as hedge funds managing digital assets and international markets. The final round shifts focus to wealth preservation, restructuring portfolios and navigating changing tax policies.",
-    heroIcon: TrendingUp,
-    stats: [
-      { label: 'Market Arena', value: 'PSX to Web3' },
-      { label: 'Portfolio Role', value: 'Hedge Fund' },
-    ],
-    badgeText: 'Wealth Preservation & Tax Navigations',
-    status: 'Stock & Digital Asset Arena',
-    theme: {
-      // Light 1: Alabaster Cream Card
-      cardBg: 'bg-[#f8eee1]',
-      cardBorder: 'border border-[#e8dcc6]',
-      titleColor: 'text-[#5a0d1b]',
-      roundsSubtitleColor: 'text-[#701020]',
-      descColor: 'text-[#650d1c]',
-      tagBg: 'bg-[#e8dcc6]/70 text-[#701020] border border-[#89192c]/20',
-      roundActive: 'bg-[#701020] text-[#f8eee1] border border-[#701020]',
-      roundInactive: 'bg-transparent text-[#701020] border border-[#701020]/60',
-      rightFrameBg: 'bg-[#e8dcc6]/60 border border-[#89192c]/15',
-      iconBoxBg: 'bg-[#701020] text-[#f1ca7e] border border-[#89192c]',
-      statusBg: 'bg-[#f8eee1] text-[#701020] border border-[#89192c]/20',
-      statCardBg: 'bg-[#f8eee1] border border-[#89192c]/15',
-      statValColor: 'text-[#5a0d1b]',
-      statLabelColor: 'text-[#650d1c]',
-      footerPillBg: 'bg-[#f8eee1] text-[#701020] border border-[#89192c]/20',
-      pulseDot: 'bg-[#701020]',
-    },
+      'Trade real-time equities on the Pakistan Stock Exchange, construct multi-asset hedge portfolios, and navigate global digital asset shocks.',
+    tags: ['3 Rounds', 'PSX Equities', 'Hedge Fund Simulation'],
+    Art: InvestomaniaArt,
+    cardBg: 'bg-[#5a0d1b]/92 backdrop-blur-xl',
+    textColor: 'text-[#f8eee1]',
+    taglineColor: 'text-[#f1ca7e]',
+    descColor: 'text-[#e8dcc6]',
+    borderStyle: 'border-[#89192c]/80 shadow-[0_20px_60px_rgba(90,13,27,0.7)]',
+    pillBg: 'bg-[#701020]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
+    accentColor: '#f1ca7e',
   },
   {
     id: 'defend-the-empire',
-    number: '02',
-    tag: 'Module 02',
+    num: '02',
+    category: 'Crisis Leadership',
     title: 'Defend the Empire',
-    roundsLabel: '3 Rounds',
-    roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
+    tagline: 'Boardroom triage under intense public scrutiny.',
     description:
-      'Teams navigate a corporate crisis through a three-part simulation. They must develop an internal response plan to protect employee well-being, defend their strategies in a mock shareholder meeting, manage public backlash via a mock press conference, and make strategic financial decisions to combat declining cash flow.',
-    heroIcon: ShieldAlert,
-    stats: [
-      { label: 'Simulation Type', value: 'Corporate Crisis' },
-      { label: 'Defense Round', value: 'Mock Press Conf' },
-    ],
-    badgeText: 'Internal Response & Cash Flow Recovery',
-    status: 'Crisis Control Track',
-    theme: {
-      // Light 2: Warm Parchment Card
-      cardBg: 'bg-[#e8dcc6]',
-      cardBorder: 'border border-[#89192c]/25',
-      titleColor: 'text-[#5a0d1b]',
-      roundsSubtitleColor: 'text-[#701020]',
-      descColor: 'text-[#650d1c]',
-      tagBg: 'bg-[#f8eee1] text-[#701020] border border-[#89192c]/20',
-      roundActive: 'bg-[#701020] text-[#f8eee1] border border-[#701020]',
-      roundInactive: 'bg-transparent text-[#701020] border border-[#701020]/60',
-      rightFrameBg: 'bg-[#f8eee1]/75 border border-[#89192c]/20',
-      iconBoxBg: 'bg-[#701020] text-[#f1ca7e] border border-[#89192c]',
-      statusBg: 'bg-[#e8dcc6] text-[#701020] border border-[#89192c]/20',
-      statCardBg: 'bg-[#e8dcc6] border border-[#89192c]/20',
-      statValColor: 'text-[#5a0d1b]',
-      statLabelColor: 'text-[#650d1c]',
-      footerPillBg: 'bg-[#e8dcc6] text-[#701020] border border-[#89192c]/20',
-      pulseDot: 'bg-[#701020]',
-    },
+      'Confront an unscripted corporate emergency. Triage internal operations, defend your firm before aggressive mock journalists, and reverse critical cash bleeds.',
+    tags: ['3 Rounds', 'Mock Press Conference', 'Financial Triage'],
+    Art: DefendEmpireArt,
+    cardBg: 'bg-[#650d1c]/92 backdrop-blur-xl',
+    textColor: 'text-[#f8eee1]',
+    taglineColor: 'text-[#f1ca7e]',
+    descColor: 'text-[#e8dcc6]',
+    borderStyle: 'border-[#89192c]/80 shadow-[0_20px_60px_rgba(90,13,27,0.7)]',
+    pillBg: 'bg-[#5a0d1b]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
+    accentColor: '#f1ca7e',
   },
   {
     id: 'market-monopoly',
-    number: '03',
-    tag: 'Module 03',
+    num: '03',
+    category: 'Mergers & Acquisitions',
     title: 'Market Monopoly',
-    roundsLabel: '2 Rounds',
-    roundsList: ['ROUND 1', 'ROUND 2'],
+    tagline: 'High-stakes property bidding and hostile takeovers.',
     description:
-      'Teams compete to build business empires by bidding on Karachi-inspired properties and utilities within a limited budget. They must manage cash flow, negotiate mergers with other teams, upgrade properties, and settle rental obligations while balancing the risks of bank financing.',
-    heroIcon: Landmark,
-    stats: [
-      { label: 'Property Hub', value: 'Karachi Auctions' },
-      { label: 'Strategic Play', value: 'Mergers & Risk' },
-    ],
-    badgeText: 'Property Upgrades & Rental Management',
-    status: 'Real Estate & Mergers',
-    theme: {
-      // Accent: Imperial Gold Card
-      cardBg: 'bg-[#f1ca7e]',
-      cardBorder: 'border border-[#701020]/30 shadow-2xl',
-      titleColor: 'text-[#5a0d1b]',
-      roundsSubtitleColor: 'text-[#5a0d1b]',
-      descColor: 'text-[#5a0d1b]/90',
-      tagBg: 'bg-[#f8eee1] text-[#5a0d1b] border border-[#5a0d1b]/20',
-      roundActive: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#5a0d1b]',
-      roundInactive: 'bg-transparent text-[#5a0d1b] border border-[#5a0d1b]/60',
-      rightFrameBg: 'bg-[#5a0d1b]/10 border border-[#5a0d1b]/20',
-      iconBoxBg: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#701020]',
-      statusBg: 'bg-[#f8eee1] text-[#5a0d1b] border border-[#5a0d1b]/20',
-      statCardBg: 'bg-[#f8eee1] border border-[#5a0d1b]/20',
-      statValColor: 'text-[#5a0d1b]',
-      statLabelColor: 'text-[#650d1c]',
-      footerPillBg: 'bg-[#f8eee1] text-[#5a0d1b] border border-[#5a0d1b]/20',
-      pulseDot: 'bg-[#5a0d1b]',
-    },
+      'Build a commercial dynasty across Karachi’s prime districts. Bid on commercial utilities, negotiate aggressive mergers, and balance high-risk debt leverage.',
+    tags: ['2 Rounds', 'Commercial Auctions', 'M&A Strategy'],
+    Art: MarketMonopolyArt,
+    cardBg: 'bg-[#e8dcc6]/92 backdrop-blur-xl',
+    textColor: 'text-[#5a0d1b]',
+    taglineColor: 'text-[#701020]',
+    descColor: 'text-[#650d1c]',
+    borderStyle: 'border-[#701020]/30 shadow-[0_20px_60px_rgba(90,13,27,0.35)]',
+    pillBg: 'bg-[#f8eee1]/80 backdrop-blur-md text-[#701020] border border-[#701020]/25',
+    accentColor: '#701020',
   },
   {
     id: 'venture-verse',
-    number: '04',
-    tag: 'Module 04',
+    num: '04',
+    category: 'Venture Capital',
     title: 'Venture Verse',
-    roundsLabel: '2 Rounds',
-    roundsList: ['ROUND 1', 'ROUND 2'],
+    tagline: 'Pitch to real investors. Defend your model.',
     description:
-      "Teams develop an original business concept addressing a real-world problem and pitch it to a panel of judges acting as investors. Participants must demonstrate their venture's viability, competitive advantage, and growth strategy while defending their decisions during a Q&A and an unexpected business crisis.",
-    heroIcon: Rocket,
-    stats: [
-      { label: 'Pitch Format', value: 'Investor Panel' },
-      { label: 'Evaluation', value: 'Crisis Q&A' },
-    ],
-    badgeText: 'Viability, Advantage & Growth Defense',
-    status: 'Shark Pitch Arena',
-    theme: {
-      // Dark 4: Ruby Velvet Card
-      cardBg: 'bg-[#89192c]',
-      cardBorder: 'border border-[#f1ca7e]/35 shadow-2xl',
-      titleColor: 'text-[#f8eee1]',
-      roundsSubtitleColor: 'text-[#f1ca7e]',
-      descColor: 'text-[#e8dcc6]',
-      tagBg: 'bg-[#701020] text-[#f1ca7e] border border-[#f1ca7e]/30',
-      roundActive: 'bg-[#f1ca7e] text-[#5a0d1b] border border-[#f1ca7e]',
-      roundInactive: 'bg-transparent text-[#f1ca7e] border border-[#f1ca7e]/60',
-      rightFrameBg: 'bg-[#701020] border border-[#89192c]',
-      iconBoxBg: 'bg-[#f1ca7e] text-[#5a0d1b] border border-[#f1ca7e]',
-      statusBg: 'bg-[#89192c] text-[#f1ca7e] border border-[#f1ca7e]/30',
-      statCardBg: 'bg-[#89192c] border border-[#f1ca7e]/20',
-      statValColor: 'text-[#f8eee1]',
-      statLabelColor: 'text-[#e8dcc6]',
-      footerPillBg: 'bg-[#89192c] text-[#f1ca7e] border border-[#f1ca7e]/20',
-      pulseDot: 'bg-[#f1ca7e]',
-    },
+      'Pitch an original startup to seasoned venture capital partners. Justify your unit economics, defend market defensibility, and navigate unexpected operational curveballs.',
+    tags: ['2 Rounds', 'Shark Pitch Arena', 'VC Cross-Exam'],
+    Art: VentureVerseArt,
+    cardBg: 'bg-[#701020]/92 backdrop-blur-xl',
+    textColor: 'text-[#f8eee1]',
+    taglineColor: 'text-[#f1ca7e]',
+    descColor: 'text-[#e8dcc6]',
+    borderStyle: 'border-[#f1ca7e]/35 shadow-[0_20px_60px_rgba(90,13,27,0.75)]',
+    pillBg: 'bg-[#5a0d1b]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/25',
+    accentColor: '#f1ca7e',
   },
   {
     id: 'viral-velocity',
-    number: '05',
-    tag: 'Module 05',
+    num: '05',
+    category: 'Brand & Growth',
     title: 'Viral Velocity',
-    roundsLabel: '3 Rounds',
-    roundsList: ['ROUND 1', 'ROUND 2', 'ROUND 3'],
+    tagline: 'Create viral culture. Activate real consumer footfall.',
     description:
-      'Teams are assigned a brand to bring to life across three rounds. They must first establish the brand’s Instagram presence through creative content, then develop a comprehensive marketing campaign with a specified budget, and finally create a physical stall featuring a product prototype to engage with consumers in a real-world setting.',
-    heroIcon: Zap,
-    stats: [
-      { label: 'Digital Channel', value: 'Instagram Growth' },
-      { label: 'Physical Stall', value: 'Live Prototype' },
-    ],
-    badgeText: 'Marketing Budget & Consumer Engagement',
-    status: 'Brand Growth & Activation',
-    theme: {
-      // Dark 1: Abyssal Oxblood Crown Card (Matches Screenshot 2 perfectly!)
-      cardBg: 'bg-[#5a0d1b]',
-      cardBorder: 'border-2 border-[#f1ca7e]/60 shadow-[0_25px_60px_rgba(90,13,27,0.85)]',
-      titleColor: 'text-[#f8eee1]',
-      roundsSubtitleColor: 'text-[#f1ca7e]',
-      descColor: 'text-[#e8dcc6]',
-      tagBg: 'bg-[#701020] text-[#f1ca7e] border border-[#f1ca7e]/40',
-      roundActive: 'bg-[#f1ca7e] text-[#5a0d1b] border border-[#f1ca7e]',
-      roundInactive: 'bg-transparent text-[#f1ca7e] border border-[#f1ca7e]/60',
-      rightFrameBg: 'bg-[#701020] border border-[#f1ca7e]/30',
-      iconBoxBg: 'bg-[#f1ca7e] text-[#5a0d1b] border border-[#f1ca7e]',
-      statusBg: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#f1ca7e]/40',
-      statCardBg: 'bg-[#5a0d1b] border border-[#89192c]',
-      statValColor: 'text-[#f8eee1]',
-      statLabelColor: 'text-[#e8dcc6]',
-      footerPillBg: 'bg-[#5a0d1b] text-[#f1ca7e] border border-[#f1ca7e]/30',
-      pulseDot: 'bg-[#f1ca7e]',
-    },
+      'Ignite a brand from nothing. Build a viral digital media presence, model a paid growth budget, and build a physical pop-up booth on campus to convert real crowds.',
+    tags: ['3 Rounds', 'Guerrilla Activation', 'Live Campus Stalls'],
+    Art: ViralVelocityArt,
+    cardBg: 'bg-[#5a0d1b]/92 backdrop-blur-xl',
+    textColor: 'text-[#f8eee1]',
+    taglineColor: 'text-[#f1ca7e]',
+    descColor: 'text-[#e8dcc6]',
+    borderStyle: 'border-[#f1ca7e]/40 shadow-[0_20px_60px_rgba(90,13,27,0.75)]',
+    pillBg: 'bg-[#701020]/80 backdrop-blur-md text-[#f1ca7e] border border-[#f1ca7e]/30',
+    accentColor: '#f1ca7e',
   },
 ];
 
-/**
- * Individual Stacking Card Component
- * - Centered in viewport: Positioned comfortably so the whole card is visible on screen
- * - Incremental top offset creates clean cascading top edges
- * - Linear scale transform provides 3D depth without scroll lag
- */
-function StackCard({ module, index, totalCards, scrollYProgress }) {
-  const HeroIcon = module.heroIcon;
-
-  // Lightweight hardware-accelerated scale transform
-  const startProgress = index / totalCards;
-  const endProgress = Math.min(1, (index + 1.2) / totalCards);
-  const targetScale = 1 - (totalCards - index - 1) * 0.03;
-
-  const scale = useTransform(
-    scrollYProgress,
-    [startProgress, endProgress],
-    [1, targetScale]
-  );
+/* ─────────────────────────────────────────────────────────────
+   Individual Stacking Card Component
+   ───────────────────────────────────────────────────────────── */
+function StackingCard({ item, index }) {
+  const Art = item.Art;
 
   return (
     <div
-      className="sticky h-screen w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 pointer-events-none"
-      style={{
-        // Balanced center-weighted sticky offset so cards never get clipped at the bottom
-        top: `calc(13vh + ${index * 22}px)`,
-        zIndex: index + 1,
-      }}
+      className="sticky top-20 sm:top-24 md:top-28 w-full flex items-center justify-center pointer-events-none mb-12 sm:mb-20 md:mb-28"
+      style={{ zIndex: index + 1 }}
     >
-      <motion.div
-        style={{
-          scale,
-          transformOrigin: 'top center',
-        }}
+      <div
         className={cn(
-          'pointer-events-auto will-change-transform w-full max-w-4xl lg:max-w-5xl rounded-3xl p-6 sm:p-8 md:p-9 flex flex-col md:flex-row items-stretch justify-between gap-6 md:gap-8 shadow-2xl',
-          module.theme.cardBg,
-          module.theme.cardBorder
+          'group pointer-events-auto w-full max-w-4xl lg:max-w-5xl rounded-3xl sm:rounded-4xl p-6 sm:p-8 md:p-12 border shadow-2xl transition-all duration-300 relative overflow-hidden backdrop-blur-xl',
+          item.cardBg,
+          item.borderStyle,
+          item.textColor
         )}
       >
-        {/* Left Column (~54%): Module Overview, Slanted Round Badges & Description */}
-        <div className="flex flex-col justify-between w-full md:w-[54%] pr-0 md:pr-4">
-          <div>
-            {/* Top Row: Module Tag & Total Rounds */}
-            <div className="flex items-center gap-3 mb-2.5">
-              <span
-                className={cn(
-                  'inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider',
-                  module.theme.tagBg
-                )}
-              >
-                {module.tag}
-              </span>
-              <span
-                className={cn(
-                  'text-xs font-extrabold tracking-widest uppercase',
-                  module.theme.roundsSubtitleColor
-                )}
-              >
-                {module.roundsLabel}
-              </span>
-            </div>
+        {/* Subtle Glass Sheen Top Edge */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
 
-            {/* Slanted Parallelogram Round Badges (Exact match to Screenshot 2) */}
-            <div className="flex items-center gap-2 sm:gap-2.5 my-3">
-              {module.roundsList.map((roundName, rIdx) => {
-                const isActive = rIdx === 0;
-                return (
-                  <div
-                    key={rIdx}
-                    className={cn(
-                      'transform -skew-x-12 px-3 sm:px-4 py-1 sm:py-1.5 transition-all duration-300',
-                      isActive ? module.theme.roundActive : module.theme.roundInactive
-                    )}
-                  >
-                    <span className="block transform skew-x-12 text-[10px] sm:text-xs font-black tracking-wider uppercase select-none">
-                      {roundName}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+        {/* Subtle Watermark Number in background */}
+        <div className="absolute right-6 -bottom-6 text-8xl sm:text-9xl md:text-[14rem] font-black opacity-[0.04] pointer-events-none select-none font-mono">
+          {item.num}
+        </div>
 
-            {/* Title */}
-            <h3
-              className={cn(
-                'text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-tight mb-3',
-                module.theme.titleColor
-              )}
-            >
-              {module.title}
-            </h3>
-
-            {/* Exact Official Description */}
-            <p
-              className={cn(
-                'text-xs sm:text-sm md:text-[15px] leading-relaxed font-normal',
-                module.theme.descColor
-              )}
-            >
-              {module.description}
-            </p>
+        {/* Frameless Module SVG Artwork in Card Background */}
+        <div className="absolute right-0 bottom-0 top-0 w-3/4 sm:w-2/3 md:w-1/2 flex items-center justify-end pointer-events-none select-none overflow-hidden opacity-20 sm:opacity-25 md:opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-700 ease-out">
+          <div className="w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-96 -mr-4 sm:-mr-8 md:-mr-10 -mb-4 sm:-mb-6 md:mb-0 flex items-center justify-center">
+            <Art />
           </div>
         </div>
 
-        {/* Right Column (~46%): Pure Icon Dashboard & Round Intelligence (No Photos, No Buttons) */}
-        <div
-          className={cn(
-            'w-full md:w-[46%] rounded-2xl p-5 sm:p-6 flex flex-col justify-between border mt-2 md:mt-0',
-            module.theme.rightFrameBg
-          )}
-        >
-          {/* Top Row: Emblem Hero Icon & Track Status */}
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <div
-              className={cn(
-                'w-13 h-13 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center shadow-md',
-                module.theme.iconBoxBg
-              )}
-            >
-              <HeroIcon className="w-7 h-7 stroke-[2.2]" />
-            </div>
-
-            <div
-              className={cn(
-                'inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider border shadow-sm',
-                module.theme.statusBg
-              )}
-            >
-              <span
-                className={cn(
-                  'w-2 h-2 rounded-full animate-pulse',
-                  module.theme.pulseDot
-                )}
-              />
-              <span>{module.status}</span>
-            </div>
+        {/* Editorial Content (Foreground, 100% Legible) */}
+        <div className="relative z-10 flex flex-col justify-center max-w-xl lg:max-w-2xl">
+          {/* Index & Category Row */}
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="text-xs sm:text-sm font-mono font-extrabold tracking-widest uppercase opacity-75">
+              {item.num} / 05
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-current opacity-40" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-wider opacity-90">
+              {item.category}
+            </span>
           </div>
 
-          {/* Center: 2 Key Stat Cards */}
-          <div className="grid grid-cols-2 gap-3 my-auto">
-            {module.stats.map((st, sIdx) => (
-              <div
-                key={sIdx}
+          {/* Display Title */}
+          <h3 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.05]">
+            {item.title}
+          </h3>
+
+          {/* Crisp 1-Line Hook */}
+          <p className={cn('mt-1.5 text-xs sm:text-sm md:text-base font-bold', item.taglineColor)}>
+            {item.tagline}
+          </p>
+
+          {/* 2-Line Punchy Description */}
+          <p className={cn('mt-3 text-xs sm:text-sm md:text-base leading-relaxed max-w-xl', item.descColor)}>
+            {item.description}
+          </p>
+
+          {/* 3 Minimal Badges */}
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            {item.tags.map((tag, tIdx) => (
+              <span
+                key={tIdx}
                 className={cn(
-                  'rounded-xl p-3 sm:p-3.5 border flex flex-col justify-center shadow-sm',
-                  module.theme.statCardBg
+                  'px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold tracking-wide transition-colors',
+                  item.pillBg
                 )}
               >
-                <div
-                  className={cn(
-                    'text-base sm:text-lg md:text-xl font-black tracking-tight leading-tight',
-                    module.theme.statValColor
-                  )}
-                >
-                  {st.value}
-                </div>
-                <div
-                  className={cn(
-                    'text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-0.5 opacity-80',
-                    module.theme.statLabelColor
-                  )}
-                >
-                  {st.label}
-                </div>
-              </div>
+                {tag}
+              </span>
             ))}
           </div>
 
-          {/* Bottom Card: Round Intelligence Spec Pill */}
-          <div
-            className={cn(
-              'mt-4 px-3.5 py-2.5 rounded-xl border flex items-center justify-between gap-3 text-[11px] sm:text-xs font-semibold shadow-sm',
-              module.theme.footerPillBg
-            )}
-          >
-            <div className="flex items-center gap-2 min-w-0">
-              <CheckCircle2 className="w-4 h-4 shrink-0" />
-              <span className="truncate">{module.badgeText}</span>
-            </div>
-            <Clock className="w-3.5 h-3.5 shrink-0 opacity-70" />
+          {/* Single Clean Action Link */}
+          <div className="mt-6 pt-5 border-t border-current/15">
+            <a
+              href="/aes-delegate-guide.pdf"
+              download="AES-Delegate-Guide-2026.pdf"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold hover:underline underline-offset-4 tracking-wide group"
+            >
+              <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" focusable="false" />
+              <span>Download Delegate Guide (PDF)</span>
+            </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
 
-/**
- * Modules Section
- * - Zero Scroll Lag: No backdrop filters, lightweight transform execution, optimized will-change.
- * - Perfectly Centered Sticky Cards: Cards lock fully into the center of the viewport without clipping.
- * - Official 5 Modules Content & Slanted Round Badges (Screenshot 2).
- * - Strictly follows DESIGN-RULES.md (7 core colors).
- */
+/* ─────────────────────────────────────────────────────────────
+   Main Modules Section (Preserves Smooth 3D Stacking Scroll)
+   ───────────────────────────────────────────────────────────── */
 export default function Modules() {
-  const containerRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
   return (
     <section
       id="modules"
-      ref={containerRef}
-      className="relative w-full bg-[#5a0d1b] text-[#f8eee1] border-t border-[#89192c]"
+      className="relative z-20 w-full bg-[#5a0d1b] text-[#f8eee1] select-none"
     >
-      {/* Lead-in Header */}
-      <div className="relative z-10 max-w-7xl mx-auto pt-24 sm:pt-32  px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        {/* Section Heading */}
-        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#f8eee1]">
-          Module <span className="text-[#f1ca7e]">Overview</span>
+      {/* Ambient background glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#f1ca7e]/30 to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#701020]/25 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Intro Header (Visible before cards stack, animating on scroll up & down) */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto"
+      >
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
+          <span className="text-[#f8eee1]">Summit</span>{' '}
+          <span className="text-[#f1ca7e]">Modules</span>
         </h2>
 
-        {/* Description */}
-        <p className="mt-4 max-w-2xl text-base sm:text-lg text-[#e8dcc6] leading-relaxed">
-          Five flagship competitive tracks designed to test portfolio strategy, corporate
-          crisis control, property bidding, venture pitching, and guerrilla brand growth.
+        <p className="mt-4 text-sm sm:text-base md:text-lg text-[#e8dcc6] font-normal leading-relaxed max-w-xl mx-auto">
+          Scroll through our premier arenas. Designed to test real business instinct under real constraints.
         </p>
-      </div>
+      </motion.div>
 
-      {/* 3D Stacking Cards Deck Track */}
-      <div className="relative w-full pb-32">
-        {MODULES_DATA.map((module, index) => (
-          <StackCard
-            key={module.id}
-            module={module}
-            index={index}
-            totalCards={MODULES_DATA.length}
-            scrollYProgress={scrollYProgress}
+      {/* 5 Stacking Cards Deck in Smooth Sticky Flow */}
+      <div className="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-28 sm:pb-44">
+        {MODULES.map((item, idx) => (
+          <StackingCard
+            key={item.id}
+            item={item}
+            index={idx}
           />
         ))}
       </div>
