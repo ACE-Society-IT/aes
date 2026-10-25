@@ -12,19 +12,8 @@ export const metadata = {
 
 export default function ModulesPage() {
   return (
-    <main className="min-h-screen bg-[#5a0d1b] text-[#f8eee1] overflow-x-hidden pt-28 sm:pt-32">
+    <main className="min-h-screen bg-[#5a0d1b] text-[#f8eee1] overflow-x-hidden">
       <Navbar />
-
-      {/* Header intro */}
-      <section className="relative px-4 sm:px-6 lg:px-8 py-12 max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.05]">
-          <span className="text-[#e0485c]">Summit</span>{' '}
-          <span className="text-[#f1ca7e]">Modules</span>
-        </h1>
-        <p className="mt-4 text-base sm:text-lg text-[#e8dcc6] max-w-2xl mx-auto leading-relaxed">
-          From trading floors and hostile takeovers to startup pitching and crisis containment — test your limits across our premier competitive simulations.
-        </p>
-      </section>
 
       {/* 5 Modules */}
       <Modules />
