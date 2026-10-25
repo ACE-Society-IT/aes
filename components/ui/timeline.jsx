@@ -423,7 +423,7 @@ export default function Timeline({
           <h2 className="text-2xl font-black tracking-tight">
             {title === 'Summit Track' ? (
               <>
-                <span className="text-[#e0485c]">Summit</span>{' '}
+                <span className="text-[#f8eee1]">Summit</span>{' '}
                 <span className="text-[#f1ca7e]">Track</span>
               </>
             ) : (
@@ -495,7 +495,7 @@ export default function Timeline({
                 <h2 className="text-4xl lg:text-5xl font-black leading-[0.95] tracking-tight">
                   {title === 'Summit Track' ? (
                     <>
-                      <span className="text-[#e0485c]">Summit</span>{' '}
+                      <span className="text-[#f8eee1]">Summit</span>{' '}
                       <span className="text-[#f1ca7e]">Track</span>
                     </>
                   ) : (

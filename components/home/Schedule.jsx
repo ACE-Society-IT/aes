@@ -202,8 +202,7 @@ export default function Schedule() {
           className="text-center max-w-2xl mx-auto mb-12 sm:mb-16"
         >
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
-            <span className="text-[#f8eee1]">The </span>
-            <span className="text-[#e0485c]">Summit</span>{' '}
+            <span className="text-[#f8eee1]">The Summit </span>
             <span className="text-[#f1ca7e]">Track</span>
           </h2>
 

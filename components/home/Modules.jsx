@@ -211,22 +211,26 @@ export default function Modules() {
   return (
     <section
       id="modules"
-      className="relative z-20 w-full bg-[#f8eee1] text-[#5a0d1b] select-none"
+      className="relative z-20 w-full bg-[#5a0d1b] text-[#f8eee1] select-none"
     >
+      {/* Ambient background glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#f1ca7e]/30 to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#701020]/25 rounded-full blur-3xl pointer-events-none" />
+
       {/* Intro Header (Visible before cards stack, animating on scroll up & down) */}
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className="pt-20 sm:pt-28 md:pt-36 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto"
+        className="pt-24 sm:pt-32 md:pt-40 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto"
       >
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05]">
-          <span className="text-[#701020]">Summit</span>{' '}
-          <span className="text-[#F1CA7E] drop-shadow-[0_1px_2px_rgba(90,13,27,0.3)]">Modules</span>
+          <span className="text-[#f8eee1]">Summit</span>{' '}
+          <span className="text-[#f1ca7e]">Modules</span>
         </h2>
 
-        <p className="mt-4 text-sm sm:text-base md:text-lg text-[#650d1c] font-normal leading-relaxed max-w-xl mx-auto">
+        <p className="mt-4 text-sm sm:text-base md:text-lg text-[#e8dcc6] font-normal leading-relaxed max-w-xl mx-auto">
           Scroll through our premier arenas. Designed to test real business instinct under real constraints.
         </p>
       </motion.div>
