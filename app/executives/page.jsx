@@ -218,25 +218,19 @@ function ExecutiveAccordionItem({ exec, index, isOpen, onToggle }) {
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 sm:gap-6 items-center">
                   {/* Left Silhouette Portrait Frame */}
                   <div className="sm:col-span-4 flex justify-center sm:justify-start">
-                    <div className="relative w-36 sm:w-40 aspect-[4/4.8] rounded-2xl overflow-hidden border-2 border-[#89192c] bg-gradient-to-b from-[#701020] via-[#5a0d1b] to-[#420a13] p-3 shadow-xl flex flex-col justify-between items-center select-none">
+                    <div className="relative w-36 sm:w-44 aspect-[4/4.8] rounded-2xl overflow-hidden border-2 border-[#89192c] bg-gradient-to-b from-[#701020] via-[#5a0d1b] to-[#420a13] p-4 shadow-xl flex items-center justify-center select-none">
                       {/* Subtle backplate halo */}
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(241,202,126,0.18),transparent_70%)] pointer-events-none" />
 
-                      {/* Header Stamp */}
-                      <div className="relative z-10 w-full flex items-center justify-between text-[9px] font-mono tracking-widest text-[#f1ca7e] uppercase">
-                        <span>AES · 2026</span>
-                        <span>{exec.department}</span>
-                      </div>
-
                       {/* Vector Silhouette */}
-                      <div className="relative z-10 w-full flex-1 flex items-center justify-center py-1">
+                      <div className="relative z-10 w-full h-full flex items-center justify-center">
                         <svg
                           viewBox={isFemale ? '1137 150 980 1225' : '102 120 980 1225'}
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                           role="img"
                           aria-labelledby={`${titleId} ${descId}`}
-                          className="w-full h-full max-h-[140px] sm:max-h-[155px] object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
+                          className="w-full h-full max-h-[170px] sm:max-h-[190px] object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)]"
                         >
                           <title id={titleId}>{`${exec.name} Portrait`}</title>
                           <desc id={descId}>{`Official silhouette vector portrait for ${exec.name}.`}</desc>
@@ -254,11 +248,6 @@ function ExecutiveAccordionItem({ exec, index, isOpen, onToggle }) {
                             </linearGradient>
                           </defs>
                         </svg>
-                      </div>
-
-                      {/* Bottom Footer Monogram */}
-                      <div className="relative z-10 w-full text-center text-[9px] font-bold tracking-[0.2em] uppercase text-[#e8dcc6]/70 border-t border-[#89192c]/50 pt-1">
-                        {exec.badge}
                       </div>
                     </div>
                   </div>

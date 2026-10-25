@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X, Calendar, Layers, Users, HelpCircle, Home } from 'lucide-react';
+import { ArrowUpRight, Menu, X, Calendar, Layers, Users, HelpCircle, Home, Award } from 'lucide-react';
 
 /**
  * Clean navigation links matching AES Summit information architecture
@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { name: 'Schedule', href: '/schedule', icon: Calendar, subtitle: 'Nov 13 — 15, 2026' },
   { name: 'Modules', href: '/modules', icon: Layers, subtitle: '5 Flagship Tracks' },
   { name: 'Executives', href: '/executives', icon: Users, subtitle: 'Leadership Council' },
+  { name: 'Ambassadors', href: '/ambassadors', icon: Award, subtitle: 'Student Leader Cohort' },
   { name: 'FAQs', href: '/faq', icon: HelpCircle, subtitle: 'Summit Queries' },
 ];
 
@@ -170,7 +171,7 @@ export function MorphingScrollNavbar() {
                 : 'max-w-[640px] opacity-100 overflow-hidden px-3 mx-auto pointer-events-auto gap-1 sm:gap-2'
             }`}
           >
-            {NAV_LINKS.filter((link) => link.href !== '/').map((link) => {
+            {NAV_LINKS.filter((link) => link.href !== '/' && link.href !== '/ambassadors').map((link) => {
               const active = isActive(link.href);
               return (
                 <Link
@@ -215,7 +216,7 @@ export function MorphingScrollNavbar() {
 
         {/* ═══ MOBILE NAVBAR PILL ═══ */}
         <nav
-          className="pointer-events-auto flex md:hidden items-center justify-between w-full max-w-md rounded-full bg-[#5a0d1b]/95 backdrop-blur-2xl border-2 border-[#89192c] px-4 py-2.5 shadow-[0_12px_40px_rgba(90,13,27,0.85)]"
+          className="pointer-events-auto flex md:hidden items-center justify-between w-full max-w-md rounded-full bg-[#5a0d1b]/95 backdrop-blur-2xl border-2 border-[#89192c] px-3.5 sm:px-4 py-2 sm:py-2.5 shadow-[0_12px_40px_rgba(90,13,27,0.85)]"
           aria-label="Mobile Navigation"
         >
           {/* Brand Logo */}
@@ -224,7 +225,7 @@ export function MorphingScrollNavbar() {
             className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] rounded-full shrink-0"
             aria-label="AES Home"
           >
-            <div className="relative h-7 w-16">
+            <div className="relative h-7 w-14 sm:w-16">
               <Image
                 src="/aes-logo.png"
                 alt="AES Logo"
@@ -238,10 +239,11 @@ export function MorphingScrollNavbar() {
           </Link>
 
           {/* Quick Actions & Menu Toggle Button */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 flex-nowrap">
+            {/* Show Ambassador on larger screens where space permits */}
             <Link
               href="/ambassadors"
-              className="inline-flex items-center justify-center px-2.5 sm:px-3 py-1.5 rounded-full border border-[#f1ca7e]/40 bg-[#89192c]/50 hover:bg-[#89192c] text-[#f8eee1] hover:text-[#f1ca7e] font-semibold text-xs tracking-tight transition-colors"
+              className="hidden min-[520px]:inline-flex items-center justify-center px-3 py-1.5 rounded-full border border-[#f1ca7e]/40 bg-[#89192c]/50 hover:bg-[#89192c] text-[#f8eee1] hover:text-[#f1ca7e] font-semibold text-xs tracking-tight transition-colors whitespace-nowrap shrink-0"
               aria-label="Ambassador Program"
             >
               <span>Ambassador</span>
@@ -251,7 +253,7 @@ export function MorphingScrollNavbar() {
               href="https://forms.gle/cGVgw5TpvpU9AXZx5"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-3.5 py-1.5 rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] font-bold text-xs tracking-tight shadow-md transition-colors"
+              className="inline-flex items-center justify-center px-3 sm:px-3.5 py-1.5 rounded-full bg-[#f8eee1] hover:bg-[#f1ca7e] text-[#5a0d1b] font-bold text-xs tracking-tight shadow-md transition-colors whitespace-nowrap shrink-0"
             >
               <span>Register</span>
               <ArrowUpRight className="w-3.5 h-3.5 ml-1 stroke-[2.5]" />
@@ -263,7 +265,7 @@ export function MorphingScrollNavbar() {
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
-              className="w-9 h-9 rounded-full bg-[#701020] border border-[#89192c] text-[#f8eee1] hover:text-[#f1ca7e] hover:border-[#f1ca7e]/60 flex items-center justify-center active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e]"
+              className="w-9 h-9 rounded-full bg-[#701020] border border-[#89192c] text-[#f8eee1] hover:text-[#f1ca7e] hover:border-[#f1ca7e]/60 flex items-center justify-center active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] shrink-0"
             >
               {mobileMenuOpen ? (
                 <X className="w-5 h-5 stroke-[2.2]" />
