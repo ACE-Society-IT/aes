@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       {/* Curved Loop Ribbon (Seamless upper section transition) */}
-      <section className="py-2 sm:py-3 bg-[#5a0d1b] border-y border-[#89192c]/30 overflow-hidden relative select-none">
+      {/* <section className="py-2 sm:py-3 bg-[#5a0d1b] border-y border-[#89192c]/30 overflow-hidden relative select-none">
         <CurvedLoop
           marqueeText="ALPHA ENTREPRENEURSHIP SUMMIT 2026"
           speed={2.2}
@@ -32,12 +32,10 @@ export default function Home() {
           scrollBoost={0.8}
           shape="wave"
         />
-      </section>
-
+      </section> */}
       <Vision />
       <Competition />
       <Modules />
-
       <Schedule />
       <Handbook />
       <Faqs />
