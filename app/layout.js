@@ -125,17 +125,17 @@ const jsonLd = {
       "hasPart": [
         {
           "@type": "WebPage",
-          "@id": `${SITE_URL}/modules`,
+          "@id": `${SITE_URL}/#modules`,
           "name": "Summit Modules",
-          "url": `${SITE_URL}/modules`,
+          "url": `${SITE_URL}/#modules`,
           "description":
             "5 competitive simulation arenas: Investomania, Defend The Empire, Market Monopoly, Venture Verse, and Viral Velocity.",
         },
         {
           "@type": "WebPage",
-          "@id": `${SITE_URL}/schedule`,
+          "@id": `${SITE_URL}/#schedule`,
           "name": "Track Schedule",
-          "url": `${SITE_URL}/schedule`,
+          "url": `${SITE_URL}/#schedule`,
           "description":
             "Chronological 3-day summit itinerary across Day 01, Day 02, and Day 03 at Alpha College.",
         },
@@ -157,9 +157,9 @@ const jsonLd = {
         },
         {
           "@type": "WebPage",
-          "@id": `${SITE_URL}/faq`,
+          "@id": `${SITE_URL}/#faqs`,
           "name": "Frequently Asked Questions",
-          "url": `${SITE_URL}/faq`,
+          "url": `${SITE_URL}/#faqs`,
           "description":
             "Official delegate guidelines, team fees, lodging, rules, and event conduct.",
         },
@@ -201,14 +201,14 @@ const jsonLd = {
           "position": 1,
           "name": "Summit Modules",
           "description": "5 Competitive Arenas",
-          "url": `${SITE_URL}/modules`,
+          "url": `${SITE_URL}/#modules`,
         },
         {
           "@type": "SiteNavigationElement",
           "position": 2,
           "name": "Track Schedule",
           "description": "3-Day Itinerary & Gala Dinner",
-          "url": `${SITE_URL}/schedule`,
+          "url": `${SITE_URL}/#schedule`,
         },
         {
           "@type": "SiteNavigationElement",
@@ -229,7 +229,7 @@ const jsonLd = {
           "position": 5,
           "name": "FAQ",
           "description": "Frequently Asked Questions",
-          "url": `${SITE_URL}/faq`,
+          "url": `${SITE_URL}/#faqs`,
         },
       ],
     },

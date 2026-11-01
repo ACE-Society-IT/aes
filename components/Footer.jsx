@@ -9,11 +9,11 @@ import { TextHoverEffect, FooterBackgroundGradient } from '@/components/ui/hover
 
 // Clean, streamlined navigation links
 const FOOTER_LINKS = [
-  { label: 'Summit Modules', href: '/modules' },
-  { label: 'Summit Track', href: '/schedule' },
+  { label: 'Summit Modules', href: '/#modules' },
+  { label: 'Summit Track', href: '/#schedule' },
   { label: 'Executive Council', href: '/executives' },
   { label: 'Ambassadors', href: '/ambassadors' },
-  { label: 'FAQs', href: '/faq' },
+  { label: 'FAQs', href: '/#faqs' },
   { label: 'Register Now', href: 'https://forms.gle/cGVgw5TpvpU9AXZx5' },
 ];
 

@@ -69,6 +69,40 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/schedule',
+        destination: '/#schedule',
+        permanent: false,
+      },
+      {
+        source: '/faq',
+        destination: '/#faqs',
+        permanent: false,
+      },
+      {
+        source: '/faqs',
+        destination: '/#faqs',
+        permanent: false,
+      },
+      {
+        source: '/modules',
+        destination: '/#modules',
+        permanent: false,
+      },
+      {
+        source: '/ambassador',
+        destination: '/ambassadors',
+        permanent: true,
+      },
+      {
+        source: '/executive',
+        destination: '/executives',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

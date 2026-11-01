@@ -14,7 +14,7 @@
 ## Key Pages
 
 - [Home](https://alphaace.com.pk/): Overview of AES 2026, vision pillars, and interactive showcase.
-- [Summit Track & Schedule](https://alphaace.com.pk/schedule): Chronological itinerary across Day 01 (Nov 13), Day 02 (Nov 14), and Day 03 (Nov 15).
+- [Summit Track & Schedule](https://alphaace.com.pk/#schedule): Chronological itinerary across Day 01 (Nov 13), Day 02 (Nov 14), and Day 03 (Nov 15).
 - [Summit Modules](https://alphaace.com.pk/modules): Deep dive into the 5 competitive simulation tracks.
 - [Executive Council](https://alphaace.com.pk/executives): Leadership board, director bios, and LinkedIn profiles.
 - [Ambassador Program](https://alphaace.com.pk/ambassadors): Multi-tier rewards, team discounts, and campus ambassador roles.

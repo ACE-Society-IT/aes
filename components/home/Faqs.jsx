@@ -154,10 +154,12 @@ export default function Faqs() {
     <MouseStreakWrapper
       id="faqs"
       fadeOnScroll={false}
-      showTrail={false}
-      className="w-full text-[#f8eee1] py-10 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]"
+      showTrail={true}
+      className="w-full text-[#f8eee1] py-10 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#89192c] scroll-mt-20 sm:scroll-mt-24"
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto">
+        {/* Invisible anchor target so both #faq and #faqs work */}
+        <span id="faq" className="scroll-mt-20 sm:scroll-mt-24 -top-20 relative block" aria-hidden="true" />
         {/* Two-Column Layout: Header Left + FAQs Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16">
           {/* Left Column — Section Header */}

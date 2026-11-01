@@ -186,7 +186,7 @@ export default function Schedule() {
   return (
     <section
       id="schedule"
-      className="relative z-30 w-full bg-[#5a0d1b] text-[#f8eee1] py-20 sm:py-28 md:py-36 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/50 select-none overflow-hidden"
+      className="relative z-30 w-full bg-[#5a0d1b] text-[#f8eee1] py-20 sm:py-28 md:py-36 px-4 sm:px-6 lg:px-8 border-t border-[#89192c]/50 select-none overflow-hidden scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Ambient Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#f1ca7e]/30 to-transparent pointer-events-none" />

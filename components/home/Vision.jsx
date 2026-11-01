@@ -777,7 +777,7 @@ export default function Vision() {
                 {/* Direct Action Links */}
                 <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
                   <Link
-                    href="/schedule"
+                    href="/#schedule"
                     onClick={() => setSelectedPillar(null)}
                     className="px-4 py-2 rounded-xl border-2 border-[#701020] text-[#701020] hover:bg-[#701020] hover:text-[#f1ca7e] text-xs sm:text-sm font-bold transition-colors text-center"
                   >

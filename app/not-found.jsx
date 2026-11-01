@@ -39,14 +39,14 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/schedule"
+            href="/#schedule"
             className="inline-flex items-center px-6 py-3 rounded-full border-2 border-[#89192c] hover:border-[#f1ca7e] bg-[#701020]/80 text-[#f8eee1] hover:text-[#f1ca7e] font-bold text-sm tracking-tight transition-all duration-300 hover:scale-105 active:scale-95"
           >
             View Summit Track
           </Link>
 
           <Link
-            href="/modules"
+            href="/#modules"
             className="inline-flex items-center px-6 py-3 rounded-full border-2 border-[#89192c] hover:border-[#f1ca7e] bg-[#701020]/80 text-[#f8eee1] hover:text-[#f1ca7e] font-bold text-sm tracking-tight transition-all duration-300 hover:scale-105 active:scale-95"
           >
             Explore Modules

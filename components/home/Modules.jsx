@@ -211,7 +211,7 @@ export default function Modules() {
   return (
     <section
       id="modules"
-      className="relative z-20 w-full bg-[#5a0d1b] text-[#f8eee1] select-none"
+      className="relative z-20 w-full bg-[#5a0d1b] text-[#f8eee1] select-none scroll-mt-20 sm:scroll-mt-24"
     >
       {/* Ambient background glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#f1ca7e]/30 to-transparent pointer-events-none" />

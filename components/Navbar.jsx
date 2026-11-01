@@ -11,11 +11,11 @@ import { ArrowUpRight, Menu, X, Calendar, Layers, Users, HelpCircle, Home, Award
  */
 const NAV_LINKS = [
   { name: 'Home', href: '/', icon: Home, subtitle: 'Summit Overview' },
-  { name: 'Schedule', href: '/schedule', icon: Calendar, subtitle: 'Nov 13 — 15, 2026' },
-  { name: 'Modules', href: '/modules', icon: Layers, subtitle: '5 Flagship Tracks' },
+  { name: 'Schedule', href: '/#schedule', icon: Calendar, subtitle: 'Nov 13 — 15, 2026' },
+  { name: 'Modules', href: '/#modules', icon: Layers, subtitle: '5 Flagship Tracks' },
   { name: 'Executives', href: '/executives', icon: Users, subtitle: 'Leadership Council' },
   { name: 'Ambassadors', href: '/ambassadors', icon: Award, subtitle: 'Student Leader Cohort' },
-  { name: 'FAQs', href: '/faq', icon: HelpCircle, subtitle: 'Summit Queries' },
+  { name: 'FAQs', href: '/#faqs', icon: HelpCircle, subtitle: 'Summit Queries' },
 ];
 
 export function MorphingScrollNavbar() {
@@ -102,9 +102,9 @@ export function MorphingScrollNavbar() {
   }, [scrollState.scrollDirection]);
 
   const isActive = (href) => {
-    if (pathname === href) return true;
-    if (href === '/faq' && pathname === '/faqs') return true;
-    return false;
+    if (href === '/') return pathname === '/';
+    if (href.startsWith('/#') || href.startsWith('#')) return false;
+    return pathname === href;
   };
 
   const { isAtTop, scrollDirection, scrollProgress } = scrollState;
@@ -171,7 +171,7 @@ export function MorphingScrollNavbar() {
                 : 'max-w-[640px] opacity-100 overflow-hidden px-3 mx-auto pointer-events-auto gap-1 sm:gap-2'
             }`}
           >
-            {NAV_LINKS.filter((link) => link.href !== '/' && link.href !== '/ambassadors').map((link) => {
+            {NAV_LINKS.filter((link) => link.name !== 'Home' && link.name !== 'Ambassadors').map((link) => {
               const active = isActive(link.href);
               return (
                 <Link
