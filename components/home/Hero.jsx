@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Download } from 'lucide-react';
 import MouseStreakWrapper from './MouseStreakWrapper';
 
 const SUMMIT_DATES = [
@@ -13,39 +12,12 @@ const SUMMIT_DATES = [
 ];
 
 export default function Hero() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <MouseStreakWrapper className="pt-24 sm:pt-36 md:pt-48 pb-12 sm:pb-16 md:pb-24 px-4 sm:px-6 lg:px-8">
       {/* Main Center Content Container */}
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-        {/* AES Monument Logo Centerpiece with Dynamic Ascent, Perspective Scaling & Fade */}
-        <div
-          className="relative group mb-4 sm:mb-6 md:mb-8 flex flex-col items-center justify-center will-change-transform"
-          style={{
-            transform: `translate3d(0, ${-scrollY * 0.35}px, 0) scale(${Math.max(0.86, 1 - scrollY * 0.00045)})`,
-            opacity: Math.max(0, 1 - scrollY / 520),
-          }}
-        >
+        {/* AES Monument Logo Centerpiece */}
+        <div className="relative group mb-4 sm:mb-6 md:mb-8 flex flex-col items-center justify-center">
           {/* Ambient Backlight Halo */}
           <div className="absolute -inset-8 sm:-inset-14 bg-gradient-to-r from-[#f1ca7e]/20 via-[#89192c]/50 to-[#f1ca7e]/20 rounded-full blur-2xl sm:blur-3xl opacity-80 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -67,26 +39,14 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* Subtitle Description with Upward Parallax & Fade */}
-        <p
-          className="mt-2.5 sm:mt-4 md:mt-5 text-sm sm:text-base md:text-xl text-[#e8dcc6] max-w-2xl font-normal leading-relaxed will-change-transform"
-          style={{
-            transform: `translate3d(0, ${-scrollY * 0.22}px, 0)`,
-            opacity: Math.max(0, 1 - scrollY / 440),
-          }}
-        >
+        {/* Subtitle Description */}
+        <p className="mt-2.5 sm:mt-4 md:mt-5 text-sm sm:text-base md:text-xl text-[#e8dcc6] max-w-2xl font-normal leading-relaxed">
           Pakistan’s 3-day youth entrepreneurship summit at Alpha College Karachi.
           Compete in business simulations, pitch your startup ideas, and connect with fellow founders.
         </p>
 
-        {/* 3 Highlighted Dates with Upward Parallax & Fade */}
-        <div
-          className="mt-5 sm:mt-7 md:mt-9 flex flex-col items-center w-full will-change-transform"
-          style={{
-            transform: `translate3d(0, ${-scrollY * 0.14}px, 0)`,
-            opacity: Math.max(0, 1 - scrollY / 380),
-          }}
-        >
+        {/* 3 Highlighted Dates */}
+        <div className="mt-5 sm:mt-7 md:mt-9 flex flex-col items-center w-full">
           <div className="text-[9px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[#f1ca7e] mb-2 sm:mb-2.5">
             Official Summit Dates
           </div>
@@ -120,13 +80,7 @@ export default function Hero() {
         </div>
 
         {/* Action Buttons with Reference Capsule Style */}
-        <div
-          className="mt-6 sm:mt-9 md:mt-11 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 w-full justify-center will-change-transform"
-          style={{
-            transform: `translate3d(0, ${-scrollY * 0.08}px, 0)`,
-            opacity: Math.max(0, 1 - scrollY / 340),
-          }}
-        >
+        <div className="mt-6 sm:mt-9 md:mt-11 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 w-full justify-center">
           {/* Primary Action: Register Now */}
           <a
             href="https://forms.gle/cGVgw5TpvpU9AXZx5"
@@ -140,16 +94,16 @@ export default function Hero() {
             </span>
           </a>
 
-          {/* Secondary Action: Become an Ambassador */}
+          {/* Secondary Action: Download Delegate Guide */}
           <a
-            href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4We7WHOgJUSJuBHvzR0a_yoXsS5ZZMtOmVx09mfgyTNUNkZORUE4VVk5V01XUUxZOExGTVRCMkpDQy4u"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative w-full sm:w-auto inline-flex items-center justify-between pl-6 pr-2.5 py-2 sm:pl-7 sm:pr-3 sm:py-2.5 rounded-full bg-[#89192c]/50 text-[#f8eee1] border-2 border-[#f1ca7e]/50 hover:border-[#f1ca7e] hover:bg-[#89192c] hover:text-[#f1ca7e] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 ease-out backdrop-blur-md shadow-xl shadow-[#5a0d1b]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] text-base sm:text-lg font-semibold"
+            href="/aes-delegate-guide.pdf"
+            download="AES-Delegate-Guide-2026.pdf"
+            className="group relative w-full sm:w-auto inline-flex items-center justify-between pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#89192c]/50 text-[#f8eee1] border-2 border-[#f1ca7e]/50 hover:border-[#f1ca7e] hover:bg-[#89192c] hover:text-[#f1ca7e] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 ease-out backdrop-blur-md shadow-xl shadow-[#5a0d1b]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f1ca7e] text-sm sm:text-lg font-semibold"
+            aria-label="Download AES 2026 Delegate Guide"
           >
-            <span>Become an Ambassador</span>
-            <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f1ca7e] text-[#5a0d1b] flex items-center justify-center ml-3.5 shrink-0 transition-all duration-300 ease-out group-hover:scale-110">
-              <ArrowUpRight className="w-5 h-5 stroke-[2.5] transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <span>Download Delegate Guide</span>
+            <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#f1ca7e] text-[#5a0d1b] flex items-center justify-center ml-3 sm:ml-4 shrink-0 transition-all duration-300 ease-out group-hover:scale-110">
+              <Download className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5] transition-transform duration-300 ease-out group-hover:translate-y-0.5" />
             </span>
           </a>
         </div>
