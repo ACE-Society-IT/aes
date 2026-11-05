@@ -339,10 +339,69 @@ function TeamIntro() {
 
       /* ==================================================================== */
       /* DESKTOP (min-width: 769px):                                          */
-      /* - Watermark vertical scrub                                           */
-      /* - Circle-to-pill evolution + portrait scrub + text entrance          */
+      /* - Each row pins ("on hold") at the center of the viewport until its  */
+      /*   pill container finishes transforming from a circle to the final    */
+      /*   vertical oval/stadium form, then releases to move to the next one. */
+      /* - Watermark scrubs vertically across the full pinned section height. */
       /* ==================================================================== */
       mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
+        const rows = gsap.utils.toArray('[data-team-row]');
+
+        rows.forEach((row, index) => {
+          const wrap = row.querySelector('[data-pill-wrap]');
+          const pill = row.querySelector('[data-pill]');
+          const img = row.querySelector('[data-pill-img]');
+          const reveals = row.querySelectorAll('[data-reveal]');
+
+          const isFirstRow = index === 0;
+
+          // Hold the row in the center of the screen while the circle transforms
+          // into the final vertical oval/pill form, then release to the next row.
+          const pinTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: 'center center',
+              end: '+=520',
+              pin: true,
+              pinSpacing: true,
+              scrub: 0.6,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          pinTl
+            .fromTo(
+              pill,
+              { height: () => wrap.offsetWidth },
+              { height: () => wrap.offsetHeight, ease: 'none', duration: 1 },
+              0
+            )
+            .fromTo(
+              img,
+              { yPercent: 18, scale: 1.08 },
+              { yPercent: 0, scale: 1, ease: 'none', duration: 1 },
+              0
+            );
+
+          // Gentle text entrance as each subsequent row approaches the center stage.
+          if (!isFirstRow) {
+            gsap.from(reveals, {
+              y: 28,
+              opacity: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              stagger: 0.07,
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 78%',
+                toggleActions: 'play none none reverse',
+              },
+            });
+          }
+        });
+
+        // Created after the pinned rows so `end: 'bottom bottom'` includes all pinSpacing.
         gsap.fromTo(
           '[data-team-watermark]',
           { y: () => -window.innerHeight * 0.1 },
@@ -358,88 +417,6 @@ function TeamIntro() {
             },
           }
         );
-
-        const rows = gsap.utils.toArray('[data-team-row]');
-
-        rows.forEach((row, index) => {
-          const wrap = row.querySelector('[data-pill-wrap]');
-          const pill = row.querySelector('[data-pill]');
-          const img = row.querySelector('[data-pill-img]');
-          const reveals = row.querySelectorAll('[data-reveal]');
-
-          const isFirstRow = index === 0;
-
-          // 1. Evolve the image container from a 1:1 circle (height === width)
-          //    into its full vertical stadium pill height on scroll.
-          gsap.fromTo(
-            pill,
-            {
-              height: () => wrap.offsetWidth,
-            },
-            {
-              height: () => wrap.offsetHeight,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: wrap,
-                start: isFirstRow ? 'top top+=140' : 'top 92%',
-                end: isFirstRow ? 'bottom 35%' : 'center 48%',
-                scrub: 0.8,
-                invalidateOnRefresh: true,
-              },
-            }
-          );
-
-          // 2. Scrub the portrait inside the evolving capsule.
-          gsap.fromTo(
-            img,
-            { yPercent: 18, scale: 1.08 },
-            {
-              yPercent: -12,
-              scale: 1,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: wrap,
-                start: isFirstRow ? 'top top+=140' : 'top 92%',
-                end: 'bottom 15%',
-                scrub: 1,
-                invalidateOnRefresh: true,
-              },
-            }
-          );
-
-          // 3. Subtle weightless vertical parallax on the capsule itself.
-          gsap.fromTo(
-            pill,
-            { y: isFirstRow ? 0 : 36 },
-            {
-              y: -36,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: wrap,
-                start: isFirstRow ? 'top top+=140' : 'top bottom',
-                end: 'bottom top',
-                scrub: true,
-                invalidateOnRefresh: true,
-              },
-            }
-          );
-
-          // 4. Gentle text entrance.
-          if (!isFirstRow) {
-            gsap.from(reveals, {
-              y: 28,
-              opacity: 0,
-              duration: 0.8,
-              ease: 'power3.out',
-              stagger: 0.07,
-              scrollTrigger: {
-                trigger: row,
-                start: 'top 82%',
-                toggleActions: 'play none none reverse',
-              },
-            });
-          }
-        });
       });
     }, section);
 
@@ -477,7 +454,7 @@ function TeamIntro() {
       </div>
 
       {/* Top padding clears the fixed Navbar on initial load. */}
-      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pb-20 pt-24 sm:px-6 sm:pt-32 md:px-12 md:pb-[16vh] md:pt-40">
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pb-20 pt-24 sm:px-6 sm:pt-32 md:px-12 md:pb-[16vh] md:pt-28">
         <h2 id="team-intro-heading" className="sr-only">
           Meet the Executive Team
         </h2>
@@ -488,7 +465,7 @@ function TeamIntro() {
             <article
               key={`${member.image}-${index}`}
               data-team-row
-              className="mb-[30vh] flex min-h-[86vh] flex-row items-center justify-between gap-3 last:mb-0 sm:gap-5 md:mb-[16vh] md:min-h-0 md:gap-16"
+              className="mb-[30vh] flex min-h-[86vh] flex-row items-center justify-between gap-3 last:mb-0 sm:gap-5 md:mb-[14vh] md:min-h-[78vh] md:gap-16"
             >
               {/* Alternating two-column order on both mobile and desktop (~40% Pill / ~60% Text on mobile):
                   - Odd (1st, 3rd, 5th...): Image on left (order-1), right-aligned text on right (order-2)
