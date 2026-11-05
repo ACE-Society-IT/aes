@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '@/components/Navbar';
@@ -153,11 +152,15 @@ function PillPortrait({ member }) {
   const alt = `${member.firstName} ${member.lastName}, ${member.role}`;
 
   return (
-    // Outer wrapper is never transformed -> stable ScrollTrigger measurements
-    <div data-pill-wrap className="shrink-0">
+    // Outer wrapper reserves the final stadium dimensions so ScrollTrigger
+    // measurements stay completely stable while `[data-pill]` morphs from a circle.
+    <div
+      data-pill-wrap
+      className="flex h-[74vw] max-h-[350px] w-[43vw] max-w-[195px] shrink-0 items-center justify-center md:h-[clamp(390px,42vw,580px)] md:max-h-none md:w-[clamp(280px,30vw,420px)] md:max-w-none"
+    >
       <div
         data-pill
-        className="relative h-[clamp(390px,42vw,580px)] w-[clamp(280px,30vw,420px)] overflow-hidden rounded-full bg-linear-to-br from-[#5a0d1b] via-[#701020] to-[#89192c] shadow-2xl shadow-[#5a0d1b]/25 will-change-transform"
+        className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-[#5a0d1b] via-[#701020] to-[#89192c] shadow-2xl shadow-[#5a0d1b]/25 will-change-[height,transform]"
       >
         {/* Soft radial glow for depth (bottom-right richer mid-tone) */}
         <div
@@ -176,8 +179,9 @@ function PillPortrait({ member }) {
             className="absolute inset-x-0 bottom-0 mx-auto h-auto w-[90%] object-contain will-change-transform"
           />
         ) : (
-          // Photos with backgrounds: oversized (118%) so the -15% drift never
-          // exposes the pill floor. Anchored to the top to keep faces in frame.
+          // Sized relative to the full pill height so morphing `[data-pill]` from
+          // a 1:1 circle to the full vertical capsule reveals the portrait smoothly
+          // without squishing or stretching the image.
           // eslint-disable-next-line @next/next/no-img-element
           <img
             data-pill-img
@@ -185,7 +189,7 @@ function PillPortrait({ member }) {
             alt={alt}
             loading="lazy"
             decoding="async"
-            className="absolute inset-x-0 top-0 h-[118%] w-full object-cover object-[50%_20%] will-change-transform"
+            className="h-[86vw] max-h-[410px] w-full shrink-0 object-cover object-[50%_20%] will-change-transform md:h-[clamp(460px,50vw,680px)] md:max-h-none"
           />
         )}
 
@@ -206,13 +210,13 @@ function PillPortrait({ member }) {
 function MemberInfo({ member, alignRight }) {
   return (
     <div
-      className={`w-full max-w-md text-center ${
-        alignRight ? 'md:text-right' : 'md:text-left'
+      className={`w-full max-w-md ${
+        alignRight ? 'text-right' : 'text-left'
       }`}
     >
       <h3
         data-reveal
-        className="font-display text-[clamp(3rem,5.5vw,5.25rem)] font-normal uppercase leading-[0.88] tracking-[-0.02em] text-[#5a0d1b]"
+        className="font-display text-[clamp(2.1rem,8.5vw,3.1rem)] font-normal uppercase leading-[0.88] tracking-[-0.02em] text-[#5a0d1b] md:text-[clamp(3rem,5.5vw,5.25rem)]"
       >
         <span className="block">{member.firstName}</span>
         <span className="block">{member.lastName}</span>
@@ -220,14 +224,14 @@ function MemberInfo({ member, alignRight }) {
 
       <p
         data-reveal
-        className="mb-6 mt-[0.35rem] font-display text-[clamp(1.25rem,2vw,1.85rem)] uppercase leading-none text-[#5a0d1b]"
+        className="mb-3.5 mt-1.5 font-display text-[clamp(1rem,3.8vw,1.3rem)] uppercase leading-[0.95] text-[#5a0d1b] md:mb-6 md:mt-[0.35rem] md:text-[clamp(1.25rem,2vw,1.85rem)] md:leading-none"
       >
         {member.role}
       </p>
 
       <ul
         data-reveal
-        className="font-condensed text-[1rem] leading-[1.45] text-[#5a0d1b] md:text-[1.05rem]"
+        className="font-condensed text-[0.82rem] leading-[1.38] text-[#5a0d1b] sm:text-[0.92rem] md:text-[1.05rem] md:leading-[1.45]"
       >
         {member.favorites.map(([label, value]) => (
           <li key={label}>
@@ -239,12 +243,15 @@ function MemberInfo({ member, alignRight }) {
       <p
         data-reveal
         aria-hidden="true"
-        className="my-4 font-condensed text-[1.1rem] text-[#5a0d1b]"
+        className="my-2 font-condensed text-[0.95rem] text-[#5a0d1b] md:my-4 md:text-[1.1rem]"
       >
         -
       </p>
 
-      <div data-reveal className="font-condensed text-[1.1rem] leading-snug">
+      <div
+        data-reveal
+        className="font-condensed text-[0.88rem] leading-snug sm:text-[0.98rem] md:text-[1.1rem]"
+      >
         {member.phone && (
           <a
             href={`tel:${member.phone.replace(/\s+/g, '')}`}
@@ -256,7 +263,7 @@ function MemberInfo({ member, alignRight }) {
         {member.email && (
           <a
             href={`mailto:${member.email}`}
-            className="block lowercase text-[#89192c] transition-opacity duration-300 ease-out hover:opacity-70"
+            className="block break-all lowercase text-[#89192c] transition-opacity duration-300 ease-out hover:opacity-70"
           >
             {member.email}
           </a>
@@ -266,7 +273,7 @@ function MemberInfo({ member, alignRight }) {
             href={member.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-block font-semibold text-[#5a0d1b] underline decoration-2 underline-offset-4 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:opacity-70 motion-reduce:transition-none motion-reduce:hover:transform-none"
+            className="mt-1.5 inline-block font-semibold text-[#5a0d1b] underline decoration-2 underline-offset-4 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:opacity-70 motion-reduce:transition-none motion-reduce:hover:transform-none md:mt-2"
           >
             LinkedIn
           </a>
@@ -290,13 +297,14 @@ function TeamIntro() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        /* ---- Giant "TEAM" watermark: drifts upper-middle -> lower-middle ---- */
+      /* ---- Desktop only: watermark scrub + per-member reveal & parallax ---- */
+      /* On mobile (< 768px), watermark is fixed and rows render statically without reveal animations. */
+      mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
         gsap.fromTo(
           '[data-team-watermark]',
-          { y: () => -window.innerHeight * 0.22 },
+          { y: () => -window.innerHeight * 0.1 },
           {
-            y: () => window.innerHeight * 0.22,
+            y: () => window.innerHeight * 0.2,
             ease: 'none',
             scrollTrigger: {
               trigger: section,
@@ -308,57 +316,86 @@ function TeamIntro() {
           }
         );
 
-        /* ---- Per-member pill + cutout parallax ---- */
-        gsap.utils.toArray('[data-team-row]').forEach((row) => {
+        const rows = gsap.utils.toArray('[data-team-row]');
+
+        rows.forEach((row, index) => {
           const wrap = row.querySelector('[data-pill-wrap]');
           const pill = row.querySelector('[data-pill]');
           const img = row.querySelector('[data-pill-img]');
           const reveals = row.querySelectorAll('[data-reveal]');
 
-          // Cutout rises from below the capsule mask, then drifts slightly up.
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: wrap,
-              start: 'top 85%',
-              end: 'bottom 15%',
-              scrub: 1,
-            },
-          });
-          tl.fromTo(
-            img,
-            { yPercent: 100 },
-            { yPercent: 0, ease: 'none', duration: 0.45 }
-          ).to(img, { yPercent: -15, ease: 'none', duration: 0.55 });
+          const isFirstRow = index === 0;
 
-          // Weightless drift on the pill itself.
+          // 1. Evolve the image container from a 1:1 circle (height === width)
+          //    into its full vertical stadium pill height on scroll.
           gsap.fromTo(
             pill,
-            { y: 60 },
             {
-              y: -60,
+              height: () => wrap.offsetWidth,
+            },
+            {
+              height: () => wrap.offsetHeight,
               ease: 'none',
               scrollTrigger: {
                 trigger: wrap,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true,
+                start: isFirstRow ? 'top top+=140' : 'top 92%',
+                end: isFirstRow ? 'bottom 35%' : 'center 48%',
+                scrub: 0.8,
+                invalidateOnRefresh: true,
               },
             }
           );
 
-          // Gentle text entrance.
-          gsap.from(reveals, {
-            y: 32,
-            opacity: 0,
-            duration: 0.9,
-            ease: 'power3.out',
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: row,
-              start: 'top 75%',
-              toggleActions: 'play none none reverse',
-            },
-          });
+          // 2. Scrub the portrait inside the evolving capsule.
+          gsap.fromTo(
+            img,
+            { yPercent: 18, scale: 1.08 },
+            {
+              yPercent: -12,
+              scale: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: wrap,
+                start: isFirstRow ? 'top top+=140' : 'top 92%',
+                end: 'bottom 15%',
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+
+          // 3. Subtle weightless vertical parallax on the capsule itself.
+          gsap.fromTo(
+            pill,
+            { y: isFirstRow ? 0 : 36 },
+            {
+              y: -36,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: wrap,
+                start: isFirstRow ? 'top top+=140' : 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
+
+          // 4. Gentle text entrance.
+          if (!isFirstRow) {
+            gsap.from(reveals, {
+              y: 28,
+              opacity: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              stagger: 0.07,
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 82%',
+                toggleActions: 'play none none reverse',
+              },
+            });
+          }
         });
       });
     }, section);
@@ -378,21 +415,27 @@ function TeamIntro() {
     <section
       ref={sectionRef}
       aria-labelledby="team-intro-heading"
-      className="relative overflow-x-clip bg-[#f8eee1] bg-[linear-gradient(to_right,#89192c1f_1px,transparent_1px),linear-gradient(to_bottom,#89192c1f_1px,transparent_1px)] bg-[length:40px_40px]"
+      className="relative overflow-x-clip bg-[#f8eee1] bg-[linear-gradient(to_right,#89192c1f_1px,transparent_1px),linear-gradient(to_bottom,#89192c1f_1px,transparent_1px)] bg-[length:40px_40px] [clip-path:inset(0)]"
     >
-      {/* Giant sticky "TEAM" watermark */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
-          <span
-            data-team-watermark
-            className="block select-none font-display text-[clamp(10rem,30vw,18rem)] font-normal uppercase leading-[0.8] text-[#e8dcc6] will-change-transform"
-          >
-            Executives
-          </span>
-        </div>
+      {/* Giant "EXECUTIVES" background watermark:
+          - Fixed in the background on mobile (clipped cleanly to this section via clip-path).
+          - Scrubbed vertically via GSAP on desktop.
+          - Top padding clears the fixed Navbar so it is never hidden at initial load. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 flex items-start justify-center overflow-hidden pt-36 sm:pt-40 md:items-center md:pt-24"
+      >
+        <span
+          data-team-watermark
+          className="block select-none font-display text-[clamp(4.25rem,18.5vw,18rem)] font-normal uppercase leading-[0.8] text-[#e8dcc6] will-change-transform"
+        >
+          Executives
+        </span>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-[14vh] md:px-12">
+      {/* Top padding (`pt-28 sm:pt-36 md:pt-40`) ensures the fixed Navbar never covers
+          the first executive's text or portrait on initial page load. */}
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pb-20 pt-28 sm:px-6 sm:pt-36 md:px-12 md:pb-[16vh] md:pt-40">
         <h2 id="team-intro-heading" className="sr-only">
           Meet the Executive Team
         </h2>
@@ -403,14 +446,18 @@ function TeamIntro() {
             <article
               key={`${member.image}-${index}`}
               data-team-row
-              className="mb-[12vh] flex flex-col items-center gap-10 last:mb-0 md:mb-[16vh] md:flex-row md:justify-between md:gap-16"
+              className="mb-[10vh] flex flex-row items-center justify-between gap-3 last:mb-0 sm:gap-6 md:mb-[16vh] md:gap-16"
             >
-              <div className={isOdd ? 'md:order-1' : 'md:order-2'}>
+              {/* Alternating two-column order on both mobile and desktop:
+                  - Odd (1st, 3rd, 5th...): Image on left (order-1), right-aligned text on right (order-2)
+                  - Even (2nd, 4th, 6th...): Left-aligned text on left (order-1), image on right (order-2) */}
+              <div className={isOdd ? 'order-1' : 'order-2'}>
                 <PillPortrait member={member} />
               </div>
+
               <div
-                className={`flex w-full justify-center ${
-                  isOdd ? 'md:order-2 md:justify-end' : 'md:order-1 md:justify-start'
+                className={`flex flex-1 ${
+                  isOdd ? 'order-2 justify-end' : 'order-1 justify-start'
                 }`}
               >
                 <MemberInfo member={member} alignRight={isOdd} />
