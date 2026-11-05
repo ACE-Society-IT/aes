@@ -13,21 +13,15 @@ if (typeof window !== 'undefined') {
 /**
  * Team roster rendered in the scroll-driven "Team Intro" section.
  *
- * - `cutout: true`  -> transparent PNG cutout, rendered at 90% width / contain
- *                      at the bottom of the pill (Goodway-style).
- * - `cutout: false` -> regular photo with its own background, rendered as a
- *                      full-bleed cover image so the pill never shows hard edges.
- *
- * TODO: Replace placeholder roles, favourites, contacts and LinkedIn URLs with
- * verified details. Entries using stock photos (eb*, ex*) are placeholders.
+ * Each portrait is rendered as a tall vertical photograph (1000x3600 / ~1:3.6
+ * aspect ratio) inside `.pill-mask`.
  */
 const TEAM = [
   {
     firstName: 'Mansoor',
     lastName: 'Moiz',
     role: 'Executive Council',
-    image: '/executives/mansoor-moiz.png',
-    cutout: false,
+    image: '/executives/res.png',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -41,8 +35,7 @@ const TEAM = [
     firstName: 'Bareerah',
     lastName: 'Ahmed',
     role: 'Executive Council',
-    image: '/executives/bareerah-ahmed.png',
-    cutout: false,
+    image: '/executives/res2.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -57,7 +50,6 @@ const TEAM = [
     lastName: 'Japanwalla',
     role: 'Executive Council',
     image: '/executives/ayaan-japanwalla.jpg',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -72,7 +64,6 @@ const TEAM = [
     lastName: 'Member',
     role: 'Executive Board',
     image: '/executives/eb1.webp',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -87,7 +78,6 @@ const TEAM = [
     lastName: 'Member',
     role: 'Executive Board',
     image: '/executives/eb2.jpg',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -102,7 +92,6 @@ const TEAM = [
     lastName: 'Member',
     role: 'Executive Council',
     image: '/executives/exe3.jpg',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -117,7 +106,6 @@ const TEAM = [
     lastName: 'Member',
     role: 'Executive Council',
     image: '/executives/ex4.jpg',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -132,7 +120,6 @@ const TEAM = [
     lastName: 'Member',
     role: 'Executive Council',
     image: '/executives/ex1.jpg',
-    cutout: false,
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -152,52 +139,26 @@ function PillPortrait({ member }) {
   const alt = `${member.firstName} ${member.lastName}, ${member.role}`;
 
   return (
-    // Mobile: width clamp(140px, 40vw, 165px) and tall ~1:2.6 stadium height clamp(380px, 50vh, 440px).
-    // Desktop (md+): width clamp(280px, 30vw, 420px) and height clamp(390px, 42vw, 580px).
+    // Outer wrapper reserves the taller final stadium dimensions so ScrollTrigger
+    // measurements stay stable while `[data-pill]` evolves from a 1:1 circle to a tall capsule.
     <div
       data-pill-wrap
-      className="flex h-[clamp(380px,50vh,440px)] w-[clamp(140px,40vw,165px)] shrink-0 items-center justify-center md:h-[clamp(390px,42vw,580px)] md:w-[clamp(280px,30vw,420px)]"
+      className="flex h-[clamp(440px,62vh,520px)] w-[clamp(145px,40vw,175px)] shrink-0 items-center justify-center md:h-[clamp(580px,76vh,760px)] md:w-[clamp(270px,24vw,350px)]"
     >
       <div
         data-pill
-        className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-[#5a0d1b] via-[#701020] to-[#89192c] shadow-2xl shadow-[#5a0d1b]/25 will-change-[height,transform]"
+        className="pill-mask relative h-full w-full overflow-hidden rounded-full will-change-[height,transform]"
       >
-        {/* Soft radial glow for depth (bottom-right richer mid-tone) */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_85%,#89192c_0%,transparent_65%)]"
-        />
-
-        {member.cutout ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            data-pill-img
-            src={member.image}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-x-0 bottom-0 mx-auto h-auto w-[90%] object-contain will-change-transform"
-          />
-        ) : (
-          // Oversized height (118% of full pill height) anchored at top so:
-          // - At yPercent: 75 (mobile entry), the top ~80% of the capsule is visibly empty.
-          // - At yPercent: 0 (viewport center), the portrait fills the capsule cleanly.
-          // - At yPercent: -15 (exit drift), the bottom of the pill never exposes a gap.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            data-pill-img
-            src={member.image}
-            alt={alt}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-x-0 top-0 h-[calc(clamp(380px,50vh,440px)*1.18)] w-full shrink-0 object-cover object-[50%_20%] will-change-transform md:h-[calc(clamp(390px,42vw,580px)*1.18)]"
-          />
-        )}
-
-        {/* Inner hairline rim */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-inset ring-[#f1ca7e]/20"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          data-pill-img
+          src={member.image}
+          alt={alt}
+          width={1000}
+          height={3600}
+          loading="lazy"
+          decoding="async"
+          className="tall-parallax-img pointer-events-none absolute top-0 left-0 aspect-[1000/3600] h-[calc(clamp(440px,62vh,520px)*2.5)] min-h-[250%] w-full object-cover object-center will-change-transform md:h-[calc(clamp(580px,76vh,760px)*2.5)]"
         />
       </div>
     </div>
@@ -211,7 +172,7 @@ function PillPortrait({ member }) {
 function MemberInfo({ member, alignRight }) {
   return (
     <div
-      className={`flex w-full max-w-md flex-col justify-center ${
+      className={`member-info flex w-full max-w-md flex-col justify-center ${
         alignRight ? 'text-right' : 'text-left'
       }`}
     >
@@ -302,66 +263,58 @@ function TeamIntro() {
       /* MOBILE (max-width: 768px):                                           */
       /* - Fixed "EXECUTIVES" watermark in background                         */
       /* - Single-card viewport cadence                                       */
-      /* - Cutout portrait scrub: yPercent 75 -> 0 (at center) -> -15 (exit)  */
+      /* - Tall image window pan: yPercent 0 (top) -> -58 (bottom)            */
       /* ==================================================================== */
       mm.add('(max-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
-        const rows = gsap.utils.toArray('[data-team-row]');
+        gsap.utils.toArray('.team-card').forEach((card) => {
+          const img = card.querySelector('.tall-parallax-img');
+          if (!img) return;
 
-        rows.forEach((row) => {
-          const wrap = row.querySelector('[data-pill-wrap]');
-          const img = row.querySelector('[data-pill-img]');
-
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: wrap,
-              start: 'top 95%',
-              end: 'bottom top',
-              scrub: 1,
-              invalidateOnRefresh: true,
-            },
-          });
-
-          // Phase 1 ("top 95%" -> "center center"): Cutout rises from pushed-down
-          // initial state (yPercent: 75, leaving top half of capsule empty) to 0.
-          // Phase 2 ("center center" -> "bottom top"): Continues subtle upward
-          // exit drift to yPercent: -15 as the row leaves the top of the screen.
-          tl.fromTo(
+          gsap.fromTo(
             img,
-            { yPercent: 75 },
-            { yPercent: 0, ease: 'none', duration: 0.5 }
-          ).to(img, {
-            yPercent: -15,
-            ease: 'none',
-            duration: 0.5,
-          });
+            { yPercent: 0 },
+            {
+              yPercent: -58,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
         });
       });
 
       /* ==================================================================== */
       /* DESKTOP (min-width: 769px):                                          */
-      /* - Each row pins ("on hold") at the center of the viewport until its  */
-      /*   pill container finishes transforming from a circle to the final    */
-      /*   vertical oval/stadium form, then releases to move to the next one. */
-      /* - Watermark scrubs vertically across the full pinned section height. */
+      /* - Each row pins ("on hold") at the center of the viewport while:     */
+      /*   1) `.pill-mask` evolves from a 1:1 circle to the full tall         */
+      /*      stadium capsule, and                                            */
+      /*   2) `.tall-parallax-img` pans vertically (yPercent: 0 -> -58)       */
+      /*      within the immense height of the image.                         */
+      /* - Then releases the pin to scroll to the next executive.             */
       /* ==================================================================== */
       mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
-        const rows = gsap.utils.toArray('[data-team-row]');
+        const rows = gsap.utils.toArray('.team-card');
 
         rows.forEach((row, index) => {
           const wrap = row.querySelector('[data-pill-wrap]');
           const pill = row.querySelector('[data-pill]');
-          const img = row.querySelector('[data-pill-img]');
+          const img = row.querySelector('.tall-parallax-img');
           const reveals = row.querySelectorAll('[data-reveal]');
 
           const isFirstRow = index === 0;
 
           // Hold the row in the center of the screen while the circle transforms
-          // into the final vertical oval/pill form, then release to the next row.
+          // into the taller final capsule and scrolls within the tall image.
           const pinTl = gsap.timeline({
             scrollTrigger: {
               trigger: row,
               start: 'center center',
-              end: '+=520',
+              end: '+=560',
               pin: true,
               pinSpacing: true,
               scrub: 0.6,
@@ -379,8 +332,8 @@ function TeamIntro() {
             )
             .fromTo(
               img,
-              { yPercent: 18, scale: 1.08 },
-              { yPercent: 0, scale: 1, ease: 'none', duration: 1 },
+              { yPercent: 0 },
+              { yPercent: -58, ease: 'none', duration: 1 },
               0
             );
 
@@ -465,11 +418,11 @@ function TeamIntro() {
             <article
               key={`${member.image}-${index}`}
               data-team-row
-              className="mb-[30vh] flex min-h-[86vh] flex-row items-center justify-between gap-3 last:mb-0 sm:gap-5 md:mb-[14vh] md:min-h-[78vh] md:gap-16"
+              className="team-card mb-[30vh] flex min-h-[86vh] flex-row items-center justify-between gap-3 last:mb-0 sm:gap-5 md:mb-[14vh] md:min-h-[78vh] md:gap-16"
             >
-              {/* Alternating two-column order on both mobile and desktop (~40% Pill / ~60% Text on mobile):
-                  - Odd (1st, 3rd, 5th...): Image on left (order-1), right-aligned text on right (order-2)
-                  - Even (2nd, 4th, 6th...): Left-aligned text on left (order-1), image on right (order-2) */}
+              {/* Alternating two-column order on both mobile and desktop:
+                  - Odd (1st, 3rd, 5th...): Pill Mask on left (order-1), right-aligned text on right (order-2)
+                  - Even (2nd, 4th, 6th...): Left-aligned text on left (order-1), Pill Mask on right (order-2) */}
               <div className={isOdd ? 'order-1' : 'order-2'}>
                 <PillPortrait member={member} />
               </div>
