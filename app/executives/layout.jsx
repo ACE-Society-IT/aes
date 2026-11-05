@@ -1,3 +1,19 @@
+import { Anton, Barlow_Condensed } from 'next/font/google';
+
+const anton = Anton({
+  variable: '--font-anton',
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+});
+
+const barlowCondensed = Barlow_Condensed({
+  variable: '--font-barlow-condensed',
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+});
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://alphaace.com.pk';
 
 export const metadata = {
@@ -42,5 +58,10 @@ export const metadata = {
 };
 
 export default function ExecutivesLayout({ children }) {
-  return children;
+  // contents keeps the wrapper out of layout while exposing the font CSS variables
+  return (
+    <div className={`contents ${anton.variable} ${barlowCondensed.variable}`}>
+      {children}
+    </div>
+  );
 }

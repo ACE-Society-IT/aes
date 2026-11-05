@@ -20,6 +20,13 @@
   --font-sans: var(--font-outfit), system-ui, -apple-system, sans-serif;
 }
 
+/* Condensed display + body fonts (loaded via next/font in app/executives/layout.jsx).
+   inline so the var() resolves on the element where the font variable is defined. */
+@theme inline {
+  --font-display: var(--font-anton), 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --font-condensed: var(--font-barlow-condensed), 'Arial Narrow', system-ui, sans-serif;
+}
+
 :root {
   --background: #5a0d1b;
   --foreground: #f8eee1;

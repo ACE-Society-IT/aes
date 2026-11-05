@@ -2,10 +2,18 @@
 
 import React, { useEffect } from 'react';
 import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 /**
  * Global smooth scroll provider using Lenis.
  * Provides luxury, momentum-based inertia scrolling across the entire site.
+ * Lenis is driven by GSAP's ticker and synced with ScrollTrigger so that
+ * scroll-scrubbed animations stay perfectly in step with the smoothed scroll.
  */
 export default function SmoothScroll({ children }) {
   useEffect(() => {
@@ -24,13 +32,15 @@ export default function SmoothScroll({ children }) {
       touchMultiplier: 1.2,
     });
 
-    let frameId;
-    function raf(time) {
-      lenis.raf(time);
-      frameId = requestAnimationFrame(raf);
-    }
+    // Sync Lenis -> ScrollTrigger on every smoothed scroll tick
+    lenis.on('scroll', ScrollTrigger.update);
 
-    frameId = requestAnimationFrame(raf);
+    // Drive Lenis from GSAP's ticker (single shared RAF loop)
+    const tickLenis = (time) => {
+      lenis.raf(time * 1000); // gsap ticker time is in seconds
+    };
+    gsap.ticker.add(tickLenis);
+    gsap.ticker.lagSmoothing(0);
 
     // Handle initial hash on page load (e.g. navigating from another page to /#schedule)
     if (typeof window !== 'undefined' && window.location.hash) {
@@ -82,7 +92,9 @@ export default function SmoothScroll({ children }) {
     window.addEventListener('dragstart', handleDragStart);
 
     return () => {
-      cancelAnimationFrame(frameId);
+      lenis.off('scroll', ScrollTrigger.update);
+      gsap.ticker.remove(tickLenis);
+      gsap.ticker.lagSmoothing(500, 33); // restore GSAP default
       lenis.destroy();
       window.removeEventListener('dragstart', handleDragStart);
       document.removeEventListener('click', handleAnchorClick);
