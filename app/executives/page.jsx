@@ -152,11 +152,11 @@ function PillPortrait({ member }) {
   const alt = `${member.firstName} ${member.lastName}, ${member.role}`;
 
   return (
-    // Outer wrapper reserves the final stadium dimensions so ScrollTrigger
-    // measurements stay completely stable while `[data-pill]` morphs from a circle.
+    // Mobile: width clamp(140px, 40vw, 165px) and tall ~1:2.6 stadium height clamp(380px, 50vh, 440px).
+    // Desktop (md+): width clamp(280px, 30vw, 420px) and height clamp(390px, 42vw, 580px).
     <div
       data-pill-wrap
-      className="flex h-[74vw] max-h-[350px] w-[43vw] max-w-[195px] shrink-0 items-center justify-center md:h-[clamp(390px,42vw,580px)] md:max-h-none md:w-[clamp(280px,30vw,420px)] md:max-w-none"
+      className="flex h-[clamp(380px,50vh,440px)] w-[clamp(140px,40vw,165px)] shrink-0 items-center justify-center md:h-[clamp(390px,42vw,580px)] md:w-[clamp(280px,30vw,420px)]"
     >
       <div
         data-pill
@@ -179,9 +179,10 @@ function PillPortrait({ member }) {
             className="absolute inset-x-0 bottom-0 mx-auto h-auto w-[90%] object-contain will-change-transform"
           />
         ) : (
-          // Sized relative to the full pill height so morphing `[data-pill]` from
-          // a 1:1 circle to the full vertical capsule reveals the portrait smoothly
-          // without squishing or stretching the image.
+          // Oversized height (118% of full pill height) anchored at top so:
+          // - At yPercent: 75 (mobile entry), the top ~80% of the capsule is visibly empty.
+          // - At yPercent: 0 (viewport center), the portrait fills the capsule cleanly.
+          // - At yPercent: -15 (exit drift), the bottom of the pill never exposes a gap.
           // eslint-disable-next-line @next/next/no-img-element
           <img
             data-pill-img
@@ -189,7 +190,7 @@ function PillPortrait({ member }) {
             alt={alt}
             loading="lazy"
             decoding="async"
-            className="h-[86vw] max-h-[410px] w-full shrink-0 object-cover object-[50%_20%] will-change-transform md:h-[clamp(460px,50vw,680px)] md:max-h-none"
+            className="absolute inset-x-0 top-0 h-[calc(clamp(380px,50vh,440px)*1.18)] w-full shrink-0 object-cover object-[50%_20%] will-change-transform md:h-[calc(clamp(390px,42vw,580px)*1.18)]"
           />
         )}
 
@@ -210,13 +211,13 @@ function PillPortrait({ member }) {
 function MemberInfo({ member, alignRight }) {
   return (
     <div
-      className={`w-full max-w-md ${
+      className={`flex w-full max-w-md flex-col justify-center ${
         alignRight ? 'text-right' : 'text-left'
       }`}
     >
       <h3
         data-reveal
-        className="font-display text-[clamp(2.1rem,8.5vw,3.1rem)] font-normal uppercase leading-[0.88] tracking-[-0.02em] text-[#5a0d1b] md:text-[clamp(3rem,5.5vw,5.25rem)]"
+        className="font-display text-[clamp(2.15rem,8.5vw,3.1rem)] font-normal uppercase leading-[0.88] tracking-[-0.02em] text-[#5a0d1b] md:text-[clamp(3rem,5.5vw,5.25rem)]"
       >
         <span className="block">{member.firstName}</span>
         <span className="block">{member.lastName}</span>
@@ -224,14 +225,14 @@ function MemberInfo({ member, alignRight }) {
 
       <p
         data-reveal
-        className="mb-3.5 mt-1.5 font-display text-[clamp(1rem,3.8vw,1.3rem)] uppercase leading-[0.95] text-[#5a0d1b] md:mb-6 md:mt-[0.35rem] md:text-[clamp(1.25rem,2vw,1.85rem)] md:leading-none"
+        className="mb-4 mt-1.5 font-display text-[clamp(1rem,3.8vw,1.3rem)] uppercase leading-[0.95] text-[#5a0d1b] md:mb-6 md:mt-[0.35rem] md:text-[clamp(1.25rem,2vw,1.85rem)] md:leading-none"
       >
         {member.role}
       </p>
 
       <ul
         data-reveal
-        className="font-condensed text-[0.82rem] leading-[1.38] text-[#5a0d1b] sm:text-[0.92rem] md:text-[1.05rem] md:leading-[1.45]"
+        className="font-condensed text-[0.85rem] leading-[1.4] text-[#5a0d1b] sm:text-[0.95rem] md:text-[1.05rem] md:leading-[1.45]"
       >
         {member.favorites.map(([label, value]) => (
           <li key={label}>
@@ -243,14 +244,14 @@ function MemberInfo({ member, alignRight }) {
       <p
         data-reveal
         aria-hidden="true"
-        className="my-2 font-condensed text-[0.95rem] text-[#5a0d1b] md:my-4 md:text-[1.1rem]"
+        className="my-2.5 font-condensed text-[0.95rem] text-[#5a0d1b] md:my-4 md:text-[1.1rem]"
       >
         -
       </p>
 
       <div
         data-reveal
-        className="font-condensed text-[0.88rem] leading-snug sm:text-[0.98rem] md:text-[1.1rem]"
+        className="font-condensed text-[0.9rem] leading-snug sm:text-[1rem] md:text-[1.1rem]"
       >
         {member.phone && (
           <a
@@ -297,9 +298,51 @@ function TeamIntro() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      /* ---- Desktop only: watermark scrub + per-member reveal & parallax ---- */
-      /* On mobile (< 768px), watermark is fixed and rows render statically without reveal animations. */
-      mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+      /* ==================================================================== */
+      /* MOBILE (max-width: 768px):                                           */
+      /* - Fixed "EXECUTIVES" watermark in background                         */
+      /* - Single-card viewport cadence                                       */
+      /* - Cutout portrait scrub: yPercent 75 -> 0 (at center) -> -15 (exit)  */
+      /* ==================================================================== */
+      mm.add('(max-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+        const rows = gsap.utils.toArray('[data-team-row]');
+
+        rows.forEach((row) => {
+          const wrap = row.querySelector('[data-pill-wrap]');
+          const img = row.querySelector('[data-pill-img]');
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: wrap,
+              start: 'top 95%',
+              end: 'bottom top',
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // Phase 1 ("top 95%" -> "center center"): Cutout rises from pushed-down
+          // initial state (yPercent: 75, leaving top half of capsule empty) to 0.
+          // Phase 2 ("center center" -> "bottom top"): Continues subtle upward
+          // exit drift to yPercent: -15 as the row leaves the top of the screen.
+          tl.fromTo(
+            img,
+            { yPercent: 75 },
+            { yPercent: 0, ease: 'none', duration: 0.5 }
+          ).to(img, {
+            yPercent: -15,
+            ease: 'none',
+            duration: 0.5,
+          });
+        });
+      });
+
+      /* ==================================================================== */
+      /* DESKTOP (min-width: 769px):                                          */
+      /* - Watermark vertical scrub                                           */
+      /* - Circle-to-pill evolution + portrait scrub + text entrance          */
+      /* ==================================================================== */
+      mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
         gsap.fromTo(
           '[data-team-watermark]',
           { y: () => -window.innerHeight * 0.1 },
@@ -423,7 +466,7 @@ function TeamIntro() {
           - Top padding clears the fixed Navbar so it is never hidden at initial load. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 flex items-start justify-center overflow-hidden pt-36 sm:pt-40 md:items-center md:pt-24"
+        className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden pt-16 md:pt-24"
       >
         <span
           data-team-watermark
@@ -433,9 +476,8 @@ function TeamIntro() {
         </span>
       </div>
 
-      {/* Top padding (`pt-28 sm:pt-36 md:pt-40`) ensures the fixed Navbar never covers
-          the first executive's text or portrait on initial page load. */}
-      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pb-20 pt-28 sm:px-6 sm:pt-36 md:px-12 md:pb-[16vh] md:pt-40">
+      {/* Top padding clears the fixed Navbar on initial load. */}
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 pb-20 pt-24 sm:px-6 sm:pt-32 md:px-12 md:pb-[16vh] md:pt-40">
         <h2 id="team-intro-heading" className="sr-only">
           Meet the Executive Team
         </h2>
@@ -446,9 +488,9 @@ function TeamIntro() {
             <article
               key={`${member.image}-${index}`}
               data-team-row
-              className="mb-[10vh] flex flex-row items-center justify-between gap-3 last:mb-0 sm:gap-6 md:mb-[16vh] md:gap-16"
+              className="mb-[30vh] flex min-h-[86vh] flex-row items-center justify-between gap-3 last:mb-0 sm:gap-5 md:mb-[16vh] md:min-h-0 md:gap-16"
             >
-              {/* Alternating two-column order on both mobile and desktop:
+              {/* Alternating two-column order on both mobile and desktop (~40% Pill / ~60% Text on mobile):
                   - Odd (1st, 3rd, 5th...): Image on left (order-1), right-aligned text on right (order-2)
                   - Even (2nd, 4th, 6th...): Left-aligned text on left (order-1), image on right (order-2) */}
               <div className={isOdd ? 'order-1' : 'order-2'}>
@@ -456,7 +498,7 @@ function TeamIntro() {
               </div>
 
               <div
-                className={`flex flex-1 ${
+                className={`flex basis-[58%] md:basis-auto md:flex-1 ${
                   isOdd ? 'order-2 justify-end' : 'order-1 justify-start'
                 }`}
               >
