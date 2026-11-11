@@ -22,11 +22,17 @@ const TEAM = [
     lastName: 'Moiz',
     role: 'Executive Council',
     image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    favorites: 'Chairman Executive Officer Of Alpha Entrepreneurship summit 2026.',
+    phone: null,
+    email: null,
+    linkedin: '#',
+  },
+  {
+    firstName: 'Zoya',
+    lastName: 'Ehtisham',
+    role: 'Executive Council',
+    image: '/executives/female.jpg',
+    favorites: 'Chief Financial Officer of Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
@@ -36,11 +42,7 @@ const TEAM = [
     lastName: 'Ahmed',
     role: 'Executive Council',
     image: '/executives/female.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    favorites: 'Executive Director of Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
@@ -50,81 +52,37 @@ const TEAM = [
     lastName: 'Japanwalla',
     role: 'Executive Council',
     image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    favorites: 'Media and Marketing Director at Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
   },
   {
-    firstName: 'Executive',
-    lastName: 'Member',
-    role: 'Executive Board',
-    image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
-    phone: null,
-    email: null,
-    linkedin: '#',
-  },
-  {
-    firstName: 'Executive',
-    lastName: 'Member',
-    role: 'Executive Board',
-    image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
-    phone: null,
-    email: null,
-    linkedin: '#',
-  },
-  {
-    firstName: 'Executive',
-    lastName: 'Member',
+    firstName: 'Ayan',
+    lastName: 'Khurram',
     role: 'Executive Council',
     image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    favorites: 'Module Director at Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
   },
   {
-    firstName: 'Executive',
-    lastName: 'Member',
+    firstName: 'Zobia',
+    lastName: 'Khan',
     role: 'Executive Council',
-    image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    image: '/executives/female.jpg',
+    favorites: 'Director of Communication at Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
   },
   {
-    firstName: 'Executive',
-    lastName: 'Member',
+    firstName: 'Ahmed',
+    lastName: 'Shahid',
     role: 'Executive Council',
     image: '/executives/male.jpg',
-    favorites: [
-      ['Favourite Film', 'TBA'],
-      ['Favourite Song', 'TBA'],
-      ['Favourite Series', 'TBA'],
-    ],
+    favorites: 'Director of Operation at Alpha Entrepreneurship summit 2026.',
     phone: null,
     email: null,
     linkedin: '#',
@@ -195,20 +153,8 @@ function MemberInfo({ member, alignRight }) {
         data-reveal
         className="font-condensed text-[0.85rem] leading-[1.4] text-[#5a0d1b] sm:text-[0.95rem] md:text-[1.05rem] md:leading-[1.45]"
       >
-        {member.favorites.map(([label, value]) => (
-          <li key={label}>
-            <span className="font-semibold">{label}:</span> {value}
-          </li>
-        ))}
+        <li>{member.favorites}</li>
       </ul>
-
-      <p
-        data-reveal
-        aria-hidden="true"
-        className="my-2.5 font-condensed text-[0.95rem] text-[#5a0d1b] md:my-4 md:text-[1.1rem]"
-      >
-        -
-      </p>
 
       <div
         data-reveal
