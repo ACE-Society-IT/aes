@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 /**
  * Team roster rendered in the scroll-driven "Team Intro" section.
  *
- * Each portrait is rendered as a tall vertical photograph (1000x3600 / ~1:3.6
+ * Each portrait is rendered as a tall vertical photograph (1000x2800 / 1:2.8
  * aspect ratio) inside `.pill-mask`.
  */
 const TEAM = [
@@ -155,10 +155,10 @@ function PillPortrait({ member }) {
           src={member.image}
           alt={alt}
           width={1000}
-          height={3600}
+          height={2800}
           loading="lazy"
           decoding="async"
-          className="tall-parallax-img pointer-events-none absolute top-0 left-0 aspect-[1000/3600] h-[calc(clamp(440px,62vh,520px)*2.5)] min-h-[250%] w-full object-cover object-center will-change-transform md:h-[calc(clamp(580px,76vh,760px)*2.5)]"
+          className="tall-parallax-img pointer-events-none absolute top-0 left-0 aspect-[1000/2800] h-[calc(clamp(440px,62vh,520px)*1.85)] min-h-[185%] w-full object-cover object-center will-change-transform md:h-[calc(clamp(580px,76vh,760px)*1.85)]"
         />
       </div>
     </div>
@@ -263,7 +263,7 @@ function TeamIntro() {
       /* MOBILE (max-width: 768px):                                           */
       /* - Fixed "EXECUTIVES" watermark in background                         */
       /* - Single-card viewport cadence                                       */
-      /* - Tall image window pan: yPercent 0 (top) -> -58 (bottom)            */
+      /* - Tall image window pan (1000x2800): yPercent 0 (top) -> -45 (bottom)*/
       /* ==================================================================== */
       mm.add('(max-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
         gsap.utils.toArray('.team-card').forEach((card) => {
@@ -274,7 +274,7 @@ function TeamIntro() {
             img,
             { yPercent: 0 },
             {
-              yPercent: -58,
+              yPercent: -45,
               ease: 'none',
               scrollTrigger: {
                 trigger: card,
@@ -293,8 +293,8 @@ function TeamIntro() {
       /* - Each row pins ("on hold") at the center of the viewport while:     */
       /*   1) `.pill-mask` evolves from a 1:1 circle to the full tall         */
       /*      stadium capsule, and                                            */
-      /*   2) `.tall-parallax-img` pans vertically (yPercent: 0 -> -58)       */
-      /*      within the immense height of the image.                         */
+      /*   2) `.tall-parallax-img` pans vertically (yPercent: 0 -> -45)       */
+      /*      within the 1000x2800 image height.                              */
       /* - Then releases the pin to scroll to the next executive.             */
       /* ==================================================================== */
       mm.add('(min-width: 769px) and (prefers-reduced-motion: no-preference)', () => {
@@ -309,12 +309,12 @@ function TeamIntro() {
           const isFirstRow = index === 0;
 
           // Hold the row in the center of the screen while the circle transforms
-          // into the taller final capsule and scrolls within the tall image.
+          // into the taller final capsule and scrolls within the 1000x2800 image.
           const pinTl = gsap.timeline({
             scrollTrigger: {
               trigger: row,
               start: 'center center',
-              end: '+=560',
+              end: '+=380',
               pin: true,
               pinSpacing: true,
               scrub: 0.6,
@@ -333,7 +333,7 @@ function TeamIntro() {
             .fromTo(
               img,
               { yPercent: 0 },
-              { yPercent: -58, ease: 'none', duration: 1 },
+              { yPercent: -45, ease: 'none', duration: 1 },
               0
             );
 
