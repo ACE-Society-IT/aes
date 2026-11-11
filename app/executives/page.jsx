@@ -105,7 +105,7 @@ const TEAM = [
     firstName: 'Executive',
     lastName: 'Member',
     role: 'Executive Council',
-    image: '/executives/ex4.jpg',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
