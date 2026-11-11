@@ -21,7 +21,7 @@ const TEAM = [
     firstName: 'Mansoor',
     lastName: 'Moiz',
     role: 'Executive Council',
-    image: '/executives/res.png',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -35,7 +35,7 @@ const TEAM = [
     firstName: 'Bareerah',
     lastName: 'Ahmed',
     role: 'Executive Council',
-    image: '/executives/res2.jpg',
+    image: '/executives/female.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -49,7 +49,7 @@ const TEAM = [
     firstName: 'Ayaan',
     lastName: 'Japanwalla',
     role: 'Executive Council',
-    image: '/executives/ayaan-japanwalla.jpg',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -63,7 +63,7 @@ const TEAM = [
     firstName: 'Executive',
     lastName: 'Member',
     role: 'Executive Board',
-    image: '/executives/eb1.webp',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -77,7 +77,7 @@ const TEAM = [
     firstName: 'Executive',
     lastName: 'Member',
     role: 'Executive Board',
-    image: '/executives/eb2.jpg',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -91,7 +91,7 @@ const TEAM = [
     firstName: 'Executive',
     lastName: 'Member',
     role: 'Executive Council',
-    image: '/executives/exe3.jpg',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
@@ -119,7 +119,7 @@ const TEAM = [
     firstName: 'Executive',
     lastName: 'Member',
     role: 'Executive Council',
-    image: '/executives/ex1.jpg',
+    image: '/executives/male.jpg',
     favorites: [
       ['Favourite Film', 'TBA'],
       ['Favourite Song', 'TBA'],
